@@ -1,4 +1,5 @@
 ---
+permalink: /instructors/
 layout: default
 title: Instructors
 ---
