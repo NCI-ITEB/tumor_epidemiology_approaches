@@ -31,7 +31,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # Build settings
 remote_theme: just-the-docs/just-the-docs
 plugins:
-  - jekyll-feed
+# - jekyll-feed
 
 # collections
 collections:
