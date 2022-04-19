@@ -2,6 +2,7 @@
 permalink: /instructors/
 layout: default
 title: Instructors
+nav_order: 4
 ---
 <h1>Instructors</h1>
 
