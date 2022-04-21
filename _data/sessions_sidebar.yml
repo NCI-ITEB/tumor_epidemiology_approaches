@@ -1,0 +1,32 @@
+- label: Introduction
+  items:
+    - name: Introduction
+      link: /sessions/session_1/
+    - name: Public Databases
+      link: /sessions/session_2/
+- label: Bulk DNA-based analysis
+  items:
+    - name: DNA sequencing strategies and quality control
+      link: /sessions/session_3/
+    - name: Mutation calling and analysis
+      link: /sessions/session_4/
+    - name: Mutational signatures
+      link: /sessions/session_5/
+    - name: Somatic Copy Number Alterations (SCNAs)
+      link: /sessions/session_6/
+    - name: Structural variant (SV) analysis
+      link: /sessions/session_7/
+    - name: Identifying Cancer Drivers
+      link: /sessions/session_8/
+    - name: Clonal Evolution
+      link: /sessions/session_9/
+- label: Transcriptomic analysis
+  items:
+    - name: Transcriptome-based study designs
+      link: /sessions/session_10/
+    - name: RNA-seq data mining
+      link: /sessions/session_11/
+- label: Data Visualization
+  items:
+    - name: Data visualization approaches
+      link: /sessions/session_12/
