@@ -1,7 +1,8 @@
 ---
+permalink: /instructors/
 layout: page
 title: Instructors
-permalink: /instructors/
+nav_order: 4
 ---
 <!----- <h1>Instructors</h1> ---->
 
@@ -16,3 +17,5 @@ permalink: /instructors/
     <line></line>
   <br><br>
   {% endfor %}
+  </section>
+  
