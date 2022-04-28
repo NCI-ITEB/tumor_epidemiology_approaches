@@ -50,7 +50,9 @@ defaults:
     scope: 
       path: ""
     values:
-      hero_height: is-small/
+      #hero_height: is-small
+      hero_image: /assets/Final\ Artwork\ Sherlock\ Cover.jpeg
+      hero_darken: true
   -
     scope:
       path: Sessions
