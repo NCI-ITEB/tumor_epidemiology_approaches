@@ -51,7 +51,7 @@ defaults:
       path: ""
     values:
       #hero_height: is-small
-      hero_image: /assets/Final_Artwork_Sherlock_Cover.jpeg
+      hero_image: {{ site.baseurl }}/assets/Final_Artwork_Sherlock_Cover.jpeg
       hero_darken: true
   -
     scope:
