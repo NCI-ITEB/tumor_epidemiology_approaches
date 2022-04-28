@@ -1,8 +1,8 @@
 {% assign menus = site.data.[page.menubar] %}
 
-<aside class="menu" >
+<aside class="menu menu-label-font-size: 1">
 {% for menu in menus %}
-    <p class="menu-label">{{ menu.label }}</p>
+    <p class="menu-label" style="font-size: 16px"><b>|{{ menu.label }}</b></p>
     <ul class="menu-list">
         {% for item in menu.items %}
         <li>
