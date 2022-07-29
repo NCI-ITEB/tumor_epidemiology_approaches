@@ -1,12 +1,10 @@
 ---
 layout: page
-title: "Session 1: Introduction"
-parent: Sessions
-nav_order: 1
 permalink: /sessions/session_1/lecture
 toc: true
-tabs: session1_tabs
 ---
+<script src="/assets/js/vanilla-back-to-top.min.js"></script>
+<script>addBackToTop()</script>
 
 ## Introduction to Available Computing Clusters
 

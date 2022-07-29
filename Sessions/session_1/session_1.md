@@ -1,10 +1,6 @@
 ---
 layout: page
-title: "Session 1: Introduction"
-parent: Sessions
-nav_order: 1
 permalink: /sessions/session_1
-tabs: session1_tabs
 ---
 
 In this first section we will introduce the basics of working with
