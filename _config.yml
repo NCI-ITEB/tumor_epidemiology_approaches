@@ -8,7 +8,11 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 #
-# If you need help with YAML syntax, here are some quick references for you: 
+#   'bundle exec jekyll serve --livereload'
+#
+#
+#
+# If you need help with YAML syntax, here are some quick references for you:
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 #
@@ -48,19 +52,25 @@ paginate_path: "/news/page:num"
 #
 defaults:
   -
-    scope: 
+    scope:
       path: ""
     values:
       #hero_height: is-small
-      hero_image: /github_website/assets/Final_Artwork_Sherlock_Cover.jpeg
+      #hero_image: /github_website/assets/Final_Artwork_Sherlock_Cover.jpeg
+      hero_image: /assets/Final_Artwork_Sherlock_Cover-0.5.png
       hero_darken: true
+  -
+    scope:
+      path: Sessions
+    values:
+      hero_height: is-small
   -
     scope:
       path: Sessions
     values:
       show_menubar: true
       menubar: sessions_sidebar
-      
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

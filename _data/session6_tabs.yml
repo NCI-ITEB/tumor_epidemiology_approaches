@@ -1,0 +1,13 @@
+alignment: is-left
+style: is-boxed
+size: is-large
+items:
+  - name: Session 6
+    link: /sessions/session_6
+    icon: fa-dna
+  - name: Lecture
+    link: /sessions/session_6/lecture
+    icon: fa-book
+  - name: Practical
+    link: /sessions/session_6/practical/
+    icon: fa-laptop-code

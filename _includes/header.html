@@ -1,13 +1,13 @@
 <a href="http://www.dceg.cancer.gov	"><img itemprop="image" class="img-rounded" src="{{ site.baseurl }}/assets/DCEG-logo.svg" alt="{{ author.name }}" height=67 width=756>
-<nav class="navbar is-primary {% if site.fixed_navbar %} is-fixed-{{ site.fixed_navbar }} {% endif %}" x-data="{ openNav: false }">
+<nav class="navbar is-link {% if site.fixed_navbar %} is-fixed-{{ site.fixed_navbar }} {% endif %}" x-data="{ openNav: false }">
     <div class="container">
         <div class="navbar-brand">
-            <!---
-            <a href="{{ site.baseurl }}/" class="navbar-item" color= #000000 >
-                {{ site.title }}
-                <img itemprop="image" class="img-rounded" src="{{ site.baseurl }}/assets/DCEG-logo.svg" height=150 width=500>
+            <a href="https://dceg-workshops.github.io" class="navbar-item" color= #000000 >
+            	← To DCEG Workshops 
+                <!---{{ site.title }}
+                img itemprop="image" class="img-rounded" src="{{ site.baseurl }}/assets/DCEG-logo.svg" height=150 width=500
+                --->
             </a>
-            --->
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu" :class="{ 'is-active': openNav }" x-on:click="openNav = !openNav">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>

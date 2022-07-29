@@ -1,0 +1,9 @@
+---
+layout: page
+title: "Session 9: Clonal Evolution "
+parent: Sessions
+nav_order: 9
+permalink: /sessions/session_9/practical
+toc: true
+tabs: session9_tabs
+---
