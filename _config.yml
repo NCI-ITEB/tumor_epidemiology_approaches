@@ -26,12 +26,9 @@ title: Sherlock Bioinformatics
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   A course in bioinformatics presented by the Sherlock Lung team at NCI-DCEG.
-baseurl: "/test-url" # the subpath of your site, e.g. /blog
-#baseurl: ""
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-
-## JOHN, REMINDER: NEVER START PATHS WITH "/"; IT WILL BREAK ON GITHUB
-
+#baseurl: "/test-url" # the subpath of your site, e.g. /blog
+baseurl: "/github_website"
+#url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 remote_theme: chrisrhymes/bulma-clean-theme
