@@ -3,11 +3,11 @@ style: is-boxed
 size: is-large
 items:
   - name: Session 1
-    link: {{ site.baseurl }}/sessions/session_1
+    link: /github_website/sessions/session_1
     icon: fa-dna
   - name: Lecture
-    link: {{ site.baseurl }}/sessions/session_1/lecture
+    link: /github_website/sessions/session_1/lecture
     icon: fa-book
   - name: Practical
-    link: {{ site.baseurl }}/sessions/session_1/practical
+    link: /github_website/sessions/session_1/practical
     icon: fa-laptop-code
