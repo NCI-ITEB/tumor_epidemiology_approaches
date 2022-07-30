@@ -28,7 +28,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   A course in bioinformatics presented by the Sherlock Lung team at NCI-DCEG.
 #baseurl: "/github_website" # the subpath of your site, e.g. /blog
 baseurl: ""
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+#url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 #github_username:  jekyll
 
