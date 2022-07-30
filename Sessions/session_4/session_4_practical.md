@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /sessions/session_4/practical
+permalink: sessions/session_4/practical
 toc: true
 ---
 

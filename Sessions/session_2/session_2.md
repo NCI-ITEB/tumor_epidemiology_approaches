@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /sessions/session_2
+permalink: sessions/session_2
 ---
 
 In this session we will provide an overview of the many public resources

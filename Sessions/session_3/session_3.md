@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /sessions/session_3
+permalink: sessions/session_3
 ---
 
 ## Introduction

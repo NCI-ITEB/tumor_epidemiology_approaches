@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /sessions/session_5/lecture
+permalink: sessions/session_5/lecture
 toc: true
 ---
 

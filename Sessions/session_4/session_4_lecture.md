@@ -3,7 +3,7 @@ layout: page
 title: "Session 4: Mutation calling and analysis"
 parent: Sessions
 nav_order: 4
-permalink: /sessions/session_4/lecture
+permalink: sessions/session_4/lecture
 toc: true
 tabs: session4_tabs
 ---

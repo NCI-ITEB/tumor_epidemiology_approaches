@@ -1,4 +1,4 @@
 ---
 layout: page
-permalink: /sessions/session_11
+permalink: sessions/session_11
 ---
