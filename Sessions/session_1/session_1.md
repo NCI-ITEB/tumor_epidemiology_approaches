@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: sessions/session_1
+permalink: sessions/session_1/
 ---
 
 In this first section we will introduce the basics of working with
