@@ -1,9 +1,9 @@
 ---
 layout: page
-permalink: sessions/session_1/lecture
+permalink: {{ site.baseurl }}/sessions/session_1/lecture
 toc: true
 ---
-<script src="assets/js/vanilla-back-to-top.min.js"></script>
+<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
 <script>addBackToTop()</script>
 
 ## Introduction to Available Computing Clusters

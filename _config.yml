@@ -57,7 +57,7 @@ defaults:
     values:
       #hero_height: is-small
       #hero_image: /github_website/assets/Final_Artwork_Sherlock_Cover.jpeg
-      hero_image: assets/Final_Artwork_Sherlock_Cover-0.5.png
+      hero_image: /github_website/assets/Final_Artwork_Sherlock_Cover-0.5.png
       hero_darken: true
   -
     scope:

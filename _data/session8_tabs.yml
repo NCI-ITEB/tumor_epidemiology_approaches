@@ -9,5 +9,5 @@ items:
     link: /sessions/session_8/lecture
     icon: fa-book
   - name: Practical
-    link: /sessions/session_8/practical/
+    link: /sessions/session_8/practical
     icon: fa-laptop-code
