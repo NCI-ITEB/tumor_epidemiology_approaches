@@ -58,109 +58,109 @@ defaults:
       hero_darken: true
   -
     scope:
-      path: Sessions
+      path: sessions
     values:
       hero_height: is-small
   -
     scope:
-      path: Sessions
+      path: sessions
     values:
       show_menubar: true
       menubar: sessions_sidebar
   -
     scope:
-      path: Sessions/session_1
+      path: sessions/session_1
     values:
       title: "Session 1: Introduction"
-      parent: Sessions
+      parent: sessions
       nav_order: 1
       tabs: session1_tabs
   -
     scope:
-      path: Sessions/session_2
+      path: sessions/session_2
     values:
       title: "Session 2: Public Databases"
-      parent: Sessions
+      parent: sessions
       nav_order: 2
       tabs: session2_tabs
   -
     scope:
-      path: Sessions/session_3
+      path: sessions/session_3
     values:
       title: "Session 3: DNA Sequencing Strategies and Quality Control"
-      parent: Sessions
+      parent: sessions
       nav_order: 3
       tabs: session3_tabs
   -
     scope:
-      path: Sessions/session_4
+      path: sessions/session_4
     values:
       title: "Session 4: Mutation Calling and Analysis"
-      parent: Sessions
+      parent: sessions
       nav_order: 4
       tabs: session4_tabs
   -
     scope:
-      path: Sessions/session_5
+      path: sessions/session_5
     values:
       title: "Session 5: Mutational Signatures"
-      parent: Sessions
+      parent: sessions
       nav_order: 5
       tabs: session5_tabs
   -
     scope:
-      path: Sessions/session_6
+      path: sessions/session_6
     values:
       title: "Session 6: Somatic Copy Number Alterations"
-      parent: Sessions
+      parent: sessions
       nav_order: 6
       tabs: session6_tabs
   -
     scope:
-      path: Sessions/session_7
+      path: sessions/session_7
     values:
       title: "Session 7: Structural Variant Analysis"
-      parent: Sessions
+      parent: sessions
       nav_order: 7
       tabs: session7_tabs
   -
     scope:
-      path: Sessions/session_8
+      path: sessions/session_8
     values:
       title: "Session 8: Identifying Cancer Drivers"
-      parent: Sessions
+      parent: sessions
       nav_order: 8
       tabs: session8_tabs
   -
     scope:
-      path: Sessions/session_9
+      path: sessions/session_9
     values:
       title: "Session 9: Clonal Evolution"
-      parent: Sessions
+      parent: sessions
       nav_order: 9
       tabs: session9_tabs
   -
     scope:
-      path: Sessions/session_10
+      path: sessions/session_10
     values:
       title: "Session 10: Transcriptome-based Study Designs"
-      parent: Sessions
+      parent: sessions
       nav_order: 10
       tabs: session10_tabs
   -
     scope:
-      path: Sessions/session_11
+      path: sessions/session_11
     values:
       title: "Session 11: RNA-seq Data Mining"
-      parent: Sessions
+      parent: sessions
       nav_order: 11
       tabs: session11_tabs
   -
     scope:
-      path: Sessions/session_12
+      path: sessions/session_12
     values:
       title: "Session 12: Data Visualization Approaches"
-      parent: Sessions
+      parent: sessions
       nav_order: 12
       tabs: session12_tabs
 # Exclude from processing.

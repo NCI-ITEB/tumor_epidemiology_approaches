@@ -3,11 +3,11 @@ style: is-boxed
 size: is-large
 items:
   - name: Session 1
-    link: sessions/session_1
+    link: /sessions/session_1
     icon: fa-dna
   - name: Lecture
-    link: sessions/session_1/lecture
+    link: /sessions/session_1/lecture
     icon: fa-book
   - name: Practical
-    link: sessions/session_1/practical
+    link: /sessions/session_1/practical
     icon: fa-laptop-code

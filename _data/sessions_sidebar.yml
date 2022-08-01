@@ -1,32 +1,32 @@
 - label: Introduction
   items:
     - name: '1: Introduction'
-      link: sessions/session_1
+      link: /sessions/session_1
     - name: '2: Public Databases'
-      link: sessions/session_2
+      link: /sessions/session_2
 - label: Bulk DNA-based analysis
   items:
     - name: '3: DNA Sequencing Strategies and Quality Control'
-      link: /sessions/session_3/
+      link: /sessions/session_3
     - name: '4: Mutation Calling and Analysis'
-      link: /sessions/session_4/
+      link: /sessions/session_4
     - name: '5: Mutational Signatures'
-      link: /sessions/session_5/
+      link: /sessions/session_5
     - name: '6: Somatic Copy Number Alterations'
-      link: /sessions/session_6/
+      link: /sessions/session_6
     - name: '7: Structural Variant Analysis'
-      link: /sessions/session_7/
+      link: /sessions/session_7
     - name: '8: Identifying Cancer Drivers'
-      link: /sessions/session_8/
+      link: /sessions/session_8
     - name: '9: Clonal Evolution'
-      link: /sessions/session_9/
+      link: /sessions/session_9
 - label: Transcriptomic analysis
   items:
     - name: '10: Transcriptome-based Study Designs'
-      link: /sessions/session_10/
+      link: /sessions/session_10
     - name: '11: RNA-seq Data Mining'
-      link: /sessions/session_11/
+      link: /sessions/session_11
 - label: Data Visualization
   items:
     - name: '12: Data Visualization Approaches'
-      link: /sessions/session_12/
+      link: /sessions/session_12
