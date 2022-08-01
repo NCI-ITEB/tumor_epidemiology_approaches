@@ -1,5 +1,5 @@
 ---
-permalink: /instructors/
+permalink: /instructors
 layout: page
 title: Instructors
 nav_order: 4
@@ -14,7 +14,7 @@ nav_order: 4
     <!---
     <img class="is-rounded" style="float:left" src="{{ site.baseurl }}/assets/img/{{ author.picture }}" alt="{{ author.name }}" height=180 width=180 />
     --->
-    <div style="margin-left: 200px">	
+    <div style="margin-left: 200px">
     	<h2>{{ author.name }}</h2>
     	<h4>{{ author.organization }}</h4>
     	<h4>{{ author.position }}</h4>
@@ -23,4 +23,3 @@ nav_order: 4
   <br><br>
   {% endfor %}
   </section>
-  
