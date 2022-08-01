@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: {{ site.baseurl }}/sessions/session_1/practical
+permalink: session_1/practical
 toc: true
 ---
 

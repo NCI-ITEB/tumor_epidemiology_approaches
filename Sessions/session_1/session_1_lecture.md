@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: {{ site.baseurl }}/sessions/session_1/lecture
+permalink: session_1/lecture
 toc: true
 ---
 <script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>

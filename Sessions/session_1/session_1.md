@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: {{ site.baseurl }}/sessions/session_1/
+permalink: session_1
 ---
 
 In this first section we will introduce the basics of working with

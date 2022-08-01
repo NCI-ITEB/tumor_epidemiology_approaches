@@ -1,10 +1,10 @@
 - name: News
-  link: /news/
+  link: news
 - name: Sessions
-  link: /sessions/
+  link: sessions
   dropdown:
     - name: '1: Introduction'
-      link: /github_website/sessions/session_1
+      link: sessions/session_1
     - name: '2: Public Databases'
       link: /sessions/session_2/
     - name: '3: DNA Sequencing Strategies and Quality Control'
