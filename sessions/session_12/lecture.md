@@ -1,5 +1,5 @@
 ---
 layout: page
-permalink: session_12/lecture
-toc: true
+permalink: sessions/session_12/lecture
+menubar_toc: true
 ---

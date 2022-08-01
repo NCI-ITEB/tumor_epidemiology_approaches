@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: sessions/session_2/lecture
-toc: true
+menubar_toc: true
 ---
 
 ## Useful Databases

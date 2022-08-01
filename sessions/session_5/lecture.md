@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: sessions/session_5/lecture
-toc: true
+menubar_toc: true
 ---
 
 ## Background - History, concepts, signature types

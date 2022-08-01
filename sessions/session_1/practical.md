@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: sessions/session_1/practical
-toc: true
+menubar_toc: true
 ---
 
 This practical section will focus first on connecting to a remote cluster

@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: sessions/session_3/lecture
-toc: true
+menubar_toc: true
 ---
 
 ## Introduction to NGS DNA sequencing

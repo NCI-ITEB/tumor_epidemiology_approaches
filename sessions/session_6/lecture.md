@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: sessions/session_6/lecture
-toc: true
+menubar_toc: true
 ---
 
 ## Emerging somatic SVs in cancer genomic

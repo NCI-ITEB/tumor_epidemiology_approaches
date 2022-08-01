@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: sessions/session_1/lecture
-toc: true
+menubar_toc: true
 ---
 <script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
 <script>addBackToTop()</script>
@@ -104,6 +104,7 @@ highlight the unique aspects of each:
 | Load applications | <code>module spider #module<br>module load #module</code> | <code>module load #module</code> |
 | Backup policy | - Home dir: Weekly backups, with daily incremental backups<br> - Data dir: NOT BACKED UP<br> - Buy-in storage<br> - Additional information: [File Backups and Snapshots on the HPC Systems](https://hpc.nih.gov/storage/backups.html) | - Nightly snapshots last one week<br>- 6 hour snapshots last 3 days<br>- True backups done via CBIIT taken weekly and retained based on their policies<br>- Permanent backups need to be requested to be transferred to the archive |
 
+---
 
 ## Cluster How-Tos: Connect, Transfer Files/Share Data
 
@@ -140,7 +141,7 @@ Doing so will require a path to the drive to be mounted. Refer to the table belo
 | --- | --- | --- | --- | --- |
 | Biowulf/Helix | user's home directory | /home/[user] | \\\\hpcdrive.nih.gov\\[user] | smb://hpcdrive.nih.gov/[user] |
 | | data directory | /data/[user] | \\\\hpcdrive.nih.gov\\data | smb://hpcdrive.nih.gov/data |
-| | user's scratch space | /scratch/[user] directory | \\\\hpcdrive.nih.gov\\scratch\\[user] | smb://hpcdrive.nih.gov/scratch/[user] |
+| | user's scratch space | /scratch/[user] directory | \\\\hpcdrive.nih.gov\\scratch\\[user] | smb://hpcdrive.nih.gov/scratch/<br>[user] |
 | | shared group area (e.g. you are a member of group PQRlab) | /data/PQRlab | \\\\hpcdrive.nih.gov\\PQRlab | smb://hpcdrive.nih.gov/PQRlab |
 | CCAD | main directory | /home/ | \\\\gigantor.nci.nih.gov\\ifs | smb://gigantor.nci.nih.gov/ifs |
 | | user's home directory | /home/[user] | \\\\gigantor.nci.nih.gov\\ifs<br>\\DCEG\\Home\\[user] | smb://gigantor.nci.nih.gov/ifs<br>/DCEG/Home/[user] |
@@ -175,6 +176,7 @@ Or conversely from the HPC:
 
 . Note that these commands use the Helix system, not Biowulf (as designated by @helix.nih.gov). Biowulf should not be used for file transfers unless done from within an interactive job on the cluster.
 
+---
 
 ## Basic Linux Commands
 
@@ -192,9 +194,11 @@ Also note that this architecture is not unique to linux, virtually all popular o
 
 Commands to the shell generally follow a standard anatomy, as follows:
 
-<img src="lecture_assets/linux_command_anatomy.png" style="max-width:50%; height:auto">
+<img src="lecture_assets/linux_command_anatomy.png" style="max-width:50%; height:auto; display: flex; justify-content: center;">
 
-. The prompt is a symbol the command line presents to the user indicating that the machine is ready to accept commands. Commands are entered in the order: command, options (indicated by a preceding ‘-’), argument(s). The command above uses an ‘ls’ command which lists the files in a folder provided by the ‘argument’, in this case <code>/home/$USER</code>. By default this will simply print the names of the files, but the options ‘-l’ and ‘-t’ (combined above to simply ‘-lt’) tell the command to also include extra information such as file size, file creator, access permissions, etc. and then sort them by time last modified.
+. The prompt is a symbol the command line presents to the user indicating that the machine is ready to accept commands. Commands are entered in the order: command, options (indicated by a preceding ‘-’), and argument(s).
+
+ The command above uses an ‘ls’ command which lists the files in a folder provided by the ‘argument’, in this case <code>/home/$USER</code>. By default this will simply print the names of the files, but the options ‘-l’ and ‘-t’ (combined above to simply ‘-lt’) tell the command to also include extra information such as file size, file creator, access permissions, etc. and then sort them by time last modified.
 
 <img src="lecture_assets/ls_example.png">
 
@@ -222,6 +226,8 @@ If a GUI is a must, ‘Atom’ is a modern text editor available on Biowulf, tho
 - [Biowulf’s Linux and Slurm cheatsheet](https://hpc.nih.gov/training/handouts/BashScripting_LinuxCommands.pdf)
 - [Vim documentation](https://www.vim.org/docs.php )
 - [Cheatsheet for Vim](https://vimsheet.com)
+
+---
 
 ## Bioinformatics File Formats and Tools
 

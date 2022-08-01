@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: sessions/session_4/practical
-toc: true
+menubar_toc: true
 ---
 
 ## R Markdown
