@@ -1,6 +1,6 @@
-<section class="hero {% if page.hero_height %} {{ page.hero_height }} {% else %} is-medium {% endif %} has-text-weight-bold is-bold is-primary" {% if page.hero_image %} style="background: url('{{ page.hero_image }}') no-repeat center left;" {% endif %}>
+<section class="hero {% if page.hero_height %} {{ page.hero_height }} {% else %} is-medium {% endif %} has-text-weight-bold is-bold is-primary" {% if page.hero_image %} style="background: url('{{ page.hero_image }}') no-repeat; background-size: 650px auto; background-position: 2% 60%" {% endif %}>
     <div class="hero-head"></div>
-    <div class="hero-body {% if page.hero_darken %} hero-darken {% endif %}" style="box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.35);">
+    <div class="hero-body {% if page.hero_darken %} hero-darken {% endif %}" style="box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.45);">
         <div class="container" style="/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10" >
             <h1 class="title is-1 has-text-light" style="text-shadow: 2px 2px 0 #000;">{{ page.title }}</h1>
             <p class="subtitle is-3" style="">{{ page.subtitle }}</p>

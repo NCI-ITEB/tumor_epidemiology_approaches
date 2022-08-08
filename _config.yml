@@ -27,7 +27,7 @@ email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   A course in bioinformatics presented by the Sherlock Lung team at NCI-DCEG.
 #baseurl: "/test-url" # the subpath of your site, e.g. /blog
-baseurl: "/github_website"
+baseurl: "/tumor_epidemiology_approaches"
 #url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
@@ -54,7 +54,7 @@ defaults:
     values:
       #hero_height: is-small
       #hero_image: /github_website/assets/Final_Artwork_Sherlock_Cover.jpeg
-      hero_image: /github_website/assets/Final_Artwork_Sherlock_Cover-0.5.png
+      hero_image: /tumor_epidemiology_approaches/assets/Final_Artwork_Sherlock_Cover-0.4.png
       hero_darken: true
   -
     scope:

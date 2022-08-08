@@ -3,8 +3,6 @@ layout: page
 permalink: sessions/session_3
 ---
 
-## Introduction
-
 The aim of this session is to provide an in-depth summary of the DNA
 sequencing techniques most useful for cancer genomics, particularly
 next-generation sequencing (NGS) and Pacbio long read sequencing. First

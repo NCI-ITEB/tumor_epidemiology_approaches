@@ -1,9 +1,13 @@
 ---
 layout: page
-title: "Session 10: Transcriptome-based study designs"
-parent: Sessions
-nav_order: 10
 permalink: sessions/session_10
-#toc: true
-tabs: session10_tabs
 ---
+
+### Topics Covered
+- Experimental design: number of reads, pair end sequencing, benefits (e.g. Cost, inhouse)
+- Example of integrating RNA-seq with other molecular data
+- Data processing: data format, data QC, alignment, visualization/quantification, issues specific to RNA-seq (splicing)
+- Nanostring analysis
+
+## Practical
+- RNA-seq: Alignment, assembly, quantification, alternative splicing

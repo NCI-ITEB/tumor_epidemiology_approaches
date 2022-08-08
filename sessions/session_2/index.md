@@ -3,6 +3,14 @@ layout: page
 permalink: sessions/session_2
 ---
 
+### Topics Covered
+- Major studies (TCGA-cBioPortal/PCAWG/GTEx/ENCODE)
+- Specific analyses (IntoGen, COSMIC, mSigPortal)
+- Common resources (1000 genomes, gnomAD, UCSC Genome browser)
+
+### Practical
+- cBioPortal/PCAWG/mSigPortal
+
 In this session we will provide an overview of the many public resources
 useful for cancer genomics. We will begin by highlighting major public
 cancer genomics studies and their associated data portals such as PCAWG,

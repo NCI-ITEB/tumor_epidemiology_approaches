@@ -1,5 +1,3 @@
-- name: News
-  link: /news
 - name: Sessions
   link: /sessions
   dropdown:
@@ -27,7 +25,7 @@
       link: /sessions/session_11
     - name: '12: Data Visualization Approaches'
       link: /sessions/session_12
-- name: Resources
-  link: /resources
 - name: Instructors
   link: /instructors
+- name: News
+  link: /news
