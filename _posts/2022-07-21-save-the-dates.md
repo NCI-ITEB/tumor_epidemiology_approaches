@@ -6,7 +6,7 @@ author: John McElderry
 
 # Save the Dates!
 
-<img src="../assets/somatic_analysis_workshop_flyer_FINAL.png" style="width: 66%; height: auto"/>
+<img src="/tumor_epidemiology_approaches/assets/somatic_analysis_workshop_flyer_FINAL.png" style="width: 66%; height: auto"/>
 
 The dates for all 12 sessions in the
  *Emerging Approaches for Tumor Analyses in Epidemiological Studies* course have been finalized!
