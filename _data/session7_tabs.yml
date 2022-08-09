@@ -5,6 +5,6 @@ items:
   - name: Session 7
     link: /sessions/session_7
     icon: fa-dna
-  - name: Lecture
-    link: /sessions/session_7/lecture
-    icon: fa-book
+  # - name: Lecture
+  #   link: /sessions/session_7/lecture
+  #   icon: fa-book

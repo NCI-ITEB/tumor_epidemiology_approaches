@@ -5,9 +5,9 @@ items:
   - name: Session 8
     link: /sessions/session_8
     icon: fa-dna
-  - name: Lecture
-    link: /sessions/session_8/lecture
-    icon: fa-book
-  - name: Practical
-    link: /sessions/session_8/practical
-    icon: fa-laptop-code
+  # - name: Lecture
+  #   link: /sessions/session_8/lecture
+  #   icon: fa-book
+  # - name: Practical
+  #   link: /sessions/session_8/practical
+  #   icon: fa-laptop-code

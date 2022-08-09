@@ -8,4 +8,7 @@ permalink: sessions/session_12
 - Useful tools/software (Python, R packages, Gunplot, Adobe Illustrator)
 
 ### Practical
-- ggplot, Heatmaps, Circos Plots, IGV
+- ggplot
+- Heatmaps
+- Circos Plots
+- IGV

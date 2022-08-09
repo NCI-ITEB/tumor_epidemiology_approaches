@@ -17,7 +17,7 @@ transfer data (Globus account, mount HPC directory, GUI file transfer)
 - Samtools: Read BAM file, get all aligned reads, index, stats
 - Bedtools: merge/intersect
 
-In this first section we will introduce the basics of working with Biowulf and CCAD including connecting to, working with, and transferring files from both clusters.
+In this first session we will introduce the basics of working with Biowulf and CCAD including connecting to, working with, and transferring files from both clusters.
 
 Both Biowulf and the CCAD cluster are accessed remotely via the linux command line, therefore some command line knowledge is necessary to work with either. We will cover the basics of linux and shell scripting in the lecture and provide resources for further education. Finally, we will provide an overview of the most common file formats for storing bioinformatics data as well as the tools for working with them.
 

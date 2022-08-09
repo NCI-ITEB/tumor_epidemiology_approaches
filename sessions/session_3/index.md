@@ -3,6 +3,14 @@ layout: page
 permalink: sessions/session_3
 ---
 
+### Topics Covered
+
+- What kind of specimens (FF/FFPE/Blood/others), studies, analyses? Cost, study design, QC?
+- Targeted panel bulk sequencing
+- Whole exome bulk sequencing
+- Whole genome bulk sequencing
+
+
 The aim of this session is to provide an in-depth summary of the DNA
 sequencing techniques most useful for cancer genomics, particularly
 next-generation sequencing (NGS) and Pacbio long read sequencing. First

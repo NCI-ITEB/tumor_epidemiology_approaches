@@ -26,7 +26,7 @@ menubar_toc: true
 - [Gene Expression Profiling Interactive Analysis (GEPIA)](http://gepia.cancer-pku.cn/index.html)
 
 
-## Common Genetic Data Resources
+## Common Genetics Data Resources
 
 - [Genotype-Tissue Expression (GTEx)](https://gtexportal.org/home/)
 - [gnomAD](https://gnomad.broadinstitute.org/)
