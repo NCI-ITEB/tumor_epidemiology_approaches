@@ -31,8 +31,7 @@ nav_order: 4
     	<h2>{{ author.name }}</h2>
     	<h4>{{ author.organization }}</h4>
     	<h4>{{ author.position }}</h4>
-    	<p>{{ author.content | markdownify }}</p>
-      {% if author.profile_link %}<br><a href="{{author.profile_link}}">{{author.short_name}}'s profile</a> {% endif %}
+    	<p>{{ author.content | markdownify }}{% if author.profile_link %}<a href="{{author.profile_link}}" target="_blank">{{author.short_name}}'s profile</a> {% endif %}</p>
     </div>
   <br><br>
   {% endfor %}
