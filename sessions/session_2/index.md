@@ -16,3 +16,5 @@ In this session we will provide an overview of current cancer genomic studies an
 Then we will highlight various resources for more in-depth cancer genomics analysis such as platforms for driver gene analysis (IntOGen), mutational signature analysis(mSigPortal, Signal, COSMIC), TCGA somatic analysis (FIREBROWSE), PCAWG somatic analysis, and other specific analysis platforms (e.g. alternative splicing, noncoding, IPA). Finally we’ll conclude the lecture section by highlighting databases with programmatic access, several cloud-based analysis resources, and the “Awesome Bioinformatics” resources.
 
 The practical section will provide an opportunity to practice using most of these resources and data portals to answer cancer research questions.
+<br><br>
+<!--*-- Presenters: Tongwu Zhang and Alyssa Klein, adapted for Github pages by John McElderry*-->

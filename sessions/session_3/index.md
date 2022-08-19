@@ -29,5 +29,7 @@ the strengths and weaknesses of each approach. The aim of this section
 is to give you a very clear idea of what sequencing method will best fit
 your needs for your next genomics study.
 
-Finally we willcover quality control metrics for your sequencing data so you
-can be sure your NGS data is suitable for analysis.
+Finally we will cover quality control metrics for your sequencing data so you
+can be sure your NGS data is suitable for analysis. In the practical section you will gain hands-on experience with generating and analyzing NGS quality control data.
+<br><br>
+<!--*-- Presenters: Phuc Hoang, adapted for Github pages by John McElderry*-->

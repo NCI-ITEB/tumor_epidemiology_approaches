@@ -6,7 +6,6 @@ menubar_toc: true
 
 <script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script>
 
-
 ## Introduction to Available Computing Clusters
 
 We will first begin by discussing two computing clusters at NIH: CCAD and Biowulf. Biowulf is the NIH's main computer cluster and one of the 500 largest computing clusters in the world as of this writing.
@@ -17,7 +16,7 @@ As this is a course from DCEG, we will open this section with a brief descriptio
 
 ### Computer Cluster at DCEG (CCAD)
 
-<img src="lecture_assets/CCAD_resources.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/CCAD_resources.png">
 
 CCAD is the dedicated computing cluster for DCEG. CCAD operates under a fair use policy to avoid monopolization of resources. In other words, users are given equal access to the available resources as they become available.  
 
@@ -71,7 +70,7 @@ DefaultItemOpen=1)
 
 As compared to CCAD, Biowulf is a much larger computer cluster available to all of NIH. Biowulf features a total of 100,000+ computing cores, 920 TB of memory, and over 30 PB of data storage.
 
-<img src="lecture_assets/systems_overview.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/systems_overview.png">
 *from https://hpc.nih.gov/systems/*
 
 Like CCAD, Biowulf also operates under a fair use policy by which jobs are prioritized according to each user's recent usage volume, measured in CPU-hours. If cluster resources are in high demand, users with lower recent usage have their jobs prioritized over users with high recent usage. Jobs are scheduled automatically using a workload management software called Slurm, analogous to the Sun Grid Engine noted for CCAD.
@@ -141,7 +140,7 @@ Transfer of files can be accomplished one of many ways:
 
 GUI-based transfer applications can be a convenient way to transfer data. [WinSCP](link) for Windows and [FileZilla](link) for both Windows and MacOS are free applications recommended for file transfers.
 
-<img src="lecture_assets/filezilla_example.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/filezilla_example.png">
 *An example of transferring files with FileZilla.*
 
 ---
@@ -150,7 +149,7 @@ GUI-based transfer applications can be a convenient way to transfer data. [WinSC
 
 Drives from the NIH HPC and CCAD can be mounted directly to your local computer which allows you to click and drag files in familiar fashion. This is best only for small file transfers; transfer of larger files should be done through another method.
 
-<img src="lecture_assets/mount_drives.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/mount_drives.png">
 
 Doing so will require you to specify a folder to be mounted. Refer to the table below for the correct path formatting.
 
@@ -172,7 +171,7 @@ Doing so will require you to specify a folder to be mounted. Refer to the table 
 
 Globus is the recommended method to transfer and share files from Biowulf. Globus has the ability to monitor transfer performance, retry failures, recover from faults automatically, and report transfer status. See [here](https://hpc.nih.gov/storage/globus.html) for how to set up a Globus account.
 
-<img src="lecture_assets/globus_example.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/globus_example.png">
 
 ---
 
@@ -207,7 +206,7 @@ Because CCAD and Biowulf must be accessed via the command line it is necessary t
 
 All programming with CCAD and Biowulf is done through the linux 'shell'.
 
-<img src="lecture_assets/linux_architecture.png" style="max-width: 75%">
+<img class="center" style="width:75%; height:auto; display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/linux_architecture.png">
 
 The shell in linux is a high-level programming language, meaning that it does not interact directly with the computer’s hardware. Instead, the linux shell interprets code into instructions and interfaces with a low-level programming language called the ‘kernel’ which directly controls computer hardware. This eliminates the need for users to explicitly program basic hardware management, making shell programming a dramatically more convenient experience.
 
@@ -215,13 +214,13 @@ Also note that this architecture is not unique to linux, virtually all popular o
 
 Commands to the shell generally follow a standard anatomy, as follows:
 
-<img src="lecture_assets/linux_command_anatomy.png" style="max-width:50%; height:auto; display: flex; justify-content: center;">
+<img class="center" style="width:50%; height:auto; display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/linux_command_anatomy.png">
 
 . The prompt is a symbol the command line presents to the user indicating that the machine is ready to accept commands. Commands are entered in the order: command, options (indicated by a preceding ‘-’), and argument(s).
 
 The command above uses an ‘ls’ command which lists the files in a folder provided by the ‘argument’, in this case <code>/home/$USER</code>. By default this will simply print the names of the files, but the options ‘-l’ and ‘-t’ (combined above to simply ‘-lt’) tell the command to also include extra information such as file size, file creator, access permissions, etc. and then sort them by time last modified, respectively.
 
-<img src="lecture_assets/ls_example.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/ls_example.png">
 
 ---
 
@@ -229,7 +228,7 @@ The command above uses an ‘ls’ command which lists the files in a folder pro
 
 Issuing commands one at a time is a convenient way to browse the Biowulf file system and inspect files. There are often instances where issuing commands one at a time is inconvenient, however, such as when issuing many commands in succession or when the same set of instructions are issued repeatedly. In these instances commands can be bundled into a script which are passed to the shell and run automatically. Submitting scripts is also the preferred way to submit jobs to both CCAD and Biowulf as opposed to requesting interactive sessions.
 
-<img src="lecture_assets/script.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/script.png">
 
 Above is an example of a short script. The first line tells the shell what language the script is in. In this case it’s a Bash script. The line below, <code>module load samtools</code> loads the bioinformatics software ‘samtools’ for use. The lines after perform a variety of functions using standard linux commands, such as making a new folder and copying some data to it.
 
@@ -261,7 +260,7 @@ Finally we will discuss some of the most important file formats used in bioinfor
 
 Before we describe these file formats in more detail, below is a workflow diagram tracing the flow of information over the course of a cancer study and a slightly more detailed description of each format in the table below.
 
-<img src="lecture_assets/information_flowchart.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/information_flowchart.png">
 
 | Format name  | Data type | Tools |
 |--------------:|----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|
@@ -282,7 +281,7 @@ Before we describe these file formats in more detail, below is a workflow diagra
 
 FASTA (‘fast-a’) format is a simple format for storing sequences of nucleotides or amino acids. FASTA files are usually used only to contain reference sequences as they lack important information that would be relevant for sequencing reads, such as quality scores. Files in FASTA format traditionally end in “.fasta”, “.fa”, or “.fsa”.
 
-<img src="lecture_assets/FASTA.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/FASTA.png">
 
 FASTA files may contain one or many individual sequences, each of which is prefixed with a definition line (or “defline”) beginning with “>”. This line contains the sequence name and sometimes other important annotations for the sequence.
 
@@ -294,13 +293,13 @@ Generally speaking since FASTA files are often only reference sequences there’
 
 For sequence information from sequencing experiments, nucleotide sequences must be stored with per-base sequence quality scores. This is the purpose of the FASTQ (“fast-q”) file format. FASTQ files are traditionally suffixed with “.fastq”, “.fq”, and “.fq.gz” when compressed using the gzip algorithm.
 
-<img src="lecture_assets/FASTQ.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/FASTQ.png">
 
 The above FASTQ snippet contains two paired reads, each with four lines of information.
 
 - Line 1: an identifier line containing metadata from the sequencer for the sequence, starting with '@':
 
-<img src="lecture_assets/FASTQ_id.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/FASTQ_id.png">
 
 - Line 2: the nucleotide sequence of the read
 - Line 3: a ‘+’ sign, sometimes followed by the sequence identifier as in line 1
@@ -313,10 +312,10 @@ Two comprehensive packages for working with FASTQ, and also FASTA, include [seqt
 <!--
 <div class="fastq-tools">
   <div class="column">
-    <img src="lecture_assets/seqtk.png" style="width: 40%; height: auto; float: left">
+    <img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/seqtk.png" style="width: 40%; height: auto; float: left">
   </div>
   <div class="column">
-    <img src="lecture_assets/fastx-toolkit.png" style="width: 60%; float: right">
+    <img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/fastx-toolkit.png" style="width: 60%; float: right">
   </div>
 </div>
 <p style="overflow:hidden"></p>
@@ -330,27 +329,27 @@ SAM, BAM, and CRAM are three formats used to store aligned sequences. The three 
 
 Alignment files are composed of two sections: a header section and a list of aligned sequences. The header contains annotation information such as file formatting information, reference sequence information, the aligner and other software used to produce the alignment file, and read group information which can be used to trace which sample or sequencing run a sequence came from.
 
-<img src="lecture_assets/sam_header.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/sam_header.png">
 
 The sequences themselves are stored in a format composed of eleven sections with important information such as read name, alignment flags, which reference the sequence is aligned to, where it’s aligned, how well it’s aligned, and information on its paired mate read.
 
-<img src="lecture_assets/sam_body.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/sam_body.png">
 
 The FLAG element is an additive combination of integers representing alignment status flags.
 
-<img src="lecture_assets/sam_flags.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/sam_flags.png">
 
 As an example, the 355 flag represents the sum of the integers 1+2+32+64+256=355, and indicates that this read is paired (1), both reads in the pair are mapped properly (2), the mate is on the reverse strand (32), this is the first read in the pair (64), and that this read is not the primary alignment of this sequence (256). An excellent resource for decomposing an alignment flag into its components can be found [here](https://broadinstitute.github.io/picard/explain-flags.html). Alignment flags allow for filtering reads based on their alignment quality, such as selecting reads with both pairs mapped (flag 3) or filtering out unmapped reads and supplementary alignments (flags 4,8, and 256).
 
 The CIGAR string represents the alignment status of the sequence against the reference. It is represented by a series of number-letter pairs indicating the number of base pairs and how those bases align against the reference.
 
-<img src="lecture_assets/CIGAR_example.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/CIGAR_example.png">
 
 *https://genome.sph.umich.edu/wiki/SAM#What_is_a_CIGAR.3F*
 
 In the above example, the CIGAR string 3M1I3M1D5M indicates 3 matching bases, 1 inserted base, 3 matching bases, 1 deleted base, and 5 matching bases in that order. See below for a description of what each letter indicates.
 
-<img src="lecture_assets/CIGAR_symbols.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/CIGAR_symbols.png">
 
 Two very popular tools for working with alignment files are Samtools and Picard. Both are compatible with SAM, BAM, and CRAM formats, and provide functions to read, write, view, edit, filter, and index alignment files, plus more. For a full description of the functionality of each, see the [Samtools](http://www.htslib.org/doc/samtools.html) and [Picard](https://broadinstitute.github.io/picard/) documentation.
 
@@ -360,7 +359,7 @@ Two very popular tools for working with alignment files are Samtools and Picard.
 
 The VCF format stores information about genetic variants (SNVs, indels, SVs). Like BAM format is to SAM, BCF is the compressed, binary version of VCF. VCF and BCF file names end with ".vcf" and ".bcf", respectively. Also like SAM files, VCF files are composed of a header with meta-information and a body containing the data.
 
-<img src="lecture_assets/vcf.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/vcf.png">
 
 The header lines (in black) always begin with “##” and describe important metadata for the file, such as the software which generated the VCF file, the reference genome, and many lines defining terms within the INFO, FILTER, and FORMAT fields. Within the body of the VCF file there are eight mandatory VCF fields (in red) followed by some number of genotype fields (in blue). The mandatory fields indicate basic facts about the variant:
 
@@ -383,7 +382,7 @@ BCFtools is a popular program for reading and writing VCF and BCF files as well 
 
 MAF is a higher-level representation of variants. As compared to VCF which usually contains data on the sample level, MAF aggregates mutations from many or all samples within an experiment. MAF also includes more annotation information from public databases, such as the associated genes for variants, genome build, functional consequences, etc.
 
-<img src="lecture_assets/MAF.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/MAF.png">
 
 Maftools is a useful tool for working with MAF files. Maftools provides lots of high-level functionality such as driver gene analysis, survival curves, mutation enrichment analysis, etc., and it also provides functions for generating publication-quality plots. See [here](https://bioconductor.org/packages/release/bioc/vignettes/maftools/inst/doc/maftools.html) for more on Maftools.
 
@@ -393,7 +392,7 @@ Maftools is a useful tool for working with MAF files. Maftools provides lots of 
 
 BED files are used to store genomic interval information, such as the coordinates for a gene within a reference genome. BED files end with the suffix “.bed”.
 
-<img src="lecture_assets/BED.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/BED.png">
 
 BED files have three required fields describing the genomic coordinates for a feature (chromosome, start, stop), followed by six optional fields for storing annotations and display customizations which are used when displaying on genome browsers.
 
@@ -410,7 +409,7 @@ Bedtools is a popular resource for working with BED files, and is generally used
 Like BED, GTF and GFF store data on genomic intervals. GTF is identical to GFF version 2, and only different from GFF version 3 in the formatting of their attributes field. Typically GTF is used to store gene and transcript coordinates whereas GFF is a more general purpose designation. These files are suffixed with ‘.gtf‘, ‘.gff’, ‘.gff2’, or ‘.gff3’.
 The format is as follows:
 
-<img src="lecture_assets/GTF_GFF.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/GTF_GFF.png">
 
 1. Chromosome
 2. Source of the GFF/GTF file
