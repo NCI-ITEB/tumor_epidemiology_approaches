@@ -3,8 +3,9 @@ layout: page
 permalink: sessions/session_1/lecture
 menubar_toc: true
 ---
-<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
-<script>addBackToTop()</script>
+
+<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script>
+
 
 ## Introduction to Available Computing Clusters
 
@@ -426,3 +427,20 @@ Working with GTF or GFF files can be done with GffCompare. GffCompare provides a
 ---
 
 ### Additional Resources
+
+- [SRA tools for raw sequencer output](https://github.com/ncbi/sra-tools)
+- [UConn file formats guide ](https://bioinformatics.uconn.edu/resources-and-events/tutorials-2/file-formats-tutorial/)
+- [seqtk](https://docs.csc.fi/apps/seqtk/)
+- [FASTA tools](https://www.ncbi.nlm.nih.gov/CBBresearch/Spouge/html_ncbi/html/fasta/list.html)
+- [FASTX-Toolkit](http://hannonlab.cshl.edu/fastx_toolkit/index.html)
+- [FASTQC for fastq quality control](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+- [Explain SAM/BAM Alignment Flags](https://broadinstitute.github.io/picard/explain-flags.html)
+- [CIGAR string formatting](https://genome.sph.umich.edu/wiki/SAM#What_is_a_CIGAR.3F)
+- [Samtools](http://www.htslib.org/doc/samtools.html)
+- [Picard](https://broadinstitute.github.io/picard/)
+- [BCFtools](http://samtools.github.io/bcftools/)
+- [MAFtools](https://bioconductor.org/packages/release/bioc/vignettes/maftools/inst/doc/maftools.html)
+- [BEDtools](https://bedtools.readthedocs.io/en/latest/)
+- [GFFcompare](http://ccb.jhu.edu/software/stringtie/gffcompare.shtml)
+- [Samtools docs on file formats](https://samtools.github.io/hts-specs/)
+- [UCSC file format descriptions](https://genome.ucsc.edu/FAQ/FAQformat.html)

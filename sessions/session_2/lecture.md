@@ -4,22 +4,24 @@ permalink: sessions/session_2/lecture
 menubar_toc: true
 ---
 
+<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script>
+
 ## Useful Databases
 
 ## Major Cancer Genomic Studies with Data Portals
 
-- [ICGC Data Portal](https://dcc.icgc.org/):
-- [Pan-Cancer Analysis of Whole Genomes (PCAWG)](https://dcc.icgc.org/pcawg):
-- [100,000 Genomes Project \| Genomics England](https://www.genomicsengland.co.uk/initiatives/100000-genomes-project):
-- [Pediatric Cancer Genome Project (PCGP)](https://permalinks.stjude.cloud/permalinks/pcgp) and [Pediatric Cancer Databases (PeCan)](https://pecan.stjude.cloud/):
-- [St. Jude Cloud Genomics Platform](https://platform.stjude.cloud/):
-- [St. Jude Cloud Visualization Community](https://proteinpaint.stjude.org/):
-- [AACR Project: Genomics Evidence Neoplasia Information Exchange (GENIE)](https://www.aacr.org/professionals/research/aacr-project-genie/aacr-project-genie-data/):
-- [MSK-IMPACT](https://www.mskcc.org/msk-impact):
-- [Cancer Research Data Commons (CRDC) at NCI](https://datacommons.cancer.gov/):
-- [GDC Data Portal](https://portal.gdc.cancer.gov/):
-- [Cell Model Passports](https://cellmodelpassports.sanger.ac.uk/):
-- [Depmap portal](https://depmap.org/portal/):
+- [ICGC Data Portal](https://dcc.icgc.org/)
+- [Pan-Cancer Analysis of Whole Genomes (PCAWG)](https://dcc.icgc.org/pcawg)
+- [100,000 Genomes Project \| Genomics England](https://www.genomicsengland.co.uk/initiatives/100000-genomes-project)
+- [Pediatric Cancer Genome Project (PCGP)](https://permalinks.stjude.cloud/permalinks/pcgp) and [Pediatric Cancer Databases (PeCan)](https://pecan.stjude.cloud/)
+- [St. Jude Cloud Genomics Platform](https://platform.stjude.cloud/)
+- [St. Jude Cloud Visualization Community](https://proteinpaint.stjude.org/)
+- [AACR Project: Genomics Evidence Neoplasia Information Exchange (GENIE)](https://www.aacr.org/professionals/research/aacr-project-genie/aacr-project-genie-data/)
+- [MSK-IMPACT](https://www.mskcc.org/msk-impact)
+- [Cancer Research Data Commons (CRDC) at NCI](https://datacommons.cancer.gov/)
+- [GDC Data Portal](https://portal.gdc.cancer.gov/)
+- [Cell Model Passports](https://cellmodelpassports.sanger.ac.uk/)
+- [Depmap portal](https://depmap.org/portal/)
 
 - [cBioPortal](https://www.cbioportal.org/datasets)
 - [FIREBROWSE](https://gdac.broadinstitute.org/)
