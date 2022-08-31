@@ -334,22 +334,24 @@ Alignment files are composed of two sections: a header section and a list of ali
 The sequences themselves are stored in a format composed of eleven sections with important information such as read name, alignment flags, which reference the sequence is aligned to, where it’s aligned, how well it’s aligned, and information on its paired mate read.
 
 <img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/sam_body.png">
+*from the [samtools documentation](https://samtools.github.io/hts-specs/SAMv1.pdf)*
 
 The FLAG element is an additive combination of integers representing alignment status flags.
 
 <img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/sam_flags.png">
+*from the [samtools documentation](https://samtools.github.io/hts-specs/SAMv1.pdf)*
 
 As an example, the 355 flag represents the sum of the integers 1+2+32+64+256=355, and indicates that this read is paired (1), both reads in the pair are mapped properly (2), the mate is on the reverse strand (32), this is the first read in the pair (64), and that this read is not the primary alignment of this sequence (256). An excellent resource for decomposing an alignment flag into its components can be found [here](https://broadinstitute.github.io/picard/explain-flags.html). Alignment flags allow for filtering reads based on their alignment quality, such as selecting reads with both pairs mapped (flag 3) or filtering out unmapped reads and supplementary alignments (flags 4,8, and 256).
 
 The CIGAR string represents the alignment status of the sequence against the reference. It is represented by a series of number-letter pairs indicating the number of base pairs and how those bases align against the reference.
 
 <img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/CIGAR_example.png">
-
 *https://genome.sph.umich.edu/wiki/SAM#What_is_a_CIGAR.3F*
 
 In the above example, the CIGAR string 3M1I3M1D5M indicates 3 matching bases, 1 inserted base, 3 matching bases, 1 deleted base, and 5 matching bases in that order. See below for a description of what each letter indicates.
 
 <img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/CIGAR_symbols.png">
+*from the [samtools documentation](https://samtools.github.io/hts-specs/SAMv1.pdf)*
 
 Two very popular tools for working with alignment files are Samtools and Picard. Both are compatible with SAM, BAM, and CRAM formats, and provide functions to read, write, view, edit, filter, and index alignment files, plus more. For a full description of the functionality of each, see the [Samtools](http://www.htslib.org/doc/samtools.html) and [Picard](https://broadinstitute.github.io/picard/) documentation.
 

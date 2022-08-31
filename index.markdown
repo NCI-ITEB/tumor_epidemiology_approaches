@@ -10,7 +10,7 @@ hero_size: is-medium
 title: Emerging Approaches for Tumor Analyses in Epidemiological Studies
 ---
 
-Welcome to the github pages for the *Emerging Approaches for Tumor Analyses in Epidemiological Studies* course! This course is provided by NCI-ITEB, and taught by bioinformaticians from the Sherlock Lung study on lung cancer in never smokers.
+Welcome to the GitHub pages for the *Emerging Approaches for Tumor Analyses in Epidemiological Studies* course! This course is provided annually by NCI-ITEB, and taught by bioinformaticians from the Sherlock Lung study on lung cancer in never smokers.
 
 ## Course Description
 
