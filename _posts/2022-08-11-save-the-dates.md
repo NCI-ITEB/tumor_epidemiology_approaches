@@ -39,4 +39,6 @@ All sessions begin at 9:30am with a lecture component ending at 10:30am, followe
 - May 10, 2023: Data visualization approaches
 - May 17, 2023: “Ask a Bioinformatician” IV
 
+This companion website containing digital adaptations of the course content will be updated before each session.
+
 Sign up for the course [here]() if you haven't already. Those who participate in all lectures and practical sessions will receive a certificate of completion for the course suitable for your CV/resume.
