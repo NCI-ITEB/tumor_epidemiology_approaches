@@ -2,7 +2,7 @@ alignment: is-left
 style: is-boxed
 size: is-large
 items:
-  - name: Session 7
+  - name: Overview
     link: /sessions/session_7
     icon: fa-dna
   # - name: Lecture

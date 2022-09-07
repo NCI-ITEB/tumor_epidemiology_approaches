@@ -5,7 +5,7 @@ title: Instructors
 ---
   <section class="px-4">
   {% for author in site.authors %}
-	<figure class="image is-128x128" style="float:left" >
+	<figure class="image is-128x128" style="float:left; clear:left" >
 		<img class="is-rounded" src="{{ site.baseurl }}/assets/instructors/{{ author.picture }}">
 	</figure>
     <div class="px-4" style="overflow: auto">
