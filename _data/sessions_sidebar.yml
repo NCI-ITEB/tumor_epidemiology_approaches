@@ -1,4 +1,4 @@
-- label: Block 1
+- label: Module 1
   items:
     - name: '1: Introduction'
       link: /sessions/session_1
@@ -6,7 +6,7 @@
       link: /sessions/session_2
     - name: '3: DNA Sequencing Strategies and Quality Control'
       link: /sessions/session_3
-- label: Block 2
+- label: Module 2
   items:
     - name: '4: Mutation Calling and Analysis'
       link: /sessions/session_4
@@ -14,7 +14,7 @@
       link: /sessions/session_5
     - name: '6: Somatic Copy Number Alterations'
       link: /sessions/session_6
-- label: Block 3
+- label: Module 3
   items:
     - name: '7: Structural Variant Analysis'
       link: /sessions/session_7
@@ -22,7 +22,7 @@
       link: /sessions/session_8
     - name: '9: Clonal Evolution'
       link: /sessions/session_9
-- label: Block 4
+- label: Module 4
   items:
     - name: '10: Transcriptome-based Study Designs'
       link: /sessions/session_10
