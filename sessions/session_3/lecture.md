@@ -16,15 +16,13 @@ A typical Next Generation Sequencing (NGS) workflow can be divided into 5 steps:
 - Sequencing: libraries are loaded onto a flow cell and placed on the sequencer. Two common sequencing platforms are Illumina and Ion Torrent.
 - Data analysis & interpretation: After sequencing, the instrument software identifies nucleotides (a process called base calling) and the predicted accuracy of those base calls. The raw output from sequencers are often in FASTA format, which can be aligned to a reference genome in BAM format.
 
-
-<img>
-*From Qiagen*
-
+<img src="lecture_assets/qiagen_workflow.jpg">
+<figcaption class="has-text-centered is-size-7 is-italic">From https://www.qiagen.com/</figcaption><br>
 
 Sample collection, preservation, and manipulation are important pre-analytical factors to consider. See the overview of the most commonly used biopsy techniques, preservation methods, and genomic analytes below.
 
-
-<img>
+<img class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:66%;" src="lecture_assets/sample_collection.png">
+<figcaption class="has-text-centered is-size-7 is-italic"><a href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-016-0370-4">Lennon NJ, Adalsteinsson VA, Gabriel SB, 2016</a></figcaption><br>
 
 Traditional biopsy methods include fine- or core-needle biopsy or surgical resection. These biopsies typically only access the primary tumor site. From traditional tissue biopsy the most common pathological preservation path is through formalin fixation and paraffin embedding (FFPE), though fresh frozen tissue or disaggregated cells are sometimes also available. From each of these material types, both DNA and RNA can be extracted.
 
@@ -32,12 +30,13 @@ Liquid biopsy usually involves blood draw, though some groups are now testing ur
 
 Common pre-analytical issues, impacts, and contingencies associated with different sample types are summarized in the Table below:
 
-
-*Lennon NJ, Adalsteinsson VA, Gabriel SB. Technological considerations for genome-guided diagnosis and management of cancer. Genome Med. 2016 Oct 26;8(1):112. doi: 10.1186/s13073-016-0370-4. PMID: 27784341; PMCID: PMC5080740.*
-
-<img>
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/sample_collection_details.png">
+<figcaption class="has-text-centered is-size-7 is-italic "><a href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-016-0370-4">Lennon NJ, Adalsteinsson VA, Gabriel SB, 2016</a></figcaption><br>
 
 All DNA extraction procedures aim to isolate the DNA from all other cell components. Steps for preprocessing, lysis will vary substantially depending on specimen type. Quality and quantity of extracted DNA will vary depending on specimen type, storage conditions, and extraction techniques.
+
+<img class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:66%;" src="lecture_assets/dna_extraction.jpg">
+<figcaption class="has-text-centered is-size-7 is-italic">From https://www.eppendorf.com/worldwide/</figcaption><br>
 
 ---
 
@@ -50,14 +49,16 @@ After extraction, DNA quantity and quality should be assessed to decide if your 
 ---
 
 ### Quantitation Methods
-
+<div style="float:right; max-width:50%">
+<img src="lecture_assets/spectrometry_curve.jpg" style="float:right">
+<figcaption class="has-text-centered is-size-7 is-italic">Spectrophotometer curve; from <a href="https://www.sciencedirect.com/science/article/pii/B9780128028230000079">Chang-Hui Shen - Detection and Analysis of Nucleic Acids, 2019</a></figcaption>
+<img src="lecture_assets/picogreen_fluorescence.jpg" style="float:right">
+<figcaption class="has-text-centered is-size-7 is-italic">Fluometry curve; taken from http://beckman.com/</figcaption>
+</div>
 - Spectrophotometry-absorbance measurement:
-  - Measures DNA concentration by absorbance of UV light
+  - Measures DNA concentration by absorbance of UV light at specific wavelengths
   - Accessible to many labs
   - Can overestimate quantity due to other molecules absorbing at the same wavelength as DNA
-
-<img>
-
 - Fluorometry:
   - Measures DNA via binding dye which is fluorescent when bound to dsDNA
   - Not standard in all labs; but becoming more accessible
@@ -65,42 +66,44 @@ After extraction, DNA quantity and quality should be assessed to decide if your 
   - Utilizes a standard curve
   - In general, more accurate
 
-<img>
-
 For both quality and quantity, requirements will vary depending on downstream sequencing platform and application.  Amplification-free approaches generally require more material.
 
 ---
 
 ### Qualitative approaches
 
-- Electrophoresis
+- Electrophoresis:
   - Slab Gel (older technology, most labs can do this)
-    - Size distribution measured against a ladder with DNA fragments of known sizes to determine quality <img>
+    - Size distribution measured against a ladder with DNA fragments of known sizes to determine quality<br>
+    <img src="lecture_assets/gel_quality_test.jpg" style="max-width:66%; position:center">
   - BioAnalyzer, TapeStation, FemtoPulse
     - Automated electrophoresis, detection, analysis
-    - Determine fragment size distribution, assign a qualitative score <img>
+    - Determine fragment size distribution, assign a qualitative score<br><img src="lecture_assets/femtopulse.png" style="max-width:66%; position:center"><br>
+    <figcaption class="is-size-7 is-italic">From http://illumina.com/</figcaption>
   - Metrics like GQN, DIN, DV200 are based on the size distribution of DNA fragments
-- qPCR
-  - Ratios of amplification for larger amplicons vs smaller amplicons used to determine quality
-
-<img>
+- qPCR:
+  - Ratios of amplification for larger amplicons vs smaller amplicons used to determine quality<br>
+  <img src="lecture_assets/qPCR_quality_assessment.png" style="max-width:66%; position:center"><br>
+  <figcaption class="is-size-7 is-italic">From http://sequencing.roche.com/</figcaption>
 
 Both methods can be informative or predictive for performance in downstream NGS assays, or determine feasibility.
 
 For both quality and quantity, requirements will vary depending on downstream sequencing platform and application.  Long Read approaches generally require longer fragments; Short Read approaches can accommodate lower quality DNA to a point; even then, data quality may be impacted.
-FFPE samples in particular are notorious for being degraded/lower quality
+
+FFPE samples in particular are notorious for being degraded/lower quality.
 
 ---
 
 ### Library preparation & QC:
 
-<img>
+<img src="lecture_assets/qiagen_libraryPrep.png">
+<figcaption class="has-text-centered is-size-7 is-italic">From https://www.qiagen.com/</figcaption><br>
 
 All library preparation methods are converting the analyte (DNA, RNA) into a molecule that is usable by the sequencer. Fragment size, adapter structure, and whether the library is amplified will depend on the sequencing platform and application. Fragmentation can be either enzymatic or mechanical, and adapters can be y-shaped, linear, or hairpins. Adapters may incorporate binding sites (for flow cells or beads), sequencing primer sites, and barcodes for demultiplexing or unique molecular identification
 After library preparation, obtaining the size distribution and molar concentration (molecule count) of the library is critical to ensuring that yields on expensive sequencing runs are maximized, and data quality is as good as it can be. qPCR for measuring concentration, BioAnalyzer/Tapestation/FemtoPulse are common methods for library QC before sequencing.
 
-
-<img><img>
+<img src="lecture_assets/qPCR_libraryPrep.jpg" style="max-width:50%"><img src="lecture_assets/tapestation_libraryPrep.jpg" style="max-width:50%">
+<figcaption class="has-text-centered is-size-7 is-italic">From https://www.sequencing.roche.com</figcaption><br>
 
 Loading too much library on a sequencing flowcell/chip/SMRTcell can impact data quality/reduce yield; loading too little will reduce yield. Each sequencing platform has a range of acceptable library sizes and amounts required for a sequencing run. Presence of adapter/primer dimers can also reduce yield of usable data. Of note, achieving a library of the right size and purifying/excluding dimers from the final library is much more difficult when the input material is degraded (as in FFPE samples).
 
@@ -109,9 +112,8 @@ Loading too much library on a sequencing flowcell/chip/SMRTcell can impact data 
 ## Tailoring sequencing strategies for study design and purposes
 Major sequencing platforms and their use cases are summarized in the table and figure below:
 
-<img>
-
-<img>
+<img class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/platforms_table.png">
+<img class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/platforms_v_methods.jpg">
 
 ---
 
@@ -119,10 +121,8 @@ Major sequencing platforms and their use cases are summarized in the table and f
 
 The process for Illumina sequencing is pictured below:
 
-<img>
-
-[*Chaitankar et al. 2020*]
-(https://www.sciencedirect.com/science/article/pii/S1350946216300301?via%3Dihub)
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;max-width:66%;" src="lecture_assets/illumina_sequencing_method.png">
+<figcaption class="has-text-centered is-size-7 is-italic"><a href="https://www.sciencedirect.com/science/article/pii/S1350946216300301?via%3Dihub">Chaitankar et al. 2020</a></figcaption><br>
 
 Library molecules are loaded onto flow cells and individual library molecules are clonally amplified into clusters via bridge amplification. Clusters are sequenced using a Sequencing By Synthesis (SBS) method using reversible terminator nucleotides that are fluorescently labeled. Fluorescence is captured in images for each cycle of sequencing, and the signal for each cluster is interpreted. Poor fluorescence or mixed fluorescent signals within a cluster will reduce base calling certainty and therefore sequence quality.
 
@@ -131,8 +131,8 @@ Library molecules are loaded onto flow cells and individual library molecules ar
 ### Ion Torrent
 Library molecules undergo emulsion PCR on beads. After amplification, the emulsion is broken and the amplified beads are loaded into wells on the sequencing chip. Nucleotides are incorporated sequentially onto the chip; base incorporations for a given well/bead are interpreted as pH changes due to the release of Hydrogen.
 
-
-<img>
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;max-width:66%;" src="lecture_assets/ionTorrent_sequencing_method.jpg">
+<figcaption class="has-text-centered is-size-7 is-italic"><a href="https://academic.oup.com/bioinformatics/article/29/13/i344/188472?login=false">Golan and Medvedev, 2013</a></figcaption><br>
 
 ---
 
@@ -140,8 +140,9 @@ Library molecules undergo emulsion PCR on beads. After amplification, the emulsi
 
 DNA Polymerase and sequencing primer are bound to the hairpin adapters on library molecules and loaded into wells (ZMWs) on a SMRTcell. Once the polymerase is activated, it unzips the library molecule into a circle as it incorporates nucleotides, which are fluorescently labeled. Nucleotide incorporation is captured in real time as a movie of fluorescent signals. Each individual molecule can be read through many times; these are analytically combined into a single HiFi (or CCS) read that is highly accurate.
 
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;max-width:66%;" src="lecture_assets/Pacbio_sequencing_method.jpg">
+<figcaption class="has-text-centered is-size-7 is-italic">From https://www.pacb.com/</figcaption><br>
 
-<img>
 Long read sequencing is great for repetitive regions, STR  or AT/GC rich loci that are difficult to sequence or map with short reads, or where phasing across long regions is useful. Among long read platforms, Pacbio has the highest accuracy at 99.9%.
 
 ---
@@ -150,8 +151,8 @@ Long read sequencing is great for repetitive regions, STR  or AT/GC rich loci th
 A motor protein unwinds dsDNA and drives single-stranded DNA (negatively charged) through the nanopore due to voltage applied across the membrane.
 As nucleotides pass through the nanopore, the current change is measured and used to determine nucleotides as they pass. Nanopore sequencing has the opportunity for the longest reads of any platform, albeit at lower accuracy than Pacbio.
 
-<img>
-https://www.nature.com/articles/s41587-021-01108-x
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;max-width:66%;" src="lecture_assets/Nanopore_sequencing_method.jpg">
+<figcaption class="has-text-centered is-size-7 is-italic">From <a href="https://www.nature.com/articles/s41587-021-01108-x">Wang et al., 2021</a></figcaption>
 
 ---
 
@@ -159,12 +160,10 @@ https://www.nature.com/articles/s41587-021-01108-x
 
 The three most typical NGS approaches are whole genome sequencing (WGS), whole exome sequencing (WES or WXS), and targeted sequencing, plus RNA sequencing for transcriptomic analysis. Each strategy has unique limitations that should be considered when selecting methodology for any study. See the figures below for a summary of each method’s capabilities and limitations:
 
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;max-width:75%;" src="lecture_assets/methods_v_studyDesign.png">
+<figcaption class="has-text-centered is-size-7 is-italic"><a href="https://www.sciencedirect.com/science/article/pii/S0734975020300343">Hess et al. 2020</a></figcaption>
 
-<img>
-[Hess et al. 2020](https://www.sciencedirect.com/science/article/pii/S0734975020300343
-)
-
-<img>
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;max-width:75%;" src="lecture_assets/methods_v_studyDesign_2.png">
 
 The general question when choosing sequencing methods is cost vs discovery power. WGS, and in particular long read sequencing, provides the most opportunity for discovery but is much more expensive than WES and targeted sequencing and has sequencing depth limitations due to cost. Additionally, WGS produces much more data than other methods which imposes additional considerations regarding data storage and computational analysis.
 
@@ -193,9 +192,8 @@ Note that these requirements and numbers are likely to change with time and betw
 
 *Pacbio long read statistics per sequencing strategy*
 
-
-https://www.nature.com/articles/s41576-020-0236-x
-<img>
+<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/longRead_methods_comparison.png">
+<figcaption class="has-text-centered is-size-7 is-italic"><a href="https://www.nature.com/articles/s41576-020-0236-x">Logsdon et al., 2020</a></figcaption>
 
 ---
 
@@ -228,8 +226,8 @@ Pacbio long reads have additional benefits over short read WGS:
 
 In addition to DNA-based and RNA-based bulk-sequencing, there are also epigenomic related bulk-sequencing techniques to explore the epigenome. Hi-C can be used to study the 3D genome organization and topology-associated domain. To examine chromatin accessibility (closed and open chromatin regions) a number of different approaches could be used such as MNase-seq, ATAC-seq, DNase-seq, FAIRE-seq. This is important to understand which genomic regions are transcriptionally active or repressed.
 
-<img>
-https://www.sciencedirect.com/science/article/pii/B9780128122150000042
+<img class="center" style="display: block; margin-left: auto; margin-right: auto;" src="lecture_assets/epigenomics_seq.png">
+<figcaption class="has-text-centered is-size-7 is-italic"><a href="https://www.sciencedirect.com/science/article/pii/B9780128122150000042">Hsu et al., 2018</a></figcaption>
 
 For protein-DNA interactions (e.g. the binding of specific transcription factors to DNA), ChIP-seq is particularly helpful. To study small RNA, miRNA-seq can be used.
 For DNA methylation, there are various approaches including Whole-Genome Bisulfite sequencing, Reduced Representation Bisulfite sequencing, and Methylated DNA immunoprecipitation.
@@ -240,9 +238,8 @@ For DNA methylation, there are various approaches including Whole-Genome Bisulfi
 
 In recent years many new technologies have been developed to sequence at the individual cell level. We will not discuss these methods in this session, but see the figure below for a brief, non-comprehensive summary of single-cell methods:
 
-
-<img>
-*Ren et al. 2018*
+<img class="center" style="display: block; margin-left: auto; margin-right: auto;" src="lecture_assets/singleCell_seqs.png">
+<figcaption class="has-text-centered is-size-7 is-italic"><a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1593-z">Ren et al., 2018</a></figcaption>
 
 ---
 
@@ -259,8 +256,8 @@ Targeted sequencing sequences key genes or regions of interest to high depth (50
 | More comprehensive method, but with longer hands-on time and turnaround time              | More affordable, easier workflow                                                 |
 
 
-<img>
-*A) Target enrichment, B) Amplicon sequencing. [From Thermo Fisher](https://www.thermofisher.com/us/en/home/life-science/sequencing/sequencing-learning-center/next-generation-sequencing-information/ngs-basics/targeted-sequencing-approaches.html)*
+<img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/targetedSeq_diagram.png">
+<figcaption class="has-text-centered is-size-7 is-italic">A) Target enrichment, B) Amplicon sequencing. <a href="https://www.thermofisher.com/us/en/home/life-science/sequencing/sequencing-learning-center/next-generation-sequencing-information/ngs-basics/targeted-sequencing-approaches.html">From Thermo Fisher</a></figcaption>
 
 ---
 
@@ -277,13 +274,11 @@ There are targeted panels for many diseases and purposes, but some of the most c
 
 Information on other targeted panels or how to create a custom panel can be found on the Illumina website (see examples below), or from other vendors.
 
-
-<img>
+<img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/targetedPanels_search.png">
 
 Many instrument-specific softwares are available with various analysis modules for data analysis, or alternatively standard exome sequencing pipelines can be used to analyze targeted sequencing data.
 
-
-<img>
+<img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/targetedPanel_analysis_software.png">
 
 ---
 
@@ -291,8 +286,8 @@ Many instrument-specific softwares are available with various analysis modules f
 
 As the name implies, WES sequences DNA coding regions which are also known as exons. Many of the genetic mutations that lead to genetic disorders happen in the exome, which is why WES can still be very useful despite the fact that it doesn’t analyze the entire genome. Importantly it is much more cost efficient than WGS and is therefore a good option for research questions answerable by either method. The standard bioinformatics pipeline for WES is somewhat similar to WGS, but with the additional need to specify WES capture platforms.
 
-<img>
-*Choi et al. 2018*
+<img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:50%" src="lecture_assets/WES_exome_capture.png">
+<figcaption class="has-text-centered is-size-7 is-italic"><a href="https://www.koreabreedjournal.org/journal/view.html?doi=10.9787/KJBS.2018.50.4.364">Choi et al., 2018</a></figcaption><br>
 
 To perform exome capture, genomic DNA is sheared (commonly by sonication i.e. physical force such as ultrasonicators using burst of ultrasounds) to create evenly sized DNA fragments which are then followed by adaptor ligation. Size selection is performed on the library prior to capture. Size-selected libraries are then incubated with biotinylated probes complementary to the exome regions (like cDNA library or RNA baits). The bait-DNA hybrids are then “pulled” out of the complex mixture by incubation with the magnetic beads. RNA baits are digested such that the remaining nuclear acid is the targeted DNA of interest. Captured DNA is amplified and the targeted samples are sequenced.
 
@@ -321,12 +316,12 @@ WGS is the most comprehensive method for analyzing entire genomes. WGS provides 
 SNV and INDELs can be called using a variety of callers, such as Mutect2, Strelka2, Vardict, Muse, or LoFreq, or an ensemble caller such as [Somatic Combiner](https://github.com/mingyi-wang/somatic-combiner) as used in the NCI-CGR pipeline. We will discuss the practical details of mutation calling in the next session.
 
 
-<img>
-*SomaticCombiner: Wang, M.  et al. Scientific Reports,  10:12898 (2020)*
+<img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/variant_calling_WGS.png">
+<figcaption class="has-text-centered is-size-7 is-italic"><a href="https://www.nature.com/articles/s41598-020-69772-8">SomaticCombiner: Wang, M.  et al. Scientific Reports,  10:12898 (2020)</a></figcaption><br>
 
 Alternatively there is the Sentieon variant discovery pipeline which was used for Sherlock Lung. We will discuss the Sentieon pipeline further in the next session on variant calling.
 
-<img>
+<img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/sentieon_pipeline.png">
 
 ---
 
@@ -359,7 +354,8 @@ There are several tools available for QC of sequencing data, but two of the most
 #### MultiQC
 MultiQC is a general use tool, perfect for summarizing output from numerous bioinformatics tools (currently [114 supported](https://multiqc.info/)). MultiQC searches a given directory for analysis logs and compiles an HTML report encompassing all samples and tools.
 
-<img>
+<img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/multiqc.png">
+
 There are many QC tools, but some of the most popular ones include:
 
 - FastQC
@@ -378,15 +374,16 @@ There are many QC tools, but some of the most popular ones include:
 
 ### Check Sequencing Quality Using FastQC
 
-<img>
+<img class="center" style="display: block; margin-left: auto; margin-right: auto;" src="lecture_assets/fastqc_quality.png">
 
 ---
 
 ### Checking Insert Size with
 
-<img>
+<img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:50%" src="lecture_assets/insert_size.png">
 
 ---
 
 ### Assessing Gender and Relatedness with Somalier
- <img>
+
+<img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/somalier.png">

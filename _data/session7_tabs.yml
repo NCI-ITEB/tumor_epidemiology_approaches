@@ -8,3 +8,6 @@ items:
   # - name: Lecture
   #   link: /sessions/session_7/lecture
   #   icon: fa-book
+  # - name: Practical
+  #   link: /sessions/session_7/practical
+  #   icon: fa-laptop-code
