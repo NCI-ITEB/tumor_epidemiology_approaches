@@ -39,7 +39,7 @@ plugins:
 
 # collections
 collections:
-  authors:
+  instructors:
   speakers:
 
 # updates

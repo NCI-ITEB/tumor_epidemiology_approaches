@@ -1,6 +1,8 @@
 ---
-picture: NuriaLopezBigas_IRB_photo.png
-name: Nuria Lopez-Bigas, Ph.D.
+picture: NuriaLopezBigas_IRB_photo_zoomed.png
+name: Nuria Lopez-Bigas
+education: Ph.D.
+affiliation: Institute for Research in Biomedicine in Barcelona
 talk_title: Somatic mutations in tumors and normal tissues
 talk_date: March 23th, 2023
 ---

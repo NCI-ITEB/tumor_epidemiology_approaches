@@ -13,9 +13,10 @@ title: Invited Speakers
   	</figure>
     {% endif %}
     <div class="px-4" style="overflow:auto">
-      	<h2>{{speaker.name}}</h2>
+      	<h2>{{speaker.name}}, {{speaker.education}}</h2>
+        <h5>{{speaker.affiliation}}</h5>
       	{% if speaker.talk_title %}
-        <h4>{{ speaker.talk_date }} - {{ speaker.talk_title }}</h4>
+        <h4>{{ speaker.talk_date }} - "{{ speaker.talk_title }}"</h4>
         {% else %}
         <h4>{{ speaker.talk_date }}</h4>
         {% endif %}
