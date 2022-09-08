@@ -21,21 +21,24 @@ depending on whether you're using MacOS or Windows:
 
 - Open the Terminal app, like so:
 	- "Finder -> Applications -> Utilities -> Terminal"
-- enter the following command: <code>ssh username@helix.nih.gov</code>,
+- enter the following command: <code>ssh username@biowulf.nih.gov</code>,
 replacing 'username' with your own username.
 
 #### Windows
 
 - Install [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
 - Launch PuTTY. Under “Host Name (or IP address), type:
-<code>username@helix.nih.gov</code>, replacing 'username' with your own username,
+<code>username@biowulf.nih.gov</code>, replacing 'username' with your own username,
 and click “Open”
 - At the prompt, enter the account password
 
-At this point you should be connected to the NIH Helix cluster, and your screen
+At this point you should be connected to the NIH Biowulf cluster, and your screen
 should look something like this:
 
-<img src="practical_assets/login_screen.png">
+<img src="practical_assets/login_screen.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+
+### Locally mounting HPC System Directories
+We will need to mount your personal <code>/data</code> drive to access files on Biowulf from your local computer at the end of this session. See the instructions here for mounting your data directory: https://hpc.nih.gov/docs/hpcdrive.html.
 
 ---
 
@@ -71,35 +74,35 @@ Now let's copy that data over to our current directory:
 
 The last two characters in the code above are special characters with specific meanings. The <code>*</code> in the code above is called a 'wildcard' and can be interpreted as 'everything', in this case meaning all files. The <code>.</code> in the code means 'current directory', and is where we're copying the files to.
 
-**5\.** For the sake of practice let's merge gencode.v19.og.bed and gencode.v19.tsg.bed into a single file gencode.v19.driver.bed:
+<!--**5\.** For the sake of practice let's merge gencode.v19.og.bed and gencode.v19.tsg.bed into a single file gencode.v19.driver.bed:
 
 <code>cat gencode.v19.og.bed gencode.v19.tsg.bed > gencode.v19.driver.bed
 </code>
 
-The <code>cat</code> command will print the contents of one or more files to your screen, but using the <code>></code> character we can redirect the output to a new file. To verify that we've pasted the files together, try using the <code>wc -l</code> command on <code>gencode.v19.og.bed</code>, <code>gencode.v19.tsg.bed</code>, and <code>gencode.v19.driver.bed</code> individually to count how many lines each one has.
+The <code>cat</code> command will print the contents of one or more files to your screen, but using the <code>></code> character we can redirect the output to a new file. To verify that we've pasted the files together, try using the <code>wc -l</code> command on <code>gencode.v19.og.bed</code>, <code>gencode.v19.tsg.bed</code>, and <code>gencode.v19.driver.bed</code> individually to count how many lines each one has.-->
 
-**6\.** We're going to try sorting our new file, so before we do that let's check the manual on the <code>sort</code> command:
+**5\.** We're going to try sorting a file, so before we do that let's check the manual on the <code>sort</code> command:
 
 <code>man sort</code>
 
 Use the arrow keys or your scroll wheel to read, and take note of the options <code>-k</code> and <code>-r</code>. To exit the manual enter <code>:q</code>.
 
-**7\.** Finally let's sort the merged bed file by genomic coordinates:
+**6\.** Finally let's sort the merged bed file by genomic coordinates:
 
-<code>sort -k1,1 -k2,2n gencode.v19.driver.bed > genelist.bed</code>
+<code>sort -k1,1 -k2,2n gencode.hg38.chr22.bed >gencode.hg38.chr22.sorted.bed</code>
 
 <code>-k1,1 -k2,2n</code>: sort first by the first field, then by the second field numerically. The sorting isn't saved automatically, so as before we use the <code>></code> to redirect the output to a new file.
 
 ---
 
 ## Working with FASTQ files
-**8\.** Before we can work with our fastq files we need to decompress them:
+**7\.** Before we can work with our fastq files we need to decompress them:
 
 <code>tar -xvf sample1.fq.tar.gz</code>
 
 The <code>-x</code> and <code>-f</code> options tell tar to extract files and what file to extract from, respectively. The <code>-v</code> option is to print filenames as they're decompressed.
 
-**9\.** Let's preview our files:
+**8\.** Let's preview our files:
 
 <code>head sample1.fq</code>
 
@@ -109,11 +112,11 @@ more sample1.fq
 
 Use 'enter' or 'space' to scroll down, 'b' to scroll back, and '/' to search. To quit, either reach the end of the file or type <code>:q</code>.
 
-**10\.** Let's subset our fastq file to a smaller collection of reads with the seqtk library. First load seqtk:
+**9\.** Let's subset our fastq file to a smaller collection of reads with the seqtk library. First load seqtk:
 
 <code>module load seqtk</code>
 
-then use the 'subseq' tool to extract the reads specified in the 'name.lst' file:
+**10\.** then use the 'subseq' tool to extract the reads specified in the 'name.lst' file:
 
 seqtk subseq sample1.fq name.lst > out.fq
 
@@ -123,13 +126,15 @@ Check the output file 'out.fq' with the <code>head</code> and/or <code>more</cod
 
 ## Working with BAM files
 
-**11\.** We're going to be working with BAM files from 1000 genomes. Download these files from the 1000 genomes FTP site like so:
+**11\.** We're going to be working with BAM files from 1000 genomes. The example data was downloaded from the [1000 Genomes Project](https://www.internationalgenome.org/home).
 
-<code>wget </code>
+<img src="practical_assets/1000_genomes_download.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
 **12\.** Once that's finished downloading, rename this file to reads.bam.
 
-<code>mv XXXX reads.bam</code>
+<code>mv HG00118__chr22@38952741@38992778.bam reads.bam</code>
+
+### Examine file format
 
 **13\.** Let's look at the header of this BAM file. Before we begin working with this file using samtools we need to request an interactive session.
 
@@ -143,7 +148,7 @@ For our purposes any recent version will suffice, so enter <code>module load sam
 
 <code>samtools view -H reads.bam | more</code>
 
-The <code>view</code> mode of samtools is a tool to print sections of a BAM/SAM/CRAM file, and the <code>-H</code> option instructs samtools to print only the header. In this example we then feed the samtools output directly to the <code>more</code> command via the linux 'pipe' (the <code>|<\code> symbol) so it's easier to read and browse.
+The <code>view</code> mode of samtools is a tool to print sections of a BAM/SAM/CRAM file, and the <code>-H</code> option instructs samtools to print only the header. In this example we then feed the samtools output directly to the <code>more</code> command via the linux 'pipe' (the <code>|</code> symbol) so it's easier to read and browse.
 
 Note that we've been using a BAM file which is in binary format, but the output is in readable text. Samtools has converted the output from BAM to SAM automatically.
 
@@ -153,7 +158,11 @@ Note that we've been using a BAM file which is in binary format, but the output 
 
 As before, we use the pipe to feed the output into the <code>head -20</code> command so we can see just the first 20 lines.
 
-**15\.** Let's isolate only the reads whose mate is unmapped:
+### Extract, sort, index reads
+
+**15\.** Let's isolate only unmapped reads, and reads with unmapped mates:
+
+<code>samtools view -b -f4 reads.bam >mate_unmapped.bam</code>
 
 <code>samtools view -b -f8 reads.bam >mate_unmapped.bam</code>
 
@@ -175,59 +184,69 @@ This should create a new index file <code>reads_sorted.bam.bai/code>.
 
 <code>samtools flagstat reads_sorted.bam</code>
 
-**19\.** Find all reads mapping to chr2:25,000,000-45,000,000 and save to file chr2.bam:
+**19\.** Find all reads mapping to chr22:38,700,000-39,300,000 and save to file chr22.bam:
 
-<code>samtools view -h reads_sorted.bam chr2:25,000,000-45,000,000 > chr2.bam</code>
+<code>samtools view -h reads_sorted.bam chr22:38,700,000-39,300,000 > chr22.bam</code>
 
 The <code>-h</code> option will retain the original header in our output file.
 
-**20\.** We can visualize the alignment at XXXX using tview:
+<!--**20\.** We can visualize the alignment at XXXX using tview:
 
 <code>samtools tview XXXX</code>
 
-Note that the program IGV is much more useful for this purpose with more features, but we will not cover it today.
+Note that the program IGV is much more useful for this purpose with more features, but we will not cover it today.-->
 
 ---
 
 ## Working with BED files
 
-**21\.** Let's convert our chr2 BAM alignment file to BED format. First load bedtools and then use the 'bamtobed' mode:
+**20.** Let's convert our chr2 BAM alignment file to BED format. First load bedtools and then use the 'bamtobed' mode:
 
 <code>module load bedtools
 
-bedtools bamtobed -i chr2.bam > reads.bed
+bedtools bamtobed -i chr22.bam > reads.bed
 </code>
 
-**22\.** Report base-pair overlap between sequence alignment and genes
+**21\.** For each gene that overlaps with alignments, report the full-length of the original gene. Report each gene with more than one hit only once.
 
-<code>bedtools intersect -a reads.bed -b gencode.v19.driver.bed >intersect_overlap.bed</code>
+<code>bedtools intersect -a reads.bed -b gencode.hg38.chr22.sorted.bed >intersect_overlap.bed</code>
 
-or to get the full read length rather than just the overlapping portions:
+**22\.** Report regions in genes that have no overlap with alignments.
 
-<code>bedtools intersect -a reads.bed -b gencode.v19.driver.bed -wa >intersect_full_length_reads.bed</code>
+<code>bedtools intersect -a gencode.hg38.chr22.sorted.bed -b reads.bed -v  >intersect_no_overlap.bed</code>
 
 See the diagram below for the specifics on bedtools intersect.
 
-<img src="practical_assets/bedtools_intersect.png">
+<img src="practical_assets/bedtools_intersect.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
-**23\.** For a more advanced query, we can do the following: report all fusion reads within 2000bp upstream or 1000bp downstream of genes. Report each read with more than one hit only once:
+**23\.** For a more advanced query, we can do the following: report all reads within 2000bp upstream or 1000bp downstream of genes. Report each read with more than one hit only once:
 
-<code>bedtools window -a reads.bed -b gencode.v19.driver.bed -l 2000 -r 1000 -u  >fusion_reads_window.bed</code>
+<code>bedtools window -a reads.bed -b gencode.hg38.chr22.sorted.bed -l 2000 -r 1000 -u > intersect_reads_window.bed</code>
 
-**24\.** We're going to visualize these reads on UCSC, and to do so we need to add some header lines to our BED file. Copy and paste the following command:
+### Visualizing on UCSC
 
-<code>(printf "browser position chr2:25,000,000-45,000,000\nbrowser hide all\ntrack name=\"fusion reads\" description=\"BED format custom track example\" visibility=1 color=70,130,180 useScore=1\n#chrom\tchrom\tStart\tchromEnd\tname\tscore\tstrand\n" && cat fusion_reads_window.bed) > custom_UCSC_track.bed<\code>
+**24\.** We're going to visualize these reads on UCSC, and to do so we need to add some header lines to our BED file. Copy and paste the following series of commands:
 
-. This will paste the header (everything within the quotes) and our BED file together into one file.
+- Configure browser:<br><code>printf "browser position chr22:38,700,000-39,300,000\nbrowser hide all\n" > custom_UCSC_track.bed<\code>
 
-**25\.** Let's now visualize using the UCSC genome browser. Go to https://genome.ucsc.edu/ . Under the "Genomes" tab, select "Human GRCh37/hg19" and then click the 'add custom tracks' button on the bottom of the genome browser.
+- Add the track for overlapping regions:<br><code>(printf "track name=\"overlap regions\" description=\"example for bedtools A intersect B\" visibility=1 color=0,0,255 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_overlap.bed)  >> custom_UCSC_track.bed</code>
 
-<img src="practical_assets/ucsc_custom_track.png">
+- Add the track for full length of genes: <br><code>(printf "track name=\"original genes\" description=\"example for bedtools A intersect B -wa\" visibility=3 color=255,0,0 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_full_length_genes.bed)  >> custom_UCSC_track.bed</code>
+
+Note one important aspect in the previous commands: the first command uses <code>></code> to write the text to file while the following commands use <code>>></code>; <code>>></code> will append text to an existing file while <code>></code> will overwrite existing files.
+
+**25\.** Let's now visualize using the UCSC genome browser. Go to https://genome.ucsc.edu/. Under the "Genomes" tab, select "Human GRCh38/hg38" and then click the 'add custom tracks' button on the bottom of the genome browser.
+
+<img src="practical_assets/ucsc_select_genome.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+
+<img src="practical_assets/ucsc_select_genome.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
 Next, upload the BED file via the "Choose File" button
 
-<img src="practical_assets/upload_BED.png">
+<img src="practical_assets/upload_BED.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
-and finally hit "go".
+<img src="practical_assets/upload_BED_2.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
-<img src="practical_assets/go_button.png">
+and finally hit "go". An APOBEC3 homozygous deletion is highlighted below.
+
+<img src="practical_assets/custom_track_apobec.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
