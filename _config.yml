@@ -136,7 +136,7 @@ defaults:
     scope:
       path: sessions/session_9
     values:
-      title: "Session 9: Clonal Evolution"
+      title: "Session 9: Tumor Evolution"
       parent: sessions
       nav_order: 9
       tabs: session9_tabs

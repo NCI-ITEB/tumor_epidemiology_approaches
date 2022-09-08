@@ -1,7 +1,7 @@
 ---
 picture: WeiZhao_r_ITEB.jpeg
 short_name: Wei Zhao
-name: Wei Zhao, Ph. D.
+name: Wei Zhao, Ph.D.
 organization: NCI - ITEB
 position: Research Fellow
 profile_link: https://dceg.cancer.gov/fellowship-training/fellowship-experience/meet-fellows/iteb/zhao-wei

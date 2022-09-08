@@ -1,7 +1,7 @@
 ---
 picture: jian_sang.png
 short_name: Jian Sang
-name: Jian Sang, Ph. D.
+name: Jian Sang, Ph.D.
 organization: NCI - ITEB
 position: Postdoctoral Fellow
 profile_link: https://dceg.cancer.gov/fellowship-training/fellowship-experience/meet-fellows/iteb/sang-jian
