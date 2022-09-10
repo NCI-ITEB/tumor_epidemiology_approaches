@@ -319,7 +319,7 @@ SNV and INDELs can be called using a variety of callers, such as Mutect2, Strelk
 <img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/variant_calling_WGS.png">
 <figcaption class="has-text-centered is-size-7 is-italic"><a href="https://www.nature.com/articles/s41598-020-69772-8">SomaticCombiner: Wang, M.  et al. Scientific Reports,  10:12898 (2020)</a></figcaption><br>
 
-Alternatively there is the Sentieon variant discovery pipeline which was used for Sherlock Lung. We will discuss the Sentieon pipeline further in the next session on variant calling.
+Alternatively there is the Sentieon variant discovery pipeline which was used for Sherlock-*Lung*. We will discuss the Sentieon pipeline further in the next session on variant calling.
 
 <img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/sentieon_pipeline.png">
 
