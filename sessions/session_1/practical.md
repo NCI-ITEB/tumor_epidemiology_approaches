@@ -72,7 +72,7 @@ Now let's copy that data over to our current directory:
 
 <code>cp /data/course/* .</code>
 
-The last two characters in the code above are special characters with specific meanings. The <code>*</code> in the code above is called a 'wildcard' and can be interpreted as 'everything', in this case meaning all files. The <code>.</code> in the code means 'current directory', and is where we're copying the files to.
+The last two characters in the code above are special characters with specific meanings. The <code>*</code> in the code above is called a 'wildcard' and can be interpreted as 'anything'. So with this code we're copying all files in <code>/data/course/</code> matching the pattern 'anything', i.e. all files. The <code>.</code> in the code means 'the current working directory', and is where we're copying the files to.
 
 <!--**5\.** For the sake of practice let's merge gencode.v19.og.bed and gencode.v19.tsg.bed into a single file gencode.v19.driver.bed:
 
@@ -96,11 +96,11 @@ Use the arrow keys or your scroll wheel to read, and take note of the options <c
 ---
 
 ## Working with FASTQ files
-**7\.** Before we can work with our fastq files we need to decompress them:
+**7\.** Before we can work with our fastq files we need to decompress them using the decompression command <code>tar</code>:
 
-<code>tar -xvf sample1.fq.tar.gz</code>
+<code>tar -xzvf Sample1.tar.gz</code>
 
-The <code>-x</code> and <code>-f</code> options tell tar to extract files and what file to extract from, respectively. The <code>-v</code> option is to print filenames as they're decompressed.
+The <code>-xz</code> and <code>-f</code> options tell <code>tar</code> that we want to decompress our files and what file to extract from, respectively. The <code>-v</code> option is to print filenames as they're decompressed.
 
 **8\.** Let's preview our files:
 
@@ -118,7 +118,7 @@ Use 'enter' or 'space' to scroll down, 'b' to scroll back, and '/' to search. To
 
 **10\.** then use the 'subseq' tool to extract the reads specified in the 'name.lst' file:
 
-<code>seqtk subseq sample1.fq name.lst > out.fq</code> 
+<code>seqtk subseq Sample1_1.fq name.lst >out.fq</code>
 
 Check the output file 'out.fq' with the <code>head</code> and/or <code>more</code> command.
 
@@ -144,7 +144,7 @@ Once you are granted a session, try listing all the versions of samtools availab
 
 <code>module spider samtools</code>
 
-For our purposes any recent version will suffice, so enter <code>module load samtools</code> to load samtools. Then to view the BAM header, enter:
+For our purposes any recent version will suffice, so enter <code>module load samtools</code> to load the default version of samtools. Then to view the BAM header, enter:
 
 <code>samtools view -H reads.bam | more</code>
 
@@ -152,7 +152,7 @@ The <code>view</code> mode of samtools is a tool to print sections of a BAM/SAM/
 
 Note that we've been using a BAM file which is in binary format, but the output is in readable text. Samtools has converted the output from BAM to SAM automatically.
 
-**14\.** Now let's view the first 20 lines of the aligned reads in the body section. The command will be very similar, but without the <code>-H</code> option samtools will ignore the header by default:
+**14\.** Now let's view the first 20 lines of the aligned reads in the body section. The command will be very similar, but without the <code>-H</code> option samtools will ignore the header:
 
 <code>samtools view reads.bam|head -20</code>
 
@@ -207,11 +207,13 @@ Note that the program IGV is much more useful for this purpose with more feature
 bedtools bamtobed -i chr22.bam > reads.bed
 </code>
 
-**21\.** For each gene that overlaps with alignments, report the full-length of the original gene. Report each gene with more than one hit only once.
+**21\.** For each gene that overlaps with alignments, report the base-pair overlap between the sequence alignment and genes:
 
 <code>bedtools intersect -a reads.bed -b gencode.hg38.chr22.sorted.bed >intersect_overlap.bed</code>
 
-**22\.** Report regions in genes that have no overlap with alignments.
+<code>-a</code> and <code>-b</code> specify our two BED file inputs.
+
+**22\.** Report regions in genes that have no overlap with alignments (specified with <code>-v</code>):
 
 <code>bedtools intersect -a gencode.hg38.chr22.sorted.bed -b reads.bed -v  >intersect_no_overlap.bed</code>
 
@@ -219,21 +221,21 @@ See the diagram below for the specifics on bedtools intersect.
 
 <img src="practical_assets/bedtools_intersect.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
-**23\.** For a more advanced query, we can do the following: report all reads within 2000bp upstream or 1000bp downstream of genes. Report each read with more than one hit only once:
+**23\.** For a more advanced query, we can do the following: report all reads within 2000bp upstream or 1000bp downstream of genes. Report each read with more than one hit only once (<code>-u</code>):
 
 <code>bedtools window -a reads.bed -b gencode.hg38.chr22.sorted.bed -l 2000 -r 1000 -u > intersect_reads_window.bed</code>
 
 ### Visualizing on UCSC
 
-**24\.** We're going to visualize these reads on UCSC, and to do so we need to add some header lines to our BED file. Copy and paste the following series of commands:
+**24\.** We're going to visualize these reads on UCSC, and to do so we need to add some header lines to our BED file. Run the following series of commands:
 
-- Configure browser:<br><code>printf "browser position chr22:38,700,000-39,300,000\nbrowser hide all\n" > custom_UCSC_track.bed<\code>
+- Configure browser: <br><code>printf "browser position chr22:38,700,000-39,300,000\nbrowser hide all\n" > custom_UCSC_track.bed<\code>
 
-- Add the track for overlapping regions:<br><code>(printf "track name=\"overlap regions\" description=\"example for bedtools A intersect B\" visibility=1 color=0,0,255 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_overlap.bed)  >> custom_UCSC_track.bed</code>
+- Add the track for overlapping regions: <br><code>(printf "track name=\"overlap regions\" description=\"example for bedtools A intersect B\" visibility=1 color=0,0,255 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_overlap.bed)  >> custom_UCSC_track.bed</code>
 
 - Add the track for full length of genes: <br><code>(printf "track name=\"original genes\" description=\"example for bedtools A intersect B -wa\" visibility=3 color=255,0,0 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_full_length_genes.bed)  >> custom_UCSC_track.bed</code>
 
-Note one important aspect in the previous commands: the first command uses <code>></code> to write the text to file while the following commands use <code>>></code>; <code>>></code> will append text to an existing file while <code>></code> will overwrite existing files.
+Note one important aspect in the previous commands: the first command uses <code>></code> to write the text to file while the following commands use <code>>></code>; <code>>></code> will append text to the end of an existing file while <code>></code> will overwrite existing files.
 
 **25\.** Let's now visualize using the UCSC genome browser. Go to https://genome.ucsc.edu/. Under the "Genomes" tab, select "Human GRCh38/hg38" and then click the 'add custom tracks' button on the bottom of the genome browser.
 
