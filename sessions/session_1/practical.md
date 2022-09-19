@@ -104,11 +104,11 @@ The <code>-x</code> and <code>-f</code> options tell tar to extract files and wh
 
 **8\.** Let's preview our files:
 
-<code>head sample1.fq</code>
+<code>head Sample1_1.fq</code>
 
 By default, head will you give you the first ten lines of a file to examine. If you want to see more, you can use the option <code>-n</code>, or use the <code>more</code> command:
 
-more sample1.fq
+<code>more Sample1_1.fq</code>
 
 Use 'enter' or 'space' to scroll down, 'b' to scroll back, and '/' to search. To quit, either reach the end of the file or type <code>:q</code>.
 
@@ -118,7 +118,7 @@ Use 'enter' or 'space' to scroll down, 'b' to scroll back, and '/' to search. To
 
 **10\.** then use the 'subseq' tool to extract the reads specified in the 'name.lst' file:
 
-seqtk subseq sample1.fq name.lst > out.fq
+<code>seqtk subseq sample1.fq name.lst > out.fq</code> 
 
 Check the output file 'out.fq' with the <code>head</code> and/or <code>more</code> command.
 
