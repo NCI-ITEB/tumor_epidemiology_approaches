@@ -72,8 +72,9 @@
     {% endif %}
 {% endcapture %}{% assign tocWorkspace = '' %}
 
+<!-- change 'top: 3.5rem' if the height of the top menubar changes-->
 <div class="contents" style="{% if page.menubar_toc %}
-  position: sticky; overflow-y: scroll; top: 10px; bottom: 0; max-height: calc(100vh - 2rem);
+  position: sticky; overflow-y: scroll; top: 3.5rem; bottom: .5rem; max-height: calc(100vh - 4rem);
   {% endif %}">
     <div class="menu">
         <p class="menu-label">{{ include.contents_title }}</p>

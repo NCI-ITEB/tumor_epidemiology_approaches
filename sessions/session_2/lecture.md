@@ -36,7 +36,7 @@ These platforms have more advanced data analysis capabilities relative to the po
 - [FIREBROWSE](https://gdac.broadinstitute.org/): Very useful platform with easy-to-use and advanced genomic analysis methods for TCGA study
 - [Gene Expression Profiling Interactive Analysis (GEPIA)](http://gepia.cancer-pku.cn/index.html): Gene expression database and portal for advanced analysis of transcriptomics data including both TCGA and GTEx studies
 
-## Common Genetics Data Resources
+## Other Genetics Data Resources
 
 - [Genotype-Tissue Expression (GTEx)](https://gtexportal.org/home/): Public resource to study normal tissue-specific gene expression and regulation. Data type including WGS, WES, bulk and single-nuclear RNAseq
 - [gnomAD](https://gnomad.broadinstitute.org/): Genome aggregation database of with the goal of aggregating and harmonizing both exome and genome sequencing data from a wide variety of large-scale sequencing projects
@@ -50,7 +50,7 @@ These platforms have more advanced data analysis capabilities relative to the po
 - [UCSC Genome Browser](https://genome.ucsc.edu/): Common resource for genome browsing including many organisms and genomes, and many custom tracks containing specialized annotations
 - [Ensembl](https://useast.ensembl.org/index.html): Genome browser with some helpful tools such as Ensembl Variant Effect Predictor, BLAST, BLAT, BioMart, and more
 
-## Databases for Specific Genomic Analyses
+## Specialized Databases for Genomic Analyses
 
 - [FIREBROWSE (Broad GDAC) for Somatic Analysis](https://gdac.broadinstitute.org/): Previously mentioned, allows for many very specific cancer genomics analyses for TCGA study
 - [PCAWG Data Portal for WGS-Based Somatic Analysis](https://dcc.icgc.org/releases/PCAWG): Data portal including the major analytical results for PCAWG study

@@ -6,29 +6,32 @@ menubar_toc: true
 
 <script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script>
 
-
 This practical section will focus first on connecting to a remote cluster
 as well as using the linux command line. Then we will practice working with
 some common bioinformatics file formats.
 
+---
+
 ## Setup ssh connection
 
 First, to use the computing clusters we need to establish an ssh connection
-between your computer and the cluster. The steps to do this will differ
-depending on whether you're using MacOS or Windows:
+between your computer and the cluster.
+
+**The steps to do this will differ
+depending on whether you're using MacOS or Windows:**
 
 #### MacOS
 
 - Open the Terminal app, like so:
 	- "Finder -> Applications -> Utilities -> Terminal"
-- enter the following command: <code>ssh username@biowulf.nih.gov</code>,
-replacing 'username' with your own username.
+- enter the following command: <code>ssh USERNAME@biowulf.nih.gov</code>,
+replacing 'USERNAME' with your own username.
 
 #### Windows
 
 - Install [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
 - Launch PuTTY. Under “Host Name (or IP address), type:
-<code>username@biowulf.nih.gov</code>, replacing 'username' with your own username,
+<code>USERNAME@biowulf.nih.gov</code>, replacing 'USERNAME' with your own username,
 and click “Open”
 - At the prompt, enter the account password
 
@@ -38,7 +41,7 @@ should look something like this:
 <img src="practical_assets/login_screen.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
 ### Locally mounting HPC System Directories
-We will need to mount your personal <code>/data</code> drive to access files on Biowulf from your local computer at the end of this session. See the instructions here for mounting your data directory: https://hpc.nih.gov/docs/hpcdrive.html.
+We will need to mount your personal <code>/data</code> drive to access files on Biowulf from your local computer at the end of this session. See the instructions here for mounting your data directory: [https://hpc.nih.gov/docs/hpcdrive.html](https://hpc.nih.gov/docs/hpcdrive.html).
 
 ---
 
@@ -66,11 +69,11 @@ Verify that you are in the right folder with the <code>pwd</code> command.
 
 **4\.** Let's copy some files to practice with. Before we do that, let's look at the contents of the course folder like so:
 
-<code>ls -lh /data/course</code>
+<code>ls -lh /data/classes/DCEG_Somatic_Workshop</code>
 
 Now let's copy that data over to our current directory:
 
-<code>cp /data/course/* .</code>
+<code>cp /data/classes/DCEG_Somatic_Workshop/* .</code>
 
 The last two characters in the code above are special characters with specific meanings. The <code>*</code> in the code above is called a 'wildcard' and can be interpreted as 'anything'. So with this code we're copying all files in <code>/data/course/</code> matching the pattern 'anything', i.e. all files. The <code>.</code> in the code means 'the current working directory', and is where we're copying the files to.
 
@@ -227,7 +230,7 @@ See the diagram below for the specifics on bedtools intersect.
 
 ### Visualizing on UCSC
 
-**24\.** We're going to visualize these reads on UCSC, and to do so we need to add some header lines to our BED file. Run the following series of commands:
+**24\.** We're going to visualize these reads on UCSC, and to do so we need to add some header lines to our BED file. Run the following series of commands (red text only):
 
 - Configure browser: <br><code>printf "browser position chr22:38,700,000-39,300,000\nbrowser hide all\n" > custom_UCSC_track.bed<\code>
 
@@ -237,7 +240,7 @@ See the diagram below for the specifics on bedtools intersect.
 
 Note one important aspect in the previous commands: the first command uses <code>></code> to write the text to file while the following commands use <code>>></code>; <code>>></code> will append text to the end of an existing file while <code>></code> will overwrite existing files.
 
-**25\.** Let's now visualize using the UCSC genome browser. Go to https://genome.ucsc.edu/. Under the "Genomes" tab, select "Human GRCh38/hg38" and then click the 'add custom tracks' button on the bottom of the genome browser.
+**25\.** Let's now visualize using the UCSC genome browser. Go to [https://genome.ucsc.edu/](https://genome.ucsc.edu/). Under the "Genomes" tab, select "Human GRCh38/hg38" and then click the 'add custom tracks' button on the bottom of the genome browser.
 
 <img src="practical_assets/ucsc_select_genome.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 

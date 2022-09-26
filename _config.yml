@@ -48,6 +48,7 @@ paginate_path: "/news/page:num"
 
 # FORMATTING
 #
+fixed_navbar: top
 defaults:
   -
     scope:
@@ -72,7 +73,7 @@ defaults:
     scope:
       path: sessions/session_1
     values:
-      title: "Session 1: Introduction"
+      title: "Session 1: Introduction to Computing Clusters and Bioinformatics"
       parent: sessions
       nav_order: 1
       tabs: session1_tabs
@@ -112,7 +113,7 @@ defaults:
     scope:
       path: sessions/session_6
     values:
-      title: "Session 6: Somatic Copy Number Alterations"
+      title: "Session 6: Structural Variant Analysis"
       parent: sessions
       nav_order: 6
       tabs: session6_tabs
@@ -120,7 +121,7 @@ defaults:
     scope:
       path: sessions/session_7
     values:
-      title: "Session 7: Structural Variant Analysis"
+      title: "Session 7: Somatic Copy Number Alterations"
       parent: sessions
       nav_order: 7
       tabs: session7_tabs

@@ -139,7 +139,7 @@ You can check if these genes are identified as a potential driver using another 
 
 ---
 
-## Somatic alterations in multiple genes from the same cohort.
+## Somatic alterations in multiple genes
 
 #### How can we use cBioPortal for exploring somatic alterations in multiple genes from the same cohort?
 
