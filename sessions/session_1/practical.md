@@ -91,7 +91,7 @@ Now let's copy that data over to our current directory:
 
 <code>cp /data/classes/DCEG_Somatic_Workshop/* .</code>
 
-The last two characters in the code above are special characters with specific meanings. The <code>*</code> in the code above is called a 'wildcard' and can be interpreted as 'anything'. So with this code we're copying all files in <code>/data/course/</code> matching the pattern 'anything', i.e. all files. The <code>.</code> in the code means 'the current working directory', and is where we're copying the files to.
+The last two characters in the code above are special characters with specific meanings. The <code>*</code> in the code above is called a 'wildcard' and can be interpreted as 'anything'. So with this code we're copying all files in <code>/data/classes/DCEG_Somatic_Workshop/</code> matching the pattern 'anything', or in other words all files. The <code>.</code> in the code means 'the current working directory', and is where we're copying the files to.
 
 <!--**5\.** For the sake of practice let's merge gencode.v19.og.bed and gencode.v19.tsg.bed into a single file gencode.v19.driver.bed:
 
@@ -146,12 +146,14 @@ Same to the command <code>more</code>, use ‘space’ to scroll down, and type 
 To check the number of paired-end reads, use the following commands:
 
 <code>echo $(zcat Sample1_1.fastq.gz | wc -l)/4 | bc</code>
+
 <code>echo $(zcat Sample1_2.fastq.gz | wc -l)/4 | bc</code>
 
 You should see '300000’ for both commands.
 
 To briefly explain these commands:
-- <code>zcat Sample1_1.fastq.gz | wc -l</code>: print the decompressed contents of the gzipped (‘.gz’) reads file using ‘zcat’, then count the number of lines by feeding (or piping, the ‘|’ symbol) the output directly to ‘wc -l’
+
+- <code>zcat Sample1_1.fastq.gz | wc -l</code>: print the decompressed contents of the gzipped (‘.gz’) reads file using ‘zcat’, then count the number of lines by feeding (or piping, the ‘\|’ symbol) the output directly to ‘wc -l’
 - <code>echo $(...)/4 | bc</code>: setup a division by 4 of the line count value from the <code>wc -l</code> command using <code>echo</code> (recall that each sequence in the fastq is composed of four lines). This mathematical expression is only evaluated after using the command <code>bc</code>.
 
 **9\.** Let's subset our fastq file to a smaller collection of reads with the seqtk library. First load seqtk:
