@@ -47,7 +47,23 @@ We will need to mount your personal <code>/data</code> drive to access files on 
 
 ## Basic Bash/Linux commands
 
-Let's practice some basic linux commands. :
+Before we begin coding, let's first open an interactive session. It's important to not run long commands on the login node as it will affect other users.
+
+**Type this command:**
+
+<code>sinteractive --mem=4g --cpus-per-task=4</code>
+
+**and hit enter.**
+
+You will see this screen when your request is being submitted and is waiting for resources:
+
+<img src="practical_assets/pending_interactive.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+
+When you are allocated to an interactive session, your screen should looks like this:
+
+<img src="practical_assets/granted_interactive.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+
+Now let's practice some basic linux commands:
 
 **1\.** First, let's check what directory we're working in on the command line. Simply type:
 
@@ -90,11 +106,17 @@ The <code>cat</code> command will print the contents of one or more files to you
 
 Use the arrow keys or your scroll wheel to read, and take note of the options <code>-k</code> and <code>-r</code>. To exit the manual enter <code>:q</code>.
 
-**6\.** Finally let's sort the merged bed file by genomic coordinates:
+**6\.** Finally let's sort the bed file (gencode.hg38.chr22.bed) by genomic coordinates.
 
+Before we sort it, we want to check the first few lines of the file:
+<code>head gencode.hg38.chr22.bed</code>
+
+By default, <code>head</code> will give you the first ten lines of a file to examine. If you want to see more, you can use the option <code>-n</code>, or use the <code>more</code> command.
+
+Then we can sort the file with this command:
 <code>sort -k1,1 -k2,2n gencode.hg38.chr22.bed >gencode.hg38.chr22.sorted.bed</code>
-
 <code>-k1,1 -k2,2n</code>: sort first by the first field, then by the second field numerically. The sorting isn't saved automatically, so as before we use the <code>></code> to redirect the output to a new file.
+
 
 ---
 
@@ -105,15 +127,32 @@ Use the arrow keys or your scroll wheel to read, and take note of the options <c
 
 The <code>-xz</code> and <code>-f</code> options tell <code>tar</code> that we want to decompress our files and what file to extract from, respectively. The <code>-v</code> option is to print filenames as they're decompressed.
 
-**8\.** Let's preview our files:
+**8\.** Let's preview our files. We can do it in two ways:
 
 <code>head Sample1_1.fq</code>
 
-By default, head will you give you the first ten lines of a file to examine. If you want to see more, you can use the option <code>-n</code>, or use the <code>more</code> command:
+We have used the <code>head</code> command before. This will return the first ten lines of the file by default.
+
+Alternatively, we can use:
 
 <code>more Sample1_1.fq</code>
 
-Use 'enter' or 'space' to scroll down, 'b' to scroll back, and '/' to search. To quit, either reach the end of the file or type <code>:q</code>.
+Use 'enter' or 'space' to scroll down, 'b' to scroll back, and '/' to search. To quit, either reach the end of the file or type <code>q</code>.
+
+We have another compressed format for the same file (files with extension .fastq.gz). We can check the contents of these files directly without creating a plain text file, using this command:
+<code>zless Sample1_1.fastq.gz</code>
+Same to the command <code>more</code>, use ‘space’ to scroll down, and type <code>q</code> to exit.
+
+To check the number of paired-end reads, use the following commands:
+
+<code>echo $(zcat Sample1_1.fastq.gz | wc -l)/4 | bc</code>
+<code>echo $(zcat Sample1_2.fastq.gz | wc -l)/4 | bc</code>
+
+You should see '300000’ for both commands.
+
+To briefly explain these commands:
+- <code>zcat Sample1_1.fastq.gz | wc -l</code>: print the decompressed contents of the gzipped (‘.gz’) reads file using ‘zcat’, then count the number of lines by feeding (or piping, the ‘|’ symbol) the output directly to ‘wc -l’
+- <code>echo $(...)/4 | bc</code>: setup a division by 4 of the line count value from the <code>wc -l</code> command using <code>echo</code> (recall that each sequence in the fastq is composed of four lines). This mathematical expression is only evaluated after using the command <code>bc</code>.
 
 **9\.** Let's subset our fastq file to a smaller collection of reads with the seqtk library. First load seqtk:
 
@@ -139,11 +178,7 @@ Check the output file 'out.fq' with the <code>head</code> and/or <code>more</cod
 
 ### Examine file format
 
-**13\.** Let's look at the header of this BAM file. Before we begin working with this file using samtools we need to request an interactive session.
-
-<code>sinteractive --mem=4g --cpus-per-task=2</code>
-
-Once you are granted a session, try listing all the versions of samtools available on Biowulf:
+**13\.** Let's look at the header of this BAM file. Try listing all the versions of samtools available on Biowulf:
 
 <code>module spider samtools</code>
 
@@ -241,8 +276,6 @@ See the diagram below for the specifics on bedtools intersect.
 Note one important aspect in the previous commands: the first command uses <code>></code> to write the text to file while the following commands use <code>>></code>; <code>>></code> will append text to the end of an existing file while <code>></code> will overwrite existing files.
 
 **25\.** Let's now visualize using the UCSC genome browser. Go to [https://genome.ucsc.edu/](https://genome.ucsc.edu/). Under the "Genomes" tab, select "Human GRCh38/hg38" and then click the 'add custom tracks' button on the bottom of the genome browser.
-
-<img src="practical_assets/ucsc_select_genome.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
 <img src="practical_assets/ucsc_select_genome.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
