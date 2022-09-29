@@ -155,13 +155,12 @@ Doing so will require you to specify a folder to be mounted. Refer to the table 
 
 | | Description | Directory at cluster | SMB path for Windows | SMB path for Mac |
 | ---: | --- | --- | --- | --- |
-| Biowulf/Helix | user's home directory | /home/[user] | \\\\hpcdrive.nih.gov\\[user] | smb://hpcdrive.nih.gov/[user] |
+| **Biowulf/Helix** | user's home directory | /home/[user] | \\\\hpcdrive.nih.gov\\[user] | smb://hpcdrive.nih.gov/[user] |
 | | data directory | /data/[user] | \\\\hpcdrive.nih.gov\\data | smb://hpcdrive.nih.gov/data |
 | | user's scratch space | /scratch/[user] directory | \\\\hpcdrive.nih.gov\\scratch\\[user] | smb://hpcdrive.nih.gov/scratch/<br>[user] |
 | | shared group area (e.g. you are a member of group PQRlab) | /data/PQRlab | \\\\hpcdrive.nih.gov\\PQRlab | smb://hpcdrive.nih.gov/PQRlab |
-| CCAD | main directory | /home/ | \\\\gigantor.nci.nih.gov\\ifs | smb://gigantor.nci.nih.gov/ifs |
+| **CCAD** | main directory | /home/ | \\\\gigantor.nci.nih.gov\\ifs | smb://gigantor.nci.nih.gov/ifs |
 | | user's home directory | /home/[user] | \\\\gigantor.nci.nih.gov\\ifs<br>\\DCEG\\Home\\[user] | smb://gigantor.nci.nih.gov/ifs<br>/DCEG/Home/[user] |
-
 
 . For more detailed instructions on how to mount drives on Biowulf, see [here](https://hpc.nih.gov/docs/transfer.html).
 
