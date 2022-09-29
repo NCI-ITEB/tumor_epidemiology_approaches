@@ -135,7 +135,7 @@ Use the arrow keys or your scroll wheel to read, and take note of the options <c
 
 Before we sort it, we want to check the first few lines of the file:
 
-<code>head gencode.hg38.chr22.bed</code
+<code>head gencode.hg38.chr22.bed</code>
 
 By default, <code>head</code> will give you the first ten lines of a file to examine. If you want to see more, you can use the option <code>-n</code>, or use the <code>more</code> command.
 
