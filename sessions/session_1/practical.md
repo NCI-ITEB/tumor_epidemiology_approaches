@@ -29,16 +29,21 @@ replacing 'USERNAME' with your own username.
 
 #### Windows
 
-- Install [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+- Download and install [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+- Right-click the download package. Click ‘Install with Elevated Permissions’.
+- Enter the password. Select justification ‘I need to install work related software’. Click ‘OK’ to start installation.
 - Launch PuTTY. Under “Host Name (or IP address), type:
 <code>USERNAME@biowulf.nih.gov</code>, replacing 'USERNAME' with your own username,
 and click “Open”
+
+<img src="practical_assets/putty_openConnect.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+
 - At the prompt, enter the account password
 
 At this point you should be connected to the NIH Biowulf cluster, and your screen
 should look something like this:
 
-<img src="practical_assets/login_screen.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+<img src="practical_assets/biowulf_connected.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:85%">
 
 ### Locally mounting HPC System Directories
 We will need to mount your personal <code>/data</code> drive to access files on Biowulf from your local computer at the end of this session. See the instructions here for mounting your data directory: [https://hpc.nih.gov/docs/hpcdrive.html](https://hpc.nih.gov/docs/hpcdrive.html).
@@ -59,7 +64,7 @@ You will see this screen when your request is being submitted and is waiting for
 
 <img src="practical_assets/pending_interactive.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
-When you are allocated to an interactive session, your screen should looks like this:
+When you are allocated to a computing node and you should see USERNAME@cn#### like this:
 
 <img src="practical_assets/granted_interactive.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
@@ -83,15 +88,35 @@ To verify that your folder was created successfully, enter the following: <code>
 
 Verify that you are in the right folder with the <code>pwd</code> command.
 
-**4\.** Let's copy some files to practice with. Before we do that, let's look at the contents of the course folder like so:
+**4\.** Let's copy some files to practice with. We deposited two copies of our sample data in Biowulf and Github, respectively. You can follow either 4.a or 4.b to copy the data to your home directory.
 
-<code>ls -lh /data/classes/DCEG_Somatic_Workshop</code>
+**4\.a** Copy the data from the shared folder in Biowulf.
+Before we do that, let's look at the contents of the course folder like so:
+
+<code>ls -lh /data/classes/DCEG_Somatic_Workshop/Practical_session_1</code>
 
 Now let's copy that data over to our current directory:
 
-<code>cp /data/classes/DCEG_Somatic_Workshop/* .</code>
+<code>cp -r /data/classes/DCEG_Somatic_Workshop/Practical_session_1/* .</code>
+
+The option <code>-r</code> means copy directories recursively. If we omit this option, all the folders in this directory will be skipped.
 
 The last two characters in the code above are special characters with specific meanings. The <code>*</code> in the code above is called a 'wildcard' and can be interpreted as 'anything'. So with this code we're copying all files in <code>/data/classes/DCEG_Somatic_Workshop/</code> matching the pattern 'anything', or in other words all files. The <code>.</code> in the code means 'the current working directory', and is where we're copying the files to.
+
+**4\.b** Alternatively, you can download the data from GitHub.
+
+Let’s first look up the link from GitHub. Open the website in web browser: **TODO:Add github link**
+
+Click the green button ‘code’. Click the button next to the https link to copy the link.
+
+**TODO:Add a screen shot here**
+
+Then get back to the biowulf terminal to run the command:
+<code>git clone **TODO:Add HTTPS link** .</code>
+
+Now we can switch to the directory of sample input data.
+<code>cd  sample_input_data</code>
+
 
 <!--**5\.** For the sake of practice let's merge gencode.v19.og.bed and gencode.v19.tsg.bed into a single file gencode.v19.driver.bed:
 
@@ -109,14 +134,18 @@ Use the arrow keys or your scroll wheel to read, and take note of the options <c
 **6\.** Finally let's sort the bed file (gencode.hg38.chr22.bed) by genomic coordinates.
 
 Before we sort it, we want to check the first few lines of the file:
-<code>head gencode.hg38.chr22.bed</code>
+
+<code>head gencode.hg38.chr22.bed</code
 
 By default, <code>head</code> will give you the first ten lines of a file to examine. If you want to see more, you can use the option <code>-n</code>, or use the <code>more</code> command.
 
-Then we can sort the file with this command:
-<code>sort -k1,1 -k2,2n gencode.hg38.chr22.bed >gencode.hg38.chr22.sorted.bed</code>
-<code>-k1,1 -k2,2n</code>: sort first by the first field, then by the second field numerically. The sorting isn't saved automatically, so as before we use the <code>></code> to redirect the output to a new file.
+<img src="practical_assets/preview_bed.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
+Then we can sort the file with this command:
+
+<code>sort -k1,1 -k2,2n gencode.hg38.chr22.bed >gencode.hg38.chr22.sorted.bed</code>
+
+<code>-k1,1 -k2,2n</code>: sort first by the first field, then by the second field numerically. The sorting isn't saved automatically, so as before we use the <code>></code> to redirect the output to a new file.
 
 ---
 
@@ -149,7 +178,7 @@ To check the number of paired-end reads, use the following commands:
 
 <code>echo $(zcat Sample1_2.fastq.gz | wc -l)/4 | bc</code>
 
-You should see '300000’ for both commands.
+You should see '300,000’ for both commands.
 
 To briefly explain these commands:
 
@@ -164,6 +193,10 @@ To briefly explain these commands:
 
 <code>seqtk subseq Sample1_1.fq name.lst >out.fq</code>
 
+‘name.lst’ is a list of identifiers of reads.
+
+<code> head name.lst</code>
+
 Check the output file 'out.fq' with the <code>head</code> and/or <code>more</code> command.
 
 ---
@@ -174,9 +207,11 @@ Check the output file 'out.fq' with the <code>head</code> and/or <code>more</cod
 
 <img src="practical_assets/1000_genomes_download.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
-**12\.** Once that's finished downloading, rename this file to reads.bam.
+**12\.** Now we rename the BAM file in our input data folder to reads.bam.
 
 <code>mv HG00118__chr22@38952741@38992778.bam reads.bam</code>
+
+---
 
 ### Examine file format
 
@@ -198,27 +233,31 @@ Note that we've been using a BAM file which is in binary format, but the output 
 
 As before, we use the pipe to feed the output into the <code>head -20</code> command so we can see just the first 20 lines.
 
+---
+
 ### Extract, sort, index reads
 
 **15\.** Let's isolate only unmapped reads, and reads with unmapped mates:
 
-<code>samtools view -b -f4 reads.bam >mate_unmapped.bam</code>
+<code>samtools view -b -f4 reads.bam >unmapped.bam</code>
 
 <code>samtools view -b -f8 reads.bam >mate_unmapped.bam</code>
 
-The <code>-b</code> flag tells samtools to output in BAM format rather than SAM, and the <code>-f</code> flag requires all output reads to have the specified alignment flags, in this case flag '8' which corresponds to 'mate unmapped'.
+The <code>-b</code> flag tells samtools to output in the compressed BAM format rather than SAM, and is very important when working with large alignment files. The <code>-f</code> flag requires all output reads to have the specified alignment flags, in this case flag '4' and flag '8'. These correspond to 'read unmapped' and 'mate unmapped', respectively.
+
+A full list of SAM flags can be found at: [https://broadinstitute.github.io/picard/explain-flags.html](https://broadinstitute.github.io/picard/explain-flags.html)
 
 **16\.** Sort the original file by genomic coordinates and output into file reads_sorted.bam:
 
 <code>samtools sort -o reads_sorted.bam reads.bam</code>
 
-Note that in the previous command we used <code>></code> to save a new file whereas in this case we've used <code>-o filename</code> to accomplish the same.
+Note that in the previous command we used <code>></code> to save a new file whereas in this case we've used <code>-o [file name]</code> to accomplish the same.
 
-**17\.** Let's now index the sorted file. Indexing allows for more efficient lookup of reads and is required for many bioinformatics algorithms:
+**17\.** Let's now index the sorted file. Indexing allows for more efficient lookup of reads and is required to run many bioinformatics algorithms:
 
 <code>samtools index reads_sorted.bam</code>
 
-This should create a new index file <code>reads_sorted.bam.bai/code>.
+This should create a new index file <code>reads_sorted.bam.bai</code>.
 
 **18\.** Take a look at some of the alignment statistics using:
 
@@ -242,12 +281,11 @@ Note that the program IGV is much more useful for this purpose with more feature
 
 **20.** Let's convert our chr2 BAM alignment file to BED format. First load bedtools and then use the 'bamtobed' mode:
 
-<code>module load bedtools
+<code>module load bedtools</code>
 
-bedtools bamtobed -i chr22.bam > reads.bed
-</code>
+<code>bedtools bamtobed -i chr22.bam > reads.bed</code>
 
-**21\.** For each gene that overlaps with alignments, report the base-pair overlap between the sequence alignment and genes:
+**21\.** For each gene that overlaps with alignments, report the base-pair overlap between the sequence alignment and genes. Here we can use the ‘reads.bed’ file to extract all the regions with alignments.
 
 <code>bedtools intersect -a reads.bed -b gencode.hg38.chr22.sorted.bed >intersect_overlap.bed</code>
 
@@ -261,21 +299,25 @@ See the diagram below for the specifics on bedtools intersect.
 
 <img src="practical_assets/bedtools_intersect.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
-**23\.** For a more advanced query, we can do the following: report all reads within 2000bp upstream or 1000bp downstream of genes. Report each read with more than one hit only once (<code>-u</code>):
+**23\.** For a more advanced query, we can do the following: report all reads within 2000bp upstream or 1000bp downstream of genes. Report each read with more than one hit only once by using <code>-u</code>:
 
 <code>bedtools window -a reads.bed -b gencode.hg38.chr22.sorted.bed -l 2000 -r 1000 -u > intersect_reads_window.bed</code>
+
+---
 
 ### Visualizing on UCSC
 
 **24\.** We're going to visualize these reads on UCSC, and to do so we need to add some header lines to our BED file. Run the following series of commands (red text only):
 
-- Configure browser: <br><code>printf "browser position chr22:38,700,000-39,300,000\nbrowser hide all\n" > custom_UCSC_track.bed<\code>
+- Configure browser: <br><code>printf "browser position chr22:38,700,000-39,300,000\nbrowser hide all\n" > custom_UCSC_track.bed</code>
 
 - Add the track for overlapping regions: <br><code>(printf "track name=\"overlap regions\" description=\"example for bedtools A intersect B\" visibility=1 color=0,0,255 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_overlap.bed)  >> custom_UCSC_track.bed</code>
 
 - Add the track for full length of genes: <br><code>(printf "track name=\"original genes\" description=\"example for bedtools A intersect B -wa\" visibility=3 color=255,0,0 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_full_length_genes.bed)  >> custom_UCSC_track.bed</code>
 
-Note one important aspect in the previous commands: the first command uses <code>></code> to write the text to file while the following commands use <code>>></code>; <code>>></code> will append text to the end of an existing file while <code>></code> will overwrite existing files.
+These comments simply print some text and save them to a file. Take a look at this header using <code>head</code>.
+
+Note one very important detail in the previous commands: <code>>></code> will append text to the end of an existing file while <code>></code> will overwrite existing files. **When working with files of your own, be very careful of this difference or you could accidentally lose data!**
 
 **25\.** Let's now visualize using the UCSC genome browser. Go to [https://genome.ucsc.edu/](https://genome.ucsc.edu/). Under the "Genomes" tab, select "Human GRCh38/hg38" and then click the 'add custom tracks' button on the bottom of the genome browser.
 
