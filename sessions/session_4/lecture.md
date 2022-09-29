@@ -8,7 +8,7 @@ menubar_toc: true
 tabs: session4_tabs
 ---
 
-<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script>
+<!--script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script-->
 
 ## Types of somatic genetic variation
 

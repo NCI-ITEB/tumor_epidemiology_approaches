@@ -4,7 +4,7 @@ permalink: sessions/session_1/lecture
 menubar_toc: true
 ---
 
-<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script>
+<!--script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script-->
 
 ## Introduction to Available Computing Clusters
 
@@ -94,7 +94,7 @@ basic linux to advanced scripting for Biowulf, and also see the detailed
 
 - [Biowulf online classes and monthly zoom-in consults](https://hpc.nih.gov/training/)
 
-- Submit help tickets: Send email to staff@hpc.nih.gov
+- Submit help tickets: send email to staff@hpc.nih.gov
 
 ---
 

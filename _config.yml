@@ -48,7 +48,7 @@ paginate_path: "/news/page:num"
 
 # FORMATTING
 #
-fixed_navbar: top
+#fixed_navbar: top
 defaults:
   -
     scope:

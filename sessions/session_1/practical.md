@@ -4,7 +4,7 @@ permalink: sessions/session_1/practical
 menubar_toc: true
 ---
 
-<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script>
+<!--<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script>-->
 
 This practical section will focus first on connecting to a remote cluster
 as well as using the linux command line. Then we will practice working with
