@@ -1,7 +1,7 @@
 ---
 picture: difei_wang.png
-short_name: Difei Wang
-name: Difei Wang, Ph.D.
+name: Difei Wang
+education: Ph.D.
 organization: NCI - CGR
 position: Bioinformatics Manager
 ---

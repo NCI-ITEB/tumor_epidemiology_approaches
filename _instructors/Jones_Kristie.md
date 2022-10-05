@@ -1,6 +1,5 @@
 ---
 picture: kristie_jones.png
-short_name: Kristie Jones
 name: Kristie Jones
 organization: NCI - CGR
 position: Genomics Manager

@@ -42,4 +42,4 @@ All sessions begin at 9:30am with a lecture component ending at 10:30am, followe
 
 This companion website containing digital adaptations of the course content will be updated before each session.
 
-<!--Sign up for the course [here](https://events.cancer.gov/dceg/genomics-workshop/registration) if you haven't already.--> Those who participate in all lectures and practical sessions will receive a certificate of completion for the course suitable for your CV/resume.
+Sign up for the course [here](https://events.cancer.gov/dceg/genomics-workshop/notify-me) if you haven't already. Those who participate in all lectures and practical sessions will receive a certificate of completion for the course suitable for your CV/resume.

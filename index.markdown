@@ -4,13 +4,15 @@
 
 layout: page
 show_sidebar: true
-#hero_link:
-hero_link_text: Register now!
+hero_link: https://events.cancer.gov/dceg/genomics-workshop/notify-me
+hero_link_text: Register for 2022-2023
 hero_size: is-medium
 title: Emerging Approaches for Tumor Analyses in Epidemiological Studies
 ---
 
 Welcome to the GitHub pages for the *Emerging Approaches for Tumor Analyses in Epidemiological Studies* course. This course is provided by NCI-ITEB, and taught by bioinformaticians from the Division of Cancer Epidemiology and Genetics (DCEG), NCI; the University of Chicago; and the University of California San Diego, many of whom are involved in the Sherlock-*Lung* study of lung cancer in never smokers.
+
+To register, click the registration button above or visit the NCI events page at [https://events.cancer.gov/dceg/genomics-workshop](https://events.cancer.gov/dceg/genomics-workshop).
 
 ## Course Description
 

@@ -1,7 +1,7 @@
 ---
 picture: phuc_hoang.jpeg
-short_name: Phuc Hoang
-name: Phuc Hoang, Ph.D.
+name: Phuc Hoang
+education: Ph.D.
 organization: NCI - ITEB
 position: Bioinformatician
 ---
