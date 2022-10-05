@@ -1,6 +1,6 @@
 /*Adapted from https://www.aleksandrhovhannisyan.com/blog/how-to-add-a-copy-to-clipboard-button-to-your-jekyll-blog/*/
 const copyCodeButtons = document.querySelectorAll('.copy-code-button');
-copyCodeButtons.forEach(copyCodeButton) => {
+copyCodeButtons.forEach((copyCodeButton) => {
   const code = copyCodeButton.previousSibling.innerText;
 
   copyCodeButton.addEventListener('click', () => {
