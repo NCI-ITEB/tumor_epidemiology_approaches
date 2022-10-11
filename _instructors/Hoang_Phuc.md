@@ -1,5 +1,5 @@
 ---
-picture: phuc_hoang.jpeg
+picture: phuc_hoang.png
 name: Phuc Hoang
 education: Ph.D.
 organization: NCI - ITEB
