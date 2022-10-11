@@ -16,15 +16,21 @@ We can use the ICGC Data Portal to investigate TMB.
 
 - At the bottom of the **Cancer Projects** page, you will see a plot, titled **Number of Somatic Mutations in Donor Exomes Across Cancer Projects**, with cancer types along the x-axis and the number of mutations per Mb along the y-axis (highlighted by a red box below).  In the plot, the red line across each cancer type is the median number of mutations per Mb. This value increases as you move across the plot from left to right.
 
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="practical_assets/icgc_home.png">
+<!--img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="practical_assets/icgc_home.png"-->
+
+{% include image-modal.html link='practical_assets/icgc_home.png' alt="Example image" styles="display: block;margin-left: auto; margin-right: auto;"%}
 
 If you hover over the plot, you will see information for each cancer type, including median number of mutations per Mb, number of donors, and total number of mutations.
 
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="practical_assets/icgc_tmb.png">
+<!--img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="practical_assets/icgc_tmb.png"-->
+
+{% include image-modal.html link='practical_assets/icgc_tmb.png' alt="Example image" %}
 
 **Melanoma has the highest TMB, with a median of 68.1 mutations per Mb**
 
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="practical_assets/melanoma_tmb.png">
+<!--img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="practical_assets/melanoma_tmb.png"-->
+
+{% include image-modal.html link='practical_assets/melanoma_tmb.png' alt="Example image" %}
 
 **and Chronic Myeloid Disorders-UK has the lowest TMB, with a median of 0.033 mutations per Mb.**
 

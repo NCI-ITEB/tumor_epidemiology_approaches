@@ -30,21 +30,40 @@ replacing 'USERNAME' with your own username.
 
 #### Windows
 
-- Download and install [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
-- Right-click the download package. Click ‘Install with Elevated Permissions’.
-- Enter the password. Select justification ‘I need to install work related software’. Click ‘OK’ to start installation.
+- Download [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html). The version 'putty.exe' is a standalone package that does not require installation.
+
 - Launch PuTTY. Under “Host Name (or IP address), type:
 <code>USERNAME@biowulf.nih.gov</code>, replacing 'USERNAME' with your own username,
 and click “Open”
 
 <img src="practical_assets/putty_openConnect.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
-- At the prompt, enter the account password
+- At the prompt, enter the account password. Please note that the password will not show on the screen, and 5 failed login attempts since the last successful login are allowed.
 
 At this point you should be connected to the NIH Biowulf cluster, and your screen
 should look something like this:
 
 <img src="practical_assets/biowulf_connected.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:85%">
+
+### Request an interactive session
+
+You're now logged into the login nodes that are shared by everyone who uses Biowulf. It is important that you do NOT run intensive computing jobs on the login nodes to make them overburdened. If you do, other users will be temporarily unable to use Biowulf. You should instead request an interactive session, then you will be assigned to the compute nodes.
+
+**To do this, type this command:**
+
+<code>sinteractive --mem=4g --cpus-per-task=4 --time=4:00:00</code>{% include code-header.html %}
+
+**and hit enter.**
+
+You will see this screen when your request has been submitted and is waiting for computing resources:
+
+<img src="practical_assets/pending_interactive.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+
+When you are allocated to a compute node you should see USERNAME@cn####, like this:
+
+<img src="practical_assets/granted_interactive.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+
+When you want to close the interactive session use the command <code>exit</code>, and you will return to the login nodes.
 
 ### Locally mounting HPC System Directories
 We will need to mount your personal <code>/data</code> drive to access files on Biowulf from your local computer at the end of this session. See the instructions here for mounting your data directory: [https://hpc.nih.gov/docs/hpcdrive.html](https://hpc.nih.gov/docs/hpcdrive.html).
@@ -53,21 +72,6 @@ We will need to mount your personal <code>/data</code> drive to access files on 
 
 ## Basic Bash/Linux commands
 
-Before we begin coding, let's first open an interactive session. It's important to not run long commands on the login node as it will affect other users.
-
-**Type this command:**
-
-<code>sinteractive --mem=4g --cpus-per-task=4</code>{% include code-header.html %}
-
-**and hit enter.**
-
-You will see this screen when your request is being submitted and is waiting for resources:
-
-<img src="practical_assets/pending_interactive.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
-
-When you are allocated to a computing node and you should see USERNAME@cn#### like this:
-
-<img src="practical_assets/granted_interactive.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
 Now let's practice some basic linux commands:
 
@@ -89,9 +93,9 @@ To verify that your folder was created successfully, enter the following: <code>
 
 Verify that you are in the right folder with the <code>pwd</code> command.
 
-**4\.** Let's copy some files to practice with. We deposited two copies of our sample data in Biowulf and Github, respectively. You can follow either 4.a or 4.b to copy the data to your home directory.
+**4\.** Let's copy some files to practice with. We deposited two copies of our sample data in Biowulf and Github, respectively. You can follow either **4a** or **4b** to copy the data to your home directory.
 
-**4\.a** Copy the data from the shared folder in Biowulf.
+**4a\.** Copy the data from the shared folder in Biowulf.
 Before we do that, let's look at the contents of the course folder like so:
 
 <code>ls -lh /data/classes/DCEG_Somatic_Workshop/Practical_session_1</code>{% include code-header.html %}
@@ -100,11 +104,13 @@ Now let's copy that data over to our current directory:
 
 <code>cp -r /data/classes/DCEG_Somatic_Workshop/Practical_session_1/* .</code>{% include code-header.html %}
 
-The option <code>-r</code> means copy directories recursively. If we omit this option, all the folders in this directory will be skipped.
+The option <code>-r</code> means copy directories recursively (i.e. including all the contents in sub-directories). If we omit this option, all the folders in this directory will be skipped.
 
-The last two characters in the code above are special characters with specific meanings. The <code>*</code> in the code above is called a 'wildcard' and can be interpreted as 'anything'. So with this code we're copying all files in <code>/data/classes/DCEG_Somatic_Workshop/</code> matching the pattern 'anything', or in other words all files. The <code>.</code> in the code means 'the current working directory', and is where we're copying the files to.
+The last two characters in the code above are special characters with specific meanings. The <code>*</code> in the code above is called a 'wildcard' and can be interpreted as 'anything'. In words, we're instructing the computer to copy all files in <code>/data/classes/DCEG_Somatic_Workshop/</code> matching the pattern 'anything', or in other words all files.
 
-**4\.b** Alternatively, you can download the data from GitHub.
+The <code>.</code> in the code means 'the current working directory', and is where we're copying the files to.
+
+**4b\.** Alternatively, you can download the data from GitHub.
 
 Let’s first look up the link from GitHub. Open the website in web browser: **TODO:Add github link**
 
@@ -115,32 +121,25 @@ Click the green button ‘code’. Click the button next to the https link to co
 Then get back to the biowulf terminal to run the command:
 <code>git clone **TODO:Add HTTPS link** .</code>{% include code-header.html %}
 
-Now we can switch to the directory of sample input data.
+**5\.** Now we can switch to the directory of the sample input data.
 <code>cd  sample_input_data</code>{% include code-header.html %}
 
+There is a BED file with transcript coordinates in chromosome 22 (gencode.hg38.chr22.bed). Let's check the first few lines of this file:
 
-<!--**5\.** For the sake of practice let's merge gencode.v19.og.bed and gencode.v19.tsg.bed into a single file gencode.v19.driver.bed:
+<code>head gencode.hg38.chr22.bed</code>{% include code-header.html %}
 
-<code>cat gencode.v19.og.bed gencode.v19.tsg.bed > gencode.v19.driver.bed
-</code>{% include code-header.html %}
+By default, <code>head</code> will give you the first ten lines of a file to examine. If you want to see more, you can use the option <code>-n</code>, or examine the file manually with the <code>more</code> command.
 
-The <code>cat</code> command will print the contents of one or more files to your screen, but using the <code>></code> character we can redirect the output to a new file. To verify that we've pasted the files together, try using the <code>wc -l</code> command on <code>gencode.v19.og.bed</code>, <code>gencode.v19.tsg.bed</code>, and <code>gencode.v19.driver.bed</code> individually to count how many lines each one has.-->
+<img src="practical_assets/preview_bed.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
-**5\.** We're going to try sorting a file, so before we do that let's check the manual on the <code>sort</code> command:
+
+**6\.** Finally let's try sorting this BED file (gencode.hg38.chr22.bed) by genomic coordinates. Note that many commands/applications will require the input files (in BAM or BED formats) to be sorted by genomic cooridinates.
+
+But before we do that let's first check the manual on the <code>sort</code> command:
 
 <code>man sort</code>{% include code-header.html %}
 
 Use the arrow keys or your scroll wheel to read, and take note of the options <code>-k</code> and <code>-r</code>. To exit the manual enter <code>:q</code>.
-
-**6\.** Finally let's sort the bed file (gencode.hg38.chr22.bed) by genomic coordinates.
-
-Before we sort it, we want to check the first few lines of the file:
-
-<code>head gencode.hg38.chr22.bed</code>{% include code-header.html %}
-
-By default, <code>head</code> will give you the first ten lines of a file to examine. If you want to see more, you can use the option <code>-n</code>, or use the <code>more</code> command.
-
-<img src="practical_assets/preview_bed.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
 Then we can sort the file with this command:
 
@@ -208,9 +207,17 @@ Check the output file 'out.fq' with the <code>head</code> and/or <code>more</cod
 
 <img src="practical_assets/1000_genomes_download.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
+We used the following command to download the example in this session:
+
+<code>samtools view http://s3.amazonaws.com/1000genomes/1000G_2504_high_coverage/data/ERR3240193/HG00118.final.cram chr22:38952741-38992778</code>
+
+And the CRAM file could be converted to BAM using this command:
+
+<code>samtools view -h -b -@ 10 -T Homo_sapiens_assembly38.fasta -o HG00118__chr22@38952741@38992778.bam HG00118__chr22@38952741@38992778.cram</code>
+
 **12\.** Now we rename the BAM file in our input data folder to reads.bam.
 
-<code>mv HG00118__chr22@38952741@38992778.bam reads.bam</code>{% include code-header.html %}
+<code>mv HG00118__chr22@38952741@38992778.bam reads.bam</code>
 
 ---
 
@@ -220,13 +227,19 @@ Check the output file 'out.fq' with the <code>head</code> and/or <code>more</cod
 
 <code>module spider samtools</code>{% include code-header.html %}
 
-For our purposes any recent version will suffice, so enter <code>module load samtools</code> to load the default version of samtools. Then to view the BAM header, enter:
+Some modules will have different parameters in different versions. By default, usually it will load the latest version of the module. For our purposes any recent version will suffice, so enter <code>module load samtools</code> to load the default version of samtools. Then to view the BAM header, enter:
 
 <code>samtools view -H reads.bam | more</code>{% include code-header.html %}
 
 The <code>view</code> mode of samtools is a tool to print sections of a BAM/SAM/CRAM file, and the <code>-H</code> option instructs samtools to print only the header. In this example we then feed the samtools output directly to the <code>more</code> command via the linux 'pipe' (the <code>|</code> symbol) so it's easier to read and browse.
 
 Note that we've been using a BAM file which is in binary format, but the output is in readable text. Samtools has converted the output from BAM to SAM automatically.
+
+If we want to extract specific fields in the header, we could use the <code>grep</code> command. For example, this command would extract the lines for read groups in the header.
+
+<code>samtools view -H reads.bam|grep "^@RG"</code>{% include code-header.html %}
+
+The <code>^</code> symbol will match all lines starting with a specific pattern. In this example, it matches all lines starting with "@RG". Purely for your interest, these are the read group definition lines.
 
 **14\.** Now let's view the first 20 lines of the aligned reads in the body section. The command will be very similar, but without the <code>-H</code> option samtools will ignore the header:
 
@@ -266,7 +279,7 @@ This should create a new index file <code>reads_sorted.bam.bai</code>.
 
 **19\.** Find all reads mapping to chr22:38,700,000-39,300,000 and save to file chr22.bam:
 
-<code>samtools view -h reads_sorted.bam chr22:38,700,000-39,300,000 > chr22.bam</code>{% include code-header.html %}
+<code>samtools view -h -b reads_sorted.bam chr22:38,700,000-39,300,000 > chr22.bam</code>{% include code-header.html %}
 
 The <code>-h</code> option will retain the original header in our output file.
 
@@ -292,23 +305,31 @@ Note that the program IGV is much more useful for this purpose with more feature
 
 <code>-a</code> and <code>-b</code> specify our two BED file inputs.
 
-**22\.** Report regions in genes that have no overlap with alignments (specified with <code>-v</code>):
+**22\.** For each gene that overlaps with alignments, report the full-length of the original gene. Report each gene with more than one hit only once.
 
-<code>bedtools intersect -a gencode.hg38.chr22.sorted.bed -b reads.bed -v  >intersect_no_overlap.bed</code>{% include code-header.html %}
+<code>bedtools intersect -a gencode.hg38.chr22.sorted.bed -b reads.bed -wa -u >intersect_full_length_genes.bed</code>{% include code-header.html %}
 
-See the diagram below for the specifics on bedtools intersect.
+Compare to **21**, note that we have a <code>-wa</code> option in **22**. See the diagram below for the specifics on bedtools intersect.
 
 <img src="practical_assets/bedtools_intersect.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
-**23\.** For a more advanced query, we can do the following: report all reads within 2000bp upstream or 1000bp downstream of genes. Report each read with more than one hit only once by using <code>-u</code>:
+With the option <code>-u</code>, each read with more than one hit will be reported only once.
+
+**23\.** Report regions in genes that have no overlap with alignments (specified with <code>-v</code>):
+
+<code>bedtools intersect -a gencode.hg38.chr22.sorted.bed -b reads.bed -v  >intersect_no_overlap.bed</code>{% include code-header.html %}
+
+**24\.** For a more advanced query, we can do the following: report all reads within 2000bp upstream or 1000bp downstream of genes.
 
 <code>bedtools window -a reads.bed -b gencode.hg38.chr22.sorted.bed -l 2000 -r 1000 -u > intersect_reads_window.bed</code>{% include code-header.html %}
+
+The options <code>-l</code> and <code>-r</code> ('left' and 'right') define the base pair window upstream and downstream of the overlapping regions, respectively.
 
 ---
 
 ### Visualizing on UCSC
 
-**24\.** We're going to visualize these reads on UCSC, and to do so we need to add some header lines to our BED file. Run the following series of commands (red text only):
+**25\.** We're going to visualize these reads on UCSC, and to do so we need to add some header lines to our BED file. Run the following series of commands (red text only):
 
 - Configure browser: <br><code>printf "browser position chr22:38,700,000-39,300,000\nbrowser hide all\n" > custom_UCSC_track.bed</code>{% include code-header.html %}
 
@@ -316,11 +337,11 @@ See the diagram below for the specifics on bedtools intersect.
 
 - Add the track for full length of genes: <br><code>(printf "track name=\"original genes\" description=\"example for bedtools A intersect B -wa\" visibility=3 color=255,0,0 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_full_length_genes.bed)  >> custom_UCSC_track.bed</code>{% include code-header.html %}
 
-These comments simply print some text and save them to a file. Take a look at this header using <code>head</code>.
+The <code>printf</code> and <code>cat</code> commands simply print some text which we then save to a file using <code>></code>. Take a look at this header we've just created using <code>head custom_UCSC_track.bed</code>{% include code-header.html %}.
 
 Note one very important detail in the previous commands: <code>>></code> will append text to the end of an existing file while <code>></code> will overwrite existing files. **When working with files of your own, be very careful of this difference or you could accidentally lose data!**
 
-**25\.** Let's now visualize using the UCSC genome browser. Go to [https://genome.ucsc.edu/](https://genome.ucsc.edu/). Under the "Genomes" tab, select "Human GRCh38/hg38" and then click the 'add custom tracks' button on the bottom of the genome browser.
+**26\.** Let's now visualize using the UCSC genome browser. Go to [https://genome.ucsc.edu/](https://genome.ucsc.edu/). Under the "Genomes" tab, select "Human GRCh38/hg38" and then click the 'add custom tracks' button on the bottom of the genome browser.
 
 <img src="practical_assets/ucsc_select_genome.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
@@ -330,6 +351,8 @@ Next, upload the BED file via the "Choose File" button
 
 <img src="practical_assets/upload_BED_2.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
 
-and finally hit "go". An APOBEC3 homozygous deletion is highlighted below.
+and finally hit "go". An APOBEC3B homozygous deletion is highlighted below.
 
 <img src="practical_assets/custom_track_apobec.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+
+<img src="practical_assets/custom_track_apobec2.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
