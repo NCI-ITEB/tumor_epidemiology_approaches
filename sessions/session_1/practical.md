@@ -5,7 +5,8 @@ menubar_toc: true
 ---
 <!--<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script>-->
 
-<script src="{{ site.baseurl }}/assets/js/copyCode.js" defer></script>
+<script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
+<script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
 
 This practical section will focus first on connecting to a remote cluster
 as well as using the linux command line. Then we will practice working with
@@ -51,7 +52,7 @@ You're now logged into the login nodes that are shared by everyone who uses Biow
 
 **To do this, type this command:**
 
-<code>sinteractive --mem=4g --cpus-per-task=4 --time=4:00:00</code>{% include code-header.html %}
+<code>sinteractive --mem=4g --cpus-per-task=4 --time=4:00:00</code>{% include code-snippet-copy.html %}
 
 **and hit enter.**
 
@@ -77,19 +78,19 @@ Now let's practice some basic linux commands:
 
 **1\.** First, let's check what directory we're working in on the command line. Simply type:
 
-<code>pwd</code>{% include code-header.html %}
+<code>pwd</code>{% include code-snippet-copy.html %}
 
 and hit enter. This should output <code>/home/[your username]</code>.
 
 **2\.** Since Biowulf home directories are relatively small we are going to be working in the /data/ directory, so let's make a folder there with the <code>mkdir</code> command:
 
-<code>mkdir /data/[your username]/session1</code>{% include code-header.html %}
+<code>mkdir /data/[your username]/session1</code>{% include code-snippet-copy.html %}
 
 To verify that your folder was created successfully, enter the following: <code>ls /data/[your username]</code>. This should list all contents of your /data/ directory, and among those contents should be the 'session1' folder.
 
 **3\.** Let's move ourselves to that directory to begin working:
 
-<code>cd  /data/[your username]/session1</code>{% include code-header.html %}
+<code>cd  /data/[your username]/session1</code>{% include code-snippet-copy.html %}
 
 Verify that you are in the right folder with the <code>pwd</code> command.
 
@@ -98,11 +99,11 @@ Verify that you are in the right folder with the <code>pwd</code> command.
 **4a\.** Copy the data from the shared folder in Biowulf.
 Before we do that, let's look at the contents of the course folder like so:
 
-<code>ls -lh /data/classes/DCEG_Somatic_Workshop/Practical_session_1</code>{% include code-header.html %}
+<code>ls -lh /data/classes/DCEG_Somatic_Workshop/Practical_session_1</code>{% include code-snippet-copy.html %}
 
 Now let's copy that data over to our current directory:
 
-<code>cp -r /data/classes/DCEG_Somatic_Workshop/Practical_session_1/* .</code>{% include code-header.html %}
+<code>cp -r /data/classes/DCEG_Somatic_Workshop/Practical_session_1/* .</code>{% include code-snippet-copy.html %}
 
 The option <code>-r</code> means copy directories recursively (i.e. including all the contents in sub-directories). If we omit this option, all the folders in this directory will be skipped.
 
@@ -119,14 +120,14 @@ Click the green button ‘code’. Click the button next to the https link to co
 **TODO:Add a screen shot here**
 
 Then get back to the biowulf terminal to run the command:
-<code>git clone **TODO:Add HTTPS link** .</code>{% include code-header.html %}
+<code>git clone **TODO:Add HTTPS link** .</code>{% include code-snippet-copy.html %}
 
 **5\.** Now we can switch to the directory of the sample input data.
-<code>cd  sample_input_data</code>{% include code-header.html %}
+<code>cd  sample_input_data</code>{% include code-snippet-copy.html %}
 
 There is a BED file with transcript coordinates in chromosome 22 (gencode.hg38.chr22.bed). Let's check the first few lines of this file:
 
-<code>head gencode.hg38.chr22.bed</code>{% include code-header.html %}
+<code>head gencode.hg38.chr22.bed</code>{% include code-snippet-copy.html %}
 
 By default, <code>head</code> will give you the first ten lines of a file to examine. If you want to see more, you can use the option <code>-n</code>, or examine the file manually with the <code>more</code> command.
 
@@ -137,13 +138,13 @@ By default, <code>head</code> will give you the first ten lines of a file to exa
 
 But before we do that let's first check the manual on the <code>sort</code> command:
 
-<code>man sort</code>{% include code-header.html %}
+<code>man sort</code>{% include code-snippet-copy.html %}
 
 Use the arrow keys or your scroll wheel to read, and take note of the options <code>-k</code> and <code>-r</code>. To exit the manual enter <code>:q</code>.
 
 Then we can sort the file with this command:
 
-<code>sort -k1,1 -k2,2n gencode.hg38.chr22.bed >gencode.hg38.chr22.sorted.bed</code>{% include code-header.html %}
+<code>sort -k1,1 -k2,2n gencode.hg38.chr22.bed >gencode.hg38.chr22.sorted.bed</code>{% include code-snippet-copy.html %}
 
 <code>-k1,1 -k2,2n</code>: sort first by the first field, then by the second field numerically. The sorting isn't saved automatically, so as before we use the <code>></code> to redirect the output to a new file.
 
@@ -152,31 +153,31 @@ Then we can sort the file with this command:
 ## Working with FASTQ files
 **7\.** Before we can work with our fastq files we need to decompress them using the decompression command <code>tar</code>:
 
-<code>tar -xzvf Sample1.tar.gz</code>{% include code-header.html %}
+<code>tar -xzvf Sample1.tar.gz</code>{% include code-snippet-copy.html %}
 
 The <code>-xz</code> and <code>-f</code> options tell <code>tar</code> that we want to decompress our files and what file to extract from, respectively. The <code>-v</code> option is to print filenames as they're decompressed.
 
 **8\.** Let's preview our files. We can do it in two ways:
 
-<code>head Sample1_1.fq</code>{% include code-header.html %}
+<code>head Sample1_1.fq</code>{% include code-snippet-copy.html %}
 
 We have used the <code>head</code> command before. This will return the first ten lines of the file by default.
 
 Alternatively, we can use:
 
-<code>more Sample1_1.fq</code>{% include code-header.html %}
+<code>more Sample1_1.fq</code>{% include code-snippet-copy.html %}
 
 Use 'enter' or 'space' to scroll down, 'b' to scroll back, and '/' to search. To quit, either reach the end of the file or type <code>q</code>.
 
 We have another compressed format for the same file (files with extension .fastq.gz). We can check the contents of these files directly without creating a plain text file, using this command:
-<code>zless Sample1_1.fastq.gz</code>{% include code-header.html %}
+<code>zless Sample1_1.fastq.gz</code>{% include code-snippet-copy.html %}
 Same to the command <code>more</code>, use ‘space’ to scroll down, and type <code>q</code> to exit.
 
 To check the number of paired-end reads, use the following commands:
 
-<code>echo $(zcat Sample1_1.fastq.gz | wc -l)/4 | bc</code>{% include code-header.html %}
+<code>echo $(zcat Sample1_1.fastq.gz | wc -l)/4 | bc</code>{% include code-snippet-copy.html %}
 
-<code>echo $(zcat Sample1_2.fastq.gz | wc -l)/4 | bc</code>{% include code-header.html %}
+<code>echo $(zcat Sample1_2.fastq.gz | wc -l)/4 | bc</code>{% include code-snippet-copy.html %}
 
 You should see '300,000’ for both commands.
 
@@ -187,15 +188,15 @@ To briefly explain these commands:
 
 **9\.** Let's subset our fastq file to a smaller collection of reads with the seqtk library. First load seqtk:
 
-<code>module load seqtk</code>{% include code-header.html %}
+<code>module load seqtk</code>{% include code-snippet-copy.html %}
 
 **10\.** then use the 'subseq' tool to extract the reads specified in the 'name.lst' file:
 
-<code>seqtk subseq Sample1_1.fq name.lst >out.fq</code>{% include code-header.html %}
+<code>seqtk subseq Sample1_1.fq name.lst >out.fq</code>{% include code-snippet-copy.html %}
 
 ‘name.lst’ is a list of identifiers of reads.
 
-<code> head name.lst</code>{% include code-header.html %}
+<code> head name.lst</code>{% include code-snippet-copy.html %}
 
 Check the output file 'out.fq' with the <code>head</code> and/or <code>more</code> command.
 
@@ -225,11 +226,11 @@ And the CRAM file could be converted to BAM using this command:
 
 **13\.** Let's look at the header of this BAM file. Try listing all the versions of samtools available on Biowulf:
 
-<code>module spider samtools</code>{% include code-header.html %}
+<code>module spider samtools</code>{% include code-snippet-copy.html %}
 
 Some modules will have different parameters in different versions. By default, usually it will load the latest version of the module. For our purposes any recent version will suffice, so enter <code>module load samtools</code> to load the default version of samtools. Then to view the BAM header, enter:
 
-<code>samtools view -H reads.bam | more</code>{% include code-header.html %}
+<code>samtools view -H reads.bam | more</code>{% include code-snippet-copy.html %}
 
 The <code>view</code> mode of samtools is a tool to print sections of a BAM/SAM/CRAM file, and the <code>-H</code> option instructs samtools to print only the header. In this example we then feed the samtools output directly to the <code>more</code> command via the linux 'pipe' (the <code>|</code> symbol) so it's easier to read and browse.
 
@@ -237,13 +238,13 @@ Note that we've been using a BAM file which is in binary format, but the output 
 
 If we want to extract specific fields in the header, we could use the <code>grep</code> command. For example, this command would extract the lines for read groups in the header.
 
-<code>samtools view -H reads.bam|grep "^@RG"</code>{% include code-header.html %}
+<code>samtools view -H reads.bam|grep "^@RG"</code>{% include code-snippet-copy.html %}
 
 The <code>^</code> symbol will match all lines starting with a specific pattern. In this example, it matches all lines starting with "@RG". Purely for your interest, these are the read group definition lines.
 
 **14\.** Now let's view the first 20 lines of the aligned reads in the body section. The command will be very similar, but without the <code>-H</code> option samtools will ignore the header:
 
-<code>samtools view reads.bam|head -20</code>{% include code-header.html %}
+<code>samtools view reads.bam|head -20</code>{% include code-snippet-copy.html %}
 
 As before, we use the pipe to feed the output into the <code>head -20</code> command so we can see just the first 20 lines.
 
@@ -253,9 +254,9 @@ As before, we use the pipe to feed the output into the <code>head -20</code> com
 
 **15\.** Let's isolate only unmapped reads, and reads with unmapped mates:
 
-<code>samtools view -b -f4 reads.bam >unmapped.bam</code>{% include code-header.html %}
+<code>samtools view -b -f4 reads.bam >unmapped.bam</code>{% include code-snippet-copy.html %}
 
-<code>samtools view -b -f8 reads.bam >mate_unmapped.bam</code>{% include code-header.html %}
+<code>samtools view -b -f8 reads.bam >mate_unmapped.bam</code>{% include code-snippet-copy.html %}
 
 The <code>-b</code> flag tells samtools to output in the compressed BAM format rather than SAM, and is very important when working with large alignment files. The <code>-f</code> flag requires all output reads to have the specified alignment flags, in this case flag '4' and flag '8'. These correspond to 'read unmapped' and 'mate unmapped', respectively.
 
@@ -263,29 +264,29 @@ A full list of SAM flags can be found at: [https://broadinstitute.github.io/pica
 
 **16\.** Sort the original file by genomic coordinates and output into file reads_sorted.bam:
 
-<code>samtools sort -o reads_sorted.bam reads.bam</code>{% include code-header.html %}
+<code>samtools sort -o reads_sorted.bam reads.bam</code>{% include code-snippet-copy.html %}
 
 Note that in the previous command we used <code>></code> to save a new file whereas in this case we've used <code>-o [file name]</code> to accomplish the same.
 
 **17\.** Let's now index the sorted file. Indexing allows for more efficient lookup of reads and is required to run many bioinformatics algorithms:
 
-<code>samtools index reads_sorted.bam</code>{% include code-header.html %}
+<code>samtools index reads_sorted.bam</code>{% include code-snippet-copy.html %}
 
 This should create a new index file <code>reads_sorted.bam.bai</code>.
 
 **18\.** Take a look at some of the alignment statistics using:
 
-<code>samtools flagstat reads_sorted.bam</code>{% include code-header.html %}
+<code>samtools flagstat reads_sorted.bam</code>{% include code-snippet-copy.html %}
 
 **19\.** Find all reads mapping to chr22:38,700,000-39,300,000 and save to file chr22.bam:
 
-<code>samtools view -h -b reads_sorted.bam chr22:38,700,000-39,300,000 > chr22.bam</code>{% include code-header.html %}
+<code>samtools view -h -b reads_sorted.bam chr22:38,700,000-39,300,000 > chr22.bam</code>{% include code-snippet-copy.html %}
 
 The <code>-h</code> option will retain the original header in our output file.
 
 <!--**20\.** We can visualize the alignment at XXXX using tview:
 
-<code>samtools tview XXXX</code>{% include code-header.html %}
+<code>samtools tview XXXX</code>{% include code-snippet-copy.html %}
 
 Note that the program IGV is much more useful for this purpose with more features, but we will not cover it today.-->
 
@@ -295,19 +296,19 @@ Note that the program IGV is much more useful for this purpose with more feature
 
 **20.** Let's convert our chr2 BAM alignment file to BED format. First load bedtools and then use the 'bamtobed' mode:
 
-<code>module load bedtools</code>{% include code-header.html %}
+<code>module load bedtools</code>{% include code-snippet-copy.html %}
 
-<code>bedtools bamtobed -i chr22.bam > reads.bed</code>{% include code-header.html %}
+<code>bedtools bamtobed -i chr22.bam > reads.bed</code>{% include code-snippet-copy.html %}
 
 **21\.** For each gene that overlaps with alignments, report the base-pair overlap between the sequence alignment and genes. Here we can use the ‘reads.bed’ file to extract all the regions with alignments.
 
-<code>bedtools intersect -a reads.bed -b gencode.hg38.chr22.sorted.bed >intersect_overlap.bed</code>{% include code-header.html %}
+<code>bedtools intersect -a reads.bed -b gencode.hg38.chr22.sorted.bed >intersect_overlap.bed</code>{% include code-snippet-copy.html %}
 
 <code>-a</code> and <code>-b</code> specify our two BED file inputs.
 
 **22\.** For each gene that overlaps with alignments, report the full-length of the original gene. Report each gene with more than one hit only once.
 
-<code>bedtools intersect -a gencode.hg38.chr22.sorted.bed -b reads.bed -wa -u >intersect_full_length_genes.bed</code>{% include code-header.html %}
+<code>bedtools intersect -a gencode.hg38.chr22.sorted.bed -b reads.bed -wa -u >intersect_full_length_genes.bed</code>{% include code-snippet-copy.html %}
 
 Compare to **21**, note that we have a <code>-wa</code> option in **22**. See the diagram below for the specifics on bedtools intersect.
 
@@ -317,11 +318,11 @@ With the option <code>-u</code>, each read with more than one hit will be report
 
 **23\.** Report regions in genes that have no overlap with alignments (specified with <code>-v</code>):
 
-<code>bedtools intersect -a gencode.hg38.chr22.sorted.bed -b reads.bed -v  >intersect_no_overlap.bed</code>{% include code-header.html %}
+<code>bedtools intersect -a gencode.hg38.chr22.sorted.bed -b reads.bed -v  >intersect_no_overlap.bed</code>{% include code-snippet-copy.html %}
 
 **24\.** For a more advanced query, we can do the following: report all reads within 2000bp upstream or 1000bp downstream of genes.
 
-<code>bedtools window -a reads.bed -b gencode.hg38.chr22.sorted.bed -l 2000 -r 1000 -u > intersect_reads_window.bed</code>{% include code-header.html %}
+<code>bedtools window -a reads.bed -b gencode.hg38.chr22.sorted.bed -l 2000 -r 1000 -u > intersect_reads_window.bed</code>{% include code-snippet-copy.html %}
 
 The options <code>-l</code> and <code>-r</code> ('left' and 'right') define the base pair window upstream and downstream of the overlapping regions, respectively.
 
@@ -331,13 +332,23 @@ The options <code>-l</code> and <code>-r</code> ('left' and 'right') define the 
 
 **25\.** We're going to visualize these reads on UCSC, and to do so we need to add some header lines to our BED file. Run the following series of commands (red text only):
 
-- Configure browser: <br><code>printf "browser position chr22:38,700,000-39,300,000\nbrowser hide all\n" > custom_UCSC_track.bed</code>{% include code-header.html %}
+- Configure browser:
 
-- Add the track for overlapping regions: <br><code>(printf "track name=\"overlap regions\" description=\"example for bedtools A intersect B\" visibility=1 color=0,0,255 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_overlap.bed)  >> custom_UCSC_track.bed</code>{% include code-header.html %}
+{% include code-block-copy.html %}```
+printf "browser position chr22:38,700,000-39,300,000\nbrowser hide all\n" > custom_UCSC_track.bed
+```
 
-- Add the track for full length of genes: <br><code>(printf "track name=\"original genes\" description=\"example for bedtools A intersect B -wa\" visibility=3 color=255,0,0 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_full_length_genes.bed)  >> custom_UCSC_track.bed</code>{% include code-header.html %}
+- Add the track for overlapping regions:
+{% include code-block-copy.html %}```
+(printf "track name=\"overlap regions\" description=\"example for bedtools A intersect B\" visibility=1 color=0,0,255 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_overlap.bed)  >> custom_UCSC_track.bed
+```
 
-The <code>printf</code> and <code>cat</code> commands simply print some text which we then save to a file using <code>></code>. Take a look at this header we've just created using <code>head custom_UCSC_track.bed</code>{% include code-header.html %}.
+- Add the track for full length of genes:
+{% include code-block-copy.html %}```
+(printf "track name=\"original genes\" description=\"example for bedtools A intersect B -wa\" visibility=3 color=255,0,0 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_full_length_genes.bed)  >> custom_UCSC_track.bed
+```
+
+The <code>printf</code> and <code>cat</code> commands simply print some text which we then save to a file using <code>></code>. Take a look at this header we've just created using <code>head custom_UCSC_track.bed</code>{% include code-snippet-copy.html %}.
 
 Note one very important detail in the previous commands: <code>>></code> will append text to the end of an existing file while <code>></code> will overwrite existing files. **When working with files of your own, be very careful of this difference or you could accidentally lose data!**
 

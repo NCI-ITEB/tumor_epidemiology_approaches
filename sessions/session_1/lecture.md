@@ -4,31 +4,31 @@ permalink: sessions/session_1/lecture
 menubar_toc: true
 ---
 
-<!--script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script-->
+<!--script link="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script-->
 
 ## Introduction to Available Computing Clusters
 
-We will first begin by discussing two computing clusters at NIH: CCAD and Biowulf. Biowulf is the NIH's main computer cluster and one of the 500 largest computing clusters in the world as of this writing.
-
-As this is a course from DCEG, we will open this section with a brief description of the Computer Cluster at DCEG (CCAD). This is mostly optional information for interested DCEG members as all following practical and lecture sessions will focus on Biowulf when cluster use is required.
+We will first begin by discussing two computing clusters at NIH: CCAD and Biowulf. As this is a course from DCEG, we will open this section with a brief description of the Computer Cluster at DCEG (CCAD). CCAD is a cluster only for DCEG members. This is mostly optional information for interested DCEG members as all following practical and lecture sessions will focus on Biowulf when cluster use is required.
 
 ---
 
 ### Computer Cluster at DCEG (CCAD)
 
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/CCAD_resources.png">
-
 CCAD is the dedicated computing cluster for DCEG. CCAD operates under a fair use policy to avoid monopolization of resources. In other words, users are given equal access to the available resources as they become available.  
 
 For example, say the job queue is empty and User A submits 8 jobs to the cluster  which can run 5 jobs at any time.  The first 5 of User A's jobs are then started while the other 3 remain in the queue.  Meanwhile User B submits 1 job which is put in the queue after User A's 3 remaining jobs.  When one of User A's jobs completes, User B's job will then be run despite being entered into the queue after User's A's to ensure fair use. Job scheduling and fair use assurance is managed automatically using the Sun Grid Engine management software, through which all jobs must be submitted.
 
-The two types of cluster use include interactive sessions and cluster jobs. Interactive sessions allow for actions to be performed on the command line after logging into the cluster. Logging onto CCAD logs a user onto a specialized login node which provides a place for interactive use but does not actively control the CCAD cluster. Cluster jobs are the primary and preferred method of using CCAD in which users submit a job to a queueing system to be run when resources become available, according to fair use.
+The two types of cluster use include interactive sessions and cluster jobs.
 
-| Interactive Use | Cluster Jobs  |
-| --------------- | ------------- |
-| actions performed on the command line after logging in | submitting a job to a queueing system that is then run independently of user interaction |
+{% include image-modal.html link='lecture_assets/cluster_use.png' classes="center" styles="display: block;margin-left: auto; margin-right: auto;" %}
 
----
+Interactive sessions allow for actions to be performed on the command line after logging into the cluster. Logging onto CCAD logs a user onto a specialized login node which provides a place for interactive use but does not actively control the CCAD cluster. Cluster jobs are the primary and preferred method of using CCAD in which users submit a job to a queueing system to be run when resources become available, according to fair use.
+
+For your reference, here are the resources available at CCAD:
+
+{% include image-modal.html styles="display: block;margin-left: auto; margin-right: auto;" link="lecture_assets/CCAD_resources.png" %}
+
+<!---
 
 ### Submitting a Job to CCAD
 - Log in to the cluster:
@@ -45,6 +45,7 @@ The two types of cluster use include interactive sessions and cluster jobs. Inte
 - Check the status of a job
 
 <code>qstat</code>
+-->
 
 ---
 
@@ -68,16 +69,26 @@ DefaultItemOpen=1)
 
 ### Biowulf
 
-As compared to CCAD, Biowulf is a much larger computer cluster available to all of NIH. Biowulf features a total of 100,000+ computing cores, 920 TB of memory, and over 30 PB of data storage.
+As compared to CCAD, Biowulf is a much larger computer cluster available to all of NIH.
 
 <img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/systems_overview.png">
 *from https://hpc.nih.gov/systems/*
 
-Like CCAD, Biowulf also operates under a fair use policy by which jobs are prioritized according to each user's recent usage volume, measured in CPU-hours. If cluster resources are in high demand, users with lower recent usage have their jobs prioritized over users with high recent usage. Jobs are scheduled automatically using a workload management software called Slurm, analogous to the Sun Grid Engine noted for CCAD.
+Like CCAD, Biowulf also operates under a fair use policy by which jobs are prioritized according to each user's recent usage volume, measured in CPU-hours. If cluster resources are in high demand, users with lower recent usage (measured in CPU-hours) have their jobs prioritized over users with high recent usage. Jobs are scheduled automatically using a workload management software called Slurm, analogous to the Sun Grid Engine noted for CCAD.
 
-Note that, like CCAD, there is a login node in addition to the cluster. This login node is what you are operating when you login to Biowulf, and ***it is shared among all users***. For this reason, scientific applications and other computation-intensive processes must be run via job submission to avoid affecting other users.
+Note that, like CCAD, there is a login node in on the cluster. This login node is what you are operating immediately when you login to Biowulf, and ***it is shared among all users***. For this reason, scientific applications and other computation-intensive processes must be run via job submission or others will be unable to use the cluster.
 
-Biowulf offers many versions of over 1000 scientific applications, and maintains data from several public databases for user convenience such as reference genomes, NCBI nt Blast database, NCBI taxonomy database, ClinVar, gnomAD, etc. Biowulf also features many versions of both python and R with over 500 and 1600 packages installed, respectively.
+Biowulf is one of the top 500 most powerful clusters in the world, featuring:
+- 100,000+ cores
+- 200,000+ CPUs
+- 4,000+ nodes
+- 900+ TB memory
+- 3+ PB local scratch (lscratch)
+- ~40 PB high performance storage
+- 5 PB object storage
+- 800+ GPUs (4,000,000+ CUDA cores)
+
+Biowulf offers many versions of over 1000 scientific applications, and maintains data from several public databases for user convenience such as reference genomes, NCBI nt Blast database, NCBI taxonomy database, ClinVar, gnomAD, etc. Biowulf also features many versions of both python and R with over 500 and 1600 packages installed, respectively, and supports containerization using Singularity.
 
 For information on using Biowulf, see the [Biowulf
 website](https://hpc.nih.gov/) which contains tons of great information.
@@ -100,7 +111,7 @@ basic linux to advanced scripting for Biowulf, and also see the detailed
 
 ### Comparison of Biowulf and CCAD
 
-Lastly, we provide a table summarise and highlight the differences in working with each cluster:
+Here is a table to summarise and highlight the differences between working with CCAD and Biowulf:
 
 |     |Biowulf    | CCAD      |
 | ----: | ----------- | ----------- |
@@ -110,7 +121,22 @@ Lastly, we provide a table summarise and highlight the differences in working wi
 | Monitor jobs | <code>squeue</code>, <code>sjobs</code>, <code>jobload</code>, <code>jobhist</code> | <code>qstat</code> |
 | Transfer data | Globus, WinSCP/Fugu | <code>scp</code>, <code>rsync</code> |
 | Load applications | <code>module spider #module<br>module load #module</code> | <code>module load #module</code> |
-| Backup policy | - Home dir: Weekly backups, with daily incremental backups<br> - Data dir: NOT BACKED UP<br> - Buy-in storage<br> - Additional information: [File Backups and Snapshots on the HPC Systems](https://hpc.nih.gov/storage/backups.html) | - Nightly snapshots last one week<br>- 6 hour snapshots last 3 days<br>- True backups done via CBIIT taken weekly and retained based on their policies<br>- Permanent backups need to be requested to be transferred to the archive |
+
+#### Snapshots
+
+Snapshots are a read-only copy of data at a particular point in time. These snapshots are very helpful if you inadvertently delete a file that you need. To locate the file you are interested in, you can go to a specific snapshot by using the following command:
+
+<code>cd .snapshot</code>
+
+This will take you to a main snapshot directory that contains all of the other snapshot directories. From there you can find the file you need and copy it back to the desired directory.
+
+Here are the policies of both clusters on snapshots:
+
+| Biowulf    | CCAD      |
+| ----------- | ----------- |
+| - Home dir: Weekly backups, with daily incremental backups<br> - Data dir: NOT BACKED UP<br> - Buy-in storage<br> - Additional information: [File Backups and Snapshots on the HPC Systems](https://hpc.nih.gov/storage/backups.html) | - Nightly snapshots last one week<br>- 6 hour snapshots last 3 days<br>- True backups done via CBIIT taken weekly and retained based on their policies<br>- Permanent backups need to be requested to be transferred to the archive |
+
+More information on Biowulf snapshots can be found here: <a href="https://hpc.nih.gov/storage/backups.html" target="_blank">https://hpc.nih.gov/storage/backups.html</a>.
 
 ---
 
@@ -118,11 +144,13 @@ Lastly, we provide a table summarise and highlight the differences in working wi
 
 CCAD and Biowulf are primarily accessed for one of two purposes: direct use of the cluster or transferring files. Here we will summarise how to do both.
 
-| Host | Hostname | Accessible by | Purpose |
-| :---: | :---: | :---: | :---: |
-| Helix | helix.nih.gov | All HPC Users | data transfer |
-| Biowulf | biowulf.nih.gov | All HPC Users | cluster headnode |
-| CCAD | ccad.nci.nih.gov | All HPC Users | cluster headnode |
+|   Host   |       Hostname       | Accessible by |      Purpose      |
+|:--------:|:--------------------:|:-------------:|:-----------------:|
+|  **Biowulf** |    biowulf.nih.gov   | All HPC users | cluster head node |
+|   **Helix**  |     helix.nih.gov    | All HPC users |   data transfer   |
+| **HPCdrive** |   hpcdrive.nih.gov   | All HPC users |   data transfer   |
+|   **CCAD**   |   ccad.nci.nih.gov   | All HPC users | cluster head node |
+|  **CCAD Tdrive**  | gigantor.nci.nih.gov | All HPC users |   data transfer   |
 
 ---
 
@@ -130,7 +158,28 @@ CCAD and Biowulf are primarily accessed for one of two purposes: direct use of t
 
 The only method for directly accessing either cluster is ultimately through the command line. This is done via secure shell, or SSH.
 
-Connecting via SSH will vary depending on whether you’re using a MacOS or Windows computer to connect. MacOS computers have SSH functionality out of the box whereas Windows users will need to install [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) to connect via SSH. We will detail and practice connecting to CCAD and Biowulf further in the practical section.
+Connecting via SSH will vary depending on whether you’re using a MacOS or Windows computer to connect. Windows users will need to install [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) to connect via SSH.
+
+<div style="display: flex;
+  align-items: center;
+  flex-direction: row;">
+  <figure>
+    {% include image-modal.html link="lecture_assets/putty.png" %}
+    <figurecaption>PuTTy configuration menu</figurecaption>
+  </figure>
+  <figure>
+    {% include image-modal.html link="lecture_assets/putty_login.png" %}
+    <figurecaption>Logging into Biowulf using PuTTY</figurecaption>
+  </figure>
+</div>
+
+If you are using a Mac, no additional software is necessary. Simply open the Mac app Terminal and type <code>ssh -Y [user]@biowulf.nih.gov</code>, where [user] is your login ID.
+
+{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width: 66%" link="lecture_assets/mac_ssh.png" %}
+
+Note: -Y enables trusted X11 forwarding. X11 forwarding allows for the use of graphical applications on a remote server (ex. Integrative Genomics Viewer- IGV). Another option for running graphics applications is NoMachine (NX) (<a target="_blank" href="https://hpc.nih.gov/docs/nx.html#setup">https://hpc.nih.gov/docs/nx.html#setup</a>).
+
+We will detail and practice connecting to CCAD and Biowulf further in the practical section.
 
 ---
 
@@ -140,8 +189,23 @@ Transfer of files can be accomplished one of many ways:
 
 GUI-based transfer applications can be a convenient way to transfer data. [WinSCP](link) for Windows and [FileZilla](link) for both Windows and MacOS are free applications recommended for file transfers.
 
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/filezilla_example.png">
-*An example of transferring files with FileZilla.*
+<div style="display: flex;
+  align-items: center;
+  flex-direction: row;">
+  <figure>
+    {% include image-modal.html link="lecture_assets/winscp_menu.png" %}
+    <figurecaption>WinSCP login window</figurecaption>
+  </figure>
+  <figure>
+    {% include image-modal.html link="lecture_assets/winscp_transfer.png" %}
+    <figurecaption>File transfer with WinSCP</figurecaption>
+  </figure>
+</div>
+
+<figure>
+{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width: 66%" link="lecture_assets/filezilla_example.png" %}
+<figurecaption>File transfer with FileZilla</figurecaption>
+</figure>
 
 ---
 
@@ -149,7 +213,7 @@ GUI-based transfer applications can be a convenient way to transfer data. [WinSC
 
 Drives from the NIH HPC and CCAD can be mounted directly to your local computer which allows you to click and drag files in familiar fashion. This is best only for small file transfers; transfer of larger files should be done through another method.
 
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/mount_drives.png">
+{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto;" link="lecture_assets/mount_drives.png" %}
 
 Doing so will require you to specify a folder to be mounted. Refer to the table below for the correct path formatting.
 
@@ -170,7 +234,7 @@ Doing so will require you to specify a folder to be mounted. Refer to the table 
 
 Globus is the recommended method to transfer and share files from Biowulf. Globus has the ability to monitor transfer performance, retry failures, recover from faults automatically, and report transfer status. See [here](https://hpc.nih.gov/storage/globus.html) for how to set up a Globus account.
 
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/globus_example.png">
+{% include image-modal.html classes="center" link="lecture_assets/globus_login.png" styles="max-width:60%; height:auto; display: block;margin-left: auto; margin-right: auto;" %}
 
 ---
 
@@ -203,6 +267,7 @@ Or conversely from the HPC:
 
 Because CCAD and Biowulf must be accessed via the command line it is necessary to know some linux before using either. We’ve already discussed a few command line programs such as <code>ssh</code> for connecting to the clusters and <code>scp</code> for file transfer, but more is required to operate them. We will cover some of the most useful commands in the practical section for this session.
 
+<!--
 All programming with CCAD and Biowulf is done through the linux 'shell'.
 
 <img class="center" style="width:75%; height:auto; display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/linux_architecture.png">
@@ -220,8 +285,8 @@ Commands to the shell generally follow a standard anatomy, as follows:
 The command above uses an ‘ls’ command which lists the files in a folder provided by the ‘argument’, in this case <code>/home/$USER</code>. By default this will simply print the names of the files, but the options ‘-l’ and ‘-t’ (combined above to simply ‘-lt’) tell the command to also include extra information such as file size, file creator, access permissions, etc. and then sort them by time last modified, respectively.
 
 <img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/ls_example.png">
-
----
+-->
+<!---
 
 ### Scripting
 
@@ -239,10 +304,9 @@ Note the ‘#’ symbols at each line in the script beyond the first. These symb
 In order to write a script you must of course use a text editor. While you can write scripts using an application on your local computer and transfer them to a cluster, it is far more convenient to write the scripts on the cluster itself. Options for text editors within Biowulf include ‘vi’ and ‘vim’, ‘emacs’, and ‘nano’ which are all opened directly on the command line. This session’s practical section will include an introduction to ‘vim’.
 
 If a GUI is a must, ‘Atom’ is a modern text editor available on Biowulf, though using it requires connecting to Biowulf through a graphical interface and requesting an interactive session. It is thus slightly impractical for daily use and best reserved for writing complex scripts.
+-->
 
----
-
-### Additional Resources
+To learn more about linux, please view these external resources:
 
 - [Biowulf’s ‘Introduction to Linux’](https://hpc.nih.gov/training/handouts/Introduction_to_Linux.pdf)
 - [Biowulf’s ‘Introduction to Bash Scripting’](https://hpc.nih.gov/training/handouts/BashScripting.pdf)
@@ -259,188 +323,81 @@ Finally we will discuss some of the most important file formats used in bioinfor
 
 Before we describe these file formats in more detail, below is a workflow diagram tracing the flow of information over the course of a cancer study and a slightly more detailed description of each format in the table below.
 
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/information_flowchart.png">
+{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto;" link="lecture_assets/information_flowchart.png" %}
 
-| Format name  | Data type | Tools |
-|--------------:|----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|
-| SRA | a raw data archive with per-base quality score | sra-tools |
-| FASTA | a text file of reference genome sequence data | FASTA Tools |
-| FASTQ | a text file of sequencing data with quality score | FastQC, FASTX-Toolkit, Seqtk, Samtools, Picard tools |
-| SAM/BAM/CRAM | formats of sequence alignment data | Samtools, Picard tools |
-| BCF/VCF/gVCF | a tab-delimited text file to store the variation calls | bcftools |
-| BED (PEBED) | a tab-delimited text file to store the coordinates of genomic regions. | bedtools |
-| GTF/GFF/GFF3 | a tab-delimited text file to describe genes or other features | gff tools, GFF utilities (gffread, gffcompare) |
-| MAF | a tab-delimited text file with aggregated mutation information from VCF files and are generated on a project-level. | MAFtools |
+---
+
+### Raw Data
+
+Sequencing data with per-base quality score is stored in one of two forms: fastq (raw reads), SAM/BAM/CRAM (aligned reads).
+
+Fastq is the most basic sequencing format and stores only sequence barcodes, sequenced bases, and per-base quality scores. 1 nucleotide base in fastq format is stored in ~2 bytes (sequence + quality score). Bearing in mind that the human genome itself is 3GBs, one 30x whole genome sequencing sample= 3GB * 30x * 2 bytes per base ~ 180GB. Compressing fastq files typically compresses to 25% original size.
+
+Fastq sequencing files which are aligned to reference genomes are stored as alignment files in SAM/BAM/CRAM format. SAM (Sequence Alignment Map) is a human-readable, uncompressed alignment file, whereas BAM and CRAM are both compressed forms of SAM. BAM/CRAM files are considerably smaller than SAM files and are therefore the most common alignment formats for data sharing and deposit.
+
+BAM is a lossless compression; this means that the original SAM is always perfectly reconstructed during decompression. CRAM offers a greater degree of compression from BAM, and can be either lossless or lossy (i.e. some information may be lost during decompression).
+
+{% include image-modal.html classes="center" link="lecture_assets/fastq_sambamcram.png" %}
+
+---
+
+### Processed Data
+
+Variants calling results can be shared in the formats of VCF or MAF. In somatic genomic studies, each VCF file is generated for one tumor/normal pair. In germline studies it on VCF contains pooled variants for all samples.
+
+{% include image-modal.html link="lecture_assets/vcf_example.png" %}
+
+MAF files contain aggregated mutation information from VCF files and are generated on a project-level. MAF files also include annotation of variants from public databases.
+
+{% include image-modal.html link="lecture_assets/maf_example.png" %}
 
 <!--For more information on these and other file formats, see [here](https://bioinformatics.uconn.edu/resources-and-events/tutorials-2/file-formats-tutorial/).-->
 
 ---
 
-### FASTA
+### Preparing Data for Database Submission
 
-FASTA (‘fast-a’) format is a simple format for storing sequences of nucleotides or amino acids. FASTA files are usually used only to contain reference sequences as they lack important information that would be relevant for sequencing reads, such as quality scores. Files in FASTA format traditionally end in “.fasta”, “.fa”, or “.fsa”.
-
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/FASTA.png">
-
-FASTA files may contain one or many individual sequences, each of which is prefixed with a definition line (or “defline”) beginning with “>”. This line contains the sequence name and sometimes other important annotations for the sequence.
-
-Generally speaking since FASTA files are often only reference sequences there’s not much analysis work to be done with them directly. That said, for some handy FASTA tools see [this list](https://www.ncbi.nlm.nih.gov/CBBresearch/Spouge/html_ncbi/html/fasta/list.html).
-
----
-
-### FASTQ
-
-For sequence information from sequencing experiments, nucleotide sequences must be stored with per-base sequence quality scores. This is the purpose of the FASTQ (“fast-q”) file format. FASTQ files are traditionally suffixed with “.fastq”, “.fq”, and “.fq.gz” when compressed using the gzip algorithm.
-
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/FASTQ.png">
-
-The above FASTQ snippet contains two paired reads, each with four lines of information.
-
-- Line 1: an identifier line containing metadata from the sequencer for the sequence, starting with '@':
-
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/FASTQ_id.png">
-
-- Line 2: the nucleotide sequence of the read
-- Line 3: a ‘+’ sign, sometimes followed by the sequence identifier as in line 1
-- Line 4: per-base Phred quality scores, encoded using ASCII
-
-The quality scores are a transformation of the probability that a base was called incorrectly, according to the equation Q= -10log<sub>10</sub>(P). Thus every one point decrease in the quality score reflects a tenfold increase in the probability of an incorrectly sequenced base. To reduce file lengths this quality score is then transformed to a single character under the ASCII-based Phred-33 system. For instance, “F” in the quality scores above equates to 37 in Phred-33 meaning there is a 10<sup>-37</sup> probability of any base with quality score “F” being called incorrectly. For more information on quality scores, check [here](https://support.illumina.com/help/BaseSpace_OLH_009008/Content/Source/Informatics/BS/QualityScoreEncoding_swBS.htm).
-
-Two comprehensive packages for working with FASTQ, and also FASTA, include [seqtk](https://docs.csc.fi/apps/seqtk/) and the [FASTX Toolkit](http://hannonlab.cshl.edu/fastx_toolkit/index.html).
-
-<!--
-<div class="fastq-tools">
-  <div class="column">
-    <img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/seqtk.png" style="width: 40%; height: auto; float: left">
-  </div>
-  <div class="column">
-    <img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/fastx-toolkit.png" style="width: 60%; float: right">
-  </div>
-</div>
-<p style="overflow:hidden"></p>
-*Summary of the functions available in seqtk (left) and FASTX toolkit (above)*
--->
----
-
-### SAM (Sequence Alignment Map), BAM, CRAM
-
-SAM, BAM, and CRAM are three formats used to store aligned sequences. The three formats store the same information but most importantly vary in their level of compression. SAM files are uncompressed and are human-readable without the use of additional software. BAM files are SAM files transformed into binary format for compression. CRAM files use a different compression algorithm from BAM and achieve the highest degree of compression. Notably the CRAM format stores only the bases that differ from the aligned reference genome, and therefore to work with CRAM files the reference genome is generally required. These alignment formats are suffixed simply with “.sam”,“.bam”, and ”.cram”.
-
-Alignment files are composed of two sections: a header section and a list of aligned sequences. The header contains annotation information such as file formatting information, reference sequence information, the aligner and other software used to produce the alignment file, and read group information which can be used to trace which sample or sequencing run a sequence came from.
-
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/sam_header.png">
-
-The sequences themselves are stored in a format composed of eleven sections with important information such as read name, alignment flags, which reference the sequence is aligned to, where it’s aligned, how well it’s aligned, and information on its paired mate read.
-
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/sam_body.png">
-*from the [samtools documentation](https://samtools.github.io/hts-specs/SAMv1.pdf)*
-
-The FLAG element is an additive combination of integers representing alignment status flags.
-
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/sam_flags.png">
-*from the [samtools documentation](https://samtools.github.io/hts-specs/SAMv1.pdf)*
-
-As an example, the 355 flag represents the sum of the integers 1+2+32+64+256=355, and indicates that this read is paired (1), both reads in the pair are mapped properly (2), the mate is on the reverse strand (32), this is the first read in the pair (64), and that this read is not the primary alignment of this sequence (256). An excellent resource for decomposing an alignment flag into its components can be found [here](https://broadinstitute.github.io/picard/explain-flags.html). Alignment flags allow for filtering reads based on their alignment quality, such as selecting reads with both pairs mapped (flag 3) or filtering out unmapped reads and supplementary alignments (flags 4,8, and 256).
-
-The CIGAR string represents the alignment status of the sequence against the reference. It is represented by a series of number-letter pairs indicating the number of base pairs and how those bases align against the reference.
-
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/CIGAR_example.png">
-*https://genome.sph.umich.edu/wiki/SAM#What_is_a_CIGAR.3F*
-
-In the above example, the CIGAR string 3M1I3M1D5M indicates 3 matching bases, 1 inserted base, 3 matching bases, 1 deleted base, and 5 matching bases in that order. See below for a description of what each letter indicates.
-
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/CIGAR_symbols.png">
-*from the [samtools documentation](https://samtools.github.io/hts-specs/SAMv1.pdf)*
-
-Two very popular tools for working with alignment files are Samtools and Picard. Both are compatible with SAM, BAM, and CRAM formats, and provide functions to read, write, view, edit, filter, and index alignment files, plus more. For a full description of the functionality of each, see the [Samtools](http://www.htslib.org/doc/samtools.html) and [Picard](https://broadinstitute.github.io/picard/) documentation.
+- NCBI Sequence Read Archive (SRA)
+  - requires raw data with per-base quality scores for all submitted data.
+  - accepts binary files such as BAM/CRAM, HDF5 (for PacBio, Nanopore), SFF (when BAM is not available, for 454 Life Science and Ion Torrent data), and text formats such as FASTQ.
+  - For more information: <a target="_blank" href="https://www.ncbi.nlm.nih.gov/sra/docs/submit/">https://www.ncbi.nlm.nih.gov/sra/docs/submit/</a>
+- Gene Expression Omnibus (GEO)
+  - studies concerning quantitative gene expression, gene regulation, epigenetics, or other functional genomic studies. (e.g. mRNA-seq, miRNA-seq, ChIP-Seq, HiC-seq, methyl-seq/bisulfite-seq)
+  - does NOT accept WGS, WES, metagenomic sequencing, or variation or copy number projects.
+  - a complete submission includes: metadata, processed data, raw data containing sequence reads and quality scores (will be submitted to SRA by the GEO team)
+  - For more information: <a target="_blank" href="https://www.ncbi.nlm.nih.gov/geo/info/seq.html">https://www.ncbi.nlm.nih.gov/geo/info/seq.html</a>
+- The database of Genotypes and Phenotypes (dbGaP)
+  - studies investigating the interaction of genotype and phenotype in humans.
+  - all submissions that require controlled access must be submitted through dbGaP.
+  - requires registration of the study and subjects prior to data submission.
+  - raw data will be submitted to the protected SRA account.
+  - For more information: <a target="_blank" href="https://www.ncbi.nlm.nih.gov/sra/docs/submitdbgap/">https://www.ncbi.nlm.nih.gov/sra/docs/submitdbgap/</a>
 
 ---
 
-### VCF (Variant Calling Format)/BCF
+### File formats
 
-The VCF format stores information about genetic variants (SNVs, indels, SVs). Like BAM format is to SAM, BCF is the compressed, binary version of VCF. VCF and BCF file names end with ".vcf" and ".bcf", respectively. Also like SAM files, VCF files are composed of a header with meta-information and a body containing the data.
+Finally, we present a summary table of the bioinformatics file formats and what tools are available to work with them:
 
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/vcf.png">
-
-The header lines (in black) always begin with “##” and describe important metadata for the file, such as the software which generated the VCF file, the reference genome, and many lines defining terms within the INFO, FILTER, and FORMAT fields. Within the body of the VCF file there are eight mandatory VCF fields (in red) followed by some number of genotype fields (in blue). The mandatory fields indicate basic facts about the variant:
-
--	CHROM: chromosome/genome scaffold
--	POS: starting coordinate of the variant
--	ID: variant ID, if any
--	REF: the reference allele
--	ALT: the variant allele
--	QUAL: a Phred scaled quality score indicating probability of a true variant
--	FILTER: a list of filters applicable to the variant, separated by semicolons. All filter values are defined in the header. ‘PASS’ or ‘.’ indicates no filtering issues.
--	INFO: a list of annotations separated by semicolons in ‘key=value’ format. The meaning for each key is defined in the header.
-
-. The genotype fields contain sample-by-sample information for each variant, such as genotype and allele frequency, separated by colons. The FORMAT field defines the format by which information is stored in the genotype fields. This column is followed by a column for every sample analyzed during variant calling.
-
-BCFtools is a popular program for reading and writing VCF and BCF files as well as calling, filtering, and summarizing variants. Find the documentation for BCFtools [here](http://samtools.github.io/bcftools/).
-
----
-
-### MAF (Mutation Annotation Format)
-
-MAF is a higher-level representation of variants. As compared to VCF which usually contains data on the sample level, MAF aggregates mutations from many or all samples within an experiment. MAF also includes more annotation information from public databases, such as the associated genes for variants, genome build, functional consequences, etc.
-
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/MAF.png">
-
-Maftools is a useful tool for working with MAF files. Maftools provides lots of high-level functionality such as driver gene analysis, survival curves, mutation enrichment analysis, etc., and it also provides functions for generating publication-quality plots. See [here](https://bioconductor.org/packages/release/bioc/vignettes/maftools/inst/doc/maftools.html) for more on Maftools.
-
----
-
-### BED
-
-BED files are used to store genomic interval information, such as the coordinates for a gene within a reference genome. BED files end with the suffix “.bed”.
-
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/BED.png">
-
-BED files have three required fields describing the genomic coordinates for a feature (chromosome, start, stop), followed by six optional fields for storing annotations and display customizations which are used when displaying on genome browsers.
-
-One key detail to pay attention to is the start and stop coordinates which can be formatted one of two ways: 0-based or 1-based indexing. 0-based BED files number the gaps between bases whereas 1-based indexing numbers the bases themselves. For instance, a 0-based indexed BED file covering the first 10 bases of a genome would read start=0, stop=10 whereas a 1-based BED would read start=1, stop=10.
-
-This is important to note as a 1-based BED file interpreted as a 0-based BED will cover an incorrect interval and vice-versa. To quickly check which format your BED is in, the 'stop' minus the 'start' position of a 0-based BED is equal to the length of the fragment, whereas in a 1-based BED it’s equal to the length-1.
-
-Bedtools is a popular resource for working with BED files, and is generally used for intersecting, merging, subtracting, filtering, and other miscellaneous operations with BED files. See the documents for bedtools [here](https://bedtools.readthedocs.io/en/latest/).
-
----
-
-### GTF/GFF
-
-Like BED, GTF and GFF store data on genomic intervals. GTF is identical to GFF version 2, and only different from GFF version 3 in the formatting of their attributes field. Typically GTF is used to store gene and transcript coordinates whereas GFF is a more general purpose designation. These files are suffixed with ‘.gtf‘, ‘.gff’, ‘.gff2’, or ‘.gff3’.
-The format is as follows:
-
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/GTF_GFF.png">
-
-1. Chromosome
-2. Source of the GFF/GTF file
-3. Name for record/interval
-4. Start coordinate (1-based)
-5. Stop coordinate
-6. A score value, frequently ‘.’ which indicates 'null'
-7. Genomic strand
-8. Frame (1, 2, or 3)
-9. Attributes - annotations for the interval
-
-Working with GTF or GFF files can be done with GffCompare. GffCompare provides a set of tools for merging, comparing, estimating transcript accuracy, etc. for GTF and GFF files. Find the documentation [here](http://ccb.jhu.edu/software/stringtie/gffcompare.shtml).
+| Format name  | Data type | Tools |
+|--------------:|----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|
+| SRA | a raw data archive with per-base quality score | <a target="_blank" href="https://github.com/ncbi/sra-tools">sra-tools</a> |
+| FASTA | a text file of reference genome sequence data | <a target="_blank" href="https://www.ncbi.nlm.nih.gov/CBBresearch/Spouge/html_ncbi/html/fasta/list.html">FASTA Tools</a> |
+| FASTQ | a text file of sequencing data with quality score | <a target="_blank" href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>, <a target="_blank" href="http://hannonlab.cshl.edu/fastx_toolkit/index.html">FASTX-Toolkit</a>, <a target="_blank" href="https://docs.csc.fi/apps/seqtk/">Seqtk</a>, <a target="_blank" href="http://www.htslib.org/doc/samtools.html">Samtools</a>, <a target="_blank" href="https://broadinstitute.github.io/picard/">Picard tools</a> |
+| SAM/BAM/CRAM | formats of sequence alignment data | <a target="_blank" href="http://www.htslib.org/doc/samtools.html">Samtools</a>, <a target="_blank" href="https://broadinstitute.github.io/picard/">Picard tools</a> |
+| BCF/VCF/gVCF | a tab-delimited text file to store the variation calls | <a target="_blank" href="http://samtools.github.io/bcftools/">bcftools</a> |
+| BED (PEBED) | a tab-delimited text file to store the coordinates of genomic regions. | <a target="_blank" href="https://bedtools.readthedocs.io/en/latest/">bedtools</a> |
+| GTF/GFF/GFF3 | a tab-delimited text file to describe genes or other features | <a target="_blank" href="http://biowiki.org/wiki/index.php/Gff_Tools">gff tools</a>, <a target="_blank" href="http://ccb.jhu.edu/software/stringtie/gff.shtml">GFF utilities (gffread, gffcompare)</a> |
+| MAF | a tab-delimited text file with aggregated mutation information from VCF files and are generated on a project-level. | <a target="_blank" href="https://bioconductor.org/packages/release/bioc/vignettes/maftools/inst/doc/maftools.html">MAFtools</a> |
 
 ---
 
 ### Additional Resources
 
-- [SRA tools for raw sequencer output](https://github.com/ncbi/sra-tools)
+For full descriptions of aforementioned formats as well as tools to work with them, see the resources below as well as the supplementary information tab for this session.
+
 - [UConn file formats guide ](https://bioinformatics.uconn.edu/resources-and-events/tutorials-2/file-formats-tutorial/)
-- [seqtk](https://docs.csc.fi/apps/seqtk/)
-- [FASTA tools](https://www.ncbi.nlm.nih.gov/CBBresearch/Spouge/html_ncbi/html/fasta/list.html)
-- [FASTX-Toolkit](http://hannonlab.cshl.edu/fastx_toolkit/index.html)
-- [FASTQC for fastq quality control](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 - [Explain SAM/BAM Alignment Flags](https://broadinstitute.github.io/picard/explain-flags.html)
 - [CIGAR string formatting](https://genome.sph.umich.edu/wiki/SAM#What_is_a_CIGAR.3F)
-- [Samtools](http://www.htslib.org/doc/samtools.html)
-- [Picard](https://broadinstitute.github.io/picard/)
-- [BCFtools](http://samtools.github.io/bcftools/)
-- [MAFtools](https://bioconductor.org/packages/release/bioc/vignettes/maftools/inst/doc/maftools.html)
-- [BEDtools](https://bedtools.readthedocs.io/en/latest/)
-- [GFFcompare](http://ccb.jhu.edu/software/stringtie/gffcompare.shtml)
 - [Samtools docs on file formats](https://samtools.github.io/hts-specs/)
 - [UCSC file format descriptions](https://genome.ucsc.edu/FAQ/FAQformat.html)
