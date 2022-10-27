@@ -23,7 +23,7 @@ The purpose of this practical session is for you to gain hands-on experience per
 
 We will use two WES samples sequenced with the same exome capture kit (SeqCap EZ Exome + UTR V3) for the bulk of this practical. One sample is derived from frozen tumor tissue (Fresh_Frozen.bam), another is derived from a Formalin-Fixed Paraffin-Embedded (FFPE) tumor (FFPE_Tumor.bam). We will also use a third sample derived from germline frozen tissue in the very beginning of this practical session (LC_LC_IGC-11-1100_A.bam) for a few demonstrations.
 
-Because our tasks for today will require nearly 20 mins computation running time, we will submit our QC script to Biowulf at the very beginning of this section so that it has time to complete. As in session 1, log in to Biowulf using either PuTTy (Windows) or through the command line (Mac). For a reminder on how to do this, click here: https://nci-iteb.github.io/tumor_epidemiology_approaches/sessions/session_1/practical#setup-ssh-connection.
+Because our tasks for today will require nearly 20 mins computation running time, we will submit our QC script to Biowulf at the very beginning of this section so that it has time to complete. As in session 1, log in to Biowulf using either PuTTy (Windows) or through the command line (Mac). For a reminder on how to do this, we refer you to this <a href="https://nci-iteb.github.io/tumor_epidemiology_approaches/sessions/session_1/practical#setup-ssh-connection">Biowulf HPC guide</a>.
 
 Then request an interactive session:
 
@@ -31,7 +31,7 @@ After logging in, move to your personal data folder to create a folder for the p
 
 {% include code-block-copy.html %}
 ```
-cd /data/[your username]/
+cd /data/$USER/
 mkdir practical_session
 cd practical_session
 ```
@@ -58,11 +58,9 @@ You should also see a file slurm-########.out in your directory once your job be
 
 Let’s now examine the script using less or vi:
 
-{% include code-block-copy.html %}
-```
-less practical_3_script.sh
-vi practical_3_script.sh
-```
+<code>less practical_3_script.sh</code>{% include code-snippet-copy.html %}
+
+<code>vi practical_3_script.sh</code>{% include code-snippet-copy.html %}
 
 Before we move on, remember that all lines beginning with ## are comments that we’ve added to improve readability. These lines are not actual code and are not executed by Biowulf. The very first line, ‘#!/usr/bin/env bash’, begins with a ‘shebang’ (#!) and tells Biowulf which program to use to run this script, in this case ‘bash’. This line or something similar should be the first line of every bash script you write.
 
@@ -86,13 +84,13 @@ Stop viewing the script by typing ‘:q’ and hitting enter. If you check the o
 
 Once that finishes you should see a directory in your data folder titled “practical3_expected_results” (check with ls).
 
-As previously mentioned, today we will be examining a MultiQC report. MultiQC automatically detects QC reports from 114 QC algorithms for NGS and compiles them into interactive plots. MultiQC can further collect reports for many samples at once, allowing you to easily compare samples side-by-side in a single report. The MultiQC code is the last step of our script and is quite simple:
+As previously mentioned, today we will be examining a MultiQC report (learn more <a href="https://multiqc.info" target="_blank">here</a>). MultiQC automatically detects QC reports from 114 QC algorithms for NGS and compiles them into interactive plots. MultiQC can further collect reports for many samples at once, allowing you to easily compare samples side-by-side in a single report. The MultiQC code is the last step of our script and is quite simple:
 
 {% include image-modal.html link="practical_assets/4_multiqc_command.jpeg" %}
 
 The two references to ‘$OUTDIR’ are the output folder for the report (specified with ‘-o’) and the folder in which to search for QC reports, respectively. We’ve instructed MultiQC to ignore any files in the folder ‘trimgalore_out’ to avoid unnecessary clutter in the following sections of this practical.
 
-To open our MultiQC report you would need to mount your /data/ drive to your local computer (refresher on how to do this here: https://hpc.nih.gov/docs/hpcdrive.html) and then open practical3_expected_results/Practical_3_multiqc_report.html, but to save time we have uploaded the multiqc report along with any other files you need to open on your local computer here: link. Opening this file should open a window containing the MultiQC report in your internet browser:
+To open our MultiQC report you would need to mount your /data/ drive to your local computer (<a href="https://hpc.nih.gov/docs/hpcdrive.html">refresher on how to do this from Biowulf</a>) and then open practical3_expected_results/Practical_3_multiqc_report.html, but to save time we have uploaded the multiqc report here. <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_3/Practical_3_multiqc_report.html.gz" target="_blank">Click here to download it</a>. Opening this file should open a window containing the MultiQC report in your internet browser:
 
 {% include image-modal.html link="practical_assets/5_mutiqc_genstat.jpeg" %}
 
@@ -163,9 +161,9 @@ Looking back at our submitted script, you will see just below our fastqc command
 - The ‘--gzip’ option will compress the resulting trimmed fastq file with the gzip algorithm. Our samples in this case are small, but when working with larger files (particularly WGS) it’s critical to compress your fastq files.
 - Lastly, the ‘--fastqc’ option asks Trimgalore to rerun FastQC automatically once trimming is complete
 
-To learn more about Trimgalore, see here:(https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md).
+<a href="https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md">Click to learn more about Trimgalore</a>.
 
-By now our script should have completed trimming, and you should see files trimgalore/trimmed-LC_LC_IGC-11-1100_A_val_1_fastqc.html and trimgalore/trimmed-LC_LC_IGC-11-1100_A_val_2_fastqc.html in the output directory. If you check these new fastqc reports on your local computer (link) and scroll to the adapter content graphic, you’ll see our samples no longer have adapter sequences.
+By now our script should have completed trimming, and you should see files trimgalore/trimmed-LC_LC_IGC-11-1100_A_val_1_fastqc.html and trimgalore/trimmed-LC_LC_IGC-11-1100_A_val_2_fastqc.html in the output directory. If you check these new fastqc reports on your local computer (<a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_3/trimgalore_out.tar.gz" target="_blank">download report here</a>) and scroll to the adapter content graphic, you’ll see our samples no longer have adapter sequences.
 
 {% include image-modal.html link="practical_assets/13_fastqc_adapter_content_2.jpeg" %}
 
@@ -173,7 +171,7 @@ By now our script should have completed trimming, and you should see files trimg
 
 ## Reviewing alignment-based QC results
 
-After trimming your sequences (if necessary for your samples), the next step in a typical workflow is to align your sequences to a reference genome. Alignment is an hour(s) long, computation-intensive process that may also include additional re-alignment steps, duplicate sequences removal, and more. We don’t have time for that in this practical, so we will instead focus on the quality control that comes after alignment. For those interested in learning more about alignment, we will instead refer you to this short tutorial: https://learn.gencore.bio.nyu.edu/alignment/. We will also briefly discuss alignment in session 4.
+After trimming your sequences (if necessary for your samples), the next step in a typical workflow is to align your sequences to a reference genome. Alignment is an hour(s) long, computation-intensive process that may also include additional re-alignment steps, duplicate sequences removal, and more. We don’t have time for that in this practical, so we will instead focus on the quality control that comes after alignment. For those interested in learning more about alignment, we will instead refer you to [this short tutorial](https://learn.gencore.bio.nyu.edu/alignment/). We will also briefly discuss alignment in session 4.
 
 ---
 
@@ -218,7 +216,7 @@ We can also see that the FFPE tumor has quite a few supplementary alignments:
 
 When a sequencing read could be aligned to two or more distinct regions of the genome with no overlap, this is called chimeric alignment. One of the alignments is arbitrarily designated the “representative alignment” and the others are called “supplementary alignments”. Chimeric alignments can be indicative of structural variations.
 
-However, for FFPE samples, chimeric reads could be artificially generated as part of the sequencing artifacts that can arise from the significant damage to DNA. Therefore, additional care should be taken into account when using FFPE samples for calling structural variants. Additional information about this could be found here: https://pubmed.ncbi.nlm.nih.gov/30418619/
+However, for FFPE samples, chimeric reads could be artificially generated as part of the sequencing artifacts that can arise from the significant damage to DNA. Therefore, additional care should be taken into account when using FFPE samples for calling structural variants. Additional information about this could be found [here](https://pubmed.ncbi.nlm.nih.gov/30418619/).
 
 Overall, these alignment flags indicate mostly good quality mapping, but we will also want more details on where these reads map (we will discuss this shortly).
 
@@ -229,8 +227,7 @@ Overall, these alignment flags indicate mostly good quality mapping, but we will
 Let’s now turn to the output from the Picard module ‘CollectInsertSizeMetrics’. This tool, as the name implies, calculates insert size of our reads. Insert size and read length sound similar, but refer to different concepts. The insert size is the total length of the DNA fragment between the adapters, whereas the read lengths are the number of base pairs being sequenced at either end of the insert.
 
 {% include image-modal.html link="practical_assets/20_insert_size_figure.jpeg" %}
-
-https://pubmed.ncbi.nlm.nih.gov/24523726/
+<figcaption class="has-text-centered is-size-7 is-italic"><a href="https://pubmed.ncbi.nlm.nih.gov/24523726/"</figcaption>
 
 The command we used to generate this output in our script looks as follows:
 
@@ -285,7 +282,7 @@ Here we can see that coverage fluctuates between chromosomes, but is consistentl
 
 ### Assess Sex Concordance with Somalier
 
-At the end of our script we ran the tool Somalier: https://github.com/brentp/somalier/releases. Somalier calculates a relatedness score between samples using a list of common SNPs, which can be useful for identifying related individuals and sample swaps. Additionally, Somalier calculates a few useful statistics for sex concordance, namely zygosity of chromosome X SNPs.
+At the end of our script we ran the tool <a href="https://github.com/brentp/somalier/releases">Somalier</a>. Somalier calculates a relatedness score between samples using a list of common SNPs, which can be useful for identifying related individuals and sample swaps. Additionally, Somalier calculates a few useful statistics for sex concordance, namely zygosity of chromosome X SNPs.
 
 The Somalier commands are at the end of this script and require running ‘somalier extract’ on each sample to extract SNP information, followed by ‘somalier relate’ to calculate relatedness and other statistics between samples.
 
@@ -353,7 +350,7 @@ The stats we’re looking at in order are the percentage of off-target sequences
 
 IGV is an extremely useful resource for visualizing the alignment in areas of any genome and is very commonly used for manually verifying the results of bioinformatics algorithms.
 
-Since we will use IGV locally on your computer (i.e. not on Biowulf), you’ll need the alignment files on your computer. Rather than download from Biowulf, please download the bam files we’ve prepared here, which have been isolated to only the region around GSTM1 and GSTM2 using ‘samtools view’. Once that’s done, open IGV on your local computer and follow these steps:
+Since we will use IGV locally on your computer (i.e. not on Biowulf), you’ll need the alignment files on your computer. Rather than download from Biowulf, please <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_3/IGV_GSTM_alignments.tar.gz" target="_blank">download the bam files we’ve prepared here</a>, which have been isolated to only the region around GSTM1 and GSTM2 using ‘samtools view’. Once that’s done, open IGV on your local computer and follow these steps:
 
 - Ensure that the genome selector in the top left is set to ‘Human (GRCh37/hg19)’. If not, click that selector, click on ‘More...’, and then select ‘Human (hg19)’ and hit ‘OK’.
 - Click File in the top left and click “Load from File”.

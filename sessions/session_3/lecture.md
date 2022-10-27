@@ -34,7 +34,7 @@ Finally, we also assess the quality and quantity of final libraries before loadi
 
 ## NGS Platforms Summary
 
-Here we are just providing an overview of read lengths, examples of appropriate applications, and instrument names for the biggest sequencing technologies in use today.
+Here is an overview table of read lengths, examples of appropriate applications, and instrument names for the biggest sequencing technologies in use today.
 
 <img class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/platforms_table.png">
 
