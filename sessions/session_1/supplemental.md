@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: sessions/session_1/supplementary
+permalink: sessions/session_1/supplemental
 menubar_toc: true
 ---
 
