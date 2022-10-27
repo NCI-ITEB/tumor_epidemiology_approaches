@@ -16,6 +16,7 @@ transfer data (Globus account, mount HPC directory, GUI file transfer)
 - Submit interactive jobs
 - Samtools: Read BAM file, get all aligned reads, index, stats
 - Bedtools: merge/intersect
+- Visualize results on UCSC
 
 In this first session we will introduce the basics of working with Biowulf and CCAD including connecting to, working with, and transferring files from both clusters.
 

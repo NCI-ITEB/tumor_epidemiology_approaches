@@ -5,9 +5,9 @@ items:
   - name: Overview
     link: /sessions/session_3
     icon: fa-dna
-  # - name: Lecture
-  #   link: /sessions/session_3/lecture
-  #   icon: fa-book
+  - name: Lecture
+    link: /sessions/session_3/lecture
+    icon: fa-book
   # - name: Practical
   #   link: /sessions/session_3/practical
   #   icon: fa-laptop-code

@@ -37,14 +37,14 @@ replacing 'USERNAME' with your own username.
 <code>USERNAME@biowulf.nih.gov</code>, replacing 'USERNAME' with your own username,
 and click “Open”
 
-<img src="practical_assets/putty_openConnect.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+{% include image-modal.html link="practical_assets/putty_openConnect.png" classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
 
 - At the prompt, enter the account password. Please note that the password will not show on the screen, and 5 failed login attempts since the last successful login are allowed.
 
 At this point you should be connected to the NIH Biowulf cluster, and your screen
 should look something like this:
 
-<img src="practical_assets/biowulf_connected.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:85%">
+{% include image-modal.html link="practical_assets/biowulf_connected.png" classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:85%" %}
 
 ### Request an interactive session
 
@@ -58,11 +58,11 @@ You're now logged into the login nodes that are shared by everyone who uses Biow
 
 You will see this screen when your request has been submitted and is waiting for computing resources:
 
-<img src="practical_assets/pending_interactive.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+{% include image-modal.html link="practical_assets/pending_interactive.png" classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
 
 When you are allocated to a compute node you should see USERNAME@cn####, like this:
 
-<img src="practical_assets/granted_interactive.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+{% include image-modal.html link="practical_assets/granted_interactive.png" classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
 
 When you want to close the interactive session use the command <code>exit</code>, and you will return to the login nodes.
 
@@ -113,14 +113,15 @@ The <code>.</code> in the code means 'the current working directory', and is whe
 
 **4b\.** Alternatively, you can download the data from GitHub.
 
-Let’s first look up the link from GitHub. Open the website in web browser: **TODO:Add github link**
+Let’s first look up the link from GitHub. Open the course resources in web browser: <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials" target="_blank">https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials</a>
 
 Click the green button ‘code’. Click the button next to the https link to copy the link.
 
-**TODO:Add a screen shot here**
+{% include image-modal.html classes="center" styles="display:block; max-width:50%; margin-left:auto; margin-right:auto" link="practical_assets/github_link.png" %}
 
-Then get back to the biowulf terminal to run the command:
-<code>git clone **TODO:Add HTTPS link** .</code>{% include code-snippet-copy.html %}
+With the link now copied to your clipboard, return to the Biowulf terminal and enter <code>git clone</code> followed by the link you've copied:
+
+<code>git clone https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials.git</code>{% include code-snippet-copy.html %}
 
 **5\.** Now we can switch to the directory of the sample input data.
 <code>cd  sample_input_data</code>{% include code-snippet-copy.html %}
@@ -131,7 +132,7 @@ There is a BED file with transcript coordinates in chromosome 22 (gencode.hg38.c
 
 By default, <code>head</code> will give you the first ten lines of a file to examine. If you want to see more, you can use the option <code>-n</code>, or examine the file manually with the <code>more</code> command.
 
-<img src="practical_assets/preview_bed.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+{% include image-modal.html link="practical_assets/preview_bed.png" classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
 
 
 **6\.** Finally let's try sorting this BED file (gencode.hg38.chr22.bed) by genomic coordinates. Note that many commands/applications will require the input files (in BAM or BED formats) to be sorted by genomic cooridinates.
@@ -206,7 +207,7 @@ Check the output file 'out.fq' with the <code>head</code> and/or <code>more</cod
 
 **11\.** We're going to be working with BAM files from 1000 genomes. The example data was downloaded from the [1000 Genomes Project](https://www.internationalgenome.org/home).
 
-<img src="practical_assets/1000_genomes_download.png" class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+{% include image-modal.html link="practical_assets/1000_genomes_download.png" classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
 
 We used the following command to download the example in this session:
 
@@ -312,7 +313,7 @@ Note that the program IGV is much more useful for this purpose with more feature
 
 Compare to **21**, note that we have a <code>-wa</code> option in **22**. See the diagram below for the specifics on bedtools intersect.
 
-<img src="practical_assets/bedtools_intersect.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+{% include image-modal.html link="practical_assets/bedtools_intersect.png" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
 
 With the option <code>-u</code>, each read with more than one hit will be reported only once.
 
@@ -354,16 +355,16 @@ Note one very important detail in the previous commands: <code>>></code> will ap
 
 **26\.** Let's now visualize using the UCSC genome browser. Go to [https://genome.ucsc.edu/](https://genome.ucsc.edu/). Under the "Genomes" tab, select "Human GRCh38/hg38" and then click the 'add custom tracks' button on the bottom of the genome browser.
 
-<img src="practical_assets/ucsc_select_genome.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+{% include image-modal.html link="practical_assets/ucsc_select_genome.png" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
 
 Next, upload the BED file via the "Choose File" button
 
-<img src="practical_assets/upload_BED.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+{% include image-modal.html link="practical_assets/upload_BED.png" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
 
-<img src="practical_assets/upload_BED_2.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+{% include image-modal.html link="practical_assets/upload_BED_2.png" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
 
 and finally hit "go". An APOBEC3B homozygous deletion is highlighted below.
 
-<img src="practical_assets/custom_track_apobec.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+{% include image-modal.html link="practical_assets/custom_track_apobec.png" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
 
-<img src="practical_assets/custom_track_apobec2.png" style="display: block;margin-left: auto; margin-right: auto; max-width:75%">
+{% include image-modal.html link="practical_assets/custom_track_apobec2.png" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
