@@ -3,8 +3,8 @@ picture: Charles_Swanton_zoomed.png
 name: Charles Swanton
 education: MBPh.D., FRCP,  FMedSci, FAACR, FRS
 affiliation: Francis Crick Institute
-talk_date: May 25th, 2023 - Title TBD
-
+talk_date: May 25th, 2023
+talk_title: Title TBD
 ---
 
 Charles completed his MBPhD training in 1999 at the Imperial Cancer Research Fund Laboratories and Cancer Research UK clinician scientist/medical oncology training in 2008. He is a senior group leader of the Cancer Evolution and Genome Instability Laboratory at the Francis Crick Institute  and combines his research with clinical duties at UCLH, as a thoracic oncologist, focussed on how tumours evolve over space and time. His research branched evolutionary histories of solid tumours, processes that drive cancer cell-to-cell variation in the form of new cancer mutations or chromosomal instabilities, and the impact of such cancer diversity on effective immune surveillance and clinical outcome. Charles is chief investigator of TRACERx, a lung cancer evolutionary study and the national PEACE autopsy program.

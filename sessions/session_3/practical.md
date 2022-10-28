@@ -11,8 +11,11 @@ menubar_toc: true
 
 Before we begin, please login to Biowulf and request an interactive session:
 
-<code>ssh USERNAME@biowulf.nih.gov</code>{% include code-snippet-copy.html %}
+For a reminder on how to log-in to Biowulf, we refer you to this <a href="https://nci-iteb.github.io/tumor_epidemiology_approaches/sessions/session_1/practical#setup-ssh-connection">Biowulf HPC guide</a>. In short:
+- use PuTTy (Windows)
+- enter <code>ssh USERNAME@biowulf.nih.gov</code>{% include code-snippet-copy.html %} to your terminal, then enter your password (Mac).
 
+Request an interactive session with:
 <code>sinteractive</code>{% include code-snippet-copy.html %}
 
 ---
@@ -23,9 +26,7 @@ The purpose of this practical session is for you to gain hands-on experience per
 
 We will use two WES samples sequenced with the same exome capture kit (SeqCap EZ Exome + UTR V3) for the bulk of this practical. One sample is derived from frozen tumor tissue (Fresh_Frozen.bam), another is derived from a Formalin-Fixed Paraffin-Embedded (FFPE) tumor (FFPE_Tumor.bam). We will also use a third sample derived from germline frozen tissue in the very beginning of this practical session (LC_LC_IGC-11-1100_A.bam) for a few demonstrations.
 
-Because our tasks for today will require nearly 20 mins computation running time, we will submit our QC script to Biowulf at the very beginning of this section so that it has time to complete. As in session 1, log in to Biowulf using either PuTTy (Windows) or through the command line (Mac). For a reminder on how to do this, we refer you to this <a href="https://nci-iteb.github.io/tumor_epidemiology_approaches/sessions/session_1/practical#setup-ssh-connection">Biowulf HPC guide</a>.
-
-Then request an interactive session:
+Because our tasks for today will require nearly 20 mins computation running time, we will submit our QC script to Biowulf at the very beginning of this section so that it has time to complete.
 
 After logging in, move to your personal data folder to create a folder for the practical session and move to that folder:
 
@@ -62,13 +63,17 @@ Let’s now examine the script using less or vi:
 
 <code>vi practical_3_script.sh</code>{% include code-snippet-copy.html %}
 
-Before we move on, remember that all lines beginning with ## are comments that we’ve added to improve readability. These lines are not actual code and are not executed by Biowulf. The very first line, ‘#!/usr/bin/env bash’, begins with a ‘shebang’ (#!) and tells Biowulf which program to use to run this script, in this case ‘bash’. This line or something similar should be the first line of every bash script you write.
+All lines beginning with ## are comments that we’ve added to improve readability. These lines are not actual code and are not executed by Biowulf.
 
-The first line of code sets a variable, PATH_TO_PRACTICE3, to contain the location of all of our practical session 3 files. We can use this variable in our script, prefixed by a ‘$’, instead of typing the full path “/data/classes/DCEG_Somatic_Workshop/Practical_session_3”.
+{% include image-modal.html link="practical_assets/set_variables.png" %}
+
+The very first line, ‘#!/usr/bin/env bash’, begins with a ‘shebang’ (#!) and tells Biowulf which program to use to run this script, in this case ‘bash’. This line or something similar should be the first line of every bash script you write.
+
+The first line of code sets a variable, 'PATH_TO_PRACTICE3', to store the location of all of our practical session 3 files. We can use this variable in our script, prefixed by a ‘$’, instead of typing the full path “/data/classes/DCEG_Somatic_Workshop/Practical_session_3”.
 
 We’ve also set a couple of other variables: OUTDIR (where we’ll store the results) and CPUS_PER_COMMAND (how many cpus to use for each command). Regarding the CPUS_PER_COMMAND variable, we need to explicitly tell most bioinformatics programs how many cpus to use as they’re only configured to use one cpu by default. Whenever you have a path or a value like these that are being used more than a couple times in your script, it’s recommended to use variables. It will save you time and effort, reduce the chances of making a typo, and make it easy to reconfigure your script if something changes (e.g. the path of a folder).
 
-For more advanced users: We’ll be running some of the QC tools in parallel with each other (i.e. simultaneously) to speed things up. This is accomplished with the ‘&’ and ‘wait’ commands littered throughout our code. This is also why we’re using only 3 cpus per command despite requesting 8 from Biowulf.
+**For more advanced users:** We’ll be running some of the QC tools in parallel with each other (i.e. simultaneously) to speed things up. This is accomplished with the ‘&’ and ‘wait’ commands littered throughout our code. This is also why we’re using only 3 cpus per command despite requesting 8 from Biowulf.
 
 The next section of the script includes a series of ‘module load’ commands:
 
@@ -146,7 +151,7 @@ The last plot we’d like to highlight is the ‘Adapter Content’ plot. This w
 
 {% include image-modal.html link="practical_assets/11_fastqc_adapter_content.jpeg" %}
 
-Our FFPE samples are absent from this graph because they have no adapter content. This is because they’ve already been trimmed (more on this later). These adapter sequences can only negatively impact our analysis so they should be removed. We will remove these via read trimming.
+Our FFPE samples are absent from this graph because they have no adapter content. This is because they’ve already been trimmed. These adapter sequences can only negatively impact our analysis so they should be removed. We will remove these via read trimming.
 
 ---
 
@@ -250,7 +255,7 @@ By contrast, the mean insert size of the frozen sample is 325bp and includes man
 
 ***Answer:*** A good distribution of insert size for short read WES and WGS data is a strong peak around 300-500bp. Due to unavoidable DNA degradation in FFPE samples, this sample peaks at insert size ~115bp. Small insert sizes will cause higher adapter content in your reads, limit read length, increase duplication rate, make it difficult to discover and resolve structural variants or rearrangements, and possibly impose other discovery limitations depending on your study design.
 
-You may recall that although we just said FFPE samples often have more adapter content, we didn’t observe any adapters in this FFPE sample with FastQC. This is because the fastq samples for this FFPE tumor were already adapter trimmed.
+*Note: you may recall that although we just said FFPE samples often have more adapter content, we didn’t observe any adapters in this FFPE sample with FastQC. This is because the fastq samples for this FFPE tumor were already adapter trimmed.*
 
 ---
 

@@ -42,7 +42,7 @@ All reads within an Illumina sequencing run are same length. For other platforms
 
 Single cell sequencing is not shown in the list of applications here, but for now those approaches predominantly use Illumina sequencing.
 
-In subsequent sections, we will focus primarily on Illumina and PacBio long read sequencing. This is because the vast majority of NGS sequencing data generated as of this writing is on Illumina. PacBio long read sequencing is also growing increasingly popular as cost per sample decreases. If you’re interested in the specifics of how these sequencing technologies work we will include details in the supplementary section of this section.
+In subsequent sections, we will focus primarily on Illumina and PacBio long read sequencing. This is because the vast majority of NGS sequencing data generated as of this writing is on Illumina. PacBio long read sequencing is also growing increasingly popular as the technology improves and cost per sample decreases. If you’re interested in the specifics of how these sequencing technologies work we will include details in the supplementary materials of this section.
 
 The figure below gives a rough picture of how each sequencing technology is used at CGR:
 

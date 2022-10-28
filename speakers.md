@@ -16,7 +16,7 @@ title: Invited Speakers
       	<h2>{{speaker.name}}, {{speaker.education}}</h2>
         <h5>{{speaker.affiliation}}</h5>
       	{% if speaker.talk_title %}
-        <h4>{{ speaker.talk_date }} - "{{ speaker.talk_title }}"</h4>
+        <h4>{{ speaker.talk_date }} - <span class="is-italic">{{ speaker.talk_title }}</span></h4>
         {% else %}
         <h4>{{ speaker.talk_date }}</h4>
         {% endif %}

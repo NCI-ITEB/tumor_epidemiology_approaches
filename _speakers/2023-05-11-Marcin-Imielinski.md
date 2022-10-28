@@ -3,7 +3,8 @@ picture: Marcin_Imielinski_smaller.png
 name: Marcin Imieliński
 education:  M.D., Ph.D.
 affiliation: New York Genome Center, Weill Cornell Medicine
-talk_date: May 11th, 2023 - Origin and identity in lung adenocarcinoma evolution
+talk_date: May 11th, 2023
+talk_title: Origin and identity in lung adenocarcinoma evolution
 ---
 
 Marcin Imieliński MD, PhD, Associate Professor, Weill Cornell Medicine, Core Member, New York Genome Center, is a physician-scientist whose research is focused on understanding patterns of complex, noncoding, and structural genomic variation in human cancer.  As a molecular genetic pathologist, he is also interested in the clinical applications of whole genome sequencing.Prior to joining WCM and NYGC, Marcin Imieliński completed a postdoctoral fellowship with Matthew Meyerson at the Broad Institute, residency and fellowship in molecular pathology at Massachusetts General Hospital and Harvard Medical School,  PhD in genomics and computational biology and MD at the University of Pennsylvania, and B.S. in Computer Science from Rutgers College.
