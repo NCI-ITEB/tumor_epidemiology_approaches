@@ -3,8 +3,8 @@ layout: page
 permalink: sessions/session_3/practical
 menubar_toc: true
 ---
-
-<!--script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script-->
+<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
+<script>addBackToTop()</script>
 
 <script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
 <script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
@@ -12,8 +12,8 @@ menubar_toc: true
 Before we begin, please login to Biowulf and request an interactive session:
 
 For a reminder on how to log-in to Biowulf, we refer you to this <a href="https://nci-iteb.github.io/tumor_epidemiology_approaches/sessions/session_1/practical#setup-ssh-connection">Biowulf HPC guide</a>. In short:
-- use PuTTy (Windows)
-- enter <code>ssh USERNAME@biowulf.nih.gov</code>{% include code-snippet-copy.html %} to your terminal, then enter your password (Mac).
+- (Windows) use PuTTy
+- (Mac) enter <code>ssh USERNAME@biowulf.nih.gov</code>{% include code-snippet-copy.html %} to your terminal, then enter your password
 
 Request an interactive session with:
 <code>sinteractive</code>{% include code-snippet-copy.html %}
@@ -71,9 +71,9 @@ The very first line, ‘#!/usr/bin/env bash’, begins with a ‘shebang’ (#!)
 
 The first line of code sets a variable, 'PATH_TO_PRACTICE3', to store the location of all of our practical session 3 files. We can use this variable in our script, prefixed by a ‘$’, instead of typing the full path “/data/classes/DCEG_Somatic_Workshop/Practical_session_3”.
 
-We’ve also set a couple of other variables: OUTDIR (where we’ll store the results) and CPUS_PER_COMMAND (how many cpus to use for each command). Regarding the CPUS_PER_COMMAND variable, we need to explicitly tell most bioinformatics programs how many cpus to use as they’re only configured to use one cpu by default. Whenever you have a path or a value like these that are being used more than a couple times in your script, it’s recommended to use variables. It will save you time and effort, reduce the chances of making a typo, and make it easy to reconfigure your script if something changes (e.g. the path of a folder).
+*We’ve also set a couple of other variables: OUTDIR (where we’ll store the results) and CPUS_PER_COMMAND (how many cpus to use for each command). Regarding the CPUS_PER_COMMAND variable, we need to explicitly tell most bioinformatics programs how many cpus to use as they’re only configured to use one cpu by default. Whenever you have a path or a value like these that are being used more than a couple times in your script, it’s recommended to use variables. It will save you time and effort, reduce the chances of making a typo, and make it easy to reconfigure your script if something changes (e.g. the path of a folder).*
 
-**For more advanced users:** We’ll be running some of the QC tools in parallel with each other (i.e. simultaneously) to speed things up. This is accomplished with the ‘&’ and ‘wait’ commands littered throughout our code. This is also why we’re using only 3 cpus per command despite requesting 8 from Biowulf.
+***For more advanced users:*** *We’ll be running some of the QC tools in parallel with each other (i.e. simultaneously) to speed things up. This is accomplished with the ‘&’ and ‘wait’ commands littered throughout our code. This is also why we’re using only 3 cpus per command despite requesting 8 from Biowulf.*
 
 The next section of the script includes a series of ‘module load’ commands:
 
@@ -89,7 +89,9 @@ Stop viewing the script by typing ‘:q’ and hitting enter. If you check the o
 
 Once that finishes you should see a directory in your data folder titled “practical3_expected_results” (check with ls).
 
-As previously mentioned, today we will be examining a MultiQC report (learn more <a href="https://multiqc.info" target="_blank">here</a>). MultiQC automatically detects QC reports from 114 QC algorithms for NGS and compiles them into interactive plots. MultiQC can further collect reports for many samples at once, allowing you to easily compare samples side-by-side in a single report. The MultiQC code is the last step of our script and is quite simple:
+As previously mentioned, today we will be examining a MultiQC report (learn more <a href="https://multiqc.info" target="_blank">here</a>). MultiQC automatically detects QC reports from 114 QC algorithms for NGS and compiles them into interactive plots. MultiQC can further collect reports for many samples at once, allowing you to easily compare samples side-by-side in a single report.
+
+The MultiQC code is the last step of our script and is quite simple:
 
 {% include image-modal.html link="practical_assets/4_multiqc_command.jpeg" %}
 
@@ -97,11 +99,13 @@ The two references to ‘$OUTDIR’ are the output folder for the report (specif
 
 To open our MultiQC report you would need to mount your /data/ drive to your local computer (<a href="https://hpc.nih.gov/docs/hpcdrive.html">refresher on how to do this from Biowulf</a>) and then open practical3_expected_results/Practical_3_multiqc_report.html, but to save time we have uploaded the multiqc report here. <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_3/Practical_3_multiqc_report.html.gz" target="_blank">Click here to download it</a>. Opening this file should open a window containing the MultiQC report in your internet browser:
 
-{% include image-modal.html link="practical_assets/5_mutiqc_genstat.jpeg" %}
+{% include image-modal.html link="practical_assets/5_mutiqc_genstat.png" %}
 
-Above is the general statistics section of our MultiQC report. This section provides an overall summary of the most important statistics for our samples. These statistics are aggregated from the other QC reports generated by our script. There is lots of information already contained within this general statistics section. Already we can see that the frozen tumor sample has similar coverage to the FFPE tumor, but has larger insert sizes, slightly longer read length, and much less sequence duplication. Our germline sample from frozen tissue has similar read length and duplication rate to the frozen tumor.
+Above is the general statistics section of our MultiQC report. This section provides an overall summary of the most important statistics for our samples. These statistics are aggregated from the other QC reports generated by our script.
 
-For Advanced Users: Just above these statistics, users can configure exactly which statistics to include in the summary table using the ‘Configure Columns’ button, can generate custom plots using the ‘Plots’ function, and can change the appearance of the entire report using the toolbox on the right of the screen. It is certainly worth exploring these functions on your own, but for the sake of time we won’t discuss them here.
+There is lots of information already contained within this general statistics section. Already we can see that the frozen tumor sample has similar coverage to the FFPE tumor, but has larger insert sizes, slightly longer read length, and much less sequence duplication. Our germline sample from frozen tissue has similar read length and duplication rate to the frozen tumor.
+
+***For Advanced Users:*** *Just above these statistics, users can configure exactly which statistics to include in the summary table using the ‘Configure Columns’ button, can generate custom plots using the ‘Plots’ function, and can change the appearance of the entire report using the toolbox on the right of the screen. It is certainly worth exploring these functions on your own, but for the sake of time we won’t discuss them here.*
 
 ---
 
@@ -121,17 +125,19 @@ Fastqc will generate a graphical quality report for each input sample (which can
 
 This first FastQC plot gives us an idea of how many sequences are in each sample, and also the level of duplication in each sample.
 
-{% include image-modal.html link="practical_assets/7_fastqc_sequence_counts.jpeg" %}
+{% include image-modal.html link="practical_assets/7_fastqc_sequence_counts.png" %}
 
-Hover over each of these bars and you’ll see that the FFPE tumors have more reads, but over 30% of those reads are duplicates. You can also view this plot as percentages to get a comparison adjusting for total read count:
+Hover over each of these bars and you’ll see that the FFPE tumors have more reads, but over 30% of those reads are duplicates.
+
+<!--You can also view this plot as percentages to get a comparison adjusting for total read count:
 
 {% include image-modal.html link="practical_assets/8_fastqc_sequence_counts.jpeg" %}
 
-You can also see this in the ‘Sequence Duplication Levels’ report from FastQC:
+*You can also see this in the ‘Sequence Duplication Levels’ report from FastQC:*
 
 {% include image-modal.html link="practical_assets/9_fastqc_seqduplev.jpeg" %}
 
-In this graph every unique sequence is categorized by how much it has been duplicated. We can see that 10.8% of all unique sequences in the FFPE sample were duplicated 10-50 times. The frozen sample has very little duplication, and mostly at very low duplication levels.
+*In this graph every unique sequence is categorized by how much it has been duplicated. We can see that 10.8% of all unique sequences in the FFPE sample were duplicated 10-50 times. The frozen sample has very little duplication, and mostly at very low duplication levels.*-->
 
 ***Question: Why does the FFPE sample have a high duplication rate?***
 
@@ -143,13 +149,15 @@ Following the ‘Sequence Counts’ plot we have an important graphic showing th
 
 ### Sequence Quality and Adapter Content
 
-{% include image-modal.html link="practical_assets/10_fastqc_meanqual.jpeg" %}
+{% include image-modal.html link="practical_assets/10_fastqc_meanqual.png" %}
 
-By hovering over these lines we can see that all of our samples are at or above quality Phred score 30, and our frozen tissue sample is even above 35. Quality is expected to gradually decrease towards the end of reads due to limitations of sequencing by synthesis. A very sudden drop in sequencing quality, however, could be indicative of issues with the sequencing run.
+By hovering over these lines we can see that all of our samples are at or above quality Phred score 30, and our frozen tissue sample is even above 35.
+
+Quality is expected to gradually decrease towards the end of reads due to limitations of sequencing by synthesis. A very sudden drop in sequencing quality, however, could be indicative of issues with the sequencing run.
 
 The last plot we’d like to highlight is the ‘Adapter Content’ plot. This will show you what percentage of reads contain adapter sequences, per base position. Sequencing facilities will often do one pass of adapter trimming themselves before returning your data, but you may still have adapter content remaining. Here we can see that <5% of our germline frozen tissue reads contain adapter sequences.
 
-{% include image-modal.html link="practical_assets/11_fastqc_adapter_content.jpeg" %}
+{% include image-modal.html link="practical_assets/11_fastqc_adapter_content.png" %}
 
 Our FFPE samples are absent from this graph because they have no adapter content. This is because they’ve already been trimmed. These adapter sequences can only negatively impact our analysis so they should be removed. We will remove these via read trimming.
 
@@ -157,7 +165,7 @@ Our FFPE samples are absent from this graph because they have no adapter content
 
 ### Read Trimming
 
-Looking back at our submitted script, you will see just below our fastqc command we’ve submitted a job to run Trimgalore. Trimgalore is actually a combination of two tools: FastQC which we just examined, and the trimming algorithm Cutadapt. Cutadapt will recognize and remove adapter sequences (either from a common database by default, or specified by the user) and trim low quality 3’ bases. Here is the command we ran in our script:
+Looking back at our submitted script, you will see just below our fastqc command we’ve submitted a job to run Trimgalore. Trimgalore will recognize and remove adapter sequences (either from a common database by default, or specified by the user) and trim low quality 3’ bases. Here is the command we ran in our script:
 
 {% include image-modal.html link="practical_assets/12_trimgalore_command.jpeg" %}
 
@@ -176,7 +184,9 @@ By now our script should have completed trimming, and you should see files trimg
 
 ## Reviewing alignment-based QC results
 
-After trimming your sequences (if necessary for your samples), the next step in a typical workflow is to align your sequences to a reference genome. Alignment is an hour(s) long, computation-intensive process that may also include additional re-alignment steps, duplicate sequences removal, and more. We don’t have time for that in this practical, so we will instead focus on the quality control that comes after alignment. For those interested in learning more about alignment, we will instead refer you to [this short tutorial](https://learn.gencore.bio.nyu.edu/alignment/). We will also briefly discuss alignment in session 4.
+After trimming your sequences (if necessary for your samples), the next step in a typical workflow is to align your sequences to a reference genome. Alignment is an hour(s) long, computation-intensive process that may also include additional re-alignment steps, duplicate sequences removal, and more.
+
+We don’t have time for that in this practical, so we will instead focus on the quality control that comes after alignment. For those interested in learning more about alignment, we will instead refer you to [this short tutorial](https://learn.gencore.bio.nyu.edu/alignment/). We will also briefly discuss alignment in session 4.
 
 ---
 
@@ -194,10 +204,10 @@ To find this module in our MultiQC report, click on the Samtools tab in the tabl
 
 We can see the data for each sample by hovering over the points in the graphic (here we’ve changed the color of the fresh frozen tumor sample to red to improve visibility via MultiQC’s highlight function). We’ll choose to focus on the FFPE sample for this module as it has some features worth noting. You can also examine the text version generated directly from samtools by opening the files ‘FFPE_Tumor.flagstat.txt’ and ‘Fresh_Frozen.flagstat.txt’.
 
-{% include image-modal.html link="practical_assets/16_fresh_frozen_flagstat.jpeg" %}
-{% include image-modal.html link="practical_assets/17_FFPE_tumor_flagstat.jpeg" %}
+{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:66%" link="practical_assets/16_fresh_frozen_flagstat.jpeg" %}<br>
+{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:66%" link="practical_assets/17_FFPE_tumor_flagstat.jpeg" %}<br>
 
-A few of these stats are particularly worth highlighting. Examine the total sequences and the total mapped sequences graphs by hovering over the blue dots. In the case of our FFPE tumor sample for example, 53.14M reads were in our sample and 52.96M mapped.
+<!--A few of these stats are particularly worth highlighting. Examine the total sequences and the total mapped sequences graphs by hovering over the blue dots. In the case of our FFPE tumor sample for example, 53.14M reads were in our sample and 52.96M mapped.
 
 {% include image-modal.html link="practical_assets/samtools_readsMapped.png" %}
 
@@ -213,11 +223,23 @@ This leaves only 0.1M reads where both reads in the pair mapped but mapped impro
 
 Of those 0.1M, ~30,000 pairs of reads had quality mapping to different chromosomes.
 
-{% include image-modal.html link="practical_assets/19_FFPE_mate_mapped_to_dif_chr.jpeg" %}
+{% include image-modal.html link="practical_assets/19_FFPE_mate_mapped_to_dif_chr.jpeg" %}-->
 
-We can also see that the FFPE tumor has quite a few supplementary alignments:
+The first three stats give important information: how many reads were in each sample, how many reads passed QC *(this is determined by the sequencer/sequencing facility)*, and how many reads mapped. In our case no reads failed QC, and almost every read in both samples mapped. Hover over the points to get specific numbers at the top of the table
+
+{% include image-modal.html link="practical_assets/samtools_reads_passQC_map.png" %}
+
+Further down this table we have some statistics on how paired reads mapped:
+
+{% include image-modal.html link="practical_assets/samtools_pairedMapping_stats.png" %}
+
+The take away from these stats is how many reads were paired, and how many pairs mapped properly (near one another in the genome and with expected stranded-ness). In our case, most reads were properly paired in both samples which is good. A small number of reads may be improperly paired due to structural variants, but the vast majority of reads are expected to be properly paired.
+
+One notable stat for our samples is that the FFPE tumor has quite a few supplementary alignments:
 
 {% include image-modal.html link="practical_assets/samtools_suppAlign.png" %}
+
+{% include image-modal.html link="practical_assets/supplementary_dots.png" %}
 
 When a sequencing read could be aligned to two or more distinct regions of the genome with no overlap, this is called chimeric alignment. One of the alignments is arbitrarily designated the “representative alignment” and the others are called “supplementary alignments”. Chimeric alignments can be indicative of structural variations.
 
@@ -232,7 +254,7 @@ Overall, these alignment flags indicate mostly good quality mapping, but we will
 Let’s now turn to the output from the Picard module ‘CollectInsertSizeMetrics’. This tool, as the name implies, calculates insert size of our reads. Insert size and read length sound similar, but refer to different concepts. The insert size is the total length of the DNA fragment between the adapters, whereas the read lengths are the number of base pairs being sequenced at either end of the insert.
 
 {% include image-modal.html link="practical_assets/20_insert_size_figure.jpeg" %}
-<figcaption class="has-text-centered is-size-7 is-italic"><a href="https://pubmed.ncbi.nlm.nih.gov/24523726/"</figcaption>
+<figcaption class="has-text-centered is-size-7 is-italic"> <a href="https://pubmed.ncbi.nlm.nih.gov/24523726/">https://pubmed.ncbi.nlm.nih.gov/24523726/</a> </figcaption>
 
 The command we used to generate this output in our script looks as follows:
 
@@ -245,7 +267,7 @@ The ‘-Xmx3g’ argument is an instruction to java to use up to 3Gb of memory
 
 Let’s examine this report in MultiQC by clicking on ‘Picard’ in the left table of contents. Hover your mouse over the lines to see the samples they correspond to and the number of sequences at each insert size.
 
-{% include image-modal.html link="practical_assets/22_insert_size_vis.jpeg" %}
+{% include image-modal.html link="practical_assets/22_insert_size_vis.png" %}
 
 One difference that’s very obvious is that the FFPE samples all have relatively small insert sizes, peaking at 115bp. This is almost identical to our sequence length of 112bp, and means that most paired reads in this sample totally overlap. The effective sequencing depth for this FFPE tumor is therefore roughly half of the estimated overall depth as both reads in most pairs contain the same information.
 
@@ -271,11 +293,11 @@ The -b option is very important to note. Recall that the samples we analyzed wer
 
 The third line of each command is the naming convention for our outputs (prefixing them with ‘$OUTDIR/mosdepth/’ will ensure they are deposited in the right folder) followed by the sample to analyze. Now let’s examine the report in MultiQC by clicking on mosdepth in the table of contents.
 
-{% include image-modal.html link="practical_assets/24_mosdepth_vis.jpeg" %}
+{% include image-modal.html link="practical_assets/24_mosdepth_vis.png" %}
 
 From the general statistics table at the top of the report, we can see that the median coverage is ~21X for the frozen tumor and ~20X for the FFPE tumor. Now let’s look at the coverage per chromosome:
 
-{% include image-modal.html link="practical_assets/25_mosdepth_cov_per_chr.jpeg" %}
+{% include image-modal.html link="practical_assets/25_mosdepth_cov_per_chr.png" %}
 
 Here we can see that coverage fluctuates between chromosomes, but is consistently between 20-30x. Note the sex chromosomes on the right: our frozen tumor has virtually no coverage on the Y chromosome, which is consistent with the expected sex of this sample (female). The FFPE sample, however, is more ambiguous with ~17.5X coverage of the X chromosome and ~6X coverage of the Y chromosome.
 
@@ -295,11 +317,11 @@ The Somalier commands are at the end of this script and require running ‘somal
 
 Somalier has been included in our MultiQC report. Click on Somalier in the table of contents, but note that we won’t look at the automatically generated plots (these plots mostly show relatedness which is useful for larger studies but not relevant for this use-case). Instead, just above the Somalier summary statistics table click on the ‘Plot’ option:
 
-{% include image-modal.html link="practical_assets/27_somalier_stats.jpeg" %}
+{% include image-modal.html link="practical_assets/27_somalier_stats.png" %}
 
 In the window that appears, select ‘HomAltVarX’ and ‘HetVarX like so.’
 
-{% include image-modal.html link="practical_assets/28_somalier_plot.jpeg" %}
+{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:66%" link="practical_assets/28_somalier_plot.png" %}
 
 Here we can see that our FFPE tumor has very few heterozygous SNPs on the X chromosome, which is unusual for a female with two X chromosomes. Compare this to the fresh frozen tumor where the ratio of heterozygous and homozygous SNPs is roughly 50/50. In combination with relatively high chromosome Y coverage in the FFPE tumor, this is strong evidence for a contamination issue. (NOTE: Somalier will also assess X and Y coverage, but it calculates this coverage at some SNP locations; because many of these SNPs are not within the exome, the coverage calculation will be inaccurate for WES).
 

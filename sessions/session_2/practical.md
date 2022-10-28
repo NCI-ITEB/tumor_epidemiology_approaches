@@ -4,7 +4,8 @@ permalink: sessions/session_2/practical
 menubar_toc: true
 ---
 
-<!--script link="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script-->
+<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
+<script>addBackToTop()</script>
 
 <script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
 <script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
@@ -20,7 +21,7 @@ menubar_toc: true
 
 <!--img classes="center" styles="display: block;margin-left: auto; margin-right: auto;" link="practical_assets/icgc_home.png"-->
 
-{% include image-modal.html link="practical_assets/icgc_home.png" styless="display: block;margin-left: auto; margin-right: auto; max-width:50%" %}
+{% include image-modal.html link="practical_assets/icgc_home.png" styles="display: block;margin-left: auto; margin-right: auto;" %}
 
 3\. At the bottom of the **Cancer Projects** page, you will see a plot, titled **Number of Somatic Mutations in Donor *Exomes* Across Cancer Projects**, with cancer types along the x-axis and the number of mutations per Mb along the y-axis (highlighted by a red box below).  In the plot, the red line across each cancer type is the median number of mutations per Mb. This value increases as you move across the plot from left to right.
 

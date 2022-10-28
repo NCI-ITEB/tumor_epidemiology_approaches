@@ -4,7 +4,8 @@ permalink: sessions/session_1/lecture
 menubar_toc: true
 ---
 
-<!--script link="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script-->
+<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
+<script>addBackToTop()</script>
 
 ## Introduction to Available Computing Clusters
 
@@ -306,7 +307,7 @@ In order to write a script you must of course use a text editor. While you can w
 If a GUI is a must, ‘Atom’ is a modern text editor available on Biowulf, though using it requires connecting to Biowulf through a graphical interface and requesting an interactive session. It is thus slightly impractical for daily use and best reserved for writing complex scripts.
 -->
 
-To learn more about linux, please view these external resources:
+For now, to learn more about linux please see this <a target="_blank" href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/lecture_materials/lecture_1/Linux_bash%20commands.pdf">linux cheatsheet</a> and <a target="_blank" href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/lecture_materials/lecture_1/Vim%20editor%20comands.pdf">vim cheatsheet</a> we've prepared for your reference, and/or view these external resources:
 
 - [Biowulf’s ‘Introduction to Linux’](https://hpc.nih.gov/training/handouts/Introduction_to_Linux.pdf)
 - [Biowulf’s ‘Introduction to Bash Scripting’](https://hpc.nih.gov/training/handouts/BashScripting.pdf)

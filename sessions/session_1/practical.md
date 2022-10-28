@@ -3,7 +3,8 @@ layout: page
 permalink: sessions/session_1/practical
 menubar_toc: true
 ---
-<!--<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script>-->
+<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
+<script>addBackToTop()</script>
 
 <script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
 <script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
@@ -338,16 +339,21 @@ The options <code>-l</code> and <code>-r</code> ('left' and 'right') define the 
 {% include code-block-copy.html %}```
 printf "browser position chr22:38,700,000-39,300,000\nbrowser hide all\n" > custom_UCSC_track.bed
 ```
+<br>
 
 - Add the track for overlapping regions:
+
 {% include code-block-copy.html %}```
 (printf "track name=\"overlap regions\" description=\"example for bedtools A intersect B\" visibility=1 color=0,0,255 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_overlap.bed)  >> custom_UCSC_track.bed
 ```
+<br>
 
 - Add the track for full length of genes:
+
 {% include code-block-copy.html %}```
 (printf "track name=\"original genes\" description=\"example for bedtools A intersect B -wa\" visibility=3 color=255,0,0 useScore=1\n#chrom\tchromStart\tchromEnd\tname\tscore\tstrand\n" && cat intersect_full_length_genes.bed)  >> custom_UCSC_track.bed
 ```
+<br>
 
 The <code>printf</code> and <code>cat</code> commands simply print some text which we then save to a file using <code>></code>. Take a look at this header we've just created using <code>head custom_UCSC_track.bed</code>{% include code-snippet-copy.html %}.
 

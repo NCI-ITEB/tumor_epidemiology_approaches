@@ -1,20 +1,7 @@
 <a href="http://www.dceg.cancer.gov" style="height: 67px; max-width: 100%; text-align: left;"><img itemprop="image" class="img-rounded" src="{{ site.baseurl }}/assets/DCEG-logo.svg" alt="{{ author.name }}" style="height: 67px; max-width: 100%; text-align: left;">
 <!--<img itemprop="image" src="{{ site.baseurl }}/assets/banner.png">-->
-<nav class="navbar is-link" x-data="{ openNav: false }" style="position: sticky; overflow-y: width: 100%; scroll; top: 0; bottom: 0;">
+<nav class="navbar is-link" x-data="{ openNav: false }"> <!--style="position: sticky; overflow-y: width: 100%; scroll; top: 0; bottom: 0;"-->
     <div class="container">
-        <div class="navbar-brand">
-            <a href="https://dceg-workshops.github.io" class="navbar-item" color= #000000 >
-            	← To DCEG Workshops
-                <!---{{ site.title }}
-                img itemprop="image" class="img-rounded" src="{{ site.baseurl }}/assets/DCEG-logo.svg" height=150 width=500
-                --->
-            </a>
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu" :class="{ 'is-active': openNav }" x-on:click="openNav = !openNav">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
         <div class="navbar-menu" id="navMenu" :class="{ 'is-active': openNav }">
             <div class="navbar-start">
                 <a href="{{ site.baseurl }}/" class="navbar-item {% if page.url == "/" %}is-active{% endif %}">Home</a>
@@ -35,7 +22,6 @@
                 {% endfor %}
                 {% endif %}
             </div>
-
             <div class="navbar-end">
                 {% if site.gh_sponsor %}
                 <a class="navbar-item" href="https://github.com/sponsors/{{ site.gh_sponsor }}">
