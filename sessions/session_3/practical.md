@@ -233,7 +233,7 @@ Further down this table we have some statistics on how paired reads mapped:
 
 {% include image-modal.html link="practical_assets/samtools_pairedMapping_stats.png" %}
 
-The take away from these stats is how many reads were paired, and how many pairs mapped properly (near one another in the genome and with expected stranded-ness). In our case, most reads were properly paired in both samples which is good. A small number of reads may be improperly paired due to structural variants, but the vast majority of reads are expected to be properly paired.
+The take away from these stats is how many reads were paired, and how many pairs mapped properly (near one another in the genome and with expected stranded-ness). Most reads were properly paired in both samples which is good. A small number of reads may be improperly paired due to structural variants, but this should be a small fraction of total reads. The vast majority of reads are expected to be properly paired.
 
 One notable stat for our samples is that the FFPE tumor has quite a few supplementary alignments:
 
@@ -244,8 +244,6 @@ One notable stat for our samples is that the FFPE tumor has quite a few suppleme
 When a sequencing read could be aligned to two or more distinct regions of the genome with no overlap, this is called chimeric alignment. One of the alignments is arbitrarily designated the “representative alignment” and the others are called “supplementary alignments”. Chimeric alignments can be indicative of structural variations.
 
 However, for FFPE samples, chimeric reads could be artificially generated as part of the sequencing artifacts that can arise from the significant damage to DNA. Therefore, additional care should be taken into account when using FFPE samples for calling structural variants. Additional information about this could be found [here](https://pubmed.ncbi.nlm.nih.gov/30418619/).
-
-Overall, these alignment flags indicate mostly good quality mapping, but we will also want more details on where these reads map (we will discuss this shortly).
 
 ---
 

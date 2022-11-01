@@ -53,7 +53,7 @@ You're now logged into the login nodes that are shared by everyone who uses Biow
 
 **To do this, type this command:**
 
-<code>sinteractive --mem=4g --cpus-per-task=4 --time=4:00:00</code>{% include code-snippet-copy.html %}
+<code>sinteractive --mem=4g --cpus-per-task=2 --time=4:00:00</code>{% include code-snippet-copy.html %}
 
 **and hit enter.**
 
@@ -142,7 +142,7 @@ But before we do that let's first check the manual on the <code>sort</code> comm
 
 <code>man sort</code>{% include code-snippet-copy.html %}
 
-Use the arrow keys or your scroll wheel to read, and take note of the options <code>-k</code> and <code>-r</code>. To exit the manual enter <code>:q</code>.
+Use the arrow keys or your scroll wheel to read, and take note of the options <code>-k</code> and <code>-r</code>. To exit the manual enter <code>q</code>.
 
 Then we can sort the file with this command:
 
@@ -220,7 +220,7 @@ And the CRAM file could be converted to BAM using this command:
 
 **12\.** Now we rename the BAM file in our input data folder to reads.bam.
 
-<code>mv HG00118__chr22@38952741@38992778.bam reads.bam</code>
+<code>mv HG00118__chr22@38952741@38992778.bam reads.bam</code>{% include code-snippet-copy.html %}
 
 ---
 

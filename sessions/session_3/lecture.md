@@ -273,9 +273,10 @@ After fastq files are QC’ed and reads are aligned to the reference genome, add
 
 ### Duplicate Reads
 
-Duplicate reads are reads represented more than once in an NGS sample and are generally caused by PCR amplification prior to sequencing. Duplicate rates are usually evaluated with Samtools and Picard, and can be approximated before alignment using FastQC. For most DNA sequencing applications, extra copies of the same molecule should be removed from the data leaving only unique sequences. This is because duplicates can lead to false-positives during many analyses downstream.
+Duplicate reads are reads represented more than once in an NGS sample and are generally caused by PCR amplification prior to sequencing. Duplicate rates are usually evaluated with Samtools and Picard, and can be approximated before alignment using FastQC. For most DNA sequencing applications, extra copies of the same molecule should be removed from the data leaving only unique sequences. This is because duplicates can lead to false-positives during many analyses downstream, as pictured below.
 
 <img class="center" style="display: block; margin-left: auto; margin-right: auto;" src="lecture_assets/duplication_variantCalling.png">
+<figcaption class="has-text-centered is-size-7 is-italic">Duplicate reads can lead to propagation of sequencing errors and subsequent false-positive variant calls, or incorrect inflation of the variant allele frequency of true variants.</figcaption><br>
 
 Note that high duplication rates will lead to lower effective coverage. Duplication rates are expected to vary depending on your sequencing strategy; by virtue of how much DNA is being sequenced, targeted and exome sequencing are expected to have higher rates of duplication than WGS.
 
@@ -288,7 +289,7 @@ Insert size vs read length is a common point of confusion. Read length is the le
 In a good case, the insert size should be slightly larger than the sum of the two paired reads. In a worst case scenario, both reads in a pair will sequence the entire DNA insert as well as the adapters.
 
 <img class="center" style="display: block; margin-left: auto; margin-right: auto;" src="lecture_assets/insert_sizes.png">
-<figcaption class="has-text-centered is-size-7 is-italic">Left: a histogram of insert sizes from an NGS sequencing experiment. Right: diagram of insert size and read length. Arrows indicate where these theoretical inserts on the right would fall in the histogram.</figcaption><br>
+<figcaption class="has-text-centered is-size-7 is-italic"><b>Left:</b> a histogram of insert sizes from an NGS sequencing experiment. <b>Right:</b> diagram of insert size and read length. Arrows indicate where these theoretical inserts on the right would fall in the histogram.</figcaption><br>
 
 If both reads in a pair sequence most or the entire insert, then these two reads are effectively duplicates on opposite strands of the genome, and therefore your effective coverage will be much lower than you expect. Furthermore your reads are likely to contain some adapter content, which will mean shorter reads after adapter trimming.
 
@@ -318,6 +319,6 @@ Inter-species contamination is most common in WGS, especially with oral/saliva s
 Sex concordance (i.e. how observed sample sex relates to expected sample sex) is important because it can be a marker for sample swaps or data entry errors that can impact your analyses. If you think that a subject is female and your sequencing data indicates they are male, you may want to review your metadata and perhaps remove this sample.
 
 <img class="center" style="display: block; margin-left: auto; margin-right: auto;" src="lecture_assets/somalier.png">
-<figcaption class="has-text-centered is-size-7 is-italic">Sex concordance performed with Somalier</figcaption><br>
+<figcaption class="has-text-centered is-size-7 is-italic">Sex concordance performed with Somalier. <b>Left:</b> female samples with two X chromosomes are expected to have many heterozygous X chromosome SNPs, whereas male samples with one X chromosome should have all homozygous SNPs. <b>Right:</b> Combining information from the left figure with mean sequencing depth on the Y chromosome allows for clear separation of male and female samples. Two female samples in the left figure have no heterozygous X chromosome SNPs but also no chromosome Y coverage; these are examples of X chromosome loss.</figcaption><br>
 
 You may also want to examine the relatedness of your samples. You may find, for instance, that two paired samples from the same individual (e.g. germline and tumor tissue) are actually not related, or that samples from different individuals are highly related unexpectedly. These can be additional indicators of sample swaps that might be missed from sex concordance alone.
