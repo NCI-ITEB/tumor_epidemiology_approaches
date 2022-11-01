@@ -94,8 +94,13 @@ As previously mentioned, today we will be examining a MultiQC report (learn more
 The MultiQC code is the last step of our script and is quite simple:
 
 {% include image-modal.html link="practical_assets/4_multiqc_command.jpeg" %}
-
-The two references to ‘$OUTDIR’ are the output folder for the report (specified with ‘-o’) and the folder in which to search for QC reports, respectively. We’ve instructed MultiQC to ignore any files in the folder ‘trimgalore_out’ to avoid unnecessary clutter in the following sections of this practical.
+<figcaption class="is-italic is-size-7">
+<ul>
+<li>--title is an option to title your report</li>
+<li>--ignore will ignore results in a directory; in this case we avoided including the output in the 'trimgalore_out' folder</li>
+<li>The two references to ‘$OUTDIR’ are the output folder for the report (specified with ‘-o’) and the folder to search for QC reports, respectively</li>
+</ul>
+</figcaption><br>
 
 To open our MultiQC report you would need to mount your /data/ drive to your local computer (<a href="https://hpc.nih.gov/docs/hpcdrive.html">refresher on how to do this from Biowulf</a>) and then open practical3_expected_results/Practical_3_multiqc_report.html, but to save time we have uploaded the multiqc report here. <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_3/Practical_3_multiqc_report.html.gz" target="_blank">Click here to download it</a>. Opening this file should open a window containing the MultiQC report in your internet browser:
 
@@ -114,8 +119,12 @@ There is lots of information already contained within this general statistics se
 We’ll begin by examining the FastQC output. If you review the script we submitted you’ll see the command we used to run this:
 
 {% include image-modal.html link="practical_assets/6_fastqc_command.jpeg" %}
-
-Here you can see we gave Fastqc our $CPUS_PER_COMMAND variable with the ‘-t’ option to make use of our extra cpus. The backslashes, “\”, at the end of lines tells bash to ignore the newlines, allowing us to keep writing the fastqc command over several lines. This is purely to improve readability.
+<figcaption class="is-italic is-size-7">
+<ul>
+<li>-t is an option to run fastqc with multiple cpus</li>
+<li>the backslashes, “\”, at the end of lines tells bash to ignore the newlines, allowing us to keep writing the fastqc command over several lines. You will see these backslashes in nearly every command we run.</li>
+</ul>
+</figcaption><br>
 
 Fastqc will generate a graphical quality report for each input sample (which can be in fastq or bam/sam/cram format), which it will title [sample name]_fastqc.html. You can view these reports if you wish, but MultiQC has already incorporated this data for us. The results for FastQC within the MultiQC report are located at the end of the report, so click on the ‘FastQC’ tab in the table of contents on the left to jump there.
 
@@ -168,11 +177,14 @@ Our FFPE samples are absent from this graph because they have no adapter content
 Looking back at our submitted script, you will see just below our fastqc command we’ve submitted a job to run Trimgalore. Trimgalore will recognize and remove adapter sequences (either from a common database by default, or specified by the user) and trim low quality 3’ bases. Here is the command we ran in our script:
 
 {% include image-modal.html link="practical_assets/12_trimgalore_command.jpeg" %}
-
-- The last two lines are our samples to trim.
-- The ‘--stringency’ option sets the minimum number of base pairs that must overlap with an adapter to count as an adapter sequence.
-- The ‘--gzip’ option will compress the resulting trimmed fastq file with the gzip algorithm. Our samples in this case are small, but when working with larger files (particularly WGS) it’s critical to compress your fastq files.
-- Lastly, the ‘--fastqc’ option asks Trimgalore to rerun FastQC automatically once trimming is complete
+<figcaption class="is-italic is-size-7">
+<ul>
+<li>the last two lines are our samples to trim.</li>
+<li>the ‘--stringency’ option sets the minimum number of base pairs that must overlap with an adapter to count as an adapter sequence.</li>
+<li>the ‘--gzip’ option will compress the resulting trimmed fastq file with the gzip algorithm. Our samples in this case are small, but when working with larger files (particularly WGS) it’s critical to compress your fastq files.</li>
+<li>the ‘--fastqc’ option asks Trimgalore to rerun FastQC automatically once trimming is complete</li>
+</ul>
+</figcaption><br>
 
 <a href="https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md">Click to learn more about Trimgalore</a>.
 
@@ -195,8 +207,14 @@ We don’t have time for that in this practical, so we will instead focus on the
 Just after the trimgalore command we ran the Samtools module ‘flagstat’.  
 
 {% include image-modal.html link="practical_assets/14_samtools_flagstat_command.jpeg" %}
+<figcaption class="is-size-7 is-italic">This command has the following simple structure: <code>samtools flagstat [OPTIONS] alignment_input</code>.
+<ul>
+<li>-@ specifies number of cpus</li>
+<li>output is redirected to a .txt file with ‘>’ because the outputs from Samtools simply print to the console by default</li>
+</ul>
+</figcaption><br>
 
-This tool will collect data on the alignment flags in our data to give us a simple view of how well our sequences mapped. This command is very simple and requires only the input file and the number of cpus with the option ‘-@’ if applicable (though of course there are several other settings should you need them). We then redirected the output to a .txt file with ‘>’ because the outputs from Samtools simply print to the console and will not otherwise be saved.
+This tool will collect data on the alignment flags in our data to give us a simple view of how well our sequences mapped.
 
 To find this module in our MultiQC report, click on the Samtools tab in the table of contents on the left.
 
@@ -252,16 +270,19 @@ However, for FFPE samples, chimeric reads could be artificially generated as par
 Let’s now turn to the output from the Picard module ‘CollectInsertSizeMetrics’. This tool, as the name implies, calculates insert size of our reads. Insert size and read length sound similar, but refer to different concepts. The insert size is the total length of the DNA fragment between the adapters, whereas the read lengths are the number of base pairs being sequenced at either end of the insert.
 
 {% include image-modal.html link="practical_assets/20_insert_size_figure.jpeg" %}
-<figcaption class="has-text-centered is-size-7 is-italic"> <a href="https://pubmed.ncbi.nlm.nih.gov/24523726/">https://pubmed.ncbi.nlm.nih.gov/24523726/</a> </figcaption>
+<figcaption class="has-text-centered is-size-7 is-italic"> <a href="https://pubmed.ncbi.nlm.nih.gov/24523726/">F.S. Turner, 2014</a> </figcaption><br>
 
 The command we used to generate this output in our script looks as follows:
 
 {% include image-modal.html link="practical_assets/21_picard.jpeg" %}
-
+<figcaption class="is-size-7 is-italic">
 Picard is a java coding language application saved as a java .jar file, which is why the command to run it begins with ‘java -Xmx3g -jar’.
-The ‘-Xmx3g’ argument is an instruction to java to use up to 3Gb of memory
--I specifies our bam file input
--O and -H specify the names of the text and histogram outputs, respectively
+<ul>
+<li>‘-Xmx3g’ argument is an instruction to java to use up to 3Gb of memory</li>
+<li>-I specifies our bam file input</li>
+<li>-O and -H specify the names of the text and histogram outputs, respectively</li>
+</ul>
+</figcaption><br>
 
 Let’s examine this report in MultiQC by clicking on ‘Picard’ in the left table of contents. Hover your mouse over the lines to see the samples they correspond to and the number of sequences at each insert size.
 
@@ -286,8 +307,15 @@ The last QC metric we will discuss is sequencing coverage over the genome. In ad
 To do this we ran the tool mosdepth in our script:
 
 {% include image-modal.html link="practical_assets/23_mosdepth_command.jpeg" %}
+<figcaption class="is-italic is-size-7">
+<ul>
+<li>-t is the number of cpus to use</li>
+<li>-b is a critical parameter to note; this is an option to restrict coverage calculation to certain parts of the genome, as specified with a BED file</li>
+<li>finally we specify the name for the report followed by the input sample in the last line, respectively</li>
+</ul>
+</figcaption><br>
 
-The -b option is very important to note. Recall that the samples we analyzed were whole exome sequencing samples, thus it would be misleading to include non-coding regions of the genome in our calculation. For that reason we’ve specified a BED file with ‘-b’ to restrict the coverage calculation to only the regions of the exome which we sequenced. The BED file you use must be specific to the kit you use for exome capture prior to sequencing.
+The -b option in the mosdepth command is very important to note. Recall that the samples we analyzed were whole exome sequencing samples, thus it would be misleading to include non-coding regions of the genome in our calculation. For that reason we’ve specified a BED file with ‘-b’ to restrict the coverage calculation to only the regions of the exome which we sequenced. The BED file you use must be specific to the kit you use for exome capture prior to sequencing.
 
 The third line of each command is the naming convention for our outputs (prefixing them with ‘$OUTDIR/mosdepth/’ will ensure they are deposited in the right folder) followed by the sample to analyze. Now let’s examine the report in MultiQC by clicking on mosdepth in the table of contents.
 
@@ -312,6 +340,20 @@ At the end of our script we ran the tool <a href="https://github.com/brentp/soma
 The Somalier commands are at the end of this script and require running ‘somalier extract’ on each sample to extract SNP information, followed by ‘somalier relate’ to calculate relatedness and other statistics between samples.
 
 {% include image-modal.html link="practical_assets/26_somalier_commands.jpeg" %}
+<figcaption class="is-italic is-size-7">
+somalier extract
+<ul>
+<li>-d is the output directory for the results</li>
+<li>-s is a list of SNPs in the genome in VCF format which Somalier will sample for calculating relatedness and sex statistics</li>
+<li>-f is the specific reference genome used for sequence alignment</li>
+<li>the last line is the sample input</li>
+</ul>
+somalier relate
+<ul>
+<li>-o is the output directory for the results</li>
+<li>all somalier extraction files must then be listed to relate together</li>
+</ul>
+</figcaption><br>
 
 Somalier has been included in our MultiQC report. Click on Somalier in the table of contents, but note that we won’t look at the automatically generated plots (these plots mostly show relatedness which is useful for larger studies but not relevant for this use-case). Instead, just above the Somalier summary statistics table click on the ‘Plot’ option:
 
@@ -348,10 +390,16 @@ The previous QC metrics we’ve introduced are useful for almost any NGS applica
 The intent of targeted and exome sequencing is to focus your sequencing efforts on a relatively small area of the genome expected to have the greatest importance to your disease of interest. Thus it’s useful to know how well you sequenced your target region(s), and how much of your sequencing was off target. This is something we can answer using another function of Picard, ‘CollectHsMetrics’ (Collect Hybrid Selection Metrics). Here’s an example for how to do this:
 
 {% include image-modal.html link="practical_assets/collectHS_command.png" %}
+<figcaption class="is-italic is-size-7">
+<ul>
+<li>-I is the input alignment file</li>
+<li>-O is the output file name</li>
+<li>-R is the specific reference genome used for alignment</li>
+<li>BAIT_INTERVALS and TARGET_INTERVALS are the regions of the genome targeted during sequencing; they are only minorly different and the target intervals can be used for both</li>
+</ul>
+</figcaption><br>
 
 This code is included at the end of our script in comment form, and the outputs can be found in the Picard-CollectHsMetrics/ folder of our practical 3 resources folder (/data/classes/DCEG_Somatic_Workshop/Practical_session_3/).
-
-The options ‘I’ and ‘O’ should be familiar by now and are the input and output, respectively. We also need to specify the reference genome with ‘R’ (whichever genome you aligned to) and the BAIT_INTERVALS and TARGET_INTERVALS files (which parts of the genome you sequenced).
 
 The BAIT_INTERVALS and TARGET_INTERVALS are two subtly different genome interval files; the targets are the exact intervals corresponding to the areas of the genome you wanted to sequence (e.g. gene TP53) and the baits include those targets, plus any extra bases in the DNA baits used for exome target/capture (e.g. small overhangs up and downstream of a target). CollectHsMetrics requires both to be specified, but for most cases it’s perfectly fine to use a single target file for both.
 
