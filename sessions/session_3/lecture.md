@@ -22,7 +22,7 @@ A typical Next Generation Sequencing (NGS) workflow can be divided into 5 steps:
 Specimen collection and the types of materials available to you (be it fresh frozen tissues, FFPE tissue samples, or other types of specimens) can impact the quality of the DNA you’re able to extract.  FFPE (formalin fixed, paraffin embedded) tissues, in particular, generally result in lower quality DNA and RNA, and can make every step of wet-lab processing more challenging. This will also impact the quality of sequencing data generated as well as the analytic strategies used downstream, and it’s important to be aware of that going into a study using those types of specimens.
 
 <img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/sample_collection_details.png">
-<figcaption class="has-text-centered is-size-7 is-italic ">Sample Types and their most common analytical issues. <a href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-016-0370-4">Lennon NJ, Adalsteinsson VA, Gabriel SB, 2016</a></figcaption><br>
+<figcaption class="has-text-centered is-size-7 is-italic">Sample Types and their most common analytical issues. <a href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-016-0370-4">Lennon NJ, Adalsteinsson VA, Gabriel SB, 2016</a></figcaption><br>
 
 After DNA extraction (isolation of DNA from other cellular components), it is important to assess both the quality and quantity of DNA obtained.  The results of this quality control (QC) check can impact what sequencing strategies are feasible for your samples (long read or short read, whole genome or targeted).
 
@@ -56,7 +56,17 @@ On the Y-axis is throughput (in terms of amount of data being generated), and on
 
 Below is a summary table of the differences in overall accuracy, yield, throughput, and cost per Gb for the different NGS platforms.
 
-{% include image-modal.html link="lecture_assets/platform_specs.png" %}
+<!--{% include image-modal.html link="lecture_assets/platform_specs.png" %}-->
+
+| Sequencing Platform |   Instrument   |  Data Type | Read Length N50 (bp) | Read Accuracy (%) | Throughput per Run (Gb) | Cost per Gb ($) | Instrument Throughput  per year (Gb) |
+|:-------------------:|:------------:|:----------:|:--------------------:|:-----------------:|:-----------------------:|:---------------:|:------------------------------------:|
+| PacBio              | Sequel II      | HiFi       |       10,000-20,0000 |        >99        |                   15-30 |          50-100 |                               10,000 |
+| Oxford Nanopore     | MinION/ GridION | Long       |        10,000-60,000 |       97-99       |                    2-20 |          50-500 |                       20,000-100,000 |
+|                     |                | Ultra-long |      100,000-200,000 |                   |                   0.5-2 |       500-2,000 |                          1,000-5,000 |
+|                     | PromethION     | Long       |        10,000-60,000 |                   |                  50-100 |           20-40 |                            3,000,000 |
+| Ion Torrent         | S5             | Single-end |              100-600 |       98-99       |                  0.3-50 |          30-300 |                               10,000 |
+| Illumina            | MiSeq          | Paired-end |               36-600 |        <mark>99.9</mark>       |                  0.5-15 |         100-600 |                                1,500 |
+|                     | NovaSeq        | Paired-end |               35-500 |                   |                65-3,000 |        <mark>4-30</mark> |                            1,200,000 |
 
 NGS moves fast! Costs and applications, read lengths and accuracy can change very quickly. Illumina data is still the cheapest per Gb, and the cost differences are most easily seen with WGS. It is also among the most accurate in terms of overall read accuracy.
 
@@ -82,11 +92,12 @@ Do note that if you are looking for somatic mutations in tumor tissue or other f
 
 Targeted sequencing sequences key genes or regions of interest to high depth (500–1000× or higher), allowing identification of rare/established variants. This provides cost-effective findings for studies of disease-related genes and delivers accurate, easy-to-interpret results, identifying causative novel or inherited mutations at low allele frequencies (down to 5%). The two common methods for targeted sequencing are target enrichment (hybridization capture) and amplicon generation.
 
+
 |                                                                                                                  |                                    Hybridization Capture                                    |                          Amplicon Sequencing                          |
 |-------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------:|
 | **Principle**                                                                                                           | Capture by hybridization to biotinylated probes & isolated by magnetic pulldown             | Amplified and purified using pools of carefully designed oligo probes |
 | **Size**                                                                                                                | 20kb–62Mb regions. Typically >50 genes                                                      | A few to hundreds of genes in a single run. Typically <50 genes       |
-| **Sample input**                                                                                                        | Higher input required (10-100ng)                                                            | Lower sample input required (needle biopsy aspirate or cDNA) (>1ug)   |
+| **Sample input**                                                                                                        | Higher input required (1-250ng for library prep and 500ng of library into capture)          | Lower sample input required (needle biopsy aspirate or cDNA) (10-100ng) |
 | **Variant types**                                                                                                       | More comprehensive for all variant types                                                    | Ideal for SNVs and indels                                             |
 | **Homologous regions (e.g. pseudogenes)<br><br>Hypervariable regions (e.g. TCR)<br><br>Di/Tri nucleotide repeat regions (e.g. MSI)** | Difficulty distinguishing between the regions, resulting in non-specific enrichment         | Better enrichment with specifically designed PCR primers              |
 | **Overall**                                                                                                             | More comprehensive method, but more expensive with longer hands-on time and turnaround time | Less comprehensive, more affordable, and easier workflow              |
@@ -202,8 +213,8 @@ Once again, prices listed are from CGR. Targeted sequencing costs vary considera
 |                             | Targeted Sequencing | WES |        WGS        |
 |-----------------------------|:-------------------:|:---:|:-----------------:|
 | **Cost (per sample)**       | $15-$200            | N/A | ~$1500-5000       |
-| **DNA Quantity Required**   | 50-500 ng           |     | **>3-5 ug**       |
-| **DNA Quality Required**    | High quality        |     | **Very high quality** |
+| **DNA Quantity Required**   | 50-500 ng           |     | <mark>>3-5 ug</mark>       |
+| **DNA Quality Required**    | High quality        |     | <mark>Very high quality</mark> |
 | **Standard Coverage Depth** | >100x               |     | 10-30x            |
 | **Samples (Per Run)**       | 12-384              |     | 1                 |
 

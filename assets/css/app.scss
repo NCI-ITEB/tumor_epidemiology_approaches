@@ -1,9 +1,18 @@
 ---
 ---
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 $hero-darken: #000;
 $link: #3273dc;
 $info: #3273dc;
-//$body-family: "PT Serif";
+$body-family: "Roboto";
+$title-family: "Montserrat";
+$content-table-head-cell-border-width:1px 1px 2px !default;
+$content-table-cell-border-width: 1px !default;
+$content-table-foot-cell-border-width: 1px;
 
 // Import Main CSS file from theme
 @import "main";
+.content table tbody tr:last-child td, .content table tbody tr:last-child th { border-bottom-width: 1px; }
+.content table thead td, .content table thead th { border-width: $content-table-head-cell-border-width; color: #ffffff; background-color: $link};
+.content tbody tr:nth-child(even){background-color: $table-striped-row-even-background-color};
+.content code{color: #da1039};
