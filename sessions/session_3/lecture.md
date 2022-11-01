@@ -17,7 +17,7 @@ A typical Next Generation Sequencing (NGS) workflow can be divided into 5 steps:
 - Data analysis & interpretation: After sequencing, the instrument software identifies nucleotides (a process called base calling) and the predicted accuracy of those base calls. The raw output from sequencers are often in FASTA format, which can be aligned to a reference genome in BAM format.
 
 <img src="lecture_assets/qiagen_workflow.png">
-<figcaption class="has-text-centered is-size-7 is-italic">From https://www.qiagen.com/</figcaption><br>
+<figcaption class="has-text-centered is-size-7 is-italic"><a href="https://www.qiagen.com/">From Qiagen</a></figcaption><br>
 
 Specimen collection and the types of materials available to you (be it fresh frozen tissues, FFPE tissue samples, or other types of specimens) can impact the quality of the DNA you’re able to extract.  FFPE (formalin fixed, paraffin embedded) tissues, in particular, generally result in lower quality DNA and RNA, and can make every step of wet-lab processing more challenging. This will also impact the quality of sequencing data generated as well as the analytic strategies used downstream, and it’s important to be aware of that going into a study using those types of specimens.
 
@@ -38,7 +38,7 @@ Here is an overview table of read lengths, examples of appropriate applications,
 
 <img class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/platforms_table.png">
 
-All reads within an Illumina sequencing run are same length. For other platforms, each individual read may be a bit longer or shorter.
+All reads within an Illumina sequencing run are the same length. For other platforms, each individual read may be a bit longer or shorter.
 
 Single cell sequencing is not shown in the list of applications here, but for now those approaches predominantly use Illumina sequencing.
 
@@ -102,15 +102,16 @@ Targeted sequencing sequences key genes or regions of interest to high depth (50
 | **Homologous regions (e.g. pseudogenes)<br><br>Hypervariable regions (e.g. TCR)<br><br>Di/Tri nucleotide repeat regions (e.g. MSI)** | Difficulty distinguishing between the regions, resulting in non-specific enrichment         | Better enrichment with specifically designed PCR primers              |
 | **Overall**                                                                                                             | More comprehensive method, but more expensive with longer hands-on time and turnaround time | Less comprehensive, more affordable, and easier workflow              |
 
-In hybridization capture, the targeted regions are captured by hybridization to biotinylated probes and are then isolated by magnetic pull down. For amplicon sequencing, the regions are amplified and purified by using a pool of carefully designed oilgonucleotide probes
+In hybridization capture, the targeted regions are captured by hybridization to biotinylated probes complementary to the target DNA, and the targets are isolated by magnetic pull down. For amplicon sequencing, the regions are amplified and purified by using a pool of carefully designed oligonucleotide probes.
 
-Overall, hybridization capture often covers larger regions of the genome and is more comprehensive for more variant types, but it also requires more DNA input, longer hands-on and turn around time, and is more expensive. In contrast amplicon sequencing requires a lower amount of DNA input, which is particularly helpful when the DNA comes from a low yield source such as needle biopsy aspirate or cDNA.
-
-When studying more challenging regions like homologous regions, hypervariable regions and di/tri nucleotide repeat regions, amplicon sequencing could show better enrichment with specifically designed PCR primers. Hybridization capture might have difficulty distinguishing between these regions, resulting in non-specific enrichment. As an example, PTEN is a known tumor suppressor gene and is one of the most commonly mutated suppressor genes in cancer. PTENP1 is a processed pseudogene very similar in sequence. Being able to distinguish between the two would be essential, and is more likely with amplicon sequencing.
-
+<!--
 <img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/targetedSeq_diagram.png">
-<figcaption class="has-text-centered is-size-7 is-italic">A) Target enrichment, B) Amplicon sequencing. <a href="https://www.thermofisher.com/us/en/home/life-science/sequencing/sequencing-learning-center/next-generation-sequencing-information/ngs-basics/targeted-sequencing-approaches.html">From Thermo Fisher</a></figcaption><br>
+<figcaption class="has-text-centered is-size-7 is-italic">Scientific principles underlying A) Target enrichment, B) Amplicon sequencing. <a href="https://www.thermofisher.com/us/en/home/life-science/sequencing/sequencing-learning-center/next-generation-sequencing-information/ngs-basics/targeted-sequencing-approaches.html">From Thermo Fisher</a></figcaption><br>
+-->
 
+Overall, hybridization capture often covers larger regions of the genome and is more comprehensive for more variant types, but it also requires more DNA input, longer hands-on and turn around time, and is more expensive. In contrast amplicon sequencing requires less DNA, which is particularly helpful when the DNA comes from a low yield source such as needle biopsy aspirate or cDNA.
+
+When studying more challenging regions like homologous regions, hypervariable regions, and di/tri nucleotide repeat regions, amplicon sequencing could show better enrichment with specifically designed PCR primers. Hybridization capture might have difficulty distinguishing between these regions, resulting in non-specific enrichment.
 
 ---
 
@@ -251,20 +252,21 @@ There are many more quality metrics and tools available for performing QC of seq
 
 The first metrics you will want to check is the quality of the overall sequence run on the instrument, namely overall yield and base calling quality.  There are several metrics that can demonstrate these both at the sample and flowcell level, and the lab generating the data should be able to provide these. These metrics include the total yield, error rates, Q30%, and passed filter reads, as probably among the more important. Low yield will negatively impact coverage, and poor quality will lead to errors in mapping and variant calling.
 
-One of these metrics that I’ve mentioned that is helpful to understand is the Q30%.
+One metric that is particularly important to understand is the Q30%.
 
 {% include image-modal.html link="lecture_assets/quality_scores.png" %}
 <figcaption class="has-text-centered is-size-7 is-italic"><a href="https://www.illumina.com/documents/products/technotes/technote_Q-Scores.pdf">From Illumina</a></figcaption><br>
 
-Q30% refers to the percentage of bases generated that meet or exceed a quality score of Q30, which translates to a base having a 1 in 1000 chance of being incorrect. Most sequence data (not just Illumina) is assigned these phred-scale quality scores in the fastq files, and understanding the difference between Q20, Q30, Q40, etc. is important.
+Q30% refers to the percentage of bases generated that meet or exceed a quality score of Q30, which translates to a base having a 1 in 1,000 chance of being incorrect. Most sequence data (not just Illumina) is assigned these phred-scale quality scores in the fastq files, and understanding the difference between Q20, Q30, Q40, etc. is important.
 
 The flowcell-level metrics provided by the sequencing facility should meet Illumina’s specs for a given instrument run, which can be found on [Illumina’s website](https://www.illumina.com/systems/sequencing-platforms/novaseq/specifications.html).
 
 Once you know the overall sequence run performed well, you will want to examine some sample-level metrics that assess the quality of your reads per sample. FastQC and the FASTX toolkit are both tools that can be used to evaluate the quality of your reads.
 
 <img class="center" style="display: block; margin-left: auto; margin-right: auto;" src="lecture_assets/fastqc_quality.png">
+<figcaption class="has-text-centered is-size-7 is-italic">FastQC Sequence Quality module example images.</figcaption><br>
 
-FastQC can show read lengths, positional information about read quality, read lengths, GC content, and whether adapter sequences are present or were trimmed. Recall from the beginning of this lecture that adapters are DNA sequences that are added to our genomic DNA fragments and are used by the sequencer as priming sites for generating sequence reads.  If sequencing reads are longer than the DNA fragments, the sequencer will continue sequencing into the adapters. Adapter sequences should be trimmed to avoid errors during mapping and variant calling. Often sequencing facilities will perform some adapter trimming for you, but these tools can help identify whether more adapter trimming is still necessary or not.
+FastQC can show read lengths, positional information about read quality (figure pictured above), read lengths, GC content, and whether adapter sequences are present or were trimmed. Recall from the beginning of this lecture that adapters are DNA sequences that are added to our genomic DNA fragments and are used by the sequencer as priming sites for generating sequence reads.  If sequencing reads are longer than the DNA fragments, the sequencer will continue sequencing into the adapters. Adapter sequences should be trimmed to avoid errors during mapping and variant calling. Often sequencing facilities will perform some adapter trimming for you, but these tools can help identify whether more adapter trimming is still necessary or not.
 
 We will practice using FastQC and performing read trimming during this session's practical.
 
