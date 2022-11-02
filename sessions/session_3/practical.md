@@ -212,7 +212,7 @@ We don’t have time for that in this practical, so we will instead focus on the
 
 **16\.** Just after the trimgalore command we ran the Samtools module ‘flagstat’.  
 
-{% include image-modal.html link="practical_assets/14_samtools_flagstat_command.jpeg" %}
+{% include image-modal.html link="practical_assets/14_samtools_flagstat_command.png" %}
 <figcaption class="is-size-7 is-italic">This command has the following simple structure: <code>samtools flagstat [OPTIONS] alignment_input</code>.
 <ul>
 <li>-@ specifies number of cpus</li>
