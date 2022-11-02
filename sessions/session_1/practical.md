@@ -32,7 +32,7 @@ replacing 'USERNAME' with your own username.
 
 #### Windows
 
-- Download [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html). The version 'putty.exe' is a standalone package that does not require installation.
+- Download <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" target="_blank">PuTTY</a>. The version 'putty.exe' is a standalone package that does not require installation.
 
 - Launch PuTTY. Under “Host Name (or IP address), type:
 <code>USERNAME@biowulf.nih.gov</code>, replacing 'USERNAME' with your own username,
@@ -68,7 +68,7 @@ When you are allocated to a compute node you should see USERNAME@cn####, like th
 When you want to close the interactive session use the command <code>exit</code>, and you will return to the login nodes.
 
 ### Locally mounting HPC System Directories
-We will need to mount your personal <code>/data</code> drive to access files on Biowulf from your local computer at the end of this session. See the instructions here for mounting your data directory: [https://hpc.nih.gov/docs/hpcdrive.html](https://hpc.nih.gov/docs/hpcdrive.html).
+We will need to mount your personal <code>/data</code> drive to access files on Biowulf from your local computer at the end of this session. See the instructions here for mounting your data directory: <a target="_blank" href="https://hpc.nih.gov/docs/hpcdrive.html">(https://hpc.nih.gov/docs/hpcdrive.html).
 
 ---
 
@@ -262,7 +262,7 @@ As before, we use the pipe to feed the output into the <code>head -20</code> com
 
 The <code>-b</code> flag tells samtools to output in the compressed BAM format rather than SAM, and is very important when working with large alignment files. The <code>-f</code> flag requires all output reads to have the specified alignment flags, in this case flag '4' and flag '8'. These correspond to 'read unmapped' and 'mate unmapped', respectively.
 
-A full list of SAM flags can be found at: [https://broadinstitute.github.io/picard/explain-flags.html](https://broadinstitute.github.io/picard/explain-flags.html)
+A full list of SAM flags can be found at: <a href="https://broadinstitute.github.io/picard/explain-flags.html" target="_blank">https://broadinstitute.github.io/picard/explain-flags.html</a>
 
 **16\.** Sort the original file by genomic coordinates and output into file reads_sorted.bam:
 
@@ -359,7 +359,7 @@ The <code>printf</code> and <code>cat</code> commands simply print some text whi
 
 Note one very important detail in the previous commands: <code>>></code> will append text to the end of an existing file while <code>></code> will overwrite existing files. **When working with files of your own, be very careful of this difference or you could accidentally lose data!**
 
-**26\.** Let's now visualize using the UCSC genome browser. Go to [https://genome.ucsc.edu/](https://genome.ucsc.edu/). Under the "Genomes" tab, select "Human GRCh38/hg38" and then click the 'add custom tracks' button on the bottom of the genome browser.
+**26\.** Let's now visualize using the UCSC genome browser. Go to <a href="https://genome.ucsc.edu/"  target="_blank">https://genome.ucsc.edu/</a>. Under the "Genomes" tab, select "Human GRCh38/hg38" and then click the 'add custom tracks' button on the bottom of the genome browser.
 
 {% include image-modal.html link="practical_assets/ucsc_select_genome.png" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
 
