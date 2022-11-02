@@ -373,4 +373,4 @@ and finally hit "go". An APOBEC3B homozygous deletion is highlighted below.
 
 {% include image-modal.html link="practical_assets/custom_track_apobec.png" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
 
-{% include image-modal.html link="practical_assets/custom_track_apobec2.png" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}
+<!--{% include image-modal.html link="practical_assets/custom_track_apobec2.png" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" %}-->

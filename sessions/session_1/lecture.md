@@ -7,6 +7,8 @@ menubar_toc: true
 <script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
 <script>addBackToTop()</script>
 
+<a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/lecture_materials/lecture_1/Session%201_%20Basic%20Introduction%20(final).pdf" target="_blank">Download the original slides for this lecture here</a>
+
 ## Introduction to Available Computing Clusters
 
 We will first begin by discussing two computing clusters at NIH: CCAD and Biowulf. As this is a course from DCEG, we will open this section with a brief description of the Computer Cluster at DCEG (CCAD). CCAD is a cluster only for DCEG members. This is mostly optional information for interested DCEG members as all following practical and lecture sessions will focus on Biowulf when cluster use is required.
