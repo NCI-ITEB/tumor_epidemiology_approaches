@@ -49,7 +49,7 @@ If you’ve successfully submitted a job, Biowulf should return an eight-digit n
 
 {% include image-modal.html link="practical_assets/1_job_submission_and_ID.png" %}
 
-**4\.** Once the job is submitted you can check the status of your job by simply typing and entering “sjobs”.
+**4\.** Once the job is submitted you can check the status of your job by simply typing and entering <code>sjobs</code>.
 
 {% include image-modal.html link="practical_assets/sjobs.png" %}
 
@@ -63,19 +63,21 @@ You should also see a file slurm-########.out in your directory once your job be
 
 <code>vi practical_3_script.sh</code>{% include code-snippet-copy.html %}
 
-All lines beginning with ## are comments that we’ve added to improve readability. These lines are not actual code and are not executed by Biowulf.
+All lines beginning with <code>##</code> are comments that we’ve added to improve readability. These lines are not functional code and are not executed by Biowulf.
 
 {% include image-modal.html link="practical_assets/set_variables.png" %}
 
-The very first line, ‘#!/usr/bin/env bash’, begins with a ‘shebang’ (#!) and tells Biowulf which program to use to run this script, in this case ‘bash’. This line or something similar should be the first line of every bash script you write.
+The very first line, <code>#!/usr/bin/env bash</code>, begins with a ‘shebang’ (<code>#!</code>) and tells Biowulf which program to use to run this script, in this case ‘bash’. This line or something similar should be the first line of every bash script you write.
 
-The first line of code sets a variable, 'PATH_TO_PRACTICE3', to store the location of all of our practical session 3 files. We can use this variable in our script, prefixed by a ‘$’, instead of typing the full path “/data/classes/DCEG_Somatic_Workshop/Practical_session_3”.We’ve also set a couple of other variables: OUTDIR (where we’ll store the results) and CPUS_PER_COMMAND (how many cpus to use for each command).
+The first line of code sets a variable, PATH_TO_PRACTICE3, to store the location of all of our practical session 3 files. We can use this in our script to simplify our code: wherever we type <code>$PATH_TO_PRATICE3</code> it will be interpreted as "the value of PATH_TO_PRATICE3", i.e. <code>/data/classes/DCEG_Somatic_Workshop/Practical_session_3</code>.
 
-*NOTE: Regarding the CPUS_PER_COMMAND variable, we need to explicitly tell most bioinformatics programs how many cpus to use as they’re only configured to use one cpu by default. Whenever you have a path or a value like these that are being used more than a couple times in your script, it’s recommended to use variables. It will save you time and effort, reduce the chances of making a typo, and make it easy to reconfigure your script if something changes (e.g. the path of a folder).*
+We’ve also set a couple of other variables: OUTDIR (where we’ll store the results) and CPUS_PER_COMMAND (how many cpus to use for each command). Whenever you have a path or a value like these that are being used more than a couple times in your script, it’s recommended to use variables. It will save you time and effort, reduce the chances of making a typo, and make it easy to reconfigure your script if something changes (e.g. the location/path of a folder).
+
+*NOTE: Regarding the CPUS_PER_COMMAND variable, we need to explicitly tell most bioinformatics programs how many cpus to use as they’re only configured to use one cpu by default.*
 
 ***For more advanced users:*** *We’ll be running some of the QC tools in parallel with each other (i.e. simultaneously) to speed things up. This is accomplished with the ‘&’ and ‘wait’ commands littered throughout our code. This is also why we’re using only 3 cpus per command despite requesting 8 from Biowulf.*
 
-The next section of the script includes a series of ‘module load’ commands:
+The next section of the script includes a series of <code>module load</code> commands:
 
 {% include image-modal.html link="practical_assets/3_load_modules.jpeg" %}
 
@@ -89,7 +91,7 @@ What follows these sections is the code to run our QC steps. We will examine the
 
 <code>cp -r /data/classes/DCEG_Somatic_Workshop/Practical_session_3/expected_results ./practical3_expected_results</code>{% include code-snippet-copy.html %}
 
-Once that finishes you should see a directory in your data folder titled “practical3_expected_results” (check with ls).
+Once that finishes you should see a directory in your data folder titled “practical3_expected_results” (check with <code>ls</code>).
 
 ### Open MultiQC report
 
@@ -100,9 +102,9 @@ The MultiQC code is the last step of our script and is quite simple:
 {% include image-modal.html link="practical_assets/4_multiqc_command.jpeg" %}
 <figcaption class="is-italic is-size-7">
 <ul>
-<li>--title is an option to title your report</li>
-<li>--ignore will ignore results in a directory; in this case we avoided including the output in the 'trimgalore_out' folder</li>
-<li>The two references to ‘$OUTDIR’ are the output folder for the report (specified with ‘-o’) and the folder to search for QC reports, respectively</li>
+<li><code>--title</code> is an option to title your report</li>
+<li><code>--ignore</code> will ignore results in a directory; in this case we avoided including the output in the 'trimgalore_out' folder</li>
+<li>The two references to <code>$OUTDIR</code> are the output folder for the report (specified with <code>-o</code>) and the folder to search for QC reports, respectively</li>
 </ul>
 </figcaption><br>
 
@@ -122,17 +124,19 @@ There is lots of information already contained within this general statistics se
 
 ## Reviewing FASTQ-based QC results
 
-**9\.** We’ll begin by examining the FastQC output. If you review the script we submitted you’ll see the command we used to run this:
+**9\.** We’ll begin by examining the FastQC output. Here is the command we used to run FastQC in our script:
 
 {% include image-modal.html link="practical_assets/6_fastqc_command.jpeg" %}
 <figcaption class="is-italic is-size-7">
 <ul>
-<li>-t is an option to run fastqc with multiple cpus</li>
-<li>the backslashes, “**\”**, at the end of lines tells bash to ignore the newlines, allowing us to keep writing the fastqc command over several lines. You will see these backslashes in nearly every command we run.</li>
+<li><code>-t</code> is the option to run fastqc with multiple cpus</li>
+<li>the backslashes, <code>\</code>, at the end of lines tells bash to ignore the newlines, allowing us to keep writing the fastqc command over several lines. You will see these backslashes in nearly every command we run.</li>
 </ul>
 </figcaption><br>
 
-Fastqc will generate a graphical quality report for each input sample (which can be in fastq or bam/sam/cram format), which it will title [sample name]_fastqc.html. You can view these reports if you wish, but MultiQC has already incorporated this data for us. The results for FastQC within the MultiQC report are located at the end of the report, so click on the ‘FastQC’ tab in the table of contents on the left to jump there.
+Fastqc will generate a graphical quality report for each input sample (which can be in fastq or bam/sam/cram format), which it will title <code>[sample name]_fastqc.html</code>.
+
+MultiQC has already incorporated the these reports for us, so let's examine them. Click on the ‘FastQC’ tab in the table of contents on the left to jump there.
 
 ---
 
@@ -186,9 +190,9 @@ Our FFPE samples are absent from this graph because they have no adapter content
 <figcaption class="is-italic is-size-7">
 <ul>
 <li>the last two lines are our samples to trim.</li>
-<li>the ‘--stringency’ option sets the minimum number of base pairs that must overlap with an adapter to count as an adapter sequence.</li>
-<li>the ‘--gzip’ option will compress the resulting trimmed fastq file with the gzip algorithm. Our samples in this case are small, but when working with larger files (particularly WGS) it’s critical to compress your fastq files.</li>
-<li>the ‘--fastqc’ option asks Trimgalore to rerun FastQC automatically once trimming is complete</li>
+<li>the <code>--stringency</code> option sets the minimum number of base pairs that must overlap with an adapter to count as an adapter sequence.</li>
+<li>the <code>--gzip</code> option will compress the resulting trimmed fastq file with the gzip algorithm. Our samples in this case are small, but when working with larger files (particularly WGS) it’s critical to compress your fastq files.</li>
+<li>the <code>--fastqc</code> option asks Trimgalore to rerun FastQC automatically once trimming is complete</li>
 </ul>
 </figcaption><br>
 
@@ -215,18 +219,18 @@ We don’t have time for that in this practical, so we will instead focus on the
 {% include image-modal.html link="practical_assets/14_samtools_flagstat_command.png" %}
 <figcaption class="is-size-7 is-italic">This command has the following simple structure: <code>samtools flagstat [OPTIONS] alignment_input</code>.
 <ul>
-<li>-@ specifies number of cpus</li>
-<li>output is redirected to a .txt file with ‘>’ because the outputs from Samtools simply print to the console by default</li>
+<li><code>-@</code> specifies number of cpus</li>
+<li>output is redirected to a .txt file with <code>></code> because the outputs from Samtools simply print to the console by default</li>
 </ul>
 </figcaption><br>
 
-If you will recall, we actually ran this tool once already in practical 1. This tool will collect data on the alignment flags in our data to give us a simple view of how well our sequences mapped.
+If you will recall, we actually ran this tool once already in practical 1. This tool will collect data on the alignment flags in our data to give us a simple view of how well our sequences mapped. <a href="https://nci-iteb.github.io/tumor_epidemiology_approaches/sessions/session_1/supplemental#alignment-flags" target="_blank">If you need a refresher on alignment flags, see here</a>.
 
 **17\.** To find this module in our MultiQC report, click on the Samtools tab in the table of contents on the left.
 
 {% include image-modal.html link="practical_assets/15_samtools_visual.jpeg" %}
 
-We can see the data for each sample by hovering over the points in the graphic (here we’ve changed the color of the fresh frozen tumor sample to red to improve visibility via MultiQC’s highlight function). We’ll choose to focus on the FFPE sample for this module as it has some features worth noting. You can also examine the text version generated directly from samtools by opening the files ‘FFPE_Tumor.flagstat.txt’ and ‘Fresh_Frozen.flagstat.txt’.
+We can see the data for each sample by hovering over the points in the graphic. We’ll choose to focus on the FFPE sample for this module as it has some features worth noting. You can also examine the text version generated directly from samtools by opening the files ‘FFPE_Tumor.flagstat.txt’ and ‘Fresh_Frozen.flagstat.txt’.
 
 {% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:66%" link="practical_assets/16_fresh_frozen_flagstat.jpeg" %}<br>
 {% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:66%" link="practical_assets/17_FFPE_tumor_flagstat.jpeg" %}<br>
@@ -284,11 +288,11 @@ The command we used to generate this output in our script looks as follows:
 
 {% include image-modal.html link="practical_assets/21_picard.jpeg" %}
 <figcaption class="is-size-7 is-italic">
-Picard is a java coding language application saved as a java .jar file, which is why the command to run it begins with ‘java -Xmx3g -jar’.
+Picard is a java coding language application saved as a java .jar file, which is why the command to run it begins with <code>java -Xmx3g -jar</code>.
 <ul>
-<li>‘-Xmx3g’ argument is an instruction to java to use up to 3Gb of memory</li>
-<li>-I specifies our bam file input</li>
-<li>-O and -H specify the names of the text and histogram outputs, respectively</li>
+<li><code>-Xmx3g</code> argument is a java command to use up to 3Gb of memory</li>
+<li><code>-I</code> specifies our bam file input</li>
+<li><code>-O</code> and <code>-H</code> specify the names of the text and histogram outputs, respectively</li>
 </ul>
 </figcaption><br>
 
@@ -303,7 +307,7 @@ One difference that’s very obvious is that the FFPE samples all have relativel
 As a result the effective sequencing depth for this FFPE tumor is therefore roughly half of the estimated overall depth as both reads in most pairs contain the same information.
 
 Small insert sizes in this case are due to DNA degradation as a result of the FFPE process. Small insert sizes will also cause:
-- higher adapter content and decreased read length \*
+- higher adapter content and decreased read length\*
 - increased duplication rate
 - make it difficult to discover and resolve structural variants or rearrangements
 - possibly cause false positives during variant calling
@@ -328,13 +332,13 @@ In addition to learning how evenly your sequencing covers the genome, you can al
 {% include image-modal.html link="practical_assets/23_mosdepth_command.jpeg" %}
 <figcaption class="is-italic is-size-7">
 <ul>
-<li>-t is the number of cpus to use</li>
-<li>-b is a critical parameter to note; this is an option to restrict coverage calculation to certain parts of the genome, as specified with a BED file</li>
+<li><code>-t</code> is the number of cpus to use</li>
+<li><code>-b</code> is a critical parameter to note; this is an option to restrict coverage calculation to certain parts of the genome, as specified with a BED file</li>
 <li>finally we specify the name for the report followed by the input sample in the last line, respectively</li>
 </ul>
 </figcaption><br>
 
-The -b option in the mosdepth command is very important to note. Recall that the samples we analyzed were whole exome sequencing samples, thus it would be misleading to include non-coding regions of the genome in our calculation. For that reason we’ve specified a BED interval file with ‘-b’ to restrict the coverage calculation to only the regions of the exome which we sequenced. The BED file you use must be specific to the kit you use for exome capture prior to sequencing.
+The <code>-b</code> option in the mosdepth command is very important to note. Recall that the samples we analyzed were whole exome sequencing samples, thus it would be misleading to include non-coding regions of the genome in our coverage calculation. For that reason we’ve specified a BED interval file with <code>-b</code> to restrict the coverage calculation to only the regions of the exome which we targetted during sequencing. The BED file you use must be specific to the kit you use for exome capture prior to sequencing.
 
 **24\.** Now let’s examine the report in MultiQC by clicking on mosdepth in the table of contents.
 
@@ -364,15 +368,15 @@ At the end of our script we ran the tool <a href="https://github.com/brentp/soma
 <figcaption class="is-italic is-size-7">
 somalier extract
 <ul>
-<li>-d is the output directory for the results</li>
-<li>-s is a list of SNPs in the genome in VCF format which Somalier will sample for calculating relatedness and sex statistics</li>
-<li>-f is the specific reference genome used for sequence alignment</li>
+<li><code>-d</code> is the output directory for the results</li>
+<li><code>-s</code> is a list of SNPs in the genome in VCF format which Somalier will sample for calculating relatedness and sex statistics</li>
+<li><code>-f</code> is the specific reference genome used for sequence alignment</li>
 <li>the last line is the sample input</li>
 </ul>
 somalier relate
 <ul>
-<li>-o is the output directory for the results</li>
-<li>all somalier extraction files must then be listed to relate together</li>
+<li><code>-o</code> is the output directory for the results</li>
+<li>all somalier extraction files must then be listed to relate them together</li>
 </ul>
 </figcaption><br>
 
@@ -419,10 +423,10 @@ The intent of targeted and exome sequencing is to focus your sequencing efforts 
 {% include image-modal.html link="practical_assets/collectHS_command.png" %}
 <figcaption class="is-italic is-size-7">
 <ul>
-<li>-I is the input alignment file</li>
-<li>-O is the output file name</li>
-<li>-R is the specific reference genome used for alignment</li>
-<li>BAIT_INTERVALS and TARGET_INTERVALS are the regions of the genome targeted during sequencing; they are only minorly different and the target intervals can be used for both</li>
+<li><code>-I</code> is the input alignment file</li>
+<li><code>-O</code> is the output file name</li>
+<li><code>-R</code> is the specific reference genome used for alignment</li>
+<li><code>BAIT_INTERVALS</code> and <code>TARGET_INTERVALS</code> are the regions of the genome targeted during sequencing; they are only minorly different and the same target intervals file can be used for both</li>
 </ul>
 </figcaption><br>
 
@@ -452,7 +456,7 @@ The stats we’re looking at in order are the percentage of off-target sequences
 
 IGV is an extremely useful resource for visualizing the alignment in areas of any genome and is very commonly used for manually verifying the results of bioinformatics algorithms.
 
-**34\.** Since we will use IGV locally on your computer (i.e. not on Biowulf), you’ll need the alignment files on your computer. Rather than download from Biowulf, please <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_3/IGV_GSTM_alignments.tar.gz" target="_blank">download the bam files we’ve prepared here</a>, which have been isolated to only the region around GSTM1 and GSTM2 using ‘samtools view’.
+**34\.** Since we will use IGV locally on your computer (i.e. not on Biowulf), you’ll need the alignment files on your computer. Rather than download from Biowulf, please <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_3/IGV_GSTM_alignments.tar.gz" target="_blank">download the bam files we’ve prepared here</a>, which have been isolated to only the region around GSTM1 and GSTM2 using <code>samtools view</code>.
 
 **35\.** Once that’s done, open IGV on your local computer and follow these steps:
 

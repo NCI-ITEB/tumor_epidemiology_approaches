@@ -2,6 +2,7 @@
 layout: page
 permalink: sessions/session_1/lecture
 menubar_toc: true
+contents_title: Session 1
 ---
 
 <script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>

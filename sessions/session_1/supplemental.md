@@ -4,7 +4,7 @@ permalink: sessions/session_1/supplemental
 menubar_toc: true
 ---
 
-### FASTA
+## FASTA
 
 FASTA (‘fast-a’) format is a simple format for storing sequences of nucleotides or amino acids. FASTA files are usually used only to contain reference sequences as they lack important information that would be relevant for sequencing reads, such as quality scores. Files in FASTA format traditionally end in “.fasta”, “.fa”, or “.fsa”.
 
@@ -16,7 +16,7 @@ Generally speaking since FASTA files are often only reference sequences there’
 
 ---
 
-### FASTQ
+## FASTQ
 
 For sequence information from sequencing experiments, nucleotide sequences must be stored with per-base sequence quality scores. This is the purpose of the FASTQ (“fast-q”) file format. FASTQ files are traditionally suffixed with “.fastq”, “.fq”, and “.fq.gz” when compressed using the gzip algorithm.
 
@@ -50,7 +50,7 @@ Two comprehensive packages for working with FASTQ, and also FASTA, include [seqt
 -->
 ---
 
-### SAM (Sequence Alignment Map), BAM, CRAM
+## SAM (Sequence Alignment Map), BAM, CRAM
 
 SAM, BAM, and CRAM are three formats used to store aligned sequences. The three formats store the same information but most importantly vary in their level of compression. SAM files are uncompressed and are human-readable without the use of additional software. BAM files are SAM files transformed into binary format for compression. CRAM files use a different compression algorithm from BAM and achieve the highest degree of compression. Notably the CRAM format stores only the bases that differ from the aligned reference genome, and therefore to work with CRAM files the reference genome is generally required. These alignment formats are suffixed simply with “.sam”,“.bam”, and ”.cram”.
 
@@ -62,6 +62,8 @@ The sequences themselves are stored in a format composed of eleven sections with
 
 <img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/sam_body.png">
 *from the [samtools documentation](https://samtools.github.io/hts-specs/SAMv1.pdf)*
+
+### Alignment Flags
 
 The FLAG element is an additive combination of integers representing alignment status flags.
 
@@ -84,7 +86,7 @@ Two very popular tools for working with alignment files are Samtools and Picard.
 
 ---
 
-### VCF (Variant Calling Format)/BCF
+## VCF (Variant Calling Format)/BCF
 
 The VCF format stores information about genetic variants (SNVs, indels, SVs). Like BAM format is to SAM, BCF is the compressed, binary version of VCF. VCF and BCF file names end with ".vcf" and ".bcf", respectively. Also like SAM files, VCF files are composed of a header with meta-information and a body containing the data.
 
@@ -107,7 +109,7 @@ BCFtools is a popular program for reading and writing VCF and BCF files as well 
 
 ---
 
-### MAF (Mutation Annotation Format)
+## MAF (Mutation Annotation Format)
 
 MAF is a higher-level representation of variants. As compared to VCF which usually contains data on the sample level, MAF aggregates mutations from many or all samples within an experiment. MAF also includes more annotation information from public databases, such as the associated genes for variants, genome build, functional consequences, etc.
 
@@ -117,7 +119,7 @@ Maftools is a useful tool for working with MAF files. Maftools provides lots of 
 
 ---
 
-### BED
+## BED
 
 BED files are used to store genomic interval information, such as the coordinates for a gene within a reference genome. BED files end with the suffix “.bed”.
 
@@ -133,7 +135,7 @@ Bedtools is a popular resource for working with BED files, and is generally used
 
 ---
 
-### GTF/GFF
+## GTF/GFF
 
 Like BED, GTF and GFF store data on genomic intervals. GTF is identical to GFF version 2, and only different from GFF version 3 in the formatting of their attributes field. Typically GTF is used to store gene and transcript coordinates whereas GFF is a more general purpose designation. These files are suffixed with ‘.gtf‘, ‘.gff’, ‘.gff2’, or ‘.gff3’.
 The format is as follows:
@@ -154,7 +156,7 @@ Working with GTF or GFF files can be done with GffCompare. GffCompare provides a
 
 ---
 
-### Additional Resources
+## Additional Resources
 
 For full descriptions of aforementioned formats as well as tools to work with them, see the resources below as well as the supplementary information tab for this session.
 
