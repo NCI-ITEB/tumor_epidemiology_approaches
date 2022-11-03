@@ -63,12 +63,14 @@ defaults:
       path: sessions
     values:
       hero_height: is-small
-  -
-    scope:
-      path: sessions
-    values:
       show_menubar: true
       menubar: sessions_sidebar
+  -
+    scope:
+      type: posts
+    values:
+      hero_height: is-small
+      show_sidebar: true
   -
     scope:
       path: sessions/session_1
