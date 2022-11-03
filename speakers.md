@@ -14,7 +14,7 @@ title: Invited Speakers
     {% endif %}
     <div class="px-4" style="overflow:auto">
       	<h2>{{speaker.name}}, {{speaker.education}}</h2>
-        <h5>{{speaker.affiliation}}</h5>
+        <h5 class="is-italic">{{speaker.affiliation}}</h5>
       	{% if speaker.talk_title %}
         <h4>{{ speaker.talk_date }} - <span class="is-italic">{{ speaker.talk_title }}</span></h4>
         {% else %}
