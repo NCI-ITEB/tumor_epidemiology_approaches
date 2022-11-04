@@ -3,7 +3,7 @@ layout: page
 permalink: sessions/session_3/lecture
 menubar_toc: true
 ---
-<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
+<script link="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
 <script>addBackToTop()</script>
 
 ## Introduction to NGS sequencing
@@ -16,12 +16,12 @@ A typical Next Generation Sequencing (NGS) workflow can be divided into 5 steps:
 - Sequencing: libraries are loaded onto a flow cell and placed on the sequencer. Two common sequencing platforms are Illumina and Ion Torrent.
 - Data analysis & interpretation: After sequencing, the instrument software identifies nucleotides (a process called base calling) and the predicted accuracy of those base calls. The raw output from sequencers are often in FASTA format, which can be aligned to a reference genome in BAM format.
 
-<img src="lecture_assets/qiagen_workflow.png">
+{% include image-modal.html link="lecture_assets/qiagen_workflow.png" %}
 <figcaption class="has-text-centered is-size-7 is-italic"><a href="https://www.qiagen.com/">From Qiagen</a></figcaption><br>
 
 Specimen collection and the types of materials available to you (be it fresh frozen tissues, FFPE tissue samples, or other types of specimens) can impact the quality of the DNA you’re able to extract.  FFPE (formalin fixed, paraffin embedded) tissues, in particular, generally result in lower quality DNA and RNA, and can make every step of wet-lab processing more challenging. This will also impact the quality of sequencing data generated as well as the analytic strategies used downstream, and it’s important to be aware of that going into a study using those types of specimens.
 
-<img class="center" style="display: block;margin-left: auto; margin-right: auto;" src="lecture_assets/sample_collection_details.png">
+{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto;" link="lecture_assets/sample_collection_details.png" %}
 <figcaption class="has-text-centered is-size-7 is-italic">Sample Types and their most common analytical issues. <a href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-016-0370-4">Lennon NJ, Adalsteinsson VA, Gabriel SB, 2016</a></figcaption><br>
 
 After DNA extraction (isolation of DNA from other cellular components), it is important to assess both the quality and quantity of DNA obtained.  The results of this quality control (QC) check can impact what sequencing strategies are feasible for your samples (long read or short read, whole genome or targeted).
@@ -36,7 +36,7 @@ Finally, we also assess the quality and quantity of final libraries before loadi
 
 Here is an overview table of read lengths, examples of appropriate applications, and instrument names for the biggest sequencing technologies in use today.
 
-<img class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/platforms_table.png">
+{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" link="lecture_assets/platforms_table.png" %}
 
 All reads within an Illumina sequencing run are the same length. For other platforms, each individual read may be a bit longer or shorter.
 
@@ -46,7 +46,7 @@ In subsequent sections, we will focus primarily on Illumina and PacBio long read
 
 The figure below gives a rough picture of how each sequencing technology is used at CGR:
 
-<img class="center" style="display: block;margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/platforms_v_methods.png">
+{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:75%" link="lecture_assets/platforms_v_methods.png" %}
 
 On the Y-axis is throughput (in terms of amount of data being generated), and on the X-axis is the amount of genomic content being targeted. Oxford Nanopore is not pictured, but is roughly the same as PacBio in this image.
 
@@ -105,7 +105,7 @@ Targeted sequencing sequences key genes or regions of interest to high depth (50
 In hybridization capture, the targeted regions are captured by hybridization to biotinylated probes complementary to the target DNA, and the targets are isolated by magnetic pull down. For amplicon sequencing, the regions are amplified and purified by using a pool of carefully designed oligonucleotide probes.
 
 <!--
-<img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/targetedSeq_diagram.png">
+{% include image-modal.html classes="center" styles="display: block; margin-left: auto; margin-right: auto; max-width:75%" link="lecture_assets/targetedSeq_diagram.png" %}
 <figcaption class="has-text-centered is-size-7 is-italic">Scientific principles underlying A) Target enrichment, B) Amplicon sequencing. <a href="https://www.thermofisher.com/us/en/home/life-science/sequencing/sequencing-learning-center/next-generation-sequencing-information/ngs-basics/targeted-sequencing-approaches.html">From Thermo Fisher</a></figcaption><br>
 -->
 
@@ -227,7 +227,7 @@ The coverage depths listed are on the lower end as deeper coverage for human WGS
 
 Quality control of NGS sequencing should be performed at many levels in the process, including some which we’ve mentioned already in this lecture.
 
-<img class="center" style="display: block; margin-left: auto; margin-right: auto; max-width:75%" src="lecture_assets/qiagen_workflow_withQC.png">
+{% include image-modal.html classes="center" styles="display: block; margin-left: auto; margin-right: auto; max-width:75%" link="lecture_assets/qiagen_workflow_withQC.png" %}
 
 After sequencing is completed we will want to evaluate a variety of quality metrics, both before and after we map our sequence reads to a reference genome. For some of these metrics, there will not be a universal threshold that applies to all applications, and what is expected might vary depending on the application or sample type. Most of the examples we'll present are for Illumina data, but some of these checks are relevant for data from other platforms, too.
 
@@ -263,7 +263,7 @@ The flowcell-level metrics provided by the sequencing facility should meet Illum
 
 Once you know the overall sequence run performed well, you will want to examine some sample-level metrics that assess the quality of your reads per sample. FastQC and the FASTX toolkit are both tools that can be used to evaluate the quality of your reads.
 
-<img class="center" style="display: block; margin-left: auto; margin-right: auto;" src="lecture_assets/fastqc_quality.png">
+{% include image-modal.html classes="center" styles="display: block; margin-left: auto; margin-right: auto;" link="lecture_assets/fastqc_quality.png" %}
 <figcaption class="has-text-centered is-size-7 is-italic">FastQC Sequence Quality module example images.</figcaption><br>
 
 FastQC can show read lengths, positional information about read quality (figure pictured above), read lengths, GC content, and whether adapter sequences are present or were trimmed. Recall from the beginning of this lecture that adapters are DNA sequences that are added to our genomic DNA fragments and are used by the sequencer as priming sites for generating sequence reads.  If sequencing reads are longer than the DNA fragments, the sequencer will continue sequencing into the adapters. Adapter sequences should be trimmed to avoid errors during mapping and variant calling. Often sequencing facilities will perform some adapter trimming for you, but these tools can help identify whether more adapter trimming is still necessary or not.
@@ -288,7 +288,7 @@ After fastq files are QC’ed and reads are aligned to the reference genome, add
 
 Duplicate reads are reads represented more than once in an NGS sample and are generally caused by PCR amplification prior to sequencing. Duplicate rates are usually evaluated with Samtools and Picard, and can be approximated before alignment using FastQC. For most DNA sequencing applications, extra copies of the same molecule should be removed from the data leaving only unique sequences. This is because duplicates can lead to false-positives during many analyses downstream, as pictured below.
 
-<img class="center" style="display: block; margin-left: auto; margin-right: auto;" src="lecture_assets/duplication_variantCalling.png">
+{% include image-modal.html classes="center" styles="display: block; margin-left: auto; margin-right: auto;" link="lecture_assets/duplication_variantCalling.png" %}
 <figcaption class="has-text-centered is-size-7 is-italic">Duplicate reads can lead to propagation of sequencing errors and subsequent false-positive variant calls, or incorrect inflation of the variant allele frequency of true variants.</figcaption><br>
 
 Note that high duplication rates will lead to lower effective coverage. Duplication rates are expected to vary depending on your sequencing strategy; by virtue of how much DNA is being sequenced, targeted and exome sequencing are expected to have higher rates of duplication than WGS.
@@ -301,7 +301,7 @@ Insert size vs read length is a common point of confusion. Read length is the le
 
 In a good case, the insert size should be slightly larger than the sum of the two paired reads. In a worst case scenario, both reads in a pair will sequence the entire DNA insert as well as the adapters.
 
-<img class="center" style="display: block; margin-left: auto; margin-right: auto;" src="lecture_assets/insert_sizes.png">
+{% include image-modal.html classes="center" styles="display: block; margin-left: auto; margin-right: auto;" link="lecture_assets/insert_sizes.png" %}
 <figcaption class="has-text-centered is-size-7 is-italic"><b>Left:</b> a histogram of insert sizes from an NGS sequencing experiment. <b>Right:</b> diagram of insert size and read length. Arrows indicate where these theoretical inserts on the right would fall in the histogram.</figcaption><br>
 
 If both reads in a pair sequence most or the entire insert, then these two reads are effectively duplicates on opposite strands of the genome, and therefore your effective coverage will be much lower than you expect. Furthermore your reads are likely to contain some adapter content, which will mean shorter reads after adapter trimming.
@@ -312,7 +312,7 @@ If both reads in a pair sequence most or the entire insert, then these two reads
 
 After read mapping and deduplication, coverage depth is calculated at each location being targeted by sequencing. Coverage is generally reported as the mean depth across all target regions, or as the depth on a per-contig basis (i.e. coverage depth per chromosome). Some regions might have deeper or shallower coverage than the mean, owing to GC content biases during PCR, ease of read mapping to the region, etc.
 
-<img class="center" style="display: block; margin-left: auto; margin-right: auto;" src="lecture_assets/depth_of_coverage.png">
+{% include image-modal.html classes="center" styles="display: block; margin-left: auto; margin-right: auto;" link="lecture_assets/depth_of_coverage.png" %}
 <figcaption class="has-text-centered is-size-7 is-italic"> <a href="https://sequencing.roche.com/en-us/science-education/education/articles/metrics-for-target-enriched-ngs.html">From Roche</a> </figcaption><br>
 
 If your coverage depth is low, it’s more difficult to call variants with confidence, in particular for somatic variants present at a low level in the sample.
@@ -331,7 +331,7 @@ Inter-species contamination is most common in WGS, especially with oral/saliva s
 
 Sex concordance (i.e. how observed sample sex relates to expected sample sex) is important because it can be a marker for sample swaps or data entry errors that can impact your analyses. If you think that a subject is female and your sequencing data indicates they are male, you may want to review your metadata and perhaps remove this sample.
 
-<img class="center" style="display: block; margin-left: auto; margin-right: auto;" src="lecture_assets/somalier.png">
+{% include image-modal.html classes="center" styles="display: block; margin-left: auto; margin-right: auto;" link="lecture_assets/somalier.png" %}
 <figcaption class="has-text-centered is-size-7 is-italic">Sex concordance performed with Somalier. <b>Left:</b> female samples with two X chromosomes are expected to have many heterozygous X chromosome SNPs, whereas male samples with one X chromosome should have all homozygous SNPs. <b>Right:</b> Combining information from the left figure with mean sequencing depth on the Y chromosome allows for clear separation of male and female samples. Two female samples in the left figure have no heterozygous X chromosome SNPs but also no chromosome Y coverage; these are examples of X chromosome loss.</figcaption><br>
 
 You may also want to examine the relatedness of your samples. You may find, for instance, that two paired samples from the same individual (e.g. germline and tumor tissue) are actually not related, or that samples from different individuals are highly related unexpectedly. These can be additional indicators of sample swaps that might be missed from sex concordance alone.

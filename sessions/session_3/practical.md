@@ -33,8 +33,8 @@ Because our tasks for today will require nearly 20 mins computation running time
 {% include code-block-copy.html %}
 ```
 cd /data/$USER/
-mkdir practical_session
-cd practical_session
+mkdir practical_session_3
+cd practical_session_3
 ```
 
 **2\.** Copy over the script that will run today’s analyses, like so:
@@ -57,11 +57,17 @@ This will give a report of jobs you have queued or running and their status. Alt
 
 You should also see a file slurm-########.out in your directory once your job begins running (check with ls). This is an output file containing the text that would normally be written to the command line if you were to run these programs interactively (i.e. not via Biowulf job submission). It is a log for your script, and if your output is not what you expected or a job fails you would want to check this file to get details for troubleshooting.
 
-**5\.** Let’s now examine the script using less or vi:
-
-<code>less practical_3_script.sh</code>{% include code-snippet-copy.html %}
+**5\.** Let's now examine the script. To do this we will use the program <code>vi</code>, which as we mentioned in lecture 1 is a text editor for the command line:
 
 <code>vi practical_3_script.sh</code>{% include code-snippet-copy.html %}
+
+*Notes for using vi:* ***it's quite easy to get stuck in an editing function in vi by accident.*** *If this is happening, you will see some text in the lower left of the window, such as <code>--INSERT--</code>. Once the script has already been submitted changes you make to this document won't affect anything, so don't panic. If this happens, hit the 'ESC' key to exit the editing mode. Some helpful shortcuts in vi:*
+- *<code>i</code>: 'insert', i.e. enable direct editing of the file*
+- *escape or 'ESC' key: exit editing mode*
+- *<code>:w</code>: 'write', i.e. save changes to file*
+- *<code>:q</code>: 'quit' vi*
+- *<code>:wq</code>: write/save and quit*
+- *<code>:q!</code>: quit without saving*
 
 All lines beginning with <code>##</code> are comments that we’ve added to improve readability. These lines are not functional code and are not executed by Biowulf.
 
@@ -79,7 +85,7 @@ We’ve also set a couple of other variables: OUTDIR (where we’ll store the re
 
 The next section of the script includes a series of <code>module load</code> commands:
 
-{% include image-modal.html link="practical_assets/3_load_modules.jpeg" %}
+<img src="practical_assets/3_load_modules.jpeg" class="center" style="display:block; margin-left: auto; margin-right:auto; max-width:66%">
 
 All of these programs are needed to run the following analyses and are not loaded by Biowulf unless we request them. We did not specify versions for these tools, so Biowulf will simply load the default versions.
 
@@ -200,7 +206,9 @@ Our FFPE samples are absent from this graph because they have no adapter content
 
 **15\.** If you check the folder trimgalore, you will see the fastqc reports trimmed-LC_LC_IGC-11-1100_A_val_1_fastqc.html and trimmed-LC_LC_IGC-11-1100_A_val_2_fastqc.html. If you check these new fastqc reports on your local computer (<a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_3/trimgalore_out.tar.gz" target="_blank">download the reports here</a>) and scroll to the adapter content graphic, you’ll see our samples no longer have adapter sequences.
 
-{% include image-modal.html link="practical_assets/13_fastqc_adapter_content_2.jpeg" %}
+{% include image-modal.html link="practical_assets/13_fastqc_adapter_content_2.jpeg" classes="center" styles="display:block; margin-left: auto; margin-right:auto; max-width:75%" %}
+
+*Note: you could also get this information from MultiQC, but lack of adapter content is more visually obvious in the original FastQC report.*
 
 ---
 
@@ -302,7 +310,7 @@ Picard is a java coding language application saved as a java .jar file, which is
 
 One difference that’s very obvious is that the FFPE samples all have relatively small insert sizes, peaking at around 101bp. This is smaller than our average read length of 113bp, and means that most paired reads in this sample totally overlap, like so:
 
-{% include image-modal.html link="practical_assets/seqReads_overlap.png" %}
+<img src="practical_assets/seqReads_overlap.png" class="center" style="display:block;margin-left:auto; margin-right:auto; max-width:66%">
 
 As a result the effective sequencing depth for this FFPE tumor is therefore roughly half of the estimated overall depth as both reads in most pairs contain the same information.
 
@@ -394,7 +402,7 @@ Here we can see that our FFPE tumor has very few heterozygous SNPs on the X chro
 
 Indeed, examine the image below captured from IGV (Integrated Genomics Viewer); visualizing the alignment for this sample shows consistent, exome-specific coverage on the Y chromosome in the FFPE tumor sample, but no coverage in the frozen sample (the histograms in the middle of the image). This indicates that false-positive mapping is an unlikely explanation for the observed Y chromosome coverage.
 
-{% include image-modal.html link="practical_assets/29_IGV_ffpe_fresh_frozen.jpeg" %}
+{% include image-modal.html link="practical_assets/29_IGV_FFPE_Fresh_Frozen.png" %}
 
 *(NOTE: Somalier will also assess X and Y coverage, but it calculates this coverage using the provided SNPs; unless all of these SNPs are in the exome the coverage calculation will be inaccurate for WES).*
 

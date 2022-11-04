@@ -1,6 +1,6 @@
 <div x-data="{ open: false }" markdown="0">
-    <a x-on:click="open = true" title="View large image">
-        <img class="{{ include.classes }}" src="{{ include.link }}" alt="{{ include.alt }}" style="{{ include.styles }}">
+    <a x-on:click="open = true" title="View large image" class="{{ include.classes }}" style="{{ include.styles }}">
+        <img  src="{{ include.link }}" alt="{{ include.alt }}">
     </a>
     <div class="modal" x-bind:class="open ? 'is-active' : ''" x-cloak>
         <div class="modal-background" x-on:click="open = false"></div>

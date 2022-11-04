@@ -25,7 +25,7 @@
 title: Emerging Approaches for Tumor Analyses in Epidemiological Studies
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  A course in bioinformatics presented by the Sherlock Lung team at NCI-ITEB.
+  A DCEG course in tumor bioinformatics analysis for epidemiology
 #baseurl: "/test-url" # the subpath of your site, e.g. /blog
 baseurl: "/tumor_epidemiology_approaches"
 #url: "" # the base hostname & protocol for your site, e.g. http://example.com
