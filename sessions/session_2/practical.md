@@ -345,7 +345,7 @@ NF1: MUT != MISSENSE
 | refseq          | NM_000546 |
 
 
-47\. Be sure to save the file after editing! Alternatively, you can <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_2/TCGA_Pancancer_TP53_Mutations_proteinpaint_FINAL.tsv" target="_blank">download the edited mutation table here</a> (right click and "Save As").
+47\. Be sure to save the file after editing! Alternatively, you can <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_2/TCGA_Pancancer_TP53_Mutations_proteinpaint_FINAL.tsv" target="_blank">download the edited mutation table here</a> (right click and "Download Linked File" or "Save As").
 
 ---
 
