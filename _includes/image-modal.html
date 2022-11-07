@@ -1,14 +1,20 @@
 <div x-data="{ open: false }" markdown="0">
-    <a x-on:click="open = true" title="View large image" class="{{ include.classes }}" style="{{ include.styles }}">
-        <img  src="{{ include.link }}" alt="{{ include.alt }}">
+    <a x-on:click="open = true" title="View large image"
+    class="{% if include.classes %}{{ include.classes }}{% else %}center{% endif %}"
+    style="{% if include.styles %}{{ include.styles }}{% else %}display:block;margin-left:auto;margin-right:auto;{% if include.max-width %}{{include.max-width}}{% else %}}max-width:90%;{% endif %}{% endif %}">
+        <img  src="{{ include.link }}" alt="{{ include.alt }}"
+        class="{% if include.classes %}{{ include.classes }}{% else %}center{% endif %}"
+        style="{% if include.styles %}{{ include.styles }}{% else %}display:block;margin-left:auto;margin-right:auto;{% if include.max-width %}{{include.max-width}}{% else %}}max-width:90%;{% endif %}{% endif %}">
     </a>
     <div class="modal" x-bind:class="open ? 'is-active' : ''" x-cloak>
         <div class="modal-background" x-on:click="open = false"></div>
         <div class="modal-content">
             {% if include.large_link %}
-                <img src="{{ include.large_link }}" alt="{{ include.alt }}">
+                <img src="{{ include.large_link }}" alt="{{ include.alt }}"
+                class="center" style="display:block;margin-left:auto;margin-right:auto;max-width:100%;">
             {% else %}
-                <img src="{{ include.link }}" alt="{{ include.alt }}">
+                <img src="{{ include.link }}" alt="{{ include.alt }}"
+                class="center" style="display:block;margin-left:auto;margin-right:auto;max-width:100%;">
             {% endif %}
         </div>
         <button class="modal-close is-large" aria-label="close" x-on:click="open = false"></button>
