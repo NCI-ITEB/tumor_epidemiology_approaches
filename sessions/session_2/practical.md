@@ -199,7 +199,7 @@ You will see a list of all of the datasets available in cBioPortal.  At the top 
 
 The output plot should look like the following (in this example BRAF was used, but you can choose a different gene from the original query if you’d like):
 
-{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto;" link="practical_assets/cbio_CN_mRNA_plot.png" %}
+{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto;" link="practical_assets/cbio_CN_mRNA_plot2.png" %}
 
 **27\.** Now if you go to the **Pathways** tab, you will see that different pathways are affected when these mutations in the queried genes are present. In this case the RTK-RAS pathway is the most affected pathway when considering ***BRAF, NRAS***, or ***NF1*** mutations.
 
