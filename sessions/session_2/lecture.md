@@ -7,6 +7,10 @@ menubar_toc: true
 <script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
 <script>addBackToTop()</script>
 
+Download the original slides for this lecture:
+- <a target="_blank" href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/lecture_materials/lecture_2/Session%202_%20Public%20Databases%20(presentation).pdf">Lecture slides</a>
+- <a target="_blank" href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/lecture_materials/lecture_2/Session%202_%20Public%20Databases%20(Extra%20slides).pdf">Lecture slides+extra materials</a>
+
 ## Major Cancer Genomic Studies and Data Portals
 
 - <a target="_blank" href="https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga">TCGA</a>: Hallmark cancer genomics program, containing 33 different tumor types from more than 11,000 patients; analytical results can be accessible from many data portals.
