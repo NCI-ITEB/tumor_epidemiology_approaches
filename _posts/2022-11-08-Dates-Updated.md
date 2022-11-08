@@ -19,7 +19,7 @@ The updated schedule, including invited speakers, is outlined below with an aste
 ### New Schedule
 
 #### Module 1
-- ~~Nov. 2, 2022: Introduction to Computing Clusters and Bioinformatics~~
+- ~~Nov. 2, 2022: Introduction to Computing Clusters and Bioinformatics~~ ***✓***
 - Nov. 9, 2022: Public databases
 - Nov. 16, 2022: DNA sequencing strategies and quality control
 - Nov. 23, 2022: “Ask a Bioinformatician” I
