@@ -36,8 +36,8 @@ The updated schedule, including invited speakers, is outlined below with an aste
 ---
 #### Module 3
 - Mar. 8, 2023: Somatic copy number alterations (SCNAs)
-- Mar. 13*, 2023: Identifying cancer drivers
-- Mar. 20*, 2023: Tumor evolution
+- Mar. 13<b>**</b>, 2023: Identifying cancer drivers
+- Mar. 20<b>**</b>, 2023: Tumor evolution
   - *Mar. 23, 2023- Speaker: Núria López-Bigas - Somatic mutations in tumors and normal tissues*
 - Mar. 29, 2023: “Ask a Bioinformatician” III
   - *Apr. 20, 2023- Speaker: David Wedge - Tumour evolution in diverse human populations*
@@ -47,11 +47,11 @@ The updated schedule, including invited speakers, is outlined below with an aste
 - Apr. 26, 2023: Transcriptome-based study designs
 - May 3, 2023: RNA-seq data mining
   - *May 11, 2023- Speaker: Marcin Imieliński - Origin and identity in lung adenocarcinoma evolution*
-- May 15*, 2023: Data visualization approaches
+- May 15<b>**</b>, 2023: Data visualization approaches
 - May 17, 2023: “Ask a Bioinformatician” IV
   - *May 25, 2023- Speaker: Charles Swanton - Title TBD*
   - *June 8, 2023- Speaker: David Adams - Cross-species oncogenomics of melanoma and other malignancies to define disease drivers*
 
-*Changed date
+**Date changed
 
 We apologize for any inconvenience and hope to see you all there!
