@@ -1,11 +1,3 @@
-<!--There are several includes arguments:
-By default, images will be centered and have max-width=90%
-- To override all default styles, use the 'styles' setting
-- To change the image width only, use the 'max-width' setting
-- To add extra styles in addition to the default, use 'extra-styles'
-- To add style to the image, not the image container, use 'image-style'
--->
-
 <div x-data="{ open: false }" markdown="0">
     <a x-on:click="open = true" title="View large image"
     class="{% if include.classes %}{{ include.classes }}{% else %}center{% endif %}"
