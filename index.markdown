@@ -7,6 +7,7 @@ show_sidebar: true
 hero_link_text: Register for 2022-2023
 hero_size: is-medium
 title: Emerging Approaches for Tumor Analyses in Epidemiological Studies
+toc: true
 ---
 
 Welcome to the GitHub pages for the *Emerging Approaches for Tumor Analyses in Epidemiological Studies* course. This course is provided by NCI-ITEB, and taught by bioinformaticians from the Division of Cancer Epidemiology and Genetics (DCEG), NCI; the University of Chicago; and the University of California San Diego, many of whom are involved in the Sherlock-*Lung* study of lung cancer in never smokers.
@@ -16,7 +17,45 @@ Registration for the 2022-2023 workshop is currently closed.
 To register, click the registration button above or visit the NCI events page at [https://events.cancer.gov/dceg/genomics-workshop](https://events.cancer.gov/dceg/genomics-workshop).
 -->
 
-## Course Description
+### 2022-2023 Schedule
+
+#### Module 1
+- *Nov. 2, 2022: Introduction to Computing Clusters and Bioinformatics* <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
+- Nov. 9, 2022: Public databases
+- Nov. 16, 2022: DNA sequencing strategies and quality control
+- Nov. 23, 2022: “Ask a Bioinformatician” I
+
+---
+#### Module 2
+- Jan. 11, 2023: Mutation calling and analysis
+- Jan. 18, 2023: Mutational signatures
+  - *Jan. 19, 2023 - Speaker: Ludmil Alexandrov - Anthology of unusual patterns of somatic mutations in cancer genomes*
+- Jan. 25, 2023: Structural variant (SV) analysis
+- Feb. 1, 2023: “Ask a Bioinformatician” II
+  - *Feb. 16, 2023 - Speaker: Peter Park - Structural alterations in cancer genomes*
+
+---
+#### Module 3
+- Mar. 8, 2023: Somatic copy number alterations (SCNAs)
+- Mar. 13*, 2023: Identifying cancer drivers
+- Mar. 20*, 2023: Tumor evolution
+  - *Mar. 23, 2023- Speaker: Núria López-Bigas - Somatic mutations in tumors and normal tissues*
+- Mar. 29, 2023: “Ask a Bioinformatician” III
+  - *Apr. 20, 2023- Speaker: David Wedge - Tumour evolution in diverse human populations*
+
+---
+#### Module 4
+- Apr. 26, 2023: Transcriptome-based study designs
+- May 3, 2023: RNA-seq data mining
+  - *May 11, 2023- Speaker: Marcin Imieliński - Origin and identity in lung adenocarcinoma evolution*
+- May 15*, 2023: Data visualization approaches
+- May 17, 2023: “Ask a Bioinformatician” IV
+  - *May 25, 2023- Speaker: Charles Swanton - Title TBD*
+  - *June 8, 2023- Speaker: David Adams - Cross-species oncogenomics of melanoma and other malignancies to define disease drivers*
+
+*Changed date
+
+### Course Description
 
 This course aims to provide basic information on the types of analyses that can be conducted using tumor specimens to study the etiology and progression of cancer within epidemiological studies.
 
