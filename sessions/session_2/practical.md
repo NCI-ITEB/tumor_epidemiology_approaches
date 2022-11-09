@@ -277,16 +277,6 @@ NF1: MUT != MISSENSE
 
 {% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto;" link="practical_assets/CNCData_TERT.png" %}
 
-<!--
-**Method Two: Check Mutations using the PeCan**
-
-- Go to the St. Jude Cloud website, PeCan: <a href="https://pecan.stjude.cloud/" target="_blank">https://pecan.stjude.cloud/</a>. This contains information about several pediatric cancer studies and samples.
-- This will take you to the home page. On the left side of the page is a pie chart with a sample breakdown for all samples and cancer types available in PeCan.
-- From this page, **click on any gene on the right side** of the page to go to the hotspot information specific to that gene. In this example, we will use **TP53** (<a href="https://pecan.stjude.cloud/proteinpaint/TP53" target="_blank">https://pecan.stjude.cloud/proteinpaint/TP53</a>). When the page loads, you will see the TP53 gene with all of the amino acid residue variants across the gene. **Click on any of the variants for additional information.** You can also click on any other variants not already expanded at the bottom of the plot to expand them.
-
-{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto;" link="practical_assets/PeCan_tp53.png" %}
--->
-
 ---
 
 ## Visualizing mutation data
