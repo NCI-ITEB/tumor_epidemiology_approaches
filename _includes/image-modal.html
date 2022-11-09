@@ -1,10 +1,18 @@
+<!--There are several includes arguments:
+By default, images will be centered and have max-width=90%
+To override default style, set the 'styles' setting
+To change the image width only, set the 'max-width'
+-->
+
 <div x-data="{ open: false }" markdown="0">
     <a x-on:click="open = true" title="View large image"
     class="{% if include.classes %}{{ include.classes }}{% else %}center{% endif %}"
-    style="{% if include.styles %}{{ include.styles }}{% else %}display:block;margin-left:auto;margin-right:auto;{% if include.max-width %}{{include.max-width}}{% else %}}max-width:90%;{% endif %}{% endif %}">
+    style="{% if include.styles %}{{ include.styles }}
+    {% else %}display:block;margin-left:auto;margin-right:auto;
+    {% if include.max-width %}max-width:{{include.max-width}};{% else %}}max-width:90%;{% endif %}{% endif %}
+    {% if include.extra-styles %}{{ include.extra-styles }};{% endif %}">
         <img  src="{{ include.link }}" alt="{{ include.alt }}"
-        class="{% if include.classes %}{{ include.classes }}{% else %}center{% endif %}"
-        style="{% if include.styles %}{{ include.styles }}{% else %}display:block;margin-left:auto;margin-right:auto;{% if include.max-width %}{{include.max-width}}{% else %}}max-width:90%;{% endif %}{% endif %}">
+        style="{% if include.image-style %}{{include.image-style}}{% endif %}" >
     </a>
     <div class="modal" x-bind:class="open ? 'is-active' : ''" x-cloak>
         <div class="modal-background" x-on:click="open = false"></div>
