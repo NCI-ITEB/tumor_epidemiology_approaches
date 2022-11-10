@@ -116,7 +116,9 @@ The MultiQC code is the last step of our script and is quite simple:
 
 **8\.** To open our MultiQC report you would need to mount your /data/ drive to your local computer (<a href="https://hpc.nih.gov/docs/hpcdrive.html">refresher on how to do this from Biowulf</a>) and then open practical3_expected_results/Practical_3_multiqc_report.html.
 
-To save time we have uploaded the MultiQc report to GitHub. <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_3/Practical_3_multiqc_report.html.gz" target="_blank">Click here to download it</a>. Opening this file should open a window containing the MultiQC report in your internet browser:
+To save time we have uploaded the MultiQc report to GitHub. <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_3/Practical_3_multiqc_report.html" target="_blank">Click here to download it</a> (right click and save as).
+
+Opening this file should open a window containing the MultiQC report in your internet browser:
 
 {% include image-modal.html link="practical_assets/5_mutiqc_genstat.png" %}
 
