@@ -85,7 +85,7 @@ We’ve also set a couple of other variables: OUTDIR (where we’ll store the re
 
 The next section of the script includes a series of <code>module load</code> commands:
 
-<img src="practical_assets/3_load_modules.jpeg" class="center" style="display:block; margin-left: auto; margin-right:auto; max-width:66%">
+{% include image-modal.html link="practical_assets/3_load_modules.jpeg" max-width="50%" %}
 
 All of these programs are needed to run the following analyses and are not loaded by Biowulf unless we request them. We did not specify versions for these tools, so Biowulf will simply load the default versions.
 
@@ -206,7 +206,7 @@ Our FFPE samples are absent from this graph because they have no adapter content
 
 **15\.** If you check the folder trimgalore, you will see the fastqc reports trimmed-LC_LC_IGC-11-1100_A_val_1_fastqc.html and trimmed-LC_LC_IGC-11-1100_A_val_2_fastqc.html. If you check these new fastqc reports on your local computer (<a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_3/trimgalore_out.tar.gz" target="_blank">download the reports here</a>) and scroll to the adapter content graphic, you’ll see our samples no longer have adapter sequences.
 
-{% include image-modal.html link="practical_assets/13_fastqc_adapter_content_2.jpeg" classes="center" styles="display:block; margin-left: auto; margin-right:auto; max-width:75%" %}
+{% include image-modal.html link="practical_assets/13_fastqc_adapter_content_2.jpeg" %}
 
 *Note: you could also get this information from MultiQC, but lack of adapter content is more visually obvious in the original FastQC report.*
 
@@ -240,8 +240,11 @@ If you will recall, we actually ran this tool once already in practical 1. This 
 
 We can see the data for each sample by hovering over the points in the graphic. We’ll choose to focus on the FFPE sample for this module as it has some features worth noting. You can also examine the text version generated directly from samtools by opening the files ‘FFPE_Tumor.flagstat.txt’ and ‘Fresh_Frozen.flagstat.txt’.
 
-{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:66%" link="practical_assets/16_fresh_frozen_flagstat.jpeg" %}<br>
-{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:66%" link="practical_assets/17_FFPE_tumor_flagstat.jpeg" %}<br>
+<div style="display: flex;
+  justify-content: center;">
+    {% include image-modal.html max-width="97%" link="practical_assets/16_fresh_frozen_flagstat.jpeg" %}
+    {% include image-modal.html max-width="97%" link="practical_assets/17_FFPE_tumor_flagstat.jpeg" %}
+</div>
 
 <!--A few of these stats are particularly worth highlighting. Examine the total sequences and the total mapped sequences graphs by hovering over the blue dots. In the case of our FFPE tumor sample for example, 53.14M reads were in our sample and 52.96M mapped.
 
@@ -264,6 +267,7 @@ Of those 0.1M, ~30,000 pairs of reads had quality mapping to different chromosom
 **18\.** The first three stats give important information: how many reads were in each sample, how many reads passed QC *(this is determined by the sequencer/sequencing facility)*, and how many reads mapped. In our case no reads failed QC, and almost every read in both samples mapped. Hover over the points to get specific numbers at the top of the table
 
 {% include image-modal.html link="practical_assets/samtools_reads_passQC_map.png" %}
+<br>
 
 **19\.** Further down this table we have some statistics on how paired reads mapped:
 
@@ -310,7 +314,7 @@ Picard is a java coding language application saved as a java .jar file, which is
 
 One difference that’s very obvious is that the FFPE samples all have relatively small insert sizes, peaking at around 101bp. This is smaller than our average read length of 113bp, and means that most paired reads in this sample totally overlap, like so:
 
-<img src="practical_assets/seqReads_overlap.png" class="center" style="display:block;margin-left:auto; margin-right:auto; max-width:66%">
+{% include image-modal.html link="practical_assets/seqReads_overlap.png" max-width="66%" %}
 
 As a result the effective sequencing depth for this FFPE tumor is therefore roughly half of the estimated overall depth as both reads in most pairs contain the same information.
 
@@ -396,7 +400,7 @@ somalier relate
 
 **30\.** In the window that appears, select ‘HomAltVarX’ and ‘HetVarX like so.’
 
-{% include image-modal.html classes="center" styles="display: block;margin-left: auto; margin-right: auto; max-width:66%" link="practical_assets/28_somalier_plot.png" %}
+{% include image-modal.html max-width="66%" link="practical_assets/28_somalier_plot.png" %}
 
 Here we can see that our FFPE tumor has very few heterozygous SNPs on the X chromosome, which is unusual for a female with two X chromosomes. Compare this to the fresh frozen tumor where the ratio of heterozygous and homozygous SNPs is roughly 50/50. In combination with relatively high chromosome Y coverage in the FFPE tumor, this is strong evidence for a contamination issue.
 

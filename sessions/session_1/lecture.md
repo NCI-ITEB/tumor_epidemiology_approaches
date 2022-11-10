@@ -167,12 +167,12 @@ Connecting via SSH will vary depending on whether you’re using a MacOS or Wind
   align-items: center;
   flex-direction: row;">
   <figure>
-    {% include image-modal.html link="lecture_assets/putty.png" %}
-    <figurecaption>PuTTy configuration menu</figurecaption>
+    {% include image-modal.html max-width="95%" link="lecture_assets/putty.png" %}
+    <figurecaption class="is-italic">PuTTy configuration menu</figurecaption>
   </figure>
   <figure>
-    {% include image-modal.html link="lecture_assets/putty_login.png" %}
-    <figurecaption>Logging into Biowulf using PuTTY</figurecaption>
+    {% include image-modal.html max-width="95%" link="lecture_assets/putty_login.png" %}
+    <figurecaption class="is-italic">Logging into Biowulf using PuTTY</figurecaption>
   </figure>
 </div>
 
@@ -195,14 +195,14 @@ GUI-based transfer applications can be a convenient way to transfer data. [WinSC
 <div style="display: flex;
   align-items: center;
   flex-direction: row;">
-  <figure>
-    {% include image-modal.html link="lecture_assets/winscp_menu.png" %}
-    <figurecaption>WinSCP login window</figurecaption>
-  </figure>
-  <figure>
-    {% include image-modal.html link="lecture_assets/winscp_transfer.png" %}
-    <figurecaption>File transfer with WinSCP</figurecaption>
-  </figure>
+  <div>
+    {% include image-modal.html max-width="95%" link="lecture_assets/winscp_menu.png" %}
+    <figurecaption class="is-italic" style="text-align:center">WinSCP login window</figurecaption>
+  </div>
+  <div>
+    {% include image-modal.html max-width="95%" link="lecture_assets/winscp_transfer.png" %}
+    <figurecaption class="is-italic" style="text-align:center">File transfer with WinSCP</figurecaption>
+  </div>
 </div>
 
 <figure>

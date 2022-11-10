@@ -3,7 +3,7 @@
     class="{% if include.classes %}{{ include.classes }}{% else %}center{% endif %}"
     style="{% if include.styles %}{{ include.styles }}
     {% else %}display:block;margin-left:auto;margin-right:auto;
-    {% if include.max-width %}max-width:{{include.max-width}};{% else %}}max-width:90%;{% endif %}{% endif %}
+    {% if include.max-width %} max-width:{{include.max-width}} {% else %} max-width:90% {% endif %};{% endif %}
     {% if include.extra-styles %}{{ include.extra-styles }};{% endif %}">
         <img  src="{{ include.link }}" alt="{{ include.alt }}"
         style="{% if include.image-style %}{{include.image-style}}{% endif %}" >
