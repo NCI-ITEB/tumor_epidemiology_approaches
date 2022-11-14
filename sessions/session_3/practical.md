@@ -142,9 +142,17 @@ There is lots of information already contained within this general statistics se
 </ul>
 </figcaption><br>
 
+When using FastQC, or almost any popular bioinformatics software for that matter, you can easily get a summary of how to use the software with <code>--help</code>:
+
+{% include code-block-copy.html %}
+```
+module load fastqc ##load fastqc on Biowulf first
+fastqc --help
+```
+
 Fastqc will generate a graphical quality report for each input sample (which can be in fastq or bam/sam/cram format), which it will title <code>[sample name]_fastqc.html</code>.
 
-MultiQC has already incorporated the these reports for us, so let's examine them. Click on the ‘FastQC’ tab in the table of contents on the left to jump there.
+MultiQC has already incorporated these reports for us, so let's examine them. Click on the ‘FastQC’ tab in the table of contents on the left to jump there.
 
 ---
 
@@ -178,21 +186,24 @@ Hover over each of these bars and you’ll see that the FFPE tumors have more re
 
 {% include image-modal.html link="practical_assets/10_fastqc_meanqual.png" %}
 
-By hovering over these lines we can see that all of our samples are at or above quality Phred score 30, and our frozen tissue sample is even above 35.
+By hovering over these lines we can see that all of our samples are at or above median quality score 30 at every base position, and our frozen tissue samples are above 35. Quality score 30 is generally the minimum target for good quality sequencing, so all of our samples have acceptable sequencing quality (though you will get more false-positive variants in the FFPE sample due to its lower-end quality).
+*Reminder: quality scores represent the 10<sup> -Q/10</sup> probability that a base was called incorrectly (e.g., Q30=10<sup> -30/10</sup>=10<sup> -3</sup>=1/1,000 chance of an error).*
 
-Quality is expected to gradually decrease towards the end of reads due to limitations of sequencing by synthesis. A very sudden drop in sequencing quality, however, could be indicative of issues with the sequencing run.
+Average quality is expected to gradually decrease towards the end of reads due to limitations of sequencing by synthesis. A very sudden drop in sequencing quality, however, could be indicative of issues with the sequencing run.
 
 **13\.** The last plot we’d like to highlight is the ‘Adapter Content’ plot. This will show you what percentage of reads contain adapter sequences, per base position. Sequencing facilities will often do one pass of adapter trimming themselves before returning your data, but you may still have adapter content remaining. Here we can see that <5% of our germline frozen tissue reads contain adapter sequences.
 
 {% include image-modal.html link="practical_assets/11_fastqc_adapter_content.png" %}
 
-Our FFPE samples are absent from this graph because they have no adapter content. This is because they’ve already been trimmed. These adapter sequences can only negatively impact our analysis so they should be removed. We will remove these via read trimming.
+These adapter sequences can only negatively impact our analysis so they should be removed. We will remove these via read trimming.
+
+Our two tumor samples are absent from this graph because they were already trimmed and no longer have adapter content. Generally speaking, untrimmed reads from FFPE samples will have more adapter content than frozen tissue due to smaller insert sizes (more on this later).
 
 ---
 
 ### Read Trimming
 
-**14\.** Looking back at our submitted script, you will see just below our fastqc command we’ve submitted a job to run Trimgalore. Trimgalore will recognize and remove adapter sequences (either from a common database by default, or specified by the user) and trim low quality 3’ bases. Here is the command we ran in our script:
+**14\.** Looking back at our submitted script, you will see just below our fastqc command we’ve submitted a job to run Trimgalore. Trimgalore will recognize and remove adapter sequences (either from a standard database by default, or as specified by the user) and also trim low quality bases from the ends of reads. Here is the command we ran in our script:
 
 {% include image-modal.html link="practical_assets/12_trimgalore_command.jpeg" %}
 <figcaption class="is-italic is-size-7">

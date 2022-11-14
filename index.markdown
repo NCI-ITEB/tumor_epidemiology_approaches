@@ -21,7 +21,7 @@ To register, click the registration button above or visit the NCI events page at
 
 #### Module 1
 - *Nov. 2, 2022: Introduction to Computing Clusters and Bioinformatics* <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
-- *Nov. 9, 2022: Public databases*<span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
+- *Nov. 9, 2022: Public databases* <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
 - Nov. 16, 2022: DNA sequencing strategies and quality control
 - Nov. 23, 2022: “Ask a Bioinformatician” I
 
