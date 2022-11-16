@@ -3,7 +3,7 @@ layout: page
 permalink: sessions/session_3/lecture
 menubar_toc: true
 ---
-<script link="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
+<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
 <script>addBackToTop()</script>
 
 ## Introduction to NGS sequencing

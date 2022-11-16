@@ -4,6 +4,9 @@ permalink: sessions/session_3/supplemental
 menubar_toc: true
 ---
 
+<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
+<script>addBackToTop()</script>
+
 ## DNA extraction QC
 
 ### DNA Quantity
