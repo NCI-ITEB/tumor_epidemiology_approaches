@@ -20,11 +20,18 @@ Request an interactive session with:
 
 ---
 
-The purpose of this practical session is for you to gain hands-on experience performing quality control (QC) on sequencing data. Today’s tasks will include generating and examining FastQC reports of fastq data, followed by adapter trimming. We will then perform some alignment-level quality control on pre-generated alignment files using a variety of tools, and collect these various QC reports into one interactive report file using MultiQC. Finally, we will highlight some QC metrics that are particularly important for targeted sequencing, whole-exome sequencing (WES), or whole-genome sequencing (WGS).
+The purpose of this practical session is for you to gain hands-on experience performing quality control (QC) on sequencing data.
+
+Today’s tasks will include generating and examining FastQC reports of fastq data, followed by adapter trimming. We will then perform some alignment-level quality control on pre-generated alignment files using a variety of tools, and collect these various QC reports into one interactive report file using MultiQC.
+
+Finally, we will highlight some QC metrics that are particularly important for targeted sequencing, whole-exome sequencing (WES), or whole-genome sequencing (WGS).
 
 ## Running the QC script
 
-We will use three WES samples sequenced with the same exome capture kit (SeqCap EZ Exome + UTR V3) for the bulk of this practical. One sample is derived from frozen tumor tissue (Fresh_Frozen.bam), another is derived from a Formalin-Fixed Paraffin-Embedded (FFPE) tumor (FFPE_Tumor.bam). We will also use a third sample derived from normal blood in the very beginning of this practical session (LC_LC_IGC-11-1100_A.bam) for a few demonstrations.
+We will use three WES samples sequenced with the same exome capture kit (SeqCap EZ Exome + UTR V3) for the bulk of this practical:
+- One sample derived from frozen tumor tissue (Fresh_Frozen.bam)
+- A second tumor derived from a Formalin-Fixed Paraffin-Embedded (FFPE) sample (FFPE_Tumor.bam)
+- A third sample derived from normal blood (LC_LC_IGC-11-1100_A.bam), which we will use for only a few demonstrations
 
 Because our tasks for today will require nearly 20 mins computation running time, we will submit our QC script to Biowulf at the very beginning of this section so that it has time to complete.
 
