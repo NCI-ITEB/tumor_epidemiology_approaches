@@ -68,7 +68,9 @@ You should also see a file slurm-########.out in your directory once your job be
 
 <code>vi practical_3_script.sh</code>{% include code-snippet-copy.html %}
 
-*Notes for using vi:* ***it's quite easy to get stuck in an editing function in vi by accident.*** *If this is happening, you will see some text in the lower left of the window, such as <code>--INSERT--</code>. Once the script has already been submitted changes you make to this document won't affect anything, so don't panic. If this happens, hit the 'ESC' key to exit the editing mode. Some helpful shortcuts in vi:*
+*Notes for using vi:* ***it's quite easy to get stuck in an editing function in vi by accident.*** *If this is happening, you will see some text in the lower left of the window, such as <code>--INSERT--</code>. Once the script has already been submitted changes you make to this document won't affect anything, so don't panic. If this happens, hit the 'ESC' key to exit the editing mode.*
+
+***Some helpful commands in vi:***
 - *<code>i</code>: 'insert', i.e. enable direct editing of the file*
 - *escape or 'ESC' key: exit editing mode*
 - *<code>:w</code>: 'write', i.e. save changes to file*
@@ -82,7 +84,7 @@ All lines beginning with <code>##</code> are comments that we’ve added to impr
 
 The very first line, <code>#!/usr/bin/env bash</code>, begins with a ‘shebang’ (<code>#!</code>) and tells Biowulf which program to use to run this script, in this case ‘bash’. This line or something similar should be the first line of every bash script you write.
 
-The first line of code sets a variable, PATH_TO_PRACTICE3, to store the location of all of our practical session 3 files. We can use this in our script to simplify our code: wherever we type <code>$PATH_TO_PRATICE3</code> it will be interpreted as "the value of PATH_TO_PRATICE3", i.e. <code>/data/classes/DCEG_Somatic_Workshop/Practical_session_3</code>.
+The first line of code sets a variable, PATH_TO_PRACTICE3, to store the location of all of our practical session 3 files. We can use this in our script to simplify our code: wherever we type <code>$PATH_TO_PRACTICE3</code> it will be interpreted as "the value of PATH_TO_PRACTICE3", i.e. <code>/data/classes/DCEG_Somatic_Workshop/Practical_session_3</code>.
 
 We’ve also set a couple of other variables: OUTDIR (where we’ll store the results) and CPUS_PER_COMMAND (how many cpus to use for each command). Whenever you have a path or a value like these that are being used more than a couple times in your script, it’s recommended to use variables. It will save you time and effort, reduce the chances of making a typo, and make it easy to reconfigure your script if something changes (e.g. the location/path of a folder).
 
