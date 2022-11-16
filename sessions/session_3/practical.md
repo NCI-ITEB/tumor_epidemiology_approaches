@@ -114,6 +114,14 @@ The MultiQC code is the last step of our script and is quite simple:
 </ul>
 </figcaption><br>
 
+When using almost any popular bioinformatics software, including MultiQC, you can easily get a summary of how to use the software with <code>--help</code>. For an example, enter the following code within an interactive session:
+
+{% include code-block-copy.html %}
+```
+module load multiqc ##load multiqc on Biowulf first
+multiqc --help
+```
+
 **8\.** To open our MultiQC report you would need to mount your /data/ drive to your local computer (<a href="https://hpc.nih.gov/docs/hpcdrive.html">refresher on how to do this from Biowulf</a>) and then open practical3_expected_results/Practical_3_multiqc_report.html.
 
 To save time we have uploaded the MultiQc report to GitHub. <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_3/Practical_3_multiqc_report.html" target="_blank">Click here to download it</a> (right click and save as).
@@ -141,14 +149,6 @@ There is lots of information already contained within this general statistics se
 <li>the backslashes, <code>\</code>, at the end of lines tells bash to ignore the newlines, allowing us to keep writing the fastqc command over several lines. You will see these backslashes in nearly every command we run.</li>
 </ul>
 </figcaption><br>
-
-When using FastQC, or almost any popular bioinformatics software for that matter, you can easily get a summary of how to use the software with <code>--help</code>:
-
-{% include code-block-copy.html %}
-```
-module load fastqc ##load fastqc on Biowulf first
-fastqc --help
-```
 
 Fastqc will generate a graphical quality report for each input sample (which can be in fastq or bam/sam/cram format), which it will title <code>[sample name]_fastqc.html</code>.
 
