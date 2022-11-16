@@ -24,7 +24,7 @@ The purpose of this practical session is for you to gain hands-on experience per
 
 ## Running the QC script
 
-We will use two WES samples sequenced with the same exome capture kit (SeqCap EZ Exome + UTR V3) for the bulk of this practical. One sample is derived from frozen tumor tissue (Fresh_Frozen.bam), another is derived from a Formalin-Fixed Paraffin-Embedded (FFPE) tumor (FFPE_Tumor.bam). We will also use a third sample derived from germline frozen tissue in the very beginning of this practical session (LC_LC_IGC-11-1100_A.bam) for a few demonstrations.
+We will use three WES samples sequenced with the same exome capture kit (SeqCap EZ Exome + UTR V3) for the bulk of this practical. One sample is derived from frozen tumor tissue (Fresh_Frozen.bam), another is derived from a Formalin-Fixed Paraffin-Embedded (FFPE) tumor (FFPE_Tumor.bam). We will also use a third sample derived from normal blood in the very beginning of this practical session (LC_LC_IGC-11-1100_A.bam) for a few demonstrations.
 
 Because our tasks for today will require nearly 20 mins computation running time, we will submit our QC script to Biowulf at the very beginning of this section so that it has time to complete.
 
