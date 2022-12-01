@@ -29,19 +29,19 @@ To register, click the registration button above or visit the NCI events page at
 #### Module 2
 - Jan. 11, 2023: Mutation calling and analysis
 - Jan. 18, 2023: Mutational signatures
-  - *Jan. 19, 2023 - Speaker: Ludmil Alexandrov - Anthology of unusual patterns of somatic mutations in cancer genomes*
+  - *Jan. 19, 2023 - Ludmil Alexandrov - Anthology of unusual patterns of somatic mutations in cancer genomes*
 - Jan. 25, 2023: Structural variant (SV) analysis
 - Feb. 1, 2023: “Ask a Bioinformatician” II
-  - *Feb. 16, 2023 - Speaker: Peter Park - Structural alterations in cancer genomes*
+  - *Feb. 16, 2023 - Peter Park - Structural alterations in cancer genomes*
 
 ---
 #### Module 3
 - Mar. 8, 2023: Somatic copy number alterations (SCNAs)
 - Mar. 13<b>*</b>, 2023: Identifying cancer drivers
 - Mar. 20<b>*</b>, 2023: Tumor evolution
-  - *Mar. 23, 2023- Speaker: Núria López-Bigas - Somatic mutations in tumors and normal tissues*
+  - *Mar. 23, 2023- Núria López-Bigas - Somatic mutations in tumors and normal tissues*
 - Mar. 29, 2023: “Ask a Bioinformatician” III
-  - *Apr. 20, 2023- Speaker: David Wedge - Tumour evolution in diverse human populations*
+  - *Apr. 20, 2023- David Wedge - Tumour evolution in diverse human populations*
 
 ---
 #### Module 4
@@ -50,8 +50,8 @@ To register, click the registration button above or visit the NCI events page at
   - *May 11, 2023- Speaker: Marcin Imieliński - Origin and identity in lung adenocarcinoma evolution*
 - May 15<b>*</b>, 2023: Data visualization approaches
 - May 17, 2023: “Ask a Bioinformatician” IV
-  - *May 25, 2023- Speaker: Charles Swanton - Title TBD*
-  - *June 8, 2023- Speaker: David Adams - Cross-species oncogenomics of melanoma and other malignancies to define disease drivers*
+  - *May 25, 2023- Charles Swanton - Title TBD*
+  - *June 8, 2023- David Adams - Cross-species oncogenomics of melanoma and other malignancies to define disease drivers*
 
 *Date changed
 
