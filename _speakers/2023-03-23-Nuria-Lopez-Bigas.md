@@ -2,7 +2,7 @@
 picture: NuriaLopezBigas_IRB_photo_zoomed.png
 name: Núria López-Bigas
 education: Ph.D.
-affiliation: Institute for Research in Biomedicine in Barcelona
+affiliation: Institute for Research in Biomedicine (IRB) Barcelona
 talk_title: Somatic mutations in tumors and normal tissues
 talk_date: March 23th, 2023
 ---
