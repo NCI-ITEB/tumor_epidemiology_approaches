@@ -9,6 +9,13 @@ menubar_toc: true
 <script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
 <script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
 
+<style>
+pre {
+  max-height: 500px;
+  overflow-y: auto;
+}
+</style>
+
 Before we begin, please login to Biowulf and request an interactive session:
 
 For a reminder on how to log-in to Biowulf, we refer you to this Biowulf HPC guide. In short:
@@ -71,6 +78,93 @@ All the fields after the bash file (.sh) are arguments, and they will be passed 
 **2\.** Now let's quit the swarm file by typing <code>:q</code> and hitting enter, and open the corresponding bash file.
 
 <code>vi Step1_preprocess_variant_discovery.sh</code>{% include code-snippet-copy.html %}
+
+```console
+#!/bin/bash
+
+#### Data preprocess for somatic short variant discovery using GATK workflow ###
+
+module load samtools
+module load bwa
+module load fastp
+module load GATK/4.3.0.0
+module load picard/2.27.3
+
+GATK_Bundle=/fdb/GATK_resource_bundle/hg38-v0
+GENOME=$GATK_Bundle/Homo_sapiens_assembly38.fasta
+
+SAMPLE=$1
+INDIR=$2
+DIR=$3
+logs=$DIR/logs
+read1=$INDIR/${SAMPLE}_R1.fastq.gz
+read2=$INDIR/${SAMPLE}_R2.fastq.gz
+id=$SAMPLE
+lb=$id
+sm=$id
+
+SECONDS=0
+
+echo -e "sample:$SAMPLE\nindir:$INDIR\noutdir:$DIR"
+
+if [ ! -d "$DIR" ]; then
+        mkdir -p $DIR
+fi
+if [ ! -d "$logs" ]; then
+        mkdir -p $logs
+fi
+### Perform adaptor trimming on fastq files ###
+fastp -i $read1 -I $read2 \
+      --stdout --thread 2 \
+      -j ${logs}/fastp-${SAMPLE}.json \
+      -h ${logs}/fastp-${SAMPLE}.html \
+      2> ${logs}/fastp-${SAMPLE}.log | \
+bwa mem -M -t 8 \
+      -R "@RG\tID:$id\tPL:ILLUMINA\tLB:$lb\tSM:$sm" \
+      $GENOME - 2> ${logs}/bwa-${SAMPLE}.log | \
+samtools sort -T /lscratch/$SLURM_JOB_ID/ -m 2G -@ 4 -O BAM \
+      -o $DIR/${SAMPLE}_sort.bam  2> ${logs}/samtools-${SAMPLE}.log
+
+###/lscratch/$SLURM_JOBID
+duration=$SECONDS
+echo "Alignment completed. $(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
+
+### Duplicate marking in coordinate-sorted raw BAM files ###
+java -Xmx2g -jar $PICARDJARPATH/picard.jar MarkDuplicates \
+     -I $DIR/${SAMPLE}_sort.bam \
+    -O /dev/stdout \
+    -M marked_dup_metrics.txt 2> ${logs}/markdup-${SAMPLE}.log \
+|java -Xmx2g -jar $PICARDJARPATH/picard.jar SortSam \
+      -I /dev/stdin -O $DIR/${SAMPLE}_markdup_sorted.bam \
+      -SORT_ORDER coordinate 2>> ${logs}/markdup-${SAMPLE}.log
+
+duration=$SECONDS
+echo "Duplicate marking completed. $(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
+
+DBSNP=/fdb/GATK_resource_bundle/hg38/dbsnp_138.hg38.vcf.gz
+INDEL=/fdb/GATK_resource_bundle/hg38-v0/Homo_sapiens_assembly38.known_indels.vcf.gz
+GOLD_INDEL=/fdb/GATK_resource_bundle/hg38-v0/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz
+
+### Recaliberating base quality score###
+gatk --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID -Xms6G -Xmx6G -XX:ParallelGCThreads=2" BaseRecalibrator \
+  -I $DIR/${SAMPLE}_markdup_sorted.bam \
+  -R $GENOME \
+  -O  $DIR/${SAMPLE}_markdup_bqsr.report \
+  --known-sites $DBSNP \
+  --known-sites $INDEL \
+  --known-sites $GOLD_INDEL \
+  2> ${logs}/BQSR-${SAMPLE}.log
+
+gatk --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID -Xms6G -Xmx6G -XX:ParallelGCThreads=2" ApplyBQSR \
+  -I $DIR/${SAMPLE}_markdup_sorted.bam  \
+  -R $GENOME \
+  --bqsr-recal-file  $DIR/${SAMPLE}_markdup_bqsr.report \
+  -O  $DIR/${SAMPLE}_markdup_bqsr.bam \
+  2>> ${logs}/BQSR-${SAMPLE}.log
+
+duration=$SECONDS
+echo "Base recaliration completed. $(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
+```
 
 We first load several modules using <code>module load</code>. Then we specify the reference/source files to be used. Most of the reference files corresponding to a pre-installed application in Biowulf can be found in the folder /fdb/.
 Note the way we pass the arguments to the bash file. Arguments passed to a script are processed in the same order in which they’re sent (in this case, the order in the swarm file). The indexing of the arguments starts at one, and the first argument can be accessed inside the script using $1. Similarly, the second argument can be accessed using $2, and so on. Here we assign the first argument to variable $SAMPLE, and so on.
