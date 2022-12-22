@@ -130,7 +130,7 @@ Simlar to the first step, we use one bash file to process tumor/normal sample pa
 
 {% include image-modal.html link="practical_assets/Step2_2.PNG" %}
 
-The options <code>-I<code> were used twice to specify the input BAM files for normal and tumor samples, respectively. The names of the tumor and normal samples are specified by the options <code>-tumor</code> and <code>-normal</code>, which have to match the sample names in the read group lines of the BAM file. Note that the read group lines take this format: <code>@RG\tID:$id\tPL:ILLUMINA\tLB:$lb\tSM:$sm</code>, and the sample names are in the last field.
+The options <code>-I</code> were used twice to specify the input BAM files for normal and tumor samples, respectively. The names of the tumor and normal samples are specified by the options <code>-tumor</code> and <code>-normal</code>, which have to match the sample names in the read group lines of the BAM file. Note that the read group lines take this format: <code>@RG\tID:$id\tPL:ILLUMINA\tLB:$lb\tSM:$sm</code>, and the sample names are in the last field.
 
 If we are working with whole exome or genome sequencing data, then this step requires a large amount of memory. They can be changed in the java options <code>-Xms</code> and <code>-Xmx</code>. MuTect2 does not allow multithreading in its options. So to spped up this process, you may consider parallel computing using a 'scatter-gather' approach, that is, run separate GATK commands to process a proportion of the input data and collate all the results into the final output. For more information, please refer to [https://gatk.broadinstitute.org/hc/en-us/articles/360035532012-Parallelism-Multithreading-Scatter-Gather](https://gatk.broadinstitute.org/hc/en-us/articles/360035532012-Parallelism-Multithreading-Scatter-Gather).
 
@@ -157,7 +157,7 @@ This process annotates the variants as 'PASS' in the 'FILTER' field in its outpu
 <code>grep -v "^#" PAP1_1401_01_T01.vcf | wc -l<br>
 grep -v "^#" PAP1_1401_01_T01_passed.vcf | wc -l </code>{% include code-snippet-copy.html %}
 
-<code>grep -v<code> will extract all lines that do NOT contain a specific pattern. The pattern we specify is "^#", which is lines starting with the "#" symbol. This will exclude all the header lines in the VCF file. Then we redirect the output to the command <code>wc -l</code> which calculates the number of lines.
+<code>grep -v</code> will extract all lines that do NOT contain a specific pattern. The pattern we specify is "^#", which is lines starting with the "#" symbol. This will exclude all the header lines in the VCF file. Then we redirect the output to the command <code>wc -l</code> which calculates the number of lines.
 
 ---
 
