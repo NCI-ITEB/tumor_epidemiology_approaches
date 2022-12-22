@@ -75,11 +75,11 @@ All the fields after the bash file (.sh) are arguments, and they will be passed 
 We first load several modules using <code>module load</code>. Then we specify the reference/source files to be used. Most of the reference files corresponding to a pre-installed application in Biowulf can be found in the folder /fdb/.
 Note the way we pass the arguments to the bash file. Arguments passed to a script are processed in the same order in which they’re sent (in this case, the order in the swarm file). The indexing of the arguments starts at one, and the first argument can be accessed inside the script using $1. Similarly, the second argument can be accessed using $2, and so on. Here we assign the first argument to variable $SAMPLE, and so on.
 
-{% include image-modal.html link="practical_assets/Step1_1.png" %}
+{% include image-modal.html link="practical_assets/Step1_1.PNG" %}
 
 **3\.** We use the [fastp](https://github.com/OpenGene/fastp) command to trim the adapters, [bwa](https://bio-bwa.sourceforge.net/bwa.shtml) to perform raw alignment to the reference genome, and [samtools sort](http://www.htslib.org/doc/samtools-sort.html) to sort the files by genomic coordinates. The three commands are connected by 'pipes' <code>|</code> to bypass storage of large intermediate files. The adapter trimming step is optional. The backslash at the end of each line is used to skip the line breaker and the command continues in the next line.
 
-{% include image-modal.html link="practical_assets/Step1_2.png" %}
+{% include image-modal.html link="practical_assets/Step1_2.PNG" %}
 
 Let's take a look at the three command separately:
 
@@ -90,14 +90,14 @@ In <code>samtools sort</code> options, <code>-T</code> is the prefix of temporar
 **4\.** Now we have a sorted raw alignment BAM file. In the next section of the script, we mark read pairs that are likely to have originated from duplicates of the same DNA fragments uing [picard tools](https://broadinstitute.github.io/picard/). The picard tools package contains multiple commands, and the command lines look like this:
 <code>java [java opts] -jar $PICARDJARPATH/picard.jar COMMAND [options] </code>
 
-{% include image-modal.html link="practical_assets/Step1_3.png" %}
+{% include image-modal.html link="practical_assets/Step1_3.PNG" %}
 
 We use a pipe to connect two picard commands <code>MarkDuplicates</code> and <code>SortSam</code>. Similar to the bwa example, in the second picard command, we use <code>-I /dev/stdin</code> to specify reading from standard input.
 
 **5\.** In the last part of the script, we recalibrate base quality score to correct for patterns of systematic errors using the [GATK tools for BQSR](https://gatk.broadinstitute.org/hc/en-us/articles/360035890531-Base-Quality-Score-Recalibration-BQSR-). The GATK command lines look like this:
 <code>gatk --java-options "[java opts]" ToolName [options] </code>
 
-{% include image-modal.html link="practical_assets/Step1_4.png" %}
+{% include image-modal.html link="practical_assets/Step1_4.PNG" %}
 
 The first tool <code>BaseRecalibrator</code> builds the recalibration model. As we calculate the mismatched bases, we exclude the loci known to vary in the population, which requires the input of known variants resource. And this is specified by the option <code>--known-sites</code>.  The second tool, <code>ApplyBQSR</code> ,adjusts the score based on the model.
 
@@ -123,12 +123,12 @@ Simlar to the first step, we use one bash file to process tumor/normal sample pa
 
 **1\.** In the first part, we load necessary modules, specify reference resources and arguments from input. We pass five arguments from the swarm commands in the following order: normal sample name, tumor sample name, prefix for output file name (e.g. patient or subject ID), input file directory, and output file directory.
 
-{% include image-modal.html link="practical_assets/Step2_1.png" %}
+{% include image-modal.html link="practical_assets/Step2_1.PNG" %}
 
 
 **2\.** In the next part, we use the GATK tool [Mutect2](https://gatk.broadinstitute.org/hc/en-us/articles/360037593851-Mutect2) to call candidate variants.
 
-{% include image-modal.html link="practical_assets/Step2_2.png" %}
+{% include image-modal.html link="practical_assets/Step2_2.PNG" %}
 
 The options <code>-I<code> were used twice to specify the input BAM files for normal and tumor samples, respectively. The names of the tumor and normal samples are specified by the options <code>-tumor</code> and <code>-normal</code>, which have to match the sample names in the read group lines of the BAM file. Note that the read group lines take this format: <code>@RG\tID:$id\tPL:ILLUMINA\tLB:$lb\tSM:$sm</code>, and the sample names are in the last field.
 
@@ -138,7 +138,7 @@ If we are working with whole exome or genome sequencing data, then this step req
 
 **3\.** The next part of the script calculates the cross-sample contamination and estimates the allelic copy number segmentation for each tumor sample. It will generate a contamination-table file that will be used for filtering  This is an optional step.
 
-{% include image-modal.html link="practical_assets/Step2_3.png" %}
+{% include image-modal.html link="practical_assets/Step2_3.PNG" %}
 
 The tool <code>GetPileupSummaries</code> summarizes read counts that support reference, alternative and other alleles for given sites. In its options <code>-V</code> and <code>-L</code>, it requires an input file for common germline variant sites, e.g. this file from the gnomAD resource. We provide a reference file small_exac_common_3.hg38.vcf.gz in our folder. Other reference files for this purpose (e.g. gnomAD) can be found at the GATK Google bucket. In an interactive session, you may use the following commands to check and download the reference files for common germline variant sites.
 
@@ -148,7 +148,7 @@ gsutil ls gs://gatk-best-practices/somatic-hg38/af-only-gnomad.hg38.vcf.gz* ./</
 
 **4\.** Then we will filter the mutation candidates using the tool [FilterMutationCalls](https://gatk.broadinstitute.org/hc/en-us/articles/360036856831-FilterMutectCalls). The options <code>--contamination-table</code> and <code>--tumor-segmentation</code> use the output from the previous step and are optional.
 
-{% include image-modal.html link="practical_assets/Step2_4.png" %}
+{% include image-modal.html link="practical_assets/Step2_4.PNG" %}
 
 This process annotates the variants as 'PASS' in the 'FILTER' field in its output VCF file, but will keep all the candidate variants, including those that failed the filtering, in its output. So we use an <code>awk</code> command to extract all the variants that pass the filtering.
 
@@ -174,7 +174,7 @@ The script will take a few seconds. Let's first check the bash scripts.
 
 <code>vi /data/classes/DCEG_Somatic_Workshop/Practical_session_4/shfiles/Step4_funcotator_annotation.sh</code>{% include code-snippet-copy.html %}
 
-{% include image-modal.html link="practical_assets/Step3_1.png" %}
+{% include image-modal.html link="practical_assets/Step3_1.PNG" %}
 
 Funcotator is a tool in the GATK package. It requires five input files:
 <code>-R</code> A reference genome sequence.
@@ -199,7 +199,7 @@ Next let's check the bash scripts.
 
 <code>vi /data/classes/DCEG_Somatic_Workshop/Practical_session_4/shfiles/Step4_annovarannotation.sh</code>{% include code-snippet-copy.html %}
 
-{% include image-modal.html link="practical_assets/Step3_2.png" %}
+{% include image-modal.html link="practical_assets/Step3_2.PNG" %}
 
 The program <code>convert2annovar.pl</code> converts the VCF format into  the ANNOVAR input format (.avinput file). For specification of the ANNOVAR input format, you may get more details at: [https://annovar.openbioinformatics.org/en/latest/user-guide/input/](https://annovar.openbioinformatics.org/en/latest/user-guide/input/).
 
@@ -212,19 +212,19 @@ PAP1_1708_01_T01.hg38_multianno.csv</code>
 
 The Funcotator output is in the MAF format, the first several columns are the basic features of the mutation: genomic coordinates, reference and variant alleles, variant classifications and types. The variant classifications and types could be used to prioritize candidate driver mutations.
 
-{% include image-modal.html link="practical_assets/Funcotator_1.png" %}
+{% include image-modal.html link="practical_assets/Funcotator_1.PNG" %}
 
 If we scroll to the right, there are annotations of genomic, cDNA and protein  changes.
 **TODO: Mention the link to downstream analysis? Any other comments on the Funcotator results?**
 
-{% include image-modal.html link="practical_assets/Funcotator_2.png" %}
+{% include image-modal.html link="practical_assets/Funcotator_2.PNG" %}
 
 The ANNOVAR output is in VCF format. The first several columns include basic information about the variants. The columns of 'Func.refGene' and 'ExonicFunc.refGene' could be used to prioritize candidate driver mutations. The column 'AAChange.refGene' provides similar information to the protein changes annotated by Funcotator.
 
-{% include image-modal.html link="practical_assets/ANNOVAR_1.png" %}
+{% include image-modal.html link="practical_assets/ANNOVAR_1.PNG" %}
 
 For the next a few columns, the ExAC* columns are allele frequencies in all the samples and the subpopulations in the Exome Aggregation Consortium data sets. The column 'avsnp147' is the SNP ID in the dbSNP database. The other columns are prediction scores for the likelihood of non-synonymous variants to be deleterious using several popular tools, such as SIFT, PolyPhen2, HDIV,  LRT, and so on.
 
-{% include image-modal.html link="practical_assets/ANNOVAR_2.png" %}
+{% include image-modal.html link="practical_assets/ANNOVAR_2.PNG" %}
 
 ---  
