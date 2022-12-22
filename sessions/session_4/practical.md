@@ -39,14 +39,14 @@ Today's tasks include (A) performing somatic mutational calling using the GATK p
 
 We will use the targeted sequencing data of paired tumor and normal samples from kidney for this practice. The scripts for this task will takes about 25 mins running time, so we will submit the scripts to Biowulf at the beginning of the session and then walk through the scripts together.
 
-1. First let's create a new folder in your personal data directory, and copy all the sample data to this directory.
+**1\.** First let's create a new folder in your personal data directory, and copy all the sample data to this directory.
 
 <code>cd /data/$USER/<br>
 mkdir practical_session_4<br>
 cd practical_session_4<br>
 cp /data/classes/DCEG_Somatic_Workshop/Practical_session_4/* .</code>{% include code-snippet-copy.html %}
 
-2. Next, we will submit two sets of scripts to Biowulf. Use the following commands to submit the scripts for step 1.
+**2\.** Next, we will submit two sets of scripts to Biowulf. Use the following commands to submit the scripts for step 1.
 
 <code>cd shfiles<br>
 jobid1=$(swarm -t 8 -g 24  --gres=lscratch:24 --job-name step1 --time 1:00:00 scripts_for_step1.swarm)<br>
@@ -67,6 +67,8 @@ In a few seconds, let's check the job status using <code>sjobs<code>, the second
 While we are waiting for the two jobs, let's examine the script.
 
 <code>vi scripts_for_step1.swarm</code>{% include code-snippet-copy.html %}
+
+#### scripts_for_step1.swarm:
 ```bash
 #!/bin/bash
 sh Step1_preprocess_variant_discovery.sh GPK7017_2000 ../fastq ../Results
@@ -77,14 +79,15 @@ The first step for somatic or germline variant discovery is to pre-process the r
 
 {% include image-modal.html link="practical_assets/GATK_data_preprocess.png" max-width="30%" %}
 
-**1\.** In the swarm file, each line corresponds to one sample, and will be submitted as one process in the swarm submission. They are all in the format:
+**3\.** In the swarm file, each line corresponds to one sample, and will be submitted as one process in the swarm submission. They are all in the format:
 <code>sh ./Step1_preprocess_variant_discovery.sh $SAMPLE $INPUT_DIR $OUTPUT_DIR</code>.
 All the fields after the bash file (.sh) are arguments, and they will be passed to the bash (.sh) file. All the arguments in the swarm commands should be processed within the bash file. In this way, we can prepare the 'core' commands as bash files to process samples in batches.
 
-**2\.** Now let's quit the swarm file by typing <code>:q</code> and hitting enter, and open the corresponding bash file.
+**4\.** Now let's quit the swarm file by typing <code>:q</code> and hitting enter, and open the corresponding bash file.
 
 <code>vi Step1_preprocess_variant_discovery.sh</code>{% include code-snippet-copy.html %}
 
+#### <u>Step1_preprocess_variant_discovery.sh:</u>
 ```bash
 #!/bin/bash
 
@@ -270,6 +273,8 @@ Next we will use the analysis-ready BAM files to proceed the GATK pipeline for s
 
 Let's examine the swarm file.
 <code>vi scripts_for_step2.swarm</code>{% include code-snippet-copy.html %}
+
+#### <u>scripts_for_step2.swarm:</u>
 ```bash
 #!/bin/bash
 sh Step2_somatic_variant_discovery_MuTect2.sh  GPK7017_2000 GPK4013_0401 PAP1_1708_01_T01 ../Results ../Results
@@ -279,6 +284,7 @@ Simlar to the first step, we use one bash file to process tumor/normal sample pa
 
 <code>vi Step2_somatic_variant_discovery_MuTect2.sh</code>{% include code-snippet-copy.html %}
 
+#### <u>Step2_somatic_variant_discovery_MuTect2.sh:</u>
 ```bash
 #!/bin/bash
 
@@ -487,6 +493,7 @@ The script will take a few seconds. Let's first check the bash scripts.
 
 <code>vi /data/classes/DCEG_Somatic_Workshop/Practical_session_4/shfiles/Step4_funcotator_annotation.sh</code>{% include code-snippet-copy.html %}
 
+#### <u>Step4_funcotator_annotation.sh:</u>
 <!--{% include image-modal.html link="practical_assets/Step3_1.PNG" %}-->
 ```bash
 #!/bin/bash
@@ -561,6 +568,7 @@ Next let's check the bash scripts.
 
 <code>vi /data/classes/DCEG_Somatic_Workshop/Practical_session_4/shfiles/Step4_annovarannotation.sh</code>{% include code-snippet-copy.html %}
 
+#### <u>Step4_annovarannotation.sh:</u>
 <!--{% include image-modal.html link="practical_assets/Step3_2.PNG" %}-->
 ```bash
 #!/bin/bash

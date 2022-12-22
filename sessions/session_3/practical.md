@@ -9,6 +9,14 @@ menubar_toc: true
 <script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
 <script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
 
+<style>
+pre {
+  max-height: 500px;
+  overflow-y: auto;
+  max-width: 120%;
+}
+</style>
+
 Before we begin, please login to Biowulf and request an interactive session:
 
 For a reminder on how to log-in to Biowulf, we refer you to this <a href="https://nci-iteb.github.io/tumor_epidemiology_approaches/sessions/session_1/practical#setup-ssh-connection">Biowulf HPC guide</a>. In short:
@@ -68,6 +76,112 @@ You should also see a file slurm-########.out in your directory once your job be
 
 <code>vi practical_3_script.sh</code>{% include code-snippet-copy.html %}
 
+#### <u>practical_3_script.sh:</u>
+```bash
+#!/usr/bin/env bash
+
+## Set path to where class files are being stored
+PATH_TO_PRACTICE3=/data/classes/DCEG_Somatic_Workshop/Practical_session_3
+mkdir practical_3
+OUTDIR=practical_3
+CPUS_PER_COMMAND=3
+
+## Load modules for running QC analysis
+module load fastqc
+module load trimgalore
+module load samtools
+module load R
+module load picard
+module load multiqc
+module load mosdepth
+
+mkdir $OUTDIR/fastqc_out $OUTDIR/trimgalore_out
+## Run fastqc on all fastq files
+fastqc -t $CPUS_PER_COMMAND -o $OUTDIR/fastqc_out \
+$PATH_TO_PRACTICE3/sample_data/germline_EAGLE_WES/LC_LC_IGC-11-1100_A.bam \
+$PATH_TO_PRACTICE3/sample_data/Fresh_Frozen/Fresh_Frozen.bam \
+$PATH_TO_PRACTICE3/sample_data/FFPE/FFPE_Tumor.bam &
+
+## Perform adapter/low quality base trimming on smaller fastq samples
+trim_galore -j $CPUS_PER_COMMAND --fastqc --paired --gzip --stringency 3 \
+-o $OUTDIR/trimgalore_out --basename trimmed-LC_LC_IGC-11-1100_A \
+$PATH_TO_PRACTICE3/sample_data/germline_EAGLE_WES/LC_LC_IGC-11-1100_A.bam.fq1.gz \
+$PATH_TO_PRACTICE3/sample_data/germline_EAGLE_WES/LC_LC_IGC-11-1100_A.bam.fq2.gz &
+wait
+
+mkdir $OUTDIR/samtools_out $OUTDIR/picard_inserts_out
+## Calculate alignment flag statistics using Samtools
+samtools flagstat -@ $CPUS_PER_COMMAND \
+$PATH_TO_PRACTICE3/sample_data/Fresh_Frozen/Fresh_Frozen.bam > $OUTDIR/samtools_out/Fresh_Frozen.flagstat.txt &
+
+samtools flagstat -@ $CPUS_PER_COMMAND \
+$PATH_TO_PRACTICE3/sample_data/FFPE/FFPE_Tumor.bam > $OUTDIR/samtools_out/FFPE_Tumor.flagstat.txt &
+
+## Calculate distribution of insert sizes with Picard
+java -Xmx3g -jar $PICARDJARPATH/picard.jar CollectInsertSizeMetrics \
+-I $PATH_TO_PRACTICE3/sample_data/Fresh_Frozen/Fresh_Frozen.bam \
+-O $OUTDIR/picard_inserts_out/Fresh_Frozen.inserts.txt \
+-H $OUTDIR/picard_inserts_out/Fresh_Frozen.inserts.pdf &
+
+java -Xmx3g -jar $PICARDJARPATH/picard.jar CollectInsertSizeMetrics \
+-I $PATH_TO_PRACTICE3/sample_data/FFPE/FFPE_Tumor.bam \
+-O $OUTDIR/picard_inserts_out/FFPE_Tumor.inserts.txt \
+-H $OUTDIR/picard_inserts_out/FFPE_Tumor.inserts.pdf &
+wait
+
+mkdir $OUTDIR/mosdepth_out
+## Calculate sequencing depth for both samples, isolating only the parts of the genome covered by the exome capture kit
+mosdepth -t $CPUS_PER_COMMAND \
+-b $PATH_TO_PRACTICE3/references/sorted-SeqCap_EZ_ExomeV3_Plus_UTR_hg19_primary_annotated.bed \
+$OUTDIR/mosdepth_out/FFPE_Tumor $PATH_TO_PRACTICE3/sample_data/FFPE/FFPE_Tumor.bam &
+
+mosdepth -t $CPUS_PER_COMMAND \
+-b $PATH_TO_PRACTICE3/references/sorted-SeqCap_EZ_ExomeV3_Plus_UTR_hg19_primary_annotated.bed \
+$OUTDIR/mosdepth_out/Fresh_Frozen $PATH_TO_PRACTICE3/sample_data/Fresh_Frozen/Fresh_Frozen.bam &
+wait
+
+mkdir $OUTDIR/somalier_out
+## Run somalier - this program is not installed on Biowulf, for future use you must download here:
+## https://github.com/brentp/somalier/releases
+$PATH_TO_PRACTICE3/algorithms/somalier extract -d $OUTDIR/somalier_out/ \
+-s $PATH_TO_PRACTICE3/references/sites.hg19.vcf.gz \
+-f $PATH_TO_PRACTICE3/references/hg19_canonical_correct_chr_order.fa \
+$PATH_TO_PRACTICE3/sample_data/FFPE/FFPE_Tumor.bam &
+
+$PATH_TO_PRACTICE3/algorithms/somalier extract -d $OUTDIR/somalier_out/ \
+-s $PATH_TO_PRACTICE3/references/sites.hg19.vcf.gz \
+-f $PATH_TO_PRACTICE3/references/hg19_canonical_correct_chr_order.fa \
+$PATH_TO_PRACTICE3/sample_data/Fresh_Frozen/Fresh_Frozen.bam &
+wait
+
+$PATH_TO_PRACTICE3/algorithms/somalier relate -o $OUTDIR/somalier_out/somalier \
+$OUTDIR/somalier_out/FFPE_Tumor.somalier \
+$OUTDIR/somalier_out/Fresh_Frozen.somalier
+
+## Collect all QC reports into one multiqc report titled 'Practical_3'
+multiqc --title "Practical_3" --ignore trimgalore_out -o $OUTDIR/ $OUTDIR
+
+## 001 Convert exome regions from bed format to Picard's interval format# java -jar $PICARDJARPATH/picard.jar BedToIntervalList \
+# I=$PATH_TO_PRACTICE3/references/sorted-SeqCap_EZ_ExomeV3_Plus_UTR_hg19_primary_annotated.bed \
+# O=$PATH_TO_PRACTICE3/0-Off-Targeted/sorted-SeqCap_EZ_ExomeV3_Plus_UTR_hg19_primary_annotated.interval_list \
+# SD=$PATH_TO_PRACTICE3/0-Off-Targeted/hg19_canonical_correct_chr_order.dict
+#
+## 002 Running picard CollectHsMetrics
+# java -Xmx8g -jar $PICARDJARPATH/picard.jar CollectHsMetrics \
+# I=$PATH_TO_PRACTICE3/sample_data/FFPE/FFPE_Tumor.bam \
+# O=$PATH_TO_PRACTICE3/0-Off-Targeted/scr-0-Off_Targeted-Output/FFPE_output_hs_metrics.txt \
+# R=$PATH_TO_PRACTICE3/references/hg19_canonical_correct_chr_order.fa \
+# BAIT_INTERVALS=$PATH_TO_PRACTICE3/0-Off-Targeted/sorted-SeqCap_EZ_ExomeV3_Plus_UTR_hg19_primary_annotated.interval_list \
+# TARGET_INTERVALS=$PATH_TO_PRACTICE3/0-Off-Targeted/sorted-SeqCap_EZ_ExomeV3_Plus_UTR_hg19_primary_annotated.interval_list
+
+# java -Xmx8g -jar $PICARDJARPATH/picard.jar CollectHsMetrics \
+# I=$PATH_TO_PRACTICE3/sample_data/Fresh_Frozen/Fresh_Frozen.bam \
+# O=$PATH_TO_PRACTICE3/0-Off-Targeted/scr-0-Off_Targeted-Output/Fresh_Frozen_output_hs_metrics.txt \
+# R=$PATH_TO_PRACTICE3/references/hg19_canonical_correct_chr_order.fa \
+# BAIT_INTERVALS=$PATH_TO_PRACTICE3/0-Off-Targeted/sorted-SeqCap_EZ_ExomeV3_Plus_UTR_hg19_primary_annotated.interval_list \
+# TARGET_INTERVALS=$PATH_TO_PRACTICE3/0-Off-Targeted/sorted-SeqCap_EZ_ExomeV3_Plus_UTR_hg19_primary_annotated.interval_list
+```
+
 *Notes for using vi:* ***it's quite easy to get stuck in an editing function in vi by accident.*** *If this is happening, you will see some text in the lower left of the window, such as <code>--INSERT--</code>. Once the script has already been submitted changes you make to this document won't affect anything, so don't panic. If this happens, hit the 'ESC' key to exit the editing mode.*
 
 ***Some helpful commands in vi:***
@@ -80,7 +194,16 @@ You should also see a file slurm-########.out in your directory once your job be
 
 All lines beginning with <code>##</code> are comments that we’ve added to improve readability. These lines are not functional code and are not executed by Biowulf.
 
-{% include image-modal.html link="practical_assets/set_variables.png" %}
+<!--{% include image-modal.html link="practical_assets/set_variables.png" %}-->
+```bash
+#!/usr/bin/env bash
+
+## Set path to where class files are being stored
+PATH_TO_PRACTICE3=/data/classes/DCEG_Somatic_Workshop/Practical_session_3
+mkdir practical_3
+OUTDIR=practical_3
+CPUS_PER_COMMAND=3
+```
 
 The very first line, <code>#!/usr/bin/env bash</code>, begins with a ‘shebang’ (<code>#!</code>) and tells Biowulf which program to use to run this script, in this case ‘bash’. This line or something similar should be the first line of every bash script you write.
 
@@ -94,7 +217,17 @@ We’ve also set a couple of other variables: OUTDIR (where we’ll store the re
 
 The next section of the script includes a series of <code>module load</code> commands:
 
-{% include image-modal.html link="practical_assets/3_load_modules.jpeg" max-width="50%" %}
+<!--{% include image-modal.html link="practical_assets/3_load_modules.jpeg" max-width="50%" %}-->
+```bash
+## Load modules for running QC analysis
+module load fastqc
+module load trimgalore
+module load samtools
+module load R
+module load picard
+module load multiqc
+module load mosdepth
+```
 
 All of these programs are needed to run the following analyses and are not loaded by Biowulf unless we request them. We did not specify versions for these tools, so Biowulf will simply load the default versions.
 
@@ -114,7 +247,11 @@ As previously mentioned, today we will be examining a MultiQC report (learn more
 
 The MultiQC code is the last step of our script and is quite simple:
 
-{% include image-modal.html link="practical_assets/4_multiqc_command.jpeg" %}
+<!--{% include image-modal.html link="practical_assets/4_multiqc_command.jpeg" %}-->
+```bash
+## Collect all QC reports into one multiqc report titled 'Practical_3'
+multiqc --title "Practical_3" --ignore trimgalore_out -o $OUTDIR/ $OUTDIR
+```
 <figcaption class="is-italic is-size-7">
 <ul>
 <li><code>--title</code> is an option to title your report</li>
@@ -126,7 +263,7 @@ The MultiQC code is the last step of our script and is quite simple:
 When using almost any popular bioinformatics software, including MultiQC, you can easily get a summary of how to use the software with <code>--help</code>. For an example, enter the following code within an interactive session:
 
 {% include code-block-copy.html %}
-```
+```bash
 module load multiqc ##load multiqc on Biowulf first
 multiqc --help
 ```
@@ -151,7 +288,14 @@ There is lots of information already contained within this general statistics se
 
 **9\.** We’ll begin by examining the FastQC output. Here is the command we used to run FastQC in our script:
 
-{% include image-modal.html link="practical_assets/6_fastqc_command.jpeg" %}
+<!--{% include image-modal.html link="practical_assets/6_fastqc_command.jpeg" %}-->
+```bash
+## Run fastqc on all fastq files
+fastqc -t $CPUS_PER_COMMAND -o $OUTDIR/fastqc_out \
+$PATH_TO_PRACTICE3/sample_data/germline_EAGLE_WES/LC_LC_IGC-11-1100_A.bam \
+$PATH_TO_PRACTICE3/sample_data/Fresh_Frozen/Fresh_Frozen.bam \
+$PATH_TO_PRACTICE3/sample_data/FFPE/FFPE_Tumor.bam
+```
 <figcaption class="is-italic is-size-7">
 <ul>
 <li><code>-t</code> is the option to run fastqc with multiple cpus</li>
@@ -214,7 +358,15 @@ Our two tumor samples are absent from this graph because they were already trimm
 
 **14\.** Looking back at our submitted script, you will see just below our fastqc command we’ve submitted a job to run Trimgalore. Trimgalore will recognize and remove adapter sequences (either from a standard database by default, or as specified by the user) and also trim low quality bases from the ends of reads. Here is the command we ran in our script:
 
-{% include image-modal.html link="practical_assets/12_trimgalore_command.jpeg" %}
+<!--{% include image-modal.html link="practical_assets/12_trimgalore_command.jpeg" %}-->
+```bash
+## Perform adapter/low quality base trimming on smaller fastq samples
+trim_galore -j $CPUS_PER_COMMAND --fastqc --paired --gzip --stringency 3 \
+-o $OUTDIR/trimgalore_out --basename trimmed-LC_LC_IGC-11-1100_A \
+$PATH_TO_PRACTICE3/sample_data/germline_EAGLE_WES/LC_LC_IGC-11-1100_A.bam.fq1.gz \
+$PATH_TO_PRACTICE3/sample_data/germline_EAGLE_WES/LC_LC_IGC-11-1100_A.bam.fq2.gz
+```
+
 <figcaption class="is-italic is-size-7">
 <ul>
 <li>the last two lines are our samples to trim.</li>
@@ -246,7 +398,15 @@ We don’t have time for that in this practical, so we will instead focus on the
 
 **16\.** Just after the trimgalore command we ran the Samtools module ‘flagstat’.  
 
-{% include image-modal.html link="practical_assets/14_samtools_flagstat_command.png" %}
+<!--{% include image-modal.html link="practical_assets/14_samtools_flagstat_command.png" %}-->
+```bash
+## Calculate alignment flag statistics using Samtools
+samtools flagstat -@ $CPUS_PER_COMMAND \
+$PATH_TO_PRACTICE3/sample_data/Fresh_Frozen/Fresh_Frozen.bam > $OUTDIR/samtools_out/Fresh_Frozen.flagstat.txt &
+
+samtools flagstat -@ $CPUS_PER_COMMAND \
+$PATH_TO_PRACTICE3/sample_data/FFPE/FFPE_Tumor.bam > $OUTDIR/samtools_out/FFPE_Tumor.flagstat.txt
+```
 <figcaption class="is-size-7 is-italic">This command has the following simple structure: <code>samtools flagstat [OPTIONS] alignment_input</code>.
 <ul>
 <li><code>-@</code> specifies number of cpus</li>
@@ -320,7 +480,19 @@ Additional care should be taken into account when using FFPE samples for calling
 
 The command we used to generate this output in our script looks as follows:
 
-{% include image-modal.html link="practical_assets/21_picard.jpeg" %}
+<!--{% include image-modal.html link="practical_assets/21_picard.jpeg" %}-->
+```bash
+## Calculate distribution of insert sizes with Picard
+java -Xmx3g -jar $PICARDJARPATH/picard.jar CollectInsertSizeMetrics \
+-I $PATH_TO_PRACTICE3/sample_data/Fresh_Frozen/Fresh_Frozen.bam \
+-O $OUTDIR/picard_inserts_out/Fresh_Frozen.inserts.txt \
+-H $OUTDIR/picard_inserts_out/Fresh_Frozen.inserts.pdf &
+
+java -Xmx3g -jar $PICARDJARPATH/picard.jar CollectInsertSizeMetrics \
+-I $PATH_TO_PRACTICE3/sample_data/FFPE/FFPE_Tumor.bam \
+-O $OUTDIR/picard_inserts_out/FFPE_Tumor.inserts.txt \
+-H $OUTDIR/picard_inserts_out/FFPE_Tumor.inserts.pdf
+```
 <figcaption class="is-size-7 is-italic">
 Picard is a java coding language application saved as a java .jar file, which is why the command to run it begins with <code>java -Xmx3g -jar</code>.
 <ul>
@@ -363,7 +535,17 @@ In addition to learning how evenly your sequencing covers the genome, you can al
 
 **23\.** To do this we ran the tool mosdepth in our script:
 
-{% include image-modal.html link="practical_assets/23_mosdepth_command.jpeg" %}
+<!--{% include image-modal.html link="practical_assets/23_mosdepth_command.jpeg" %}-->
+```bash
+## Calculate sequencing depth for both samples, isolating only the parts of the genome covered by the exome capture kit
+mosdepth -t $CPUS_PER_COMMAND \
+-b $PATH_TO_PRACTICE3/references/sorted-SeqCap_EZ_ExomeV3_Plus_UTR_hg19_primary_annotated.bed \
+$OUTDIR/mosdepth_out/FFPE_Tumor $PATH_TO_PRACTICE3/sample_data/FFPE/FFPE_Tumor.bam &
+
+mosdepth -t $CPUS_PER_COMMAND \
+-b $PATH_TO_PRACTICE3/references/sorted-SeqCap_EZ_ExomeV3_Plus_UTR_hg19_primary_annotated.bed \
+$OUTDIR/mosdepth_out/Fresh_Frozen $PATH_TO_PRACTICE3/sample_data/Fresh_Frozen/Fresh_Frozen.bam
+```
 <figcaption class="is-italic is-size-7">
 <ul>
 <li><code>-t</code> is the number of cpus to use</li>
@@ -398,7 +580,25 @@ At the end of our script we ran the tool <a href="https://github.com/brentp/soma
 
 **27\.** The Somalier commands are at the end of this script and require running ‘somalier extract’ on each sample to extract SNP information, followed by ‘somalier relate’ to calculate relatedness and other statistics between samples.
 
-{% include image-modal.html link="practical_assets/26_somalier_commands.jpeg" %}
+<!--{% include image-modal.html link="practical_assets/26_somalier_commands.jpeg" %}-->
+```bash
+## Run somalier - this program is not installed on Biowulf, for future use you must download here:
+## https://github.com/brentp/somalier/releases
+$PATH_TO_PRACTICE3/algorithms/somalier extract -d $OUTDIR/somalier_out/ \
+-s $PATH_TO_PRACTICE3/references/sites.hg19.vcf.gz \
+-f $PATH_TO_PRACTICE3/references/hg19_canonical_correct_chr_order.fa \
+$PATH_TO_PRACTICE3/sample_data/FFPE/FFPE_Tumor.bam &
+
+$PATH_TO_PRACTICE3/algorithms/somalier extract -d $OUTDIR/somalier_out/ \
+-s $PATH_TO_PRACTICE3/references/sites.hg19.vcf.gz \
+-f $PATH_TO_PRACTICE3/references/hg19_canonical_correct_chr_order.fa \
+$PATH_TO_PRACTICE3/sample_data/Fresh_Frozen/Fresh_Frozen.bam &
+wait
+
+$PATH_TO_PRACTICE3/algorithms/somalier relate -o $OUTDIR/somalier_out/somalier \
+$OUTDIR/somalier_out/FFPE_Tumor.somalier \
+$OUTDIR/somalier_out/Fresh_Frozen.somalier
+```
 <figcaption class="is-italic is-size-7">
 somalier extract
 <ul>
@@ -454,7 +654,16 @@ The intent of targeted and exome sequencing is to focus your sequencing efforts 
 
 **31\.** This is something we can answer using another function of Picard, ‘CollectHsMetrics’ (Collect Hybrid Selection Metrics). Here’s an example for how to do this:
 
-{% include image-modal.html link="practical_assets/collectHS_command.png" %}
+<!--{% include image-modal.html link="practical_assets/collectHS_command.png" %}-->
+```bash
+## 002 Running picard CollectHsMetrics
+java -Xmx8g -jar $PICARDJARPATH/picard.jar CollectHsMetrics \
+I=$PATH_TO_PRACTICE3/sample_data/FFPE/FFPE_Tumor.bam \
+O=$PATH_TO_PRACTICE3/0-Off-Targeted/scr-0-Off_Targeted-Output/FFPE_output_hs_metrics.txt \
+R=$PATH_TO_PRACTICE3/references/hg19_canonical_correct_chr_order.fa \
+BAIT_INTERVALS=$PATH_TO_PRACTICE3/0-Off-Targeted/sorted-SeqCap_EZ_ExomeV3_Plus_UTR_hg19_primary_annotated.interval_list \
+TARGET_INTERVALS=$PATH_TO_PRACTICE3/0-Off-Targeted/sorted-SeqCap_EZ_ExomeV3_Plus_UTR_hg19_primary_annotated.interval_list
+```
 <figcaption class="is-italic is-size-7">
 <ul>
 <li><code>-I</code> is the input alignment file</li>
