@@ -227,4 +227,4 @@ For the next a few columns, the ExAC* columns are allele frequencies in all the 
 
 {% include image-modal.html link="practical_assets/ANNOVAR_2.png" %}
 
----
+---  
