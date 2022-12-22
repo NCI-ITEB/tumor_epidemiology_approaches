@@ -45,7 +45,7 @@ If you hover over the plot, you will see information for each cancer type, inclu
 **Tip:** The R package TCGAmutations provides pre-compiled, curated somatic mutations from 33 TCGA cohorts along with relevant clinical information for all sequenced samples. Somatic mutations from both the **MC3** and **Firehose** pipelines are included. You can load these mutation data as well as your TMB data into the tcgaCompare function from the MAFtools R package for comparison and visualization, which will generate plot similar to the one below for Acute Myeloid Leukemia (LAML) using minimal R code:
 
 {% include code-block-copy.html %}
-```
+```R
 library(maftools)
 #path to TCGA LAML MAF file
 laml.maf = system.file('extdata', 'tcga_laml.maf.gz', package = 'maftools')
