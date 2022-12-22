@@ -6,8 +6,8 @@ menubar_toc: true
 
 <!--script link="practical_assets/{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script> <script>addBackToTop()</script-->
 
-<script link="practical_assets/{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
-<script link="practical_assets/{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
+<script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
+<script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
 
 Before we begin, please login to Biowulf and request an interactive session:
 
@@ -62,7 +62,7 @@ While we are waiting for the two jobs, let's examine the script.
 
 The first step for somatic or germline variant discovery is to pre-process the raw sequence data to produce analysis-ready BAM files. As the following figure shows, we start from the raw FASTQ files (or BAM files), align them to the reference genome, and clean up the data to correct for technical biases (e.g. duplicate reads, strand bias, cross-sample contamination, etc).
 
-{% include image-modal.html link="practical_assets/GATK_data_preprocess.png" max-width="40%" %}
+{% include image-modal.html link="practical_assets/GATK_data_preprocess.png" max-width="30%" %}
 
 **1\.** In the swarm file, each line corresponds to one sample, and will be submitted as one process in the swarm submission. They are all in the format:
 <code>sh ./Step1_preprocess_variant_discovery.sh $SAMPLE $INPUT_DIR $OUTPUT_DIR</code>.
