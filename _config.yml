@@ -37,6 +37,8 @@ remote_theme: chrisrhymes/bulma-clean-theme
 plugins:
 # - jekyll-feed
 
+
+
 # collections
 collections:
   instructors:
