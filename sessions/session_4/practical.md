@@ -56,15 +56,15 @@ cp /data/classes/DCEG_Somatic_Workshop/Practical_session_4/* .</code>{% include 
 jobid1=$(swarm -t 8 -g 24  --gres=lscratch:24 --job-name step1 --time 1:00:00 scripts_for_step1.swarm)<br>
 echo $jobid1</code>{% include code-snippet-copy.html %}
 
-<code>swarm</code> is a command to submit a group of command lines to biowulf and those command lines will run as parallel processes. The options <code>-g</code>, <code>-t</code> and <code>--time</code> specify the memory (in GB), threads and running time per process. We request 8CPUs and 24GB of memory for each process. The default running time is 2hrs. We assign a job name using the option <code>--job-name</code>. The option <code>--gres</code> is to allocate a local scratch disk space for each process. <code>lscratch:N</code> will require N GB for the scratch space. The directory of this scratch space can be accessed in the script as <code>/lscratch/$SLURM_JOB_ID/</code>. More information could be found at [https://hpc.nih.gov/apps/swarm.html](https://hpc.nih.gov/apps/swarm.html).
+<span style="color:crimson">swarm</span> is a command to submit a group of command lines to biowulf and those command lines will run as parallel processes. The options <span style="color:crimson">-g</span>, <span style="color:crimson">-t</span> and <span style="color:crimson">--time</span> specify the memory (in GB), threads and running time per process. We request 8CPUs and 24GB of memory for each process. The default running time is 2hrs. We assign a job name using the option <span style="color:crimson">--job-name</span>. The option <span style="color:crimson">--gres</span> is to allocate a local scratch disk space for each process. <span style="color:crimson">lscratch:N</span> will require N GB for the scratch space. The directory of this scratch space can be accessed in the script as <span style="color:crimson">/lscratch/$SLURM_JOB_ID/</span>. More information could be found at [https://hpc.nih.gov/apps/swarm.html](https://hpc.nih.gov/apps/swarm.html).
 
-The <code>swarm</code> will return a job ID and it will be saved to <code>$jobid1</code> in this script. We then submit the swarm file for step 2 and let it start only after the completion of all commands in the first job. To set up the dependency, we use the option <code>--dependency=afterany:jobid</code> where the jobid is $jobid1. Step 1 will take about 9 mins.
+The <span style="color:crimson">swarm</span> will return a job ID and it will be saved to <span style="color:crimson">$jobid1</span> in this script. We then submit the swarm file for step 2 and let it start only after the completion of all commands in the first job. To set up the dependency, we use the option <span style="color:crimson">--dependency=afterany:jobid</span> where the jobid is $jobid1. Step 1 will take about 9 mins.
 
 
 <code>jobid2=$(swarm -t 8 -g 20 --gres=lscratch:20 --dependency=afterany:$jobid1 --job-name step2 scripts_for_step2.swarm)<br>
 echo $jobid2</code>{% include code-snippet-copy.html %}
 
-In a few seconds, let's check the job status using <code>sjobs</code>, the second job will sit in a pending state until all the processes in job1 are finished.
+In a few seconds, let's check the job status using <span style="color:crimson">sjobs</span>, the second job will sit in a pending state until all the processes in job1 are finished.
 
 ---
 
@@ -87,7 +87,7 @@ The first step for somatic or germline variant discovery is to pre-process the r
 <code>sh ./Step1_preprocess_variant_discovery.sh $SAMPLE $INPUT_DIR $OUTPUT_DIR</code>.
 All the fields after the bash file (.sh) are arguments, and they will be passed to the bash (.sh) file. All the arguments in the swarm commands should be processed within the bash file. In this way, we can prepare the 'core' commands as bash files to process samples in batches.
 
-**4\.** Now let's quit the swarm file by typing <code>:q</code> and hitting enter, and open the corresponding bash file.
+**4\.** Now let's quit the swarm file by typing <span style="color:crimson">:q</span> and hitting enter, and open the corresponding bash file.
 
 <code>vi Step1_preprocess_variant_discovery.sh</code>{% include code-snippet-copy.html %}
 
@@ -178,7 +178,7 @@ duration=$SECONDS
 echo "Base recaliration completed. $(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
 ```
 
-We first load several modules using <code>module load</code>. Then we specify the reference/source files to be used. Most of the reference files corresponding to a pre-installed application in Biowulf can be found in the folder /fdb/.
+We first load several modules using <span style="color:crimson">module load</span>. Then we specify the reference/source files to be used. Most of the reference files corresponding to a pre-installed application in Biowulf can be found in the folder /fdb/.
 Note the way we pass the arguments to the bash file. Arguments passed to a script are processed in the same order in which they’re sent (in this case, the order in the swarm file). The indexing of the arguments starts at one, and the first argument can be accessed inside the script using $1. Similarly, the second argument can be accessed using $2, and so on. Here we assign the first argument to variable $SAMPLE, and so on.
 
 <!--{% include image-modal.html link="practical_assets/Step1_1.PNG" %}-->
@@ -216,9 +216,9 @@ samtools sort -T /lscratch/$SLURM_JOB_ID/ -m 2G -@ 4 -O BAM \
 
 Let's take a look at the three commands separately:
 
-In the last line of the <code>fastp</code> command lines, '2' is a file descriptor. It redirects(writes) any 'standard error' messages to the log file fastp-${SAMPLE}.log, which will be otherwise output to the screen.
-In <code>bwa mem</code> options, <code>-t</code>specifies the number of threads. <code>-R</code> specifies the read header lines. <code>-</code> indicates taking the input from the standard input. In this example, we used the pipes to redirect the standard output of last command (aka, fastp) as the standard input into the next command (bwa). So we use this option to tell the script take the output from command as the input data.
-In <code>samtools sort</code> options, <code>-T</code> is the prefix of temporary files. <code>-m</code> and <code>-@</code> specify the memory per thread and the number of threads, respectively. <code>-O</code> specifies the output format.   
+In the last line of the <span style="color:crimson">fastp</span> command lines, '2' is a file descriptor. It redirects(writes) any 'standard error' messages to the log file fastp-${SAMPLE}.log, which will be otherwise output to the screen.
+In <span style="color:crimson">bwa mem</span> options, <span style="color:crimson">-t</span>specifies the number of threads. <span style="color:crimson">-R</span> specifies the read header lines. <span style="color:crimson">-</span> indicates taking the input from the standard input. In this example, we used the pipes to redirect the standard output of last command (aka, fastp) as the standard input into the next command (bwa). So we use this option to tell the script take the output from command as the input data.
+In <span style="color:crimson">samtools sort</span> options, <span style="color:crimson">-T</span> is the prefix of temporary files. <span style="color:crimson">-m</span> and <span style="color:crimson">-@</span> specify the memory per thread and the number of threads, respectively. <span style="color:crimson">-O</span> specifies the output format.   
 
 **6\.** Now we have a sorted raw alignment BAM file. In the next section of the script, we mark read pairs that are likely to have originated from duplicates of the same DNA fragments uing [picard tools](https://broadinstitute.github.io/picard/).
 
@@ -237,7 +237,7 @@ java -Xmx2g -jar $PICARDJARPATH/picard.jar MarkDuplicates \
 The picard tools package contains multiple commands, and the command lines look like this:
 <code>java [java opts] -jar $PICARDJARPATH/picard.jar COMMAND [options] </code>
 
-We use a pipe to connect two picard commands <code>MarkDuplicates</code> and <code>SortSam</code>. Similar to the bwa example, in the second picard command, we use <code>-I /dev/stdin</code> to specify reading from standard input.
+We use a pipe to connect two picard commands <span style="color:crimson">MarkDuplicates</span> and <span style="color:crimson">SortSam</span>. Similar to the bwa example, in the second picard command, we use <span style="color:crimson">-I /dev/stdin</span> to specify reading from standard input.
 
 **7\.** In the last part of the script, we recalibrate base quality score to correct for patterns of systematic errors using the [GATK tools for BQSR](https://gatk.broadinstitute.org/hc/en-us/articles/360035890531-Base-Quality-Score-Recalibration-BQSR-). The GATK command lines look like this:
 <code>gatk --java-options "[java opts]" ToolName [options] </code>
@@ -262,13 +262,13 @@ gatk --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID -Xms6G -Xmx6G -XX:P
   >> ${logs}/BQSR-${SAMPLE}.log 2>&1
 ```
 
-The first tool <code>BaseRecalibrator</code> builds the recalibration model. As we calculate the mismatched bases, we exclude the loci known to vary in the population, which requires the input of known variants resource. And this is specified by the option <code>--known-sites</code>.  The second tool, <code>ApplyBQSR</code> ,adjusts the score based on the model.
+The first tool <span style="color:crimson">BaseRecalibrator</span> builds the recalibration model. As we calculate the mismatched bases, we exclude the loci known to vary in the population, which requires the input of known variants resource. And this is specified by the option <span style="color:crimson">--known-sites</span>.  The second tool, <span style="color:crimson">ApplyBQSR</span> ,adjusts the score based on the model.
 
 The command line <code>> ${logs}/BQSR-${SAMPLE}.log 2>&1</code> redirects 'standard error' messages - denoted by file descriptor '2' - to the 'standard output' - denoted by file descriptor '1', and writes both mesagges to the log file BQSR-${SAMPLE}.log, which will be otherwise output to the screen.
 
 **8\.** By the end of step 1, you should have generated analysis-ready BAM files for each individual sample (tumor and normal). We prepared the sample output data in the /Results/ directory for you to check.
 
-<code>ls ../Results</code>
+<code>ls ../Results</code>{% include code-snippet-copy.html %}
 
 ---
 
@@ -285,7 +285,7 @@ Let's examine the swarm file.
 sh Step2_somatic_variant_discovery_MuTect2.sh  GPK7017_2000 GPK4013_0401 PAP1_1708_01_T01 ../Results ../Results
 ```
 
-Simlar to the first step, we use one bash file to process tumor/normal sample pairs in batches. In this example, we have only one tumor/normal pair, but we can easily scale up in this way. Now let's quit the swarm file by with <code>:q</code> and open the script file:
+Simlar to the first step, we use one bash file to process tumor/normal sample pairs in batches. In this example, we have only one tumor/normal pair, but we can easily scale up in this way. Now let's quit the swarm file by with <span style="color:crimson">:q</span> and open the script file:
 
 <code>vi Step2_somatic_variant_discovery_MuTect2.sh</code>{% include code-snippet-copy.html %}
 
@@ -415,9 +415,9 @@ gatk --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID -Xms20G -Xmx20G -XX
   > ${logs}/Mutect2-${PREFIX}.log 2>&1
 ```
 
-The options <code>-I</code> were used twice to specify the input BAM files for normal and tumor samples, respectively. The names of the tumor and normal samples are specified by the options <code>-tumor</code> and <code>-normal</code>, which have to match the sample names in the read group lines of the BAM file. Note that the read group lines take this format: <code>@RG\tID:$id\tPL:ILLUMINA\tLB:$lb\tSM:$sm</code>, and the sample names are in the last field.
+The options <span style="color:crimson">-I</span> were used twice to specify the input BAM files for normal and tumor samples, respectively. The names of the tumor and normal samples are specified by the options <span style="color:crimson">-tumor</span> and <span style="color:crimson">-normal</span>, which have to match the sample names in the read group lines of the BAM file. Note that the read group lines take this format: <code>@RG\tID:$id\tPL:ILLUMINA\tLB:$lb\tSM:$sm</code>, and the sample names are in the last field.
 
-If we are working with whole exome or genome sequencing data, then this step requires a large amount of memory. They can be changed in the java options <code>-Xms</code> and <code>-Xmx</code>. MuTect2 does not allow multithreading in its options. So to spped up this process, you may consider parallel computing using a 'scatter-gather' approach, that is, run separate GATK commands to process a proportion of the input data and collate all the results into the final output. For more information, please refer to [https://gatk.broadinstitute.org/hc/en-us/articles/360035532012-Parallelism-Multithreading-Scatter-Gather](https://gatk.broadinstitute.org/hc/en-us/articles/360035532012-Parallelism-Multithreading-Scatter-Gather).
+If we are working with whole exome or genome sequencing data, then this step requires a large amount of memory. They can be changed in the java options <span style="color:crimson">-Xms</span> and <span style="color:crimson">-Xmx</span>. MuTect2 does not allow multithreading in its options. So to spped up this process, you may consider parallel computing using a 'scatter-gather' approach, that is, run separate GATK commands to process a proportion of the input data and collate all the results into the final output. For more information, please refer to [https://gatk.broadinstitute.org/hc/en-us/articles/360035532012-Parallelism-Multithreading-Scatter-Gather](https://gatk.broadinstitute.org/hc/en-us/articles/360035532012-Parallelism-Multithreading-Scatter-Gather).
 
 
 **11\.** The next part of the script calculates the cross-sample contamination and estimates the allelic copy number segmentation for each tumor sample. It will generate a contamination-table file that will be used for filtering  This is an optional step.
@@ -449,13 +449,15 @@ gatk --java-options "-Xms10G -Xmx10G -XX:ParallelGCThreads=2" CalculateContamina
      >> ${logs}/VarFilter-${PREFIX}.log 2>&1
 ```
 
-The tool <code>GetPileupSummaries</code> summarizes read counts that support reference, alternative and other alleles for given sites. In its options <code>-V</code> and <code>-L</code>, it requires an input file for common germline variant sites, e.g. this file from the gnomAD resource. We provide a reference file small_exac_common_3.hg38.vcf.gz in our folder. Other reference files for this purpose (e.g. gnomAD) can be found at the GATK Google bucket. In an interactive session, you may use the following commands to check and download the reference files for common germline variant sites.
+The tool <span style="color:crimson">GetPileupSummaries</span> summarizes read counts that support reference, alternative and other alleles for given sites. In its options <span style="color:crimson">-V</span> and <span style="color:crimson">-L</span>, it requires an input file for common germline variant sites, e.g. this file from the gnomAD resource. We provide a reference file small_exac_common_3.hg38.vcf.gz in our folder. Other reference files for this purpose (e.g. gnomAD) can be found at the GATK Google bucket.
+
+**For your future reference**: you may use the following commands within an interactive session to check and download the reference files for common germline variant sites (for today's ).
 
 <code>module load google-cloud-sdk<br>
 gsutil ls gs://gatk-best-practices/somatic-hg38/<br>
 gsutil ls gs://gatk-best-practices/somatic-hg38/af-only-gnomad.hg38.vcf.gz* ./</code>
 
-**12\.** Then we will filter the mutation candidates using the tool [FilterMutationCalls](https://gatk.broadinstitute.org/hc/en-us/articles/360036856831-FilterMutectCalls). The options <code>--contamination-table</code> and <code>--tumor-segmentation</code> use the output from the previous step and are optional.
+**12\.** Then we will filter the mutation candidates using the tool [FilterMutationCalls](https://gatk.broadinstitute.org/hc/en-us/articles/360036856831-FilterMutectCalls). The options <span style="color:crimson">--contamination-table</span> and <span style="color:crimson">--tumor-segmentation</span> use the output from the previous step and are optional.
 
 <!--{% include image-modal.html link="practical_assets/Step2_4.PNG" %}-->
 ```bash
@@ -472,14 +474,14 @@ gatk --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID -Xms20G -Xmx20G -XX
 awk '($1 ~/^#/) || ($7 ~ /PASS/) {print}' $OUT_FILTERED_VCF >$OUT_PASSED_VCF
 ```
 
-This process annotates the variants as 'PASS' in the 'FILTER' field in its output VCF file, but will keep all the candidate variants, including those that failed the filtering, in its output. So we use an <code>awk</code> command to extract all the variants that pass the filtering.
+This process annotates the variants as 'PASS' in the 'FILTER' field in its output VCF file, but will keep all the candidate variants, including those that failed the filtering, in its output. So we use an <span style="color:crimson">awk</span> command to extract all the variants that pass the filtering.
 
 **13\.** At the end of step 2, we have VCF files for original candidates and candidates that pass the filtering. How do we check the number of candidate mutations in each file? We use these commands.
 
 <code>grep -v "^#" PAP1_1708_01_T01.vcf | wc -l<br>
 grep -v "^#" PAP1_1708_01_T01_passed.vcf | wc -l </code>{% include code-snippet-copy.html %}
 
-<code>grep -v</code> will extract all lines that do NOT contain a specific pattern. The pattern we specify is "^#", which is lines starting with the "#" symbol. This will exclude all the header lines in the VCF file. Then we redirect the output to the command <code>wc -l</code> which calculates the number of lines.
+<span style="color:crimson">grep -v</span> will extract all lines that do NOT contain a specific pattern. The pattern we specify is "^#", which is lines starting with the "#" symbol. This will exclude all the header lines in the VCF file. Then we redirect the output to the command <span style="color:crimson">wc -l</span> which calculates the number of lines.
 
 ---
 
@@ -537,12 +539,13 @@ echo "Annotation completed. $(($duration / 60)) minutes and $(($duration % 60)) 
 ```
 
 Funcotator is a tool in the GATK package. It requires five input files:
-<code>-R</code> A reference genome sequence.
-<code>-V</code> A VCF of variant calls to annotate.
-<code>--data-sources-path</code> The path to data sources or required formats.
-<code>--ref_version</code> The version of the reference genome sequence being used.
-<code>--output-file-format</code> The desired output format for the annotated variants file (MAF or VCF).
-We also specify the output file name with the <code>-O</code> option.
+
+- <code>-R</code> A reference genome sequence.
+- <code>-V</code> A VCF of variant calls to annotate.
+- <code>--data-sources-path</code> The path to data sources or required formats.
+- <code>--ref_version</code> The version of the reference genome sequence being used.
+- <code>--output-file-format</code> The desired output format for the annotated variants file (MAF or VCF).
+We also specify the output file name with the <span style="color:crimson">-O</span> option.
 
 ```bash
 gatk --java-options "-Xms10G -Xmx10G -XX:ParallelGCThreads=2" Funcotator -R $GENOME \
@@ -553,8 +556,14 @@ gatk --java-options "-Xms10G -Xmx10G -XX:ParallelGCThreads=2" Funcotator -R $GEN
      --ref-version hg38
 ```
 
-All the data source files have already been downloaded in the Biowulf, so we specify the data source folder using this command: <code>FUNCOTATORDB=/fdb/GATK_resource_bundle/funcotator/funcotator_dataSources.v1.7.20200521s</code>
+All the data source files have already been downloaded in the Biowulf, so we specify the data source folder using this command:
+
+```bash
+FUNCOTATORDB=/fdb/GATK_resource_bundle/funcotator/funcotator_dataSources.v1.7.20200521s
+```
+
 The script takes three arguments to generate the input/output paths and file names: the prefix of the input VCF file, the input and output directories.
+
 The basic output files in VCF or MAF format contains all variants from the input file, with added annotation from the data sources.
 
 We will run the second annotation package ANNOVAR and check the results together later.
@@ -604,7 +613,7 @@ duration=$SECONDS
 echo "Annotation completed. $(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
 ```
 
-The program <code>convert2annovar.pl</code> converts the VCF format into the ANNOVAR input format (.avinput file). For specification of the ANNOVAR input format, you may get more details at: [https://annovar.openbioinformatics.org/en/latest/user-guide/input/](https://annovar.openbioinformatics.org/en/latest/user-guide/input/).
+The program <span style="color:crimson">convert2annovar.pl</span> converts the VCF format into the ANNOVAR input format (.avinput file). For specification of the ANNOVAR input format, you may get more details at: [https://annovar.openbioinformatics.org/en/latest/user-guide/input/](https://annovar.openbioinformatics.org/en/latest/user-guide/input/).
 
 ```bash
 convert2annovar.pl -format vcf4 $IN_VCF -includeinfo >${PREFIX}.avinput
@@ -614,12 +623,12 @@ table_annovar.pl  ${PREFIX}.avinput $ANNOVAR_DATA/hg38 \
 	-nastring . -csvout -polish
 ```
 
-The program <code>table_annovar.pl</code> is the core command for annotation. <code>-protocol</code> specifies the annotation sources to use:ExAC version 0.3 (referred as exac03), dbNFSP version 3.0a (referred to as dbnsfp30a), dbSNP version 147 with left-normalization (referred to as avsnp147). Each 'protocol' corresponds to one field in the <code>-option</code> argument: gene-based (referred to as g), gene-based with cross-reference annotation (referred to as gx), region-based (referred to as r) and filter-based (referred to as f). In the final output file, a tab-delimited file with many columns will contain the input columns and annotation columns, that correspond to the  combination of 'protocol' and 'option'. For more details, please refer to [https://annovar.openbioinformatics.org/en/latest/user-guide/startup/#table_annovarpl](https://annovar.openbioinformatics.org/en/latest/user-guide/startup/#table_annovarpl).
+The program <span style="color:crimson">table_annovar.pl</span> is the core command for annotation. <span style="color:crimson">-protocol</span> specifies the annotation sources to use:ExAC version 0.3 (referred as exac03), dbNFSP version 3.0a (referred to as dbnsfp30a), dbSNP version 147 with left-normalization (referred to as avsnp147). Each 'protocol' corresponds to one field in the <span style="color:crimson">-option</span> argument: gene-based (referred to as g), gene-based with cross-reference annotation (referred to as gx), region-based (referred to as r) and filter-based (referred to as f). In the final output file, a tab-delimited file with many columns will contain the input columns and annotation columns, that correspond to the  combination of 'protocol' and 'option'. For more details, please refer to [https://annovar.openbioinformatics.org/en/latest/user-guide/startup/#table_annovarpl](https://annovar.openbioinformatics.org/en/latest/user-guide/startup/#table_annovarpl).
 
 **16\.** Now open the two output files for both software in Excel.
 
-<code>PAP1_1708_01_T01_funcotator.maf<br>
-PAP1_1708_01_T01.hg38_multianno.csv</code>
+<code>PAP1_1708_01_T01_funcotator.maf</code>,<br>
+<code>PAP1_1708_01_T01.hg38_multianno.csv</code>
 
 The Funcotator output is in the MAF format, the first several columns are the basic features of the mutation: genomic coordinates, reference and variant alleles, variant classifications and types. The variant classifications and types could be used to prioritize candidate driver mutations.
 
@@ -646,7 +655,7 @@ For the next a few columns, the ExAC* columns are allele frequencies in all the 
 
 **18\.** In the upper left of the IGV window you will see a dropdown menu to select a reference genome. Select  GRCh38/hg38.
 
-**19\.** Now you will need to load the BAM files into IGV. These files can be downloaded from . You can download them like so (replace USERNAME with your unique Biowulf username):
+**19\.** Now you will need to load the BAM files into IGV. These files can be downloaded from . You can download them like so (**replace USERNAME with your unique Biowulf username**):
 
 <code>scp -r USERNAME@helix.nih.gov:/scratch/sangj2/0-Session4-IGV .</code>
 
@@ -662,13 +671,13 @@ Once the files are downloaded, load them into IGV by clicking **File >> Load fro
 
 ### Passing Variants
 
-**21\.** Now let's examine some variants. First, search 'chr7:116782048 in the search bar at the top of the IGV window (boxed in red in the example image below). Individually right click "Normal.bam" and "Tumor.bam" and select **Color alignments by >> read strand** in the menu that appears for each; this will allow you to clearly see which reads are forward-strand reads and which are reverse-strand reads.
+**21\.** Now let's examine some variants. First, search <code style="color:green">chr7:116782048</code>{% include code-snippet-copy.html %} in the search bar at the top of the IGV window (boxed in red in the example image below). Individually right click "Normal.bam" and "Tumor.bam" and select **Color alignments by >> read strand** in the menu that appears for each; this will allow you to clearly see which reads are forward-strand reads and which are reverse-strand reads.
 
 {% include image-modal.html link="practical_assets/IGV-exonPASS.png" max-width="60%" %}
 
 This variant is within an exon of the MET gene, and passes variant filters (FILTER column="PASS" in the .vcf file).
 
-Likewise we can examine a passing intronic variant. In the search bar at the top, search for 'chr7:2980922' and hit Go.
+Likewise we can examine a passing intronic variant. In the search bar at the top, search for <code style="color:green">chr7:2980922</code>{% include code-snippet-copy.html %} and hit Go.
 
 {% include image-modal.html link="practical_assets/IGV-intronPASS.png" max-width="60%" %}
 
@@ -676,15 +685,15 @@ Likewise we can examine a passing intronic variant. In the search bar at the top
 
 ### Filtered Variants
 
-**22\.** Let's now examine some variants that do not pass filters. In the search bar at the top, search for 'chr7:65975357'. This variant was filtered because it was flagged as germline, and you can see that both the tumor and normal samples contain a roughly equal proportion of reads with a C>G variant.
+**22\.** Let's now examine some variants that do not pass filters. In the search bar at the top, search for <code style="color:green">chr7:65975357</code>{% include code-snippet-copy.html %}. This variant was filtered because it was flagged as germline, and you can see that both the tumor and normal samples contain a roughly equal proportion of reads with a C>G variant.
 
 {% include image-modal.html link="practical_assets/IGV-germlineEvent.png" max-width="60%" %}
 
-To see a variant exhibiting strand bias, search for 'chr7:99966779' in the search bar. As you can see, these variants are only detected on reverse-strand reads and not forward-strand reads, which is a likely sign of an artifact from sequencing.
+To see a variant exhibiting strand bias, search for <code style="color:green">chr7:99966779</code>{% include code-snippet-copy.html %} in the search bar. As you can see, these variants are only detected on reverse-strand reads and not forward-strand reads, which is a likely sign of an artifact from sequencing.
 
 {% include image-modal.html link="practical_assets/IGV-strandBias.png" max-width="60%" %}
 
-Lastly, we highlight a multi-allelic site. Search for 'chr7:140777206'. Here you can see at that genomic location the reference is an A, the tumor contains many A>T mutations, but also has several reads with a deletion at that location. Multi-allelic sites are generally very rare and are more likely to be a sign of a noisy region in the genome than a true variant.
+Lastly, we highlight a multi-allelic site. Search for <code style="color:green">chr7:140777206</code>{% include code-snippet-copy.html %}. Here you can see at that genomic location the reference is an A, the tumor contains many A>T mutations, but also has several reads with a deletion at that location. Multi-allelic sites are generally very rare and are more likely to be a sign of a noisy region in the genome than a true variant.
 
 {% include image-modal.html link="practical_assets/IGV-multiAllele.png" max-width="60%" %}
 
@@ -710,7 +719,7 @@ demonstration today, use this [link](https://www.bioconductor.org/packages/devel
 
 ### Download session directory
 
-First we will download the directory we have created for this session. This directory is called <code>session4_maftools</code>, and you can download it [here]().
+First we will download the directory we have created for this session. This directory is called <span style="color:crimson">session4_maftools</span>, and you can download it [here]().
 
 This directory includes 2 files: 1) the MAF data we will be using today, and 2) the R script with all of the commands you will find throughout this part of the practical session.
 
@@ -736,7 +745,8 @@ BiocManager::install("maftools")
 The code above installs BiocManager if it is not already installed, and then uses BiocManager to install the maftools package.  BiocManager is a package manager for the Bioconductor repository, which includes a series of R packages used for genomic analysis. Click these links for additional information about [BiocManager](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html) or [Bioconductor](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html).
 
 After you install maftools, load the package using the command:
-<code style="color: blue">library(maftools)</code>
+
+<code style="color: blue">library(maftools)</code>{% include code-snippet-copy.html %}
 
 **Additional Information:** For some functions in exercises not being demonstrated today but available as supplemental information, you will need to use the tidyverse package. Install the tidyverse package if you do not already have it installed. Then load tidyverse. This package contains a group of R packages that are useful for data analyses and visualization.
 
@@ -754,7 +764,7 @@ if(!('tidyverse' %in% installed.packages())){
 
 ### Load the data into R
 
-Run <code style="color: blue">getwd()</code> to make sure that the current working directory is the path to the session4_maftools folder:
+Run <span style="color: blue">getwd()</span> to make sure that the current working directory is the path to the session4_maftools folder:
 
 ```R
 >getwd()
@@ -765,12 +775,12 @@ Windows:
 [1] "C:/Users/[username]/Documents/session4_maftools"
 ```
 
-If the working directory is not the session4_maftools directory, use the <code>setwd()</code> command to set this directory as the working directory (replace [username] with your NIH username):
+If the working directory is not the session4_maftools directory, use the <span style="color: blue">setwd()</span> command to set this directory as the working directory (replace [username] with your NIH username):
 
 **Mac:** <code style="color: blue">setwd("/Users/[username]/Documents/session4_maftools")</code>{% include code-snippet-copy.html %}
 **Windows:** <code style="color: blue">setwd("C:/Users/[username]/Documents/session4_maftools")</code>{% include code-snippet-copy.html %}
 
-Then run <code style="color: blue">getwd()</code> as before to make sure the working directory is now correct.
+Then run <span style="color: blue">getwd()</span> as before to make sure the working directory is now correct.
 
 We have extracted over 550 TCGA-LUAD (lung adenocarcinoma) whole exome sequencing (WES) samples using the public MAF file generated as a part of the TCGA MC3 project. A sample manifest file was used to extract data for primary tumor WES samples from the public MAF file.
 
@@ -944,7 +954,7 @@ First, we will generate a plot for TP53, labeling a few specific amino acid posi
 
 {% include image-modal.html link="practical_assets/maftools_lollipop1.png" %}
 
-In the plot above, we see the different protein domains of p53 along the amino acid residue positions on the x-axis. In the main panel of the plot, there is a lollipop for each of the amino acid positions that have a mutation. These lollipops are colored by variant classification (legend bottom left), and we have added a label to a few of the lollipops by using the argument <code style="color: blue">labelPos</code> which follows the notation Original Residue-Amino Acid Position- NewResidue/Residues. In this plot for TP53, we can see that the mutation rate across the TCGA-LUAD samples is about 51%. There are several mutations, with changes at residue 175, 245, and 273 labeled.
+In the plot above, we see the different protein domains of p53 along the amino acid residue positions on the x-axis. In the main panel of the plot, there is a lollipop for each of the amino acid positions that have a mutation. These lollipops are colored by variant classification (legend bottom left), and we have added a label to a few of the lollipops by using the argument <span style="color: blue">labelPos</span> which follows the notation Original Residue-Amino Acid Position- NewResidue/Residues. In this plot for TP53, we can see that the mutation rate across the TCGA-LUAD samples is about 51%. There are several mutations, with changes at residue 175, 245, and 273 labeled.
 
 We can also generate a plot where we label all of the amino acid changes. We will use KRAS for this example, since it does not have nearly as many lollipops as TP53:
 
@@ -964,7 +974,7 @@ Now we will generate a rainfall plot, which helps to illustrate hyper-mutated ge
 
 We will be using data from TCGA breast cancer samples that include a few examples of this phenomenon.
 
-First, we need to direct R to where this file is stored, using the <code style="color: blue">system.file()</code> function. We are pointing R to the <code style="color: blue">extdata</code> folder in the maftools package, where the file, brca.maf.gz, is located:
+First, we need to direct R to where this file is stored, using the <span style="color: blue">system.file()</span> function. We are pointing R to the <span style="color: blue">extdata</span> folder in the maftools package, where the file, brca.maf.gz, is located:
 
 <code style="color: blue">brca <- system.file("extdata", "brca.maf.gz", package = "maftools")</code>{% include code-snippet-copy.html %}
 
