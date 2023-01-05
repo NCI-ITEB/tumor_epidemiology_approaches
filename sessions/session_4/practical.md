@@ -64,7 +64,7 @@ The <code>swarm</code> will return a job ID and it will be saved to <code>$jobid
 <code>jobid2=$(swarm -t 8 -g 20 --gres=lscratch:20 --dependency=afterany:$jobid1 --job-name step2 scripts_for_step2.swarm)<br>
 echo $jobid2</code>{% include code-snippet-copy.html %}
 
-In a few seconds, let's check the job status using <code>sjobs<code>, the second job will sit in a pending state until all the processes in job1 are finished.
+In a few seconds, let's check the job status using <code>sjobs</code>, the second job will sit in a pending state until all the processes in job1 are finished.
 
 ---
 
@@ -220,8 +220,7 @@ In the last line of the <code>fastp</code> command lines, '2' is a file descript
 In <code>bwa mem</code> options, <code>-t</code>specifies the number of threads. <code>-R</code> specifies the read header lines. <code>-</code> indicates taking the input from the standard input. In this example, we used the pipes to redirect the standard output of last command (aka, fastp) as the standard input into the next command (bwa). So we use this option to tell the script take the output from command as the input data.
 In <code>samtools sort</code> options, <code>-T</code> is the prefix of temporary files. <code>-m</code> and <code>-@</code> specify the memory per thread and the number of threads, respectively. <code>-O</code> specifies the output format.   
 
-**6\.** Now we have a sorted raw alignment BAM file. In the next section of the script, we mark read pairs that are likely to have originated from duplicates of the same DNA fragments uing [picard tools](https://broadinstitute.github.io/picard/). The picard tools package contains multiple commands, and the command lines look like this:
-<code>java [java opts] -jar $PICARDJARPATH/picard.jar COMMAND [options] </code>
+**6\.** Now we have a sorted raw alignment BAM file. In the next section of the script, we mark read pairs that are likely to have originated from duplicates of the same DNA fragments uing [picard tools](https://broadinstitute.github.io/picard/).
 
 <!--{% include image-modal.html link="practical_assets/Step1_3.PNG" %}-->
 ```bash
@@ -234,6 +233,9 @@ java -Xmx2g -jar $PICARDJARPATH/picard.jar MarkDuplicates \
       -I /dev/stdin -O $DIR/${SAMPLE}_markdup_sorted.bam \
       -SORT_ORDER coordinate 2>> ${logs}/markdup-${SAMPLE}.log
 ```
+
+The picard tools package contains multiple commands, and the command lines look like this:
+<code>java [java opts] -jar $PICARDJARPATH/picard.jar COMMAND [options] </code>
 
 We use a pipe to connect two picard commands <code>MarkDuplicates</code> and <code>SortSam</code>. Similar to the bwa example, in the second picard command, we use <code>-I /dev/stdin</code> to specify reading from standard input.
 
@@ -823,13 +825,14 @@ An object of class MAF
 
 The summary of the object above shows you the genome build used in generating this data, the number of samples included, the number of genes included, and a variety of variant classification types, ranging from frame shifts to nonstop mutations.
 
-**Additional Information:** We are not going to go through the following commands today, but you can use them to generate a sample summary, a gene summary, explore the fields in the file (i.e. column names), and even write a MAF summary.
 
 <details>
 
-<summary> More Details </summary>
+<summary><b>Additional Information</b></summary>
 
-<blockquote>
+<blockquote markdown="1">
+
+You can generate a sample summary, a gene summary, explore the fields in the file (i.e. column names), and even write a MAF summary.
 
 To generate a summary of the MAF file by sample: <code style="color: blue">getSampleSummary(tcga_luad_maf) %>% View()</code>{% include code-snippet-copy.html %} .
 
@@ -843,16 +846,18 @@ Here is an example of what the first few rows and columns of that table look lik
 
 {% include image-modal.html link="practical_assets/maftools_getGeneSummary.png" max-width="70%"%}
 
-<b>Tip:</b> Using View() after these commands opens them in a new tab in RStudio in an interactive table format. Otherwise the table will print directly to the R console in a format that is difficult to read.
+**Tip:** Using View() after these commands opens them in a new tab in RStudio in an interactive table format. Otherwise the table will print directly to the R console in a format that is difficult to read.
 
 <code style="color: blue">getFields(tcga_luad_maf)</code>{% include code-snippet-copy.html %}
 This will print fields included in the MAF object. There are 114 fields in our object, so shown here are just the first 10.
 
+```R
 [1] "Hugo_Symbol"                   "Entrez_Gene_Id"               
 [3] "Center"                        "NCBI_Build"                   
 [5] "Chromosome"                    "Start_Position"               
 [7] "End_Position"                  "Strand"                       
 [9] "Variant_Classification"        "Variant_Type"      
+```
 
 <code style="color: blue">write.mafSummary(maf=tcga_luad_maf, basename='tcga_luad')</code>{% include code-snippet-copy.html %}
 This will save a MAF summary to your current working directory. This consists of several files, including clinicalData (if available), maftools.MAF, summary, sampleSummary, and geneSummary files. Here is an example of these files on a local machine after they have been generated:
@@ -890,16 +895,16 @@ Use the following command to generate the MAF summary for the TCGA-LUAD data:
 
 Below is a brief explanation for each of the components in the summary above
 
-<details>
+<details markdown="1">
 
 | Component                      | Description                                                                                                                                                                                                                                                                                                                                  | Sample Interpretation                                                                                                                                                   |
 |--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Variant Classification         | Total number of mutations for each variant classification category across all samples.                                                                                                                                                                                                                                                       | The TCGA-LUAD samples contain the most missense mutations over any other variant classification type.                                                                   |
-| Variant Type                   | Total number of mutations for each variant type across all samples in a file. (SNP- Single Nucleotide Polymorphisms, TNP- Triple Nucleotide Polymorphism, ONP- Oligonucleotide Polymorphism, INS- insertion, DEL- deletion). For more information click here.                                                                                | The TCGA-LUAD samples contain the greatest number of SNPs compared to any other variant type.                                                                           |
-| SNV Class                      | Total number of mutations for each Single Nucleotide Variant (SNV) class. There are six main SNV classes, as listed here: T>G, T>A, T>C, C>T, C>G, and C>A. The first base notes the original, and the base following the ‘>’ symbol is the mutated base.                                                                                    | In the TCGA-LUAD samples, there are almost 100,000 C>A mutations, which make up almost half of all of the SNVs in this TCGA-LUAD cohort.                                |
-| Variants per sample            | In this bar plot, samples are along the x-axis, and the total number of mutations in each sample are along the y-axis. These counts are colored by variant classification. The median number of variants per sample is shown as a dashed line.                                                                                               | In this TCGA-LUAD cohort, there are a median of 187 variants per sample.                                                                                                |
-| Variant Classification summary | This plot is made up of a series of box plots, one for each variant classification category. It summarizes the median number of a given variant classification type across all samples.                                                                                                                                                      | The TCGA-LUAD samples contain the most missense mutations over any other variant classification type. The median number of missense mutations is close to 200.          |
-| Top 10 mutated genes           | The bar plot shows the top 10 mutated genes in the cohort. The x-axis notes the number of variants per gene, and the y-axis contains the genes. The bars on the plot are colored by variant classification category. At the end of each bar there is a percentage, denoting the percentage of samples with at least one variant in the gene. | In the TCGA-LUAD samples, TTN was the most mutated gene, with almost 700 mutations in 48% of samples. TP53 was mutated in 51% of the samples, with about 250 mutations. |
+| Variant Classification  <img src="practical_assets/maftools_varClass.png">  | Total number of mutations for each variant classification category across all samples.                                                                                                                                                                                                                                                       | The TCGA-LUAD samples contain the most missense mutations over any other variant classification type.                                                                   |
+| Variant Type    <img src="practical_assets/maftools_varType.png">  | Total number of mutations for each variant type across all samples in a file. (SNP- Single Nucleotide Polymorphisms, TNP- Triple Nucleotide Polymorphism, ONP- Oligonucleotide Polymorphism, INS- insertion, DEL- deletion). For more information click here.                                                                                | The TCGA-LUAD samples contain the greatest number of SNPs compared to any other variant type.                                                                           |
+| SNV Class    <img src="practical_assets/maftools_snvClass.png">     | Total number of mutations for each Single Nucleotide Variant (SNV) class. There are six main SNV classes, as listed here: T>G, T>A, T>C, C>T, C>G, and C>A. The first base notes the original, and the base following the ‘>’ symbol is the mutated base.                                                                                    | In the TCGA-LUAD samples, there are almost 100,000 C>A mutations, which make up almost half of all of the SNVs in this TCGA-LUAD cohort.                                |
+| Variants per sample   <img src="practical_assets/maftools_varsPerSample.png"> | In this bar plot, samples are along the x-axis, and the total number of mutations in each sample are along the y-axis. These counts are colored by variant classification. The median number of variants per sample is shown as a dashed line.                                                                                               | In this TCGA-LUAD cohort, there are a median of 187 variants per sample.                                                                                                |
+| Variant Classification summary <img src="practical_assets/maftools_varClassSummary.png"> | This plot is made up of a series of box plots, one for each variant classification category. It summarizes the median number of a given variant classification type across all samples.                                                                                                                                                      | The TCGA-LUAD samples contain the most missense mutations over any other variant classification type. The median number of missense mutations is close to 200.          |
+| Top 10 mutated genes  <img src="practical_assets/maftools_top10Genes.png"> | The bar plot shows the top 10 mutated genes in the cohort. The x-axis notes the number of variants per gene, and the y-axis contains the genes. The bars on the plot are colored by variant classification category. At the end of each bar there is a percentage, denoting the percentage of samples with at least one variant in the gene. | In the TCGA-LUAD samples, TTN was the most mutated gene, with almost 700 mutations in 48% of samples. TP53 was mutated in 51% of the samples, with about 250 mutations. |
 
 </details>
 
@@ -937,7 +942,7 @@ First, we will generate a plot for TP53, labeling a few specific amino acid posi
 
 <code style="color: blue">lollipopPlot(maf=tcga_luad_maf, gene= 'TP53', AACol = 'HGVSp_Short', showMutationRate = TRUE, labelPos=c(175,245,273))</code>{% include code-snippet-copy.html %}
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/maftools_lollipop1.png" %}
 
 In the plot above, we see the different protein domains of p53 along the amino acid residue positions on the x-axis. In the main panel of the plot, there is a lollipop for each of the amino acid positions that have a mutation. These lollipops are colored by variant classification (legend bottom left), and we have added a label to a few of the lollipops by using the argument <code style="color: blue">labelPos</code> which follows the notation Original Residue-Amino Acid Position- NewResidue/Residues. In this plot for TP53, we can see that the mutation rate across the TCGA-LUAD samples is about 51%. There are several mutations, with changes at residue 175, 245, and 273 labeled.
 
@@ -945,7 +950,7 @@ We can also generate a plot where we label all of the amino acid changes. We wil
 
 <code style="color: blue">lollipopPlot(maf = tcga_luad_maf, gene = 'KRAS', AACol = 'HGVSp_Short', showMutationRate = TRUE, labelPos = 'all')</code>{% include code-snippet-copy.html %}
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/maftools_lollipop2.png" %}
 
 In the plot above, we see the different protein domains of KRAS along the amino acid residue positions. In the main panel of the plot, there is a lollipop for each of the amino acid positions that have a mutation. These lollipops are colored by variant classification (legend bottom left), and this time we have set <span style="color: blue">labelPos='all'</span> since the plot has fewer lollipops that they could all be seen clearly. In this plot for KRAS, we can see that the mutation rate across the TCGA-LUAD samples is about 30%. There are several mutations at the G12 position, the first set of lollipops you see on the far left of the plot.
 
@@ -995,9 +1000,15 @@ This is because we included the <span style="color: blue">detectChangePoints = T
 
 In the plot below generated using the breast cancer data, arrows denote the areas of kataegis. You can see in these areas there are several mutations very close to one another.
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/maftools_rainfall.png" %}
 
-**Additional Information:** We can try to find some of these events in the TCGA-LUAD samples as well. First, we will find the tumor mutational burden (TMB), the total number of mutations (changes) found in the DNA of cancer cells. Then we take those with the highest levels of TMB and see if we can identify any katageis events.
+<details>
+
+<summary><b>Additional Information:</b></summary>
+
+<blockquote markdown="1">
+
+We can try to find some of these events in the TCGA-LUAD samples as well. First, we will find the tumor mutational burden (TMB), the total number of mutations (changes) found in the DNA of cancer cells. Then we take those with the highest levels of TMB and see if we can identify any katageis events.
 
 a. Calculate TMB and arrange by descending total TMB, then pull the top 10 tumor sample barcodes:
 
@@ -1007,7 +1018,7 @@ This first command runs the <span style="color: blue">tmb()</span> function avai
 
 After running this first command, you will see a Mutation Burden plot pop-up in the Plots window. This shows you the mutation burden across (TMB/MB(log10)) samples. There is a median 3.74/MB mutations per sample. In addition, if you type <span style="color: blue">tmb_tcga_luad</span> in the console, you will see that there is a table that has been generated with TMB information.
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/maftools_rainfall.png" %}
 
 This command takes the table generated in step one and arranges it so samples with higher numbers of mutations are first in the table rather than last:
 
@@ -1030,9 +1041,12 @@ Kataegis detected at:
  1: 1139 TCGA-78-7155-01A-11D-2036-08   1   2   4
  ```
 
- {% include image-modal.html %}
+ {% include image-modal.html link="practical_assets/maftools_LUADKataegis.png" %}
 
  We can see from the table that the event is on chromosome 11 and consists of 7 mutations. In the plot, we see where the start of the event is as denoted by the arrow.
+
+</blockquote>
+</details>
 
 ---
 
@@ -1048,7 +1062,7 @@ Now we can run the following <span style="color: blue">tcgaCompare()</span> comm
 
 <code style="color: blue">tcga_luad_mutload <- tcgaCompare(maf = tcga_luad_maf, cohortName = 'Example Data', logscale = TRUE, capture_size = 35.8)</code>{% include code-snippet-copy.html %}
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/maftools_tcgaCompare.png" %}
 
 We set the <span style="color: blue">capture_size</span> parameter to 35.8 mb because this was the capture size used in the capture kit for TCGA samples.
 
@@ -1076,7 +1090,7 @@ First, we will look at the top 10 genes in the TCGA-LUAD data, using the followi
 
 You will see that in addition to a plot appearing in the plot window, there is a table generated to highlight all of the mutually exclusive and co-occurrence events. This table is ordered by p-value significance.
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/maftools_somaticInteractions1.png" %}
 
 In this plot, we can see a mutually exclusive significant interaction between KRAS and TP53, noted by the larger -log10(P-value) and the * symbol, denoting a P-value < 0.05. We can also see several significant co-occurrence interactions between TP53 and all of the other genes found in this plot.
 
@@ -1086,7 +1100,7 @@ Now we will note the specific genes we would like to see in the plot:
 
 <code style="color: blue">somaticInteractions(maf = tcga_luad_maf, genes = c('KRAS','EGFR','ERBB4','NTRK3','NF1','PDGFRA','BRAF','ALK','ROS1','NRTK2'), pvalue = c(0.05,0.1), nShiftSymbols = 2)</code>{% include code-snippet-copy.html %}
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/maftools_somaticInteractions2.png" %}
 
 In this plot, we can see a mutually exclusive significant interaction between *KRAS* and *BRAF*, *KRAS* and *NF1*, and *KRAS* and *EGFR*, noted by the larger -log10(P-value) and the * symbol, denoting a P-value < 0.05. We can also see several significant co-occurrence interactions, such as between *ERBB4* and *ALK*.
 
@@ -1100,7 +1114,7 @@ You can use the oncoplot to double check the relationship between two genes. For
 
 <code style="color: blue">oncoplot(maf = tcga_luad_maf, genes = c('KRAS','EGFR'))</code>{% include code-snippet-copy.html %}
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/maftools_interactionOncoplot.png" %}
 
 ---
 
@@ -1112,13 +1126,13 @@ We can also use the <span style="color: blue">OncogenicPathways()</span> functio
 
 Here is what that output table looks like:
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/maftools_oncoPathways.png" max-width="60%"%}
 
 Here you see the name of the pathway (e.g., TP53 pathway), the number of genes included in the pathway, the total number of genes in the pathway affected at least in one sample, the fraction of the pathway affected, the total number of samples with mutations observed in gene of that pathway, and the overall mutational frequency of all the genes in that pathway.
 
 Here is a visual representation of that table in bar plot format:
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/maftools_oncoPathwaysBar.png" %}
 
 The <span style="color: blue">PlotOncogenicPathways()</span> function allows you to visualize a pathway as an oncoplot:
 
@@ -1126,7 +1140,7 @@ Use the following command to generate an oncoplot for the RTK-RAS pathway:
 
 <code style="color: blue">PlotOncogenicPathways(maf = tcga_luad_maf, pathways = "RTK-RAS")</code>{% include code-snippet-copy.html %}
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/maftools_oncoplotPathways_RTKRAS.png" %}
 
 This plot visualizes the 82 genes that were mutated in almost 500 TCGA-LUAD samples. Tumor suppressor genes are colored in red and oncogenes are colored in blue. The plot orders the genes from top to bottom on the left side from most to least mutated. We can see here that KRAS is the most mutated gene in the RTK-RAS pathway, followed by EGFR and NF1.
 
@@ -1136,7 +1150,7 @@ We can visualize the TP53 pathway for additional practice, and to see what a les
 
 <code style="color: blue">PlotOncogenicPathways(maf = tcga_luad_maf, pathways = "TP53")</code>{% include code-snippet-copy.html %}
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/maftools_oncoplotPathways_TP53.png" %}
 
 This plot visualizes the 6 genes that were mutated in over 300 TCGA-LUAD samples. Tumor suppressor genes are colored in red and oncogenes are colored in blue. The plot orders the genes from top to bottom on the left side from most to least mutated. We can see here that *TP53* is the most mutated gene in the TP53 pathway, followed by *ATM* and *CHEK2*.
 
@@ -1146,8 +1160,8 @@ For additional practice, we can save this plot to our current working directory.
 
 Save as Image:
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/R_saveImage.png" max-width="50%" %}
 
 Save as PDF:
 
-{% include image-modal.html %}
+{% include image-modal.html link="practical_assets/R_savePDF.png" max-width="50%" %}
