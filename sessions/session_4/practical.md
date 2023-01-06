@@ -625,10 +625,10 @@ table_annovar.pl  ${PREFIX}.avinput $ANNOVAR_DATA/hg38 \
 
 The program <span style="color:crimson">table_annovar.pl</span> is the core command for annotation. <span style="color:crimson">-protocol</span> specifies the annotation sources to use:ExAC version 0.3 (referred as exac03), dbNFSP version 3.0a (referred to as dbnsfp30a), dbSNP version 147 with left-normalization (referred to as avsnp147). Each 'protocol' corresponds to one field in the <span style="color:crimson">-option</span> argument: gene-based (referred to as g), gene-based with cross-reference annotation (referred to as gx), region-based (referred to as r) and filter-based (referred to as f). In the final output file, a tab-delimited file with many columns will contain the input columns and annotation columns, that correspond to the  combination of 'protocol' and 'option'. For more details, please refer to [https://annovar.openbioinformatics.org/en/latest/user-guide/startup/#table_annovarpl](https://annovar.openbioinformatics.org/en/latest/user-guide/startup/#table_annovarpl).
 
-**16\.** Now open the two output files for both software in Excel.
+**16\.** Now open the two output files for both software in Excel (you can **right click >> Save as...** these links).
 
-<code>PAP1_1708_01_T01_funcotator.maf</code>,<br>
-<code>PAP1_1708_01_T01.hg38_multianno.csv</code>
+- [PAP1_1708_01_T01_funcotator.maf](https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_4/PAP1_1708_01_T01_funcotator.maf)
+- [PAP1_1708_01_T01.hg38_multianno.csv](https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_4/PAP1_1708_01_T01.hg38_multianno.csv)
 
 The Funcotator output is in the MAF format, the first several columns are the basic features of the mutation: genomic coordinates, reference and variant alleles, variant classifications and types. The variant classifications and types could be used to prioritize candidate driver mutations.
 
@@ -719,7 +719,7 @@ demonstration today, use this [link](https://www.bioconductor.org/packages/devel
 
 ### Download session directory
 
-First we will download the directory we have created for this session. This directory is called <span style="color:crimson">session4_maftools</span>, and you can download it [here]().
+First we will download the directory we have created for this session. This directory is called <span style="color:crimson">session4_maftools</span>, and you can download it [here](https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_4/session4_maftools.zip). You may have to unzip the download first before use.
 
 This directory includes 2 files: 1) the MAF data we will be using today, and 2) the R script with all of the commands you will find throughout this part of the practical session.
 
