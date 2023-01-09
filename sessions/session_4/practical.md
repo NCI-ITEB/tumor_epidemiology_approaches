@@ -655,9 +655,31 @@ For the next a few columns, the ExAC* columns are allele frequencies in all the 
 
 **18\.** In the upper left of the IGV window you will see a dropdown menu to select a reference genome. Select  GRCh38/hg38.
 
-**19\.** Now you will need to load the BAM files into IGV. These files can be downloaded from . You can download them like so (**replace USERNAME with your unique Biowulf username**):
+**19\.** Now you will need to load the BAM files into IGV. [Click here to download them from GitHub](https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_4/IGV.zip) (you may need to unzip the folder).
 
-<code>scp -r USERNAME@helix.nih.gov:/scratch/sangj2/0-Session4-IGV .</code>
+<!--
+<details><summary>To download directly from Biowulf instead...</summary>
+
+<blockquote markdown="1">
+ (**replace USERNAME with your unique Biowulf username**):
+
+**Mac:**
+
+{% include code-block-copy.html %}
+```bash
+scp -r USERNAME@helix.nih.gov:/data/classes/DCEG_Somatic_Workshop/Practical_session_4/IGV .
+```
+
+**Windows** via PuTTy:
+
+{% include code-block-copy.html %}
+```bash
+pscp -r USERNAME@helix.nih.gov:/data/classes/DCEG_Somatic_Workshop/Practical_session_4/IGV .
+```
+
+</blockquote>
+</details><br>
+-->
 
 Once the files are downloaded, load them into IGV by clicking **File >> Load from File...**, locating your downloaded files, and selecting Normal.bam and Tumor.bam.
 
@@ -671,13 +693,13 @@ Once the files are downloaded, load them into IGV by clicking **File >> Load fro
 
 ### Passing Variants
 
-**21\.** Now let's examine some variants. First, search <code style="color:green">chr7:116782048</code>{% include code-snippet-copy.html %} in the search bar at the top of the IGV window (boxed in red in the example image below). Individually right click "Normal.bam" and "Tumor.bam" and select **Color alignments by >> read strand** in the menu that appears for each; this will allow you to clearly see which reads are forward-strand reads and which are reverse-strand reads.
+**21\.a\.** Now let's examine some variants. First, search <code style="color:green">chr7:116782048</code>{% include code-snippet-copy.html %} in the search bar at the top of the IGV window (boxed in red in the example image below). Individually right click "Normal.bam" and "Tumor.bam" and select **Color alignments by >> read strand** in the menu that appears for each; this will allow you to clearly see which reads are forward-strand reads and which are reverse-strand reads.
 
 {% include image-modal.html link="practical_assets/IGV-exonPASS.png" max-width="60%" %}
 
 This variant is within an exon of the MET gene, and passes variant filters (FILTER column="PASS" in the .vcf file).
 
-Likewise we can examine a passing intronic variant. In the search bar at the top, search for <code style="color:green">chr7:2980922</code>{% include code-snippet-copy.html %} and hit Go.
+**21\.b\.** Likewise we can examine a passing intronic variant. In the search bar at the top, search for <code style="color:green">chr7:2980922</code>{% include code-snippet-copy.html %} and hit Go.
 
 {% include image-modal.html link="practical_assets/IGV-intronPASS.png" max-width="60%" %}
 
@@ -685,15 +707,15 @@ Likewise we can examine a passing intronic variant. In the search bar at the top
 
 ### Filtered Variants
 
-**22\.** Let's now examine some variants that do not pass filters. In the search bar at the top, search for <code style="color:green">chr7:65975357</code>{% include code-snippet-copy.html %}. This variant was filtered because it was flagged as germline, and you can see that both the tumor and normal samples contain a roughly equal proportion of reads with a C>G variant.
+**22\.a\.** Let's now examine some variants that do not pass filters. In the search bar at the top, search for <code style="color:green">chr7:65975357</code>{% include code-snippet-copy.html %}. This variant was filtered because it was flagged as germline, and you can see that both the tumor and normal samples contain a roughly equal proportion of reads with a C>G variant.
 
 {% include image-modal.html link="practical_assets/IGV-germlineEvent.png" max-width="60%" %}
 
-To see a variant exhibiting strand bias, search for <code style="color:green">chr7:99966779</code>{% include code-snippet-copy.html %} in the search bar. As you can see, these variants are only detected on reverse-strand reads and not forward-strand reads, which is a likely sign of an artifact from sequencing.
+**22\.b\.** To see a variant exhibiting strand bias, search for <code style="color:green">chr7:99966779</code>{% include code-snippet-copy.html %} in the search bar. As you can see, these variants are only detected on reverse-strand reads and not forward-strand reads, which is a likely sign of an artifact from sequencing.
 
 {% include image-modal.html link="practical_assets/IGV-strandBias.png" max-width="60%" %}
 
-Lastly, we highlight a multi-allelic site. Search for <code style="color:green">chr7:140777206</code>{% include code-snippet-copy.html %}. Here you can see at that genomic location the reference is an A, the tumor contains many A>T mutations, but also has several reads with a deletion at that location. Multi-allelic sites are generally very rare and are more likely to be a sign of a noisy region in the genome than a true variant.
+**22\.c\.** Lastly, we highlight a multi-allelic site. Search for <code style="color:green">chr7:140777206</code>{% include code-snippet-copy.html %}. Here you can see at that genomic location the reference is an A, the tumor contains many A>T mutations, but also has several reads with a deletion at that location. Multi-allelic sites are generally very rare and are more likely to be a sign of a noisy region in the genome than a true variant.
 
 {% include image-modal.html link="practical_assets/IGV-multiAllele.png" max-width="60%" %}
 
@@ -719,7 +741,7 @@ demonstration today, use this [link](https://www.bioconductor.org/packages/devel
 
 ### Download session directory
 
-First we will download the directory we have created for this session. This directory is called <span style="color:crimson">session4_maftools</span>, and you can download it [here](https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_4/session4_maftools.zip). You may have to unzip the download first before use.
+**23\.** First we will download the directory we have created for this session. This directory is called <span style="color:crimson">session4_maftools</span>, and you can download it [here](https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_4/session4_maftools.zip). You may have to unzip the download first before use.
 
 This directory includes 2 files: 1) the MAF data we will be using today, and 2) the R script with all of the commands you will find throughout this part of the practical session.
 
@@ -731,7 +753,7 @@ For consistency, **move this downloaded directory to your Documents folder.**
 
 ### Install and load maftools package in R
 
-If you haven’t done so already, you will need to install the maftools package in R.  Use the following commands to do this:
+**24\.** If you haven’t done so already, you will need to install the maftools package in R.  Use the following commands to do this:
 
 {% include code-block-copy.html %}
 ```R
@@ -748,7 +770,12 @@ After you install maftools, load the package using the command:
 
 <code style="color: blue">library(maftools)</code>{% include code-snippet-copy.html %}
 
-**Additional Information:** For some functions in exercises not being demonstrated today but available as supplemental information, you will need to use the tidyverse package. Install the tidyverse package if you do not already have it installed. Then load tidyverse. This package contains a group of R packages that are useful for data analyses and visualization.
+**Additional Information:** For some functions in exercises not being demonstrated today but available as supplemental information, you will need to use the tidyverse package.
+
+<details><summary></summary>
+
+<blockquote markdown="1">
+Install the tidyverse package if you do not already have it installed. Then load tidyverse. This package contains a group of R packages that are useful for data analyses and visualization.
 
 {% include code-block-copy.html %}
 ```R
@@ -760,11 +787,13 @@ if(!('tidyverse' %in% installed.packages())){
 }
 ```
 
+</blockquote>
+</details>
 ---
 
 ### Load the data into R
 
-Run <span style="color: blue">getwd()</span> to make sure that the current working directory is the path to the session4_maftools folder:
+**25\.** Run <span style="color: blue">getwd()</span> to make sure that the current working directory (the computer folder R is working in) is the path to the session4_maftools folder:
 
 ```R
 >getwd()
@@ -782,7 +811,7 @@ If the working directory is not the session4_maftools directory, use the <span s
 
 Then run <span style="color: blue">getwd()</span> as before to make sure the working directory is now correct.
 
-We have extracted over 550 TCGA-LUAD (lung adenocarcinoma) whole exome sequencing (WES) samples using the public MAF file generated as a part of the TCGA MC3 project. A sample manifest file was used to extract data for primary tumor WES samples from the public MAF file.
+**26\.** We have extracted over 550 TCGA-LUAD (lung adenocarcinoma) whole exome sequencing (WES) samples using the public MAF file generated as a part of the TCGA MC3 project. A sample manifest file was used to extract data for primary tumor WES samples from the public MAF file.
 
 To load the MAF file, we will need to use the path to the file so it can be loaded into R. Use the command below to load the data file:
 
@@ -810,7 +839,7 @@ You will see the following appear as the file is read, validated, and summarized
 
 ### Summarize the mutation data
 
-For a quick summary of the maf object you have generated from the data loaded, simply type the object name. You will see a summary of the object.
+**27\.** For a quick summary of the maf object you have generated from the data loaded, simply type the object name. You will see a summary of the object.
 
 <code style="color: blue">tcga_luad_maf</code>{% include code-snippet-copy.html %}
 
@@ -844,19 +873,19 @@ The summary of the object above shows you the genome build used in generating th
 
 You can generate a sample summary, a gene summary, explore the fields in the file (i.e. column names), and even write a MAF summary.
 
-To generate a summary of the MAF file by sample: <code style="color: blue">getSampleSummary(tcga_luad_maf) %>% View()</code>{% include code-snippet-copy.html %} .
+To generate a summary of the MAF file by sample: <code style="color: blue">getSampleSummary(tcga_luad_maf)%>%View()</code>{% include code-snippet-copy.html %} .
 
 Here is an example of what the first few rows and columns of that table look like:
 
 {% include image-modal.html link="practical_assets/maftools_getSampleSummary.png" max-width="70%"%}
 
-To generate a summary of the MAF file by gene: <code style="color: blue">getGeneSummary(tcga_luad_maf) %>% View()</code>{% include code-snippet-copy.html %} .
+To generate a summary of the MAF file by gene: <code style="color: blue">getGeneSummary(tcga_luad_maf)%>%View()</code>{% include code-snippet-copy.html %} .
 
 Here is an example of what the first few rows and columns of that table look like:
 
 {% include image-modal.html link="practical_assets/maftools_getGeneSummary.png" max-width="70%"%}
 
-**Tip:** Using View() after these commands opens them in a new tab in RStudio in an interactive table format. Otherwise the table will print directly to the R console in a format that is difficult to read.
+**Tip:** Using View() opens them in a new tab in RStudio in an interactive table format. Otherwise the table will print directly to the R console in a format that is difficult to read.
 
 <code style="color: blue">getFields(tcga_luad_maf)</code>{% include code-snippet-copy.html %}
 This will print fields included in the MAF object. There are 114 fields in our object, so shown here are just the first 10.
@@ -886,7 +915,7 @@ We are going to be running several analyses and generating several visualization
 
 ### plotmafSummary()
 
-We will start with generating a plot of the MAF summary. This summary of the data includes variant classification, variant type, SNV class, variants per sample, a variant classification summary, and the top 10 mutated genes.
+**28\.** We will start with generating a plot of the MAF summary. This summary of the data includes variant classification, variant type, SNV class, variants per sample, a variant classification summary, and the top 10 mutated genes.
 
 Use the following command to generate the MAF summary for the TCGA-LUAD data:
 
@@ -901,7 +930,7 @@ Use the following command to generate the MAF summary for the TCGA-LUAD data:
 - <code style="color: blue">dashboard</code>, plot dashboard instead of simple summary when TRUE
 - <code style="color: blue">titvRaw</code>, plots raw variant counts when FALSE or fractions when TRUE
 
-**Tip:** For help as to how a function works or what additional arguments there are, you can use <code style="color: blue">?{function_name}()</code>. For example, <code style="color: blue">?plotmafSummary</code> would provide information about this plotting function.
+**Tip:** For help as to how a function works or what additional arguments there are, you can use <code style="color: blue">?{function_name}</code>. For example, <code style="color: blue">?plotmafSummary</code> would provide information about this plotting function.
 
 Below is a brief explanation for each of the components in the summary above
 
@@ -922,7 +951,7 @@ Below is a brief explanation for each of the components in the summary above
 
 ### oncoplot()
 
-Now we will generate two different oncoplots for several different genes included in the MAF file. Oncoplots can help to visualize the mutational landscape of samples in a study or cohort.
+**29\.**Now we will generate two different oncoplots for several different genes included in the MAF file. Oncoplots can help to visualize the mutational landscape of samples in a study or cohort.
 
 First, we will generate an oncoplot for the top 10 most mutated genes in the TCGA-LUAD samples. Use the following command:
 
@@ -934,7 +963,7 @@ The oncoplot shows the tumor mutational burden in each sample (top panel), the n
 
 In the title of the plot, we can see that almost 90% of these samples have mutations in at least one of these top 10 genes. TP53 is mutated in the largest percentage of samples, 51%. We can also see that missense mutations are the dominant variant classification across these genes in the TCGA-LUAD samples.
 
-We can also generate an oncoplot for specific genes. See the example below where we plot only TP53, KRAS, and EGFR.
+**30\.** We can also generate an oncoplot for specific genes. See the example below where we plot only TP53, KRAS, and EGFR.
 
 <code style="color: blue">oncoplot(maf = tcga_luad_maf, genes = c('TP53','KRAS','EGFR'))</code>{% include code-snippet-copy.html %}
 
@@ -946,7 +975,7 @@ We see the TP53 and KRAS are similar to the first oncoplot, but it is evident th
 
 ### lollipopPlot()
 
-Next we will create a lollipop plot, which will help to visualize amino acid changes in the samples. For this plot, the longest transcript is selected for plotting by default, and a series of lollipops are plotted to denote amino acid changes, and are colored by variant classification.
+**31\.** Next we will create a lollipop plot, which will help to visualize amino acid changes in the samples. For this plot, the longest transcript is selected for plotting by default, and a series of lollipops are plotted to denote amino acid changes, and are colored by variant classification.
 
 First, we will generate a plot for TP53, labeling a few specific amino acid positions:
 
@@ -956,7 +985,7 @@ First, we will generate a plot for TP53, labeling a few specific amino acid posi
 
 In the plot above, we see the different protein domains of p53 along the amino acid residue positions on the x-axis. In the main panel of the plot, there is a lollipop for each of the amino acid positions that have a mutation. These lollipops are colored by variant classification (legend bottom left), and we have added a label to a few of the lollipops by using the argument <span style="color: blue">labelPos</span> which follows the notation Original Residue-Amino Acid Position- NewResidue/Residues. In this plot for TP53, we can see that the mutation rate across the TCGA-LUAD samples is about 51%. There are several mutations, with changes at residue 175, 245, and 273 labeled.
 
-We can also generate a plot where we label all of the amino acid changes. We will use KRAS for this example, since it does not have nearly as many lollipops as TP53:
+**32\.** We can also generate a plot where we label all of the amino acid changes. We will use KRAS for this example, since it does not have nearly as many lollipops as TP53:
 
 <code style="color: blue">lollipopPlot(maf = tcga_luad_maf, gene = 'KRAS', AACol = 'HGVSp_Short', showMutationRate = TRUE, labelPos = 'all')</code>{% include code-snippet-copy.html %}
 
@@ -970,7 +999,7 @@ In the plot above, we see the different protein domains of KRAS along the amino 
 
 ### rainfallPlot()
 
-Now we will generate a rainfall plot, which helps to illustrate hyper-mutated genomic regions by plotting the inter variant distance on a linear genomic scale. These sort of localized hypermutations can be found in cancer genomes.
+**33\.** Now we will generate a rainfall plot, which helps to illustrate hyper-mutated genomic regions by plotting the inter variant distance on a linear genomic scale. These sort of localized hypermutations can be found in cancer genomes.
 
 We will be using data from TCGA breast cancer samples that include a few examples of this phenomenon.
 
@@ -978,11 +1007,11 @@ First, we need to direct R to where this file is stored, using the <span style="
 
 <code style="color: blue">brca <- system.file("extdata", "brca.maf.gz", package = "maftools")</code>{% include code-snippet-copy.html %}
 
-Now, we use the read.maf() function as we did before to read in the TCGA-LUAD data:
+**34\.** Now, we use the read.maf() function as we did before to read in the TCGA-LUAD data:
 
 <code style="color: blue">brca <- read.maf(maf = brca, verbose = FALSE)</code>{% include code-snippet-copy.html %}
 
-Use this data to generate the rainfall plot. By default, the plot is generated for the most mutated sample, but a sample name can be provided if desired by using the tsb argument.
+**35\.** Use this data to generate the rainfall plot. By default, the plot is generated for the most mutated sample, but a sample name can be provided if desired by using the tsb argument.
 
 <code style="color: blue">rainfallPlot(maf=brca, pointSize = 0.4, detectChangePoints = TRUE)</code>{% include code-snippet-copy.html %}
 
@@ -1020,7 +1049,7 @@ In the plot below generated using the breast cancer data, arrows denote the area
 
 We can try to find some of these events in the TCGA-LUAD samples as well. First, we will find the tumor mutational burden (TMB), the total number of mutations (changes) found in the DNA of cancer cells. Then we take those with the highest levels of TMB and see if we can identify any katageis events.
 
-a. Calculate TMB and arrange by descending total TMB, then pull the top 10 tumor sample barcodes:
+**a\.** Calculate TMB and arrange by descending total TMB, then pull the top 10 tumor sample barcodes:
 
 This first command runs the <span style="color: blue">tmb()</span> function available in maftools:
 
@@ -1038,7 +1067,7 @@ This command pulls only the first ten tumor sample barcodes and saves them to a 
 
 <code style="color: blue">tsb <- tmb_tcga_luad$Tumor_Sample_Barcode[1:10]</code>{% include code-snippet-copy.html %}
 
-b. Run the <span style="color: blue">rainfallPlot()</span> function for each tumor sample barcode to see if there are any events. **Hint: To save you some time, you will observe one kataegis event for the fourth tumor sample barcode in the top 10:**
+**b\.** Run the <span style="color: blue">rainfallPlot()</span> function for each tumor sample barcode to see if there are any events. **Hint: To save you some time, you will observe one kataegis event for the fourth tumor sample barcode in the top 10:**
 
 <code style="color: blue">rainfallPlot(maf=tcga_luad_maf, pointSize = 0.4, detectChangePoints = TRUE, tsb= tsb[4])</code>{% include code-snippet-copy.html %}
 
@@ -1062,7 +1091,7 @@ Kataegis detected at:
 
 ### tcgaCompare()
 
-We can compare mutation load between our samples and 33 TCGA cohorts that are built into the maftools package from the TCGA MC3 project.
+**36\.** We can compare mutation load between our samples and 33 TCGA cohorts that are built into the maftools package from the TCGA MC3 project.
 
 First, we want to make our outer plot margins a little bigger so that our plot isn’t cut off:
 
@@ -1080,7 +1109,7 @@ Along the top of the plot are the case counts for each cancer type. Cancer types
 
 You may have noticed we are using TCGA-LUAD data, while also comparing to the LUAD cohort. The number of cases differs between these, with 566 in our dataset, and only 516 in the cohort in the maftools package. This is most likely due to a version freeze of the data included in the maftools package.
 
-Before moving on, we need to reset our plot parameters, using the command:
+**37\.** Before moving on, we need to reset our plot parameters, using the command:
 
 <code style="color: blue">dev.off()</code>{% include code-snippet-copy.html %}
 
@@ -1088,7 +1117,7 @@ Before moving on, we need to reset our plot parameters, using the command:
 
 ### somaticInteractions()
 
-We can use the <span style="color: blue">somaticInteractions()</span> function to detect mutually exclusive or co-occurring sets of genes. This function performs a pair-wise Fisher’s Exact test to detect these significant interactions.  This plot can be based on the top X genes in your dataset, or we can select specific genes to display.
+**38\.** We can use the <span style="color: blue">somaticInteractions()</span> function to detect mutually exclusive or co-occurring sets of genes. This function performs a pair-wise Fisher’s Exact test to detect these significant interactions.  This plot can be based on the top X genes in your dataset, or we can select specific genes to display.
 
 So that the plot text and labels are not cut off in the output plot, we are going to adjust the left and top outer margins:
 
@@ -1106,7 +1135,7 @@ In this plot, we can see a mutually exclusive significant interaction between KR
 
 **Note:** Here we have changed the <span style="color: blue">nShiftSymbols</span> parameter to 2 from a default value of 5, so that the P-value symbol legend does not overlap with the plot.
 
-Now we will note the specific genes we would like to see in the plot:
+**39\.** Now we will note the specific genes we would like to see in the plot:
 
 <code style="color: blue">somaticInteractions(maf = tcga_luad_maf, genes = c('KRAS','EGFR','ERBB4','NTRK3','NF1','PDGFRA','BRAF','ALK','ROS1','NRTK2'), pvalue = c(0.05,0.1), nShiftSymbols = 2)</code>{% include code-snippet-copy.html %}
 
@@ -1116,11 +1145,11 @@ In this plot, we can see a mutually exclusive significant interaction between *K
 
 **Note:** Similar to the first <span style="color: blue">somaticInteractions()</span> plot, the <span style="color: blue">nShiftSymbols</span> parameter was changed to 2 from a default value of 5, so that the P-value symbol legend does not overlap with the plot.
 
-Like before, we will reset the plot parameters back to the default by using the following command:
+**40\.** Like before, we will reset the plot parameters back to the default by using the following command:
 
 <code style="color: blue">dev.off()</code>{% include code-snippet-copy.html %}
 
-You can use the oncoplot to double check the relationship between two genes. For example, only one sample carries both KRAS and EGFR mutations in the TCGA-LUAD cohort, validating the mutually exclusive event. This can be visualized with the following code:
+**41\.** You can use the oncoplot to double check the relationship between two genes. For example, only one sample carries both KRAS and EGFR mutations in the TCGA-LUAD cohort, validating the mutually exclusive event. This can be visualized with the following code:
 
 <code style="color: blue">oncoplot(maf = tcga_luad_maf, genes = c('KRAS','EGFR'))</code>{% include code-snippet-copy.html %}
 
@@ -1130,7 +1159,7 @@ You can use the oncoplot to double check the relationship between two genes. For
 
 ### OncogenicPathways() and PlotOncogenicPathways()
 
-We can also use the <span style="color: blue">OncogenicPathways()</span> function to look for enrichment of known Oncogenic Signaling Pathways. This function generates a plot as well as a table (which is output to the console).  Use the following command to generate both:
+**42\.** We can also use the <span style="color: blue">OncogenicPathways()</span> function to look for enrichment of known Oncogenic Signaling Pathways. This function generates a plot as well as a table (which is output to the console).  Use the following command to generate both:
 
 <code style="color: blue">OncogenicPathways(maf = tcga_luad_maf)</code>{% include code-snippet-copy.html %}
 
@@ -1144,9 +1173,7 @@ Here is a visual representation of that table in bar plot format:
 
 {% include image-modal.html link="practical_assets/maftools_oncoPathwaysBar.png" %}
 
-The <span style="color: blue">PlotOncogenicPathways()</span> function allows you to visualize a pathway as an oncoplot:
-
-Use the following command to generate an oncoplot for the RTK-RAS pathway:
+**43\.** The <span style="color: blue">PlotOncogenicPathways()</span> function allows you to visualize a pathway as an oncoplot. Use the following command to generate an oncoplot for the RTK-RAS pathway:
 
 <code style="color: blue">PlotOncogenicPathways(maf = tcga_luad_maf, pathways = "RTK-RAS")</code>{% include code-snippet-copy.html %}
 
@@ -1156,7 +1183,7 @@ This plot visualizes the 82 genes that were mutated in almost 500 TCGA-LUAD samp
 
 **Tip:** If this appears cluttered in your Plot tab in R, click the Zoom button to open the plot in a different window.
 
-We can visualize the TP53 pathway for additional practice, and to see what a less cluttered plot looks like:
+**44\.** We can visualize the TP53 pathway for additional practice, and to see what a less cluttered plot looks like:
 
 <code style="color: blue">PlotOncogenicPathways(maf = tcga_luad_maf, pathways = "TP53")</code>{% include code-snippet-copy.html %}
 
@@ -1166,7 +1193,7 @@ This plot visualizes the 6 genes that were mutated in over 300 TCGA-LUAD samples
 
 **Tip:** You can add sample names across the bottom of the plot, using the argument <span style="color: blue">showTumorSampleBarcodes = TRUE</span>. You can also include genes that are in the selected pathway but were not mutated (if applicable), using the argument <span style="color: blue">fullPathway = TRUE</span>.
 
-For additional practice, we can save this plot to our current working directory. In the Plots window, you can select Export, and then Save as Image or Save as PDF:
+**45\.** We can save this plot to our current working directory. In the Plots window, you can select Export, and then Save as Image or Save as PDF:
 
 Save as Image:
 
