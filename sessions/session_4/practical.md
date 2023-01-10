@@ -48,7 +48,7 @@ We will use the targeted sequencing data of paired tumor and normal samples from
 <code>cd /data/$USER/<br>
 mkdir practical_session_4<br>
 cd practical_session_4<br>
-cp /data/classes/DCEG_Somatic_Workshop/Practical_session_4/* .</code>{% include code-snippet-copy.html %}
+cp -r /data/classes/DCEG_Somatic_Workshop/Practical_session_4/* .</code>{% include code-snippet-copy.html %}
 
 **2\.** Next, we will submit two sets of scripts to Biowulf. Use the following commands to submit the scripts for step 1.
 
@@ -268,7 +268,7 @@ The command line <code>> ${logs}/BQSR-${SAMPLE}.log 2>&1</code> redirects 'stand
 
 **8\.** By the end of step 1, you should have generated analysis-ready BAM files for each individual sample (tumor and normal). We prepared the sample output data in the /Results/ directory for you to check.
 
-<code>ls ../Results</code>{% include code-snippet-copy.html %}
+<code>ls ../Expected_Results</code>{% include code-snippet-copy.html %}
 
 ---
 
@@ -478,8 +478,12 @@ This process annotates the variants as 'PASS' in the 'FILTER' field in its outpu
 
 **13\.** At the end of step 2, we have VCF files for original candidates and candidates that pass the filtering. How do we check the number of candidate mutations in each file? We use these commands.
 
-<code>grep -v "^#" PAP1_1708_01_T01.vcf | wc -l<br>
-grep -v "^#" PAP1_1708_01_T01_passed.vcf | wc -l </code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+cd ../Expected_Results/
+grep -v "^#" PAP1_1708_01_T01.vcf | wc -l
+grep -v "^#" PAP1_1708_01_T01_passed.vcf | wc -l
+```
 
 <span style="color:crimson">grep -v</span> will extract all lines that do NOT contain a specific pattern. The pattern we specify is "^#", which is lines starting with the "#" symbol. This will exclude all the header lines in the VCF file. Then we redirect the output to the command <span style="color:crimson">wc -l</span> which calculates the number of lines.
 
@@ -722,16 +726,16 @@ This variant is within an exon of the MET gene, and passes variant filters (FILT
 ---
 ---
 
-## Introduction to Maftools
+## Introduction to maftools
 
-Maftools is an R package designed to summarize, analyze, annotate, and visualize [Mutation Annotation Format (MAF)](https://docs.gdc.cancer.gov/Data/File_Formats/MAF_Format/) files. Today, we will be using the maftools package to analyze and visualize the data within a MAF file.
+maftools is an R package designed to summarize, analyze, annotate, and visualize [Mutation Annotation Format (MAF)](https://docs.gdc.cancer.gov/Data/File_Formats/MAF_Format/) files. Today, we will be using the maftools package to analyze and visualize the data within a MAF file.
 
 The package consists of visualization and analysis based modules. The diagram below provides a visual representation of these modules as well as the inputs needed to run them.
 
 {% include image-modal.html link="practical_assets/maftools_summary.png" max-width="75%" %}
 
 <figcaption class="is-italic is-size-7" style="align: center">
-<a href="https://www.bioconductor.org/packages/devel/bioc/vignettes/maftools/inst/doc/maftools.html#5_Overview_of_the_package">Image from the Maftools documents</a>
+<a href="https://www.bioconductor.org/packages/devel/bioc/vignettes/maftools/inst/doc/maftools.html#5_Overview_of_the_package">Image from the maftools documents</a>
 </figcaption>
 
 For a more in-depth explanation of maftools, how to use it, and its capabilities beyond our
@@ -745,7 +749,7 @@ demonstration today, use this [link](https://www.bioconductor.org/packages/devel
 
 This directory includes 2 files: 1) the MAF data we will be using today, and 2) the R script with all of the commands you will find throughout this part of the practical session.
 
-For consistency, **move this downloaded directory to your Documents folder.**
+For consistency, **move this downloaded directory to your Downloads folder.**
 
 **Go to the session4_maftools folder and open the file, maf_session4_practice_FINAL.R.**
 
@@ -799,15 +803,15 @@ if(!('tidyverse' %in% installed.packages())){
 >getwd()
 
 Mac:
-[1] "/Users/[username]/Documents/session4_maftools"
+[1] "/Users/[username]/Downloads/session4_maftools"
 Windows:
-[1] "C:/Users/[username]/Documents/session4_maftools"
+[1] "C:/Users/[username]/Downloads/session4_maftools"
 ```
 
 If the working directory is not the session4_maftools directory, use the <span style="color: blue">setwd()</span> command to set this directory as the working directory (replace [username] with your NIH username):
 
-**Mac:** <code style="color: blue">setwd("/Users/[username]/Documents/session4_maftools")</code>{% include code-snippet-copy.html %}
-**Windows:** <code style="color: blue">setwd("C:/Users/[username]/Documents/session4_maftools")</code>{% include code-snippet-copy.html %}
+**Mac:** <code style="color: blue">setwd("/Users/[username]/Downloads/session4_maftools")</code>{% include code-snippet-copy.html %}
+**Windows:** <code style="color: blue">setwd("C:/Users/[username]/Downloads/session4_maftools")</code>{% include code-snippet-copy.html %}
 
 Then run <span style="color: blue">getwd()</span> as before to make sure the working directory is now correct.
 
@@ -909,7 +913,7 @@ This will save a MAF summary to your current working directory. This consists of
 ---
 ---
 
-## Visualization and analysis with Maftools
+## Visualization and analysis with maftools
 
 We are going to be running several analyses and generating several visualizations of the MAF data that you have successfully loaded into R.
 

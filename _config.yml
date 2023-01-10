@@ -36,6 +36,7 @@ remote_theme: chrisrhymes/bulma-clean-theme
 #theme: minima
 plugins:
 # - jekyll-feed
+favicon: favicon3.png?
 
 
 

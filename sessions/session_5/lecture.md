@@ -4,7 +4,7 @@ permalink: sessions/session_5/lecture
 menubar_toc: true
 ---
 
-
+<!--
 ## Background - History, concepts, signature types
 ## Emerging mutational signatures in cancer genomics
 ## De novo identification of mutational signatures
@@ -14,3 +14,4 @@ menubar_toc: true
 ## Dynamics of mutational signatures over cancer evolutionary time
 ## Mutational signature web-portals and algorithms
 ## Experimental validation of mutational signatures
+-->
