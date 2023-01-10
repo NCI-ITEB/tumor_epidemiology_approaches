@@ -74,9 +74,9 @@
 
 <!-- change 'top: 3.5rem' if the height of the top menubar changes-->
 <div class="contents" style="{% if page.menubar_toc %}
-  position: sticky; overflow-y: scroll; top: .5rem; bottom: .5rem; max-height: calc(100vh - 4rem);
+  position: sticky; overflow-y: scroll; top: 0rem; max-height: calc(100vh);
   {% endif %}">
-    <div class="menu">
+    <div class="menu" style="{% if page.menubar_toc %}font-size:.95em;{% endif %}">
         <p class="menu-label">{{ include.contents_title }}</p>
         {{ my_toc | markdownify | strip }}
     </div>
