@@ -917,6 +917,14 @@ This will save a MAF summary to your current working directory. This consists of
 
 We are going to be running several analyses and generating several visualizations of the MAF data that you have successfully loaded into R.
 
+***Note:*** *In today's examples we will be generating plots to visualize in RStudio; generating plots in this way will not save them as a file by default. To save any of today's plots, before the plotting command enter <code>pdf(file = "FILENAME.pdf")</code> followed by <code>dev.off()</code>. Example:*
+
+```R
+pdf(file = "FILENAME.pdf")
+plotmafSummary(maf = tcga_luad_maf, rmOutlier = TRUE, addStat = 'median', dashboard = TRUE, titvRaw = FALSE)
+dev.off()
+```
+
 ### plotmafSummary()
 
 **28\.** We will start with generating a plot of the MAF summary. This summary of the data includes variant classification, variant type, SNV class, variants per sample, a variant classification summary, and the top 10 mutated genes.
