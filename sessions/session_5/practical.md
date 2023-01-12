@@ -45,7 +45,6 @@ To access the output results easily, we suggest mounting your Biowulf working di
 
 ## Cancer genomic dataset and bioinformatics tools
 
-
 The dataset for today's practical session is the whole genome sequencing data from the <a href="https://www.cell.com/cell/fulltext/S0092-8674(12)00527-2" target="_blank">"Life History of 21 Breast Cancers"</a> study, led by Dr. Nik-Zainal and colleagues at the Wellcome Trust Sanger Institute. This is a significant study in the field of cancer genomics, in which the researchers applied whole genome sequencing to 21 breast cancers with an average sequencing depth of 30-40X and analyzed somatic mutations and signatures to understand the life histories of these cancers. For today's session, we will be using the cleaned mutation calling data from this study.
 
 ---
@@ -282,7 +281,7 @@ tree SBS96_De-Novo_Solution/
 
 You can download the file **SBS96_De-Novo_Activities_refit.txt** and **SBS_96_plots_SBS96_De-Novo.pdf** to your local computer. Open **SBS96_De-Novo_Activities_refit.txt** with excel.
 
-{% include image-modal.html link="practical_assets/010-sigprofiler-refitt.png" %}
+{% include image-modal.html max-width="70%" link="practical_assets/010-sigprofiler-refitt.png" %}
 
 We can see that three de novo signatures (SBS96A, SBS96B, and SBS96C) were extracted from the input mutational matrix. The first column is the sample ID, and the numbers in the remaining columns represent the counts of each de novo extracted signature found in each sample.
 
@@ -309,7 +308,7 @@ Open **SBS_96_plots_SBS96_De-Novo.pdf**, in which you can find the context of di
 
 Let’s open the file **COSMIC_SBS96_Activities.txt** with Excel. We find that six COSMIC signatures were included from signature activity matrix, including the famous APOBEC signatures SBS2 and SBS13.
 
-{% include image-modal.html link="practical_assets/015-sigprofiler-sampleRefComposition.png" %}
+{% include image-modal.html max-width="65%" link="practical_assets/015-sigprofiler-sampleRefComposition.png" %}
 
 **SBS_96_plots_COSMIC_SBS96.pdf**, in which you can find the visualizations of these COSMIC reference signatures.
 
@@ -320,7 +319,7 @@ Let’s open the file **COSMIC_SBS96_Activities.txt** with Excel. We find that s
 
 ## Explore mutational signatures data portals (mSigPortal, Signal, COSMIC)
 
-One of the data portals we will highlight today is mSigPortal. mSigPortal is a platform for exploring, visualizing, and analyzing mutational signatures and related data. It is currently in development, but a stable beta version is available for testing through the NIH network at the following link: https://analysistools-qa.cancer.gov/mutational-signatures. The final production version will be made available online at https://analysistools.cancer.gov/mutational-signatures in the future.
+One of the data portals we will highlight today is mSigPortal. mSigPortal is a platform for exploring, visualizing, and analyzing mutational signatures and related data. It is currently in development, but a stable beta version is available for testing through the NIH network at the following link: <a href="https://analysistools-qa.cancer.gov/mutational-signatures" target="_blank">https://analysistools-qa.cancer.gov/mutational-signatures</a>. The final production version will be made available online at https://analysistools.cancer.gov/mutational-signatures in the future.
 
 ---
 
@@ -330,7 +329,7 @@ In this demonstration, we will use mSigPortal to explore various mutational sign
 
 Let’s begin exploring the mSigPortal Catalog module:
 
-**15\.** Click the following link to take you to the mSigPortal development website home page: https://analysistools-qa.cancer.gov/mutational-signatures.
+**15\.** Click the following link to take you to the mSigPortal development website home page: <a href="https://analysistools-qa.cancer.gov/mutational-signatures" target="_blank">https://analysistools-qa.cancer.gov/mutational-signatures</a>.
 
 **16\.** From the home page, click on the **Catalog** tab, just to the right of the **Home** tab.
 
@@ -389,7 +388,7 @@ For example, if we look at the **PCAWG WGS** plot for SBS1, we see that the high
 
 #### APOBEC-Related signatures: SBS2 and SBS13
 
-APOBEC enzymes are part of innate immunity and are responsible for restricting viruses and retroelements by deaminating cytosine residues. APOBEC mutagenesis is the off-target effect of the activity of the APOBEC family of enzymes that function as cytosine deaminases. This off-target effect has been predominantly attributed to APOBEC3A and APOBEC3B, which has been implicated in some of the most prevalent mutational signatures in cancer. Recently, a study (check paper here) has provided direct evidence that endogenous APOBEC3 deaminases generate prevalent mutational signatures in human cancer cells.
+APOBEC enzymes are part of innate immunity and are responsible for restricting viruses and retroelements by deaminating cytosine residues. APOBEC mutagenesis is the off-target effect of the activity of the APOBEC family of enzymes that function as cytosine deaminases. This off-target effect has been predominantly attributed to APOBEC3A and APOBEC3B, which has been implicated in some of the most prevalent mutational signatures in cancer. Recently, a study ([paper here](https://www.nature.com/articles/s41586-022-04972-y)) has provided direct evidence that endogenous APOBEC3 deaminases generate prevalent mutational signatures in human cancer cells.
 
 **21\.** Select the first option in the second column under **Proposed Etiologies, Activity of APOBEC family of cytidine deaminases**.
 
@@ -403,9 +402,9 @@ APOBEC enzymes are part of innate immunity and are responsible for restricting v
 
 <blockquote markdown="1">
 
-If we look at the signature plot for both SBS2 and SBS13, we see that SBS2 is dominated by C>T mutations at the TCW context, and SBS13 is dominated by C>G mutations at TCW context. You will find each of these profiles below for your reference:
+If we look at the signature plot for both SBS2 and SBS13, we see that SBS2 is dominated by C>T mutations at the T<u>C</u>W context, and SBS13 is dominated by C>G mutations at T<u>C</u>W context. You will find each of these profiles below for your reference:
 
-**Note:** The ‘W’ in the TCW context means that the base can be either an A or a T. There are a series of IUPAC codes for nucleotide bases to indicate specific mutational types. There is additional information about these codes on the mSigPortal FAQ page [here](https://analysistools-qa.cancer.gov/mutational-signatures/#/faq), under the question: **What is the meaning of IUPAC codes for nucleotide bases indicating specific mutational types?**
+**Note:** The ‘W’ in the T<u>C</u>W context means that the base can be either an A or a T. There are a series of IUPAC codes for nucleotide bases to indicate specific mutational types. There is additional information about these codes on the mSigPortal FAQ page [here](https://analysistools-qa.cancer.gov/mutational-signatures/#/faq), under the question: **What is the meaning of IUPAC codes for nucleotide bases indicating specific mutational types?**
 
 {% include image-modal.html link="practical_assets/8_SBS2_profile.png" %}
 
@@ -463,7 +462,7 @@ Focusing on SBS4, this signature is dominated by C>A mutations, and is identifie
 
 #### Signature related to ultraviolet light exposure: SBS7
 
-**26\.** Ultraviolet light exposure can be found in the sixth row of the third column in the Cosmic Mutational Signatures (v3.3) category.
+**26\.** Ultraviolet light exposure can be found in the sixth row of the third column in the **Cosmic Mutational Signatures (v3.3)** category.
 
 **Question:** You will see that there are several UV light exposure-associated signatures, where the SBS signatures are a variation of SBS7. How many variations of SBS7 are there? What are the differences between them?
 
@@ -472,10 +471,10 @@ Focusing on SBS4, this signature is dominated by C>A mutations, and is identifie
 <blockquote markdown="1">
 There are 4 SBS7 variations associated with UV light exposure. These include SBS7a, SBS7b, SBS7c, and SBS7d.
 
-- **SBS7a:** dominated by C>T mutations, especially in the TCM context
+- **SBS7a:** dominated by C>T mutations, especially in the T<u>C</u>M context
 - **SBS7b:** dominated by contexts across C>T mutations
-- **SBS7c:** a more diverse mutational profile, but there is a spike in T>A mutations in the TTT context
-- **SBS7d:** a bit more of a diverse profile, but there is a spike in T>C mutations in the GTT context.
+- **SBS7c:** a more diverse mutational profile, but there is a spike in T>A mutations in the T<u>T</u>T context
+- **SBS7d:** a bit more of a diverse profile, but there is a spike in T>C mutations in the G<u>T</u>T context.
 
 Below are the mutational profiles of each for your reference:
 
@@ -502,7 +501,7 @@ Skin cancer is the predominant cancer type associated with SBS7. This can be det
 {% include image-modal.html link="practical_assets/17_SBS7a_PCAWG.png" %}
 </div>
 
-Note: There are other non-SBS signatures associated with UV light exposure. These include DBS1 and ID13.
+**Note:** There are other non-SBS signatures associated with UV light exposure. These include DBS1 and ID13.
 
 </blockquote>
 </details><br>
@@ -511,7 +510,7 @@ Note: There are other non-SBS signatures associated with UV light exposure. Thes
 
 #### Aristolochic acid exposure-related signature: SBS22
 
-**27\.** Aristolochic acid exposure can be found in the fourth column of the first row in the Cosmic Mutational Signatures (v3.3) category.
+**27\.** Aristolochic acid exposure can be found in the fourth column of the first row in the **Cosmic Mutational Signatures (v3.3)** category.
 
 **Question:** What is the dominant mutation subtype of SBS22? What cancer types is SBS22 associated with?
 
@@ -548,7 +547,7 @@ SBS22 is dominated by the T>A mutation type, with mutations found in all mutatio
 
 <blockquote markdown="1">
 
-C>A mutations are dominant, especially in the CCY context (C<u>C</u>C or C<u>C</u>T).
+C>A mutations are dominant, especially in the C<u>C</u>Y context (C<u>C</u>C or C<u>C</u>T).
 
 </blockquote>
 </details>
@@ -563,7 +562,7 @@ Now we are going to take a look at the reference signatures available in mSigPor
 
 {% include image-modal.html link="practical_assets/22_RefSig_tab.png" %}
 
-This will take you to the Reference Signature part of the Catalog module, specifically the RS in mSigPortal page. This page contains a series of pie charts organizing the different reference signatures available on mSigPortal:
+This will take you to the **Reference Signature** part of the **Catalog** module, specifically the **RS in mSigPortal page**. This page contains a series of pie charts organizing the different reference signatures available on mSigPortal:
 
 {% include image-modal.html link="practical_assets/23_ref_sigs.png" %}
 
@@ -575,7 +574,7 @@ Now we will explore some of the reference signatures.
 
 ### RS Profile
 
-**32\.** Click the RS Profile tab (next to the RS in mSigPortal tab). We are going to compare SBS2 and SBS13 from Cosmic v1. Set the input parameters to the following for SBS2:
+**32\.** Click the **RS Profile** tab (next to the RS in mSigPortal tab). We are going to compare SBS2 and SBS13 from Cosmic v1. Set the input parameters to the following for SBS2:
 
 {% include image-modal.html link="practical_assets/24_RS_Profile_tab.png" %}
 {% include image-modal.html link="practical_assets/25_SBS2_input.png" %}
@@ -584,20 +583,20 @@ You will see the following signature profile for SBS2:
 
 {% include image-modal.html link="practical_assets/26_SBS2_profile.png" %}
 
-**33\.** Click Add Plot in the bottom right of the page. In the second input set that appears, set the following input parameters for SBS13  (the only difference from step 19 is the signature name). You will see the following signature profile for SBS13:
+**33\.** Click **Add Plot** in the bottom right of the page. In the second input set that appears, set the following input parameters for SBS13  (the only difference from step 19 is the signature name). You will see the following signature profile for SBS13:
 
 {% include image-modal.html link="practical_assets/27_SSB13_input.png" %}
 {% include image-modal.html link="practical_assets/28_SBS13_profile.png" %}
 
 We can see that these mutational profiles are rather similar in the earlier versions of COSMIC. SBS2 and SBS13 had not been completely separated from one another as two distinct signatures until Cosmic v3.
 
-**34\.** To check this, you can add two more plots to the current page. Click Add Plot  to add SBS2 from Cosmic v3.
+**34\.** To check this, you can add two more plots to the current page. Click **Add Plot** to add SBS2 from Cosmic v3.
 
 {% include image-modal.html link="practical_assets/29_SBS2_Cosmicv3_input.png" %}
 
 {% include image-modal.html link="practical_assets/30_SBS2_Cosmicv3_profile.png" %}
 
-**35\.** Click Add Plot to add SBS13 from Cosmic v3.
+**35\.** Click **Add Plot** to add SBS13 from Cosmic v3.
 
 {% include image-modal.html link="practical_assets/31_SBS13_Cosmicv3_input.png" %}
 
@@ -609,7 +608,7 @@ You will see that Cosmic v1 and Cosmic v3 versions of SBS2 and SBS13 are clearly
 
 ### RS Comparison
 
-**36\.** Click the RS Comparison tab at the top of the page. We are going to compare SBS4 from Cosmic v3.3 and Benzo[a]pyrene-diol epoxide (BPDE) 0.125 uM SBS signatures. Set the following input parameters and click Calculate:
+**36\.** Click the **RS Comparison** tab at the top of the page. We are going to compare SBS4 from Cosmic v3.3 and Benzo[a]pyrene-diol epoxide (BPDE) 0.125 uM SBS signatures. Set the following input parameters and click **Calculate**:
 
 {% include image-modal.html link="practical_assets/33_RS_comp_tab.png" %}
 {% include image-modal.html link="practical_assets/34_RS_comp_inputs.png" %}
@@ -630,19 +629,19 @@ The mSigPortal Visualization module allows for interactive visualization and ana
 
 Today, we will be using the demo user data included in mSigPortal.
 
-**37\.** Click the Visualization tab that is just to the right of the Catalog tab in the banner at the top of the mSigPortal page.
+**37\.** Click the **Visualization** tab that is just to the right of the **Catalog** tab in the banner at the top of the mSigPortal page.
 
 {% include image-modal.html link="practical_assets/36_Vis_tab.png" %}
 
-Across the top of the page you will see several different tabs that you can explore for different visualizations under this main module banner. Then, make sure that you are on the Instructions page (top left corner). Your window should look like this:
+Across the top of the page you will see several different tabs that you can explore for different visualizations under this main module banner. Then, make sure that you are on the **Instructions** page (top left corner). Your window should look like this:
 
 {% include image-modal.html link="practical_assets/37_Vis_instructions_window.png" %}
 
-**38\.** Switch the Data Source in the input box on the left to User.
+**38\.** Switch the **Data Source** in the input box on the left of **User**.
 
-Under Upload File, practice uploading the data yourself. Click Load Example Data to upload the demo data file. You should see the file name demo_input_multi.vcf.gz appear in the file input box. This is the input you need to update. See below.
+Under **Upload File**, practice uploading the data yourself. Click **Load Example Data** to upload the demo data file. You should see the file name **demo_input_multi.vcf.gz** appear in the file input box. This is the input you need to update. See below.
 
-{% include image-modal.html link="practical_assets/38_Vis_input.png" %}
+{% include image-modal.html max-width="50%" link="practical_assets/38_Vis_input.png" %}
 
 Click **Submit**.
 
@@ -650,7 +649,7 @@ Click **Submit**.
 
 ### Profiler Summary
 
-**40\.** After you click submit the results will load and you will automatically be taken to the Profiler Summary tab. Below is the plot you will see here:
+**40\.** After you click submit the results will load and you will automatically be taken to the **Profiler Summary** tab. Below is the plot you will see here:
 
 {% include image-modal.html link="practical_assets/39_Profiler_Summary.png" %}
 
@@ -660,15 +659,15 @@ Across the bottom of the plot you will see each sample name that was included in
 
 ### Mutational Profiles
 
-**41\.** Now we will briefly look at the Mutational Profiles tab. In Mutational Profiles, users can select a sample, name, the profile type, matrix size, and filters if applicable.
+**41\.** Now we will briefly look at the **Mutational Profiles** tab. In **Mutational Profiles**, users can select a sample, name, the profile type, matrix size, and filters if applicable.
 
-**42\.** If you click the Sample Name dropdown, you will see the same three samples that were on the Profiler Summary plot.  For our purposes today, set the sample name to SB749362, and the profile type to SBS. For any of the plots here, note that they are interactive. Users can hover over the different bars on each plot mutation types and contexts, as well as the count of the type or context.
+**42\.** If you click the **Sample Name** dropdown, you will see the same three samples that were on the **Profiler Summary** plot.  For our purposes today, set the sample name to **SB749362**, and the profile type to **SBS**. For any of the plots here, note that they are interactive. Users can hover over the different bars on each plot mutation types and contexts, as well as the count of the type or context.
 
 The first matrix size is 6. Here we see the sample name and the total number of substitutions across the top of the plot, and the six mutation classes, each with their own bar. The C>T mutation class is highlighted, and we can see there are 436 mutations of this class:
 
-{% include image-modal.html link="practical_assets/40_mut_profile_6.png" %}
+{% include image-modal.html max-width="50%" link="practical_assets/40_mut_profile_6.png" %}
 
-Feel free to explore the other matrix size options for SBS. The traditional SBS profile matrix size is 96, which you can see here, with the ACA mutation context selected to illustrate the interactive component of the plot:
+Feel free to explore the other matrix size options for SBS. The traditional SBS profile matrix size is 96, which you can see here, with the A<u>C</u>A mutation context selected to illustrate the interactive component of the plot:
 
 {% include image-modal.html link="practical_assets/41_mut_profile_96.png" %}
 
@@ -676,9 +675,9 @@ Feel free to explore the other matrix size options for SBS. The traditional SBS 
 
 ### Explore mutational signature activity of public data (mSigPortal Exploration)
 
-The mSigPortal Exploration module allows users to systematically explore the mutational signature activities and performance of the mutational signature decomposition from user input, or collected public genomic studies (TCGA, PCAWG, Sherlock-Lung, etc.). This module allows users to perform analyses with mutational signature patterns and integratively explore the activities of each mutational signature including visualizations of tumor mutational burden, signature decomposition performance, mutational signature associations, sample clustering by mutational signatures, prevalence of single mutational signatures, and decomposition of mutational signatures in individual samples.
+The **mSigPortal Exploration** module allows users to systematically explore the mutational signature activities and performance of the mutational signature decomposition from user input, or collected public genomic studies ([TCGA](https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga), [PCAWG](https://dcc.icgc.org/pcawg), [Sherlock-Lung](https://dceg.cancer.gov/research/cancer-types/lung/sherlock-lung-study), etc.). This module allows users to perform analyses with mutational signature patterns and integratively explore the activities of each mutational signature including visualizations of tumor mutational burden, signature decomposition performance, mutational signature associations, sample clustering by mutational signatures, prevalence of single mutational signatures, and decomposition of mutational signatures in individual samples.
 
-**43\.** Select the Exploration tab from the banner at the top of the page:
+**43\.** Select the **Exploration** tab from the banner at the top of the page:
 
 {% include image-modal.html link="practical_assets/42_exploration_tab.png" %}
 
@@ -686,9 +685,9 @@ You should now see a page like this:
 
 {% include image-modal.html link="practical_assets/43_exploration_instructions.png" %}
 
-**44\.** We are going to use the Sherlock study for this demonstration. Select the following inputs as seen below:
+**44\.** We are going to use the **Sherlock** study for this demonstration. Select the following inputs as seen below:
 
-{% include image-modal.html link="practical_assets/44_exploration_inputs.png" %}
+{% include image-modal.html max-width="50%" link="practical_assets/44_exploration_inputs.png" %}
 
 When your inputs match those above, click **Submit**.
 
@@ -696,7 +695,7 @@ When your inputs match those above, click **Submit**.
 
 ### TMB
 
-**45\.** You will automatically be taken to the TMB tab when the results are loaded. Below is the plot you should see for TMB in the Sherlock-Lung-232 study.
+**45\.** You will automatically be taken to the **TMB** tab when the results are loaded. Below is the plot you should see for TMB in the Sherlock-Lung-232 study.
 
 {% include image-modal.html max-width="50%" link="practical_assets/45_TMB_plot.png" %}
 
@@ -708,13 +707,13 @@ The TMB plots in mSigPortal are also interactive. You can hover over each dot on
 
 #### TMB Signatures
 
-**46\.** Select the TMB Signatures tab.
+**46\.** Select the **TMB Signatures** tab.
 
 Now the Sherlock samples are separated by mutational signature. In the plot below, there are several different signatures across the bottom, and as in the last plot, the number of mutations per megabase (log10) on the y-axis. Per the legend at the top of the plot, the green numbers along the top of the plot denote the number of samples, while the blue numbers denote the number of samples in which the signature was detected.
 
 {% include image-modal.html link="practical_assets/46_TMB_Signatures_plot.png" %}
 
-**Question:** Which signature was detected in all 232 samples? What is the proposed etiology of this signature? (Hint: We talked about this signature and its etiology in one of our first questions while exploring mSigPortal Catalog.)
+**Question:** Which signature was detected in all 232 samples? What is the proposed etiology of this signature? (*Hint: We talked about this signature and its etiology in one of our first questions while exploring mSigPortal Catalog.*)
 
 <details><summary><b>Answer</b></summary>
 
@@ -729,9 +728,9 @@ SBS1 was detected in all 232 samples. The proposed etiology of SBS1 is the spont
 
 ### MS Prevalence
 
-**47\.** Select the MS Prevalence tab.
+**47\.** Select the **MS Prevalence** tab.
 
-The final section we are going to look at for the Sherlock samples is MS Prevalence, or mutational signature prevalence. You can see that there are two plots, signature prevalence by mutations (pie chart) and signature prevalence by samples (bar plot). The colors in the pie chart correspond to the signature in the bar plot with the same color.
+The final section we are going to look at for the Sherlock samples is **MS Prevalence**, or mutational signature prevalence. You can see that there are two plots, signature prevalence by mutations (pie chart) and signature prevalence by samples (bar plot). The colors in the pie chart correspond to the signature in the bar plot with the same color.
 
 The plots you see here are based on a minimum of 100 mutations required for the detection of the signature in a sample. This can be changed and the plots will adjust accordingly.
 
@@ -752,7 +751,7 @@ Here are a couple of examples when changing the minimum number or mutations:
 {% include image-modal.html link="practical_assets/51_500_muts_min_input.png" %}
 {% include image-modal.html link="practical_assets/52_500_muts_min.png" %}
 
-Generally, we can see that the frequency bars for each signature increase when decreasing the minimum number of mutations, and decrease when increasing the minimum number of mutations.
+**Generally, we can see that the frequency bars for each signature increase when decreasing the minimum number of mutations, and decrease when increasing the minimum number of mutations.**
 
 </blockquote>
 </details>
@@ -762,9 +761,9 @@ Generally, we can see that the frequency bars for each signature increase when d
 
 ## Signal PanCancer (Explore)
 
-Signal contains mutational signature data for cancer samples as well as chemical mutagens and genes via gene knockout experiments. Specifically, it includes data from a study analyzing over 3,000 samples from mostly ICGC’s PCAWG dataset of whole genome sequenced cancers (Degasperi, 2020), as well as data from more than 18,000 whole genome sequence cancer samples in the Genomics England 100,000 Genomes Project, the Hartwig Medical Foundation, and ICGC’s PCAWG dataset (Degasperi, 2022).
+Signal contains mutational signature data for cancer samples as well as chemical mutagens and genes via gene knockout experiments. Specifically, it includes data from a study analyzing over 3,000 samples from mostly ICGC’s PCAWG dataset of whole genome sequenced cancers ([Degasperi, 2020](https://pubmed.ncbi.nlm.nih.gov/35949260/)), as well as data from more than 18,000 whole genome sequence cancer samples in the Genomics England 100,000 Genomes Project, the Hartwig Medical Foundation, and ICGC’s PCAWG dataset ([Degasperi, 2022](https://pubmed.ncbi.nlm.nih.gov/35949260/)).
 
-Note: It is important to note that the mutational signature profiles you see here are not identical to the mutational signature profiles found in COSMIC, even though the signature names are the same. The sample sets of COSMIC and those in Signal differ from one another, as well as the methodologies used for signature analysis. For example, SBS3 in COSMIC and SBS3 in Signal are very different from one another. In COSMIC, SBS3 is a “flat” signature, whereas SBS3 has a peak in C>G mutations in Signal:
+*Note: It is important to note that the mutational signature profiles you see here are not identical to the mutational signature profiles found in COSMIC, even though the signature names are the same. The sample sets of COSMIC and those in Signal differ from one another, as well as the methodologies used for signature analysis. For example, SBS3 in COSMIC and SBS3 in Signal are very different from one another. In COSMIC, SBS3 is a “flat” signature, whereas SBS3 has a peak in C>G mutations in Signal:*
 
 **COSMIC:**
 
@@ -774,13 +773,13 @@ Note: It is important to note that the mutational signature profiles you see her
 
 {% include image-modal.html link="practical_assets/53_SBS3_Signal.png" %}
 
-Note: You can use mSigPortal to calculate the cosine similarity of these two profiles!
+**You can also use mSigPortal to calculate the cosine similarity of these two profiles!**
 
 {% include image-modal.html link="practical_assets/55_SBS3_COSMICvSignal.png" %}
 
-**48\.** We are going to quickly show you the Signal website, specifically the Explore tab. Click the following link: https://signal.mutationalsignatures.com/explore/cancer.
+**48\.** We are going to quickly show you the Signal website, specifically the **Explore** tab. Click the following link: <a href="https://signal.mutationalsignatures.com/explore/cancer" target="_blank">https://signal.mutationalsignatures.com/explore/cancer</a>.
 
-**49\.**   This will bring you to a Signatures summary page, which shows different organs along the top of the plot and mutational signatures along the left side of the page. The size of the circles throughout the plot correspond to the proportion of samples from the organ containing the signatures. The color of the circle corresponds to the mean number of mutations attributed to the signature, based on the number of organ samples containing the signature (red: low ; blue: high).
+**49\.**   This will bring you to a **Signatures** summary page, which shows different organs along the top of the plot and mutational signatures along the left side of the page. The size of the circles throughout the plot correspond to the proportion of samples from the organ containing the signatures. The color of the circle corresponds to the mean number of mutations attributed to the signature, based on the number of organ samples containing the signature (red: low ; blue: high).
 
 If we look at SBS4 for example, we can see that it occurs in several different cancer types, but mostly in the lung and liver. In addition, since the coloration of the lung circle is closer to blue, it has a higher mean number of mutations attributed to the signature compared to the liver.
 
