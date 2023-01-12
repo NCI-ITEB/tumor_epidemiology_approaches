@@ -711,7 +711,7 @@ IGV is an extremely useful resource for visualizing the alignment in areas of an
 
 **36\.** This should now open our samples in the viewer, though you won’t actually see any data until you pick somewhere in the genome to zoom in. Let’s zoom in on GSTM1 to see what alignments look like. To do this, enter ‘GSTM1’ into the box at the top.
 
-{% include image-modal.html link="practical_assets/GSTM_search.png" %}
+{% include image-modal.html link="practical_assets/gstm_search.png" %}
 
 This will automatically search for genes matching this pattern. Click GSTM1 to automatically jump to GSTM1 in the genome browser.
 
