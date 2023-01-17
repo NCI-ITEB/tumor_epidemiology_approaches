@@ -176,20 +176,20 @@ Matrices generated for 21 samples with 0 errors. Total of 183915 SNVs, 969 DINUC
 
 **10\.** Check the output from SigProfilerMatrixGenerator using the **tree** command:
 
-<code>tree SigProfilerMatrixGenerator_output</code>{% include code-snippet-copy.html %}
+<code>tree /data/$USER/Expect_result/SigProfilerMatrixGenerator_output</code>{% include code-snippet-copy.html %}
 
 {% include image-modal.html link="practical_assets/01-sigprofiler-tree.png" %}
 
 **11\.** We will explore the SBS96 matrix file BRCA21.SBS96.all from the results.
 
-<code>less Expect_result/SigProfilerMatrixGenerator_output/output/SBS/BRCA21.SBS96.all</code>{% include code-snippet-copy.html %}
+<code>less /data/$USER/Expect_result/SigProfilerMatrixGenerator_output/output/SBS/BRCA21.SBS96.all</code>{% include code-snippet-copy.html %}
 
 {% include image-modal.html link="practical_assets/02-sbs96-matrix.png"%}
 
 
 You can find the visualization of all SBS96 mutational profiles at the following path:
 
-<code>Expect_result/SigProfilerMatrixGenerator_output/output/plots/SBS_96_plots_BRCA21.pdf</code>
+<code>/data/$USER/Expect_result/SigProfilerMatrixGenerator_output/output/plots/SBS_96_plots_BRCA21.pdf</code>
 
 {% include image-modal.html link="practical_assets/03-sbs96-plot.png" %}
 
@@ -244,7 +244,7 @@ During the execution of SigProfilerExtractor, you may see the following messages
 
 **13\.** Check the output of SigProfilerExtractor. Because of time constraints, here we have only provided a brief overview of the main directories. For a complete description of all output, please refer to the [official documentation](https://osf.io/t6j7u/wiki/home/).
 
-<code>ls Expect_result/SigProfilerExtractor_output</code>{% include code-snippet-copy.html %}
+<code> ls /data/$USER/Expect_result/SigProfilerExtractor_output</code>{% include code-snippet-copy.html %}
 
 {% include image-modal.html link="practical_assets/05-sigprofiler-files.png" %}
 
@@ -275,7 +275,7 @@ Subdirectory **SBS96/Suggested_Solution** subdirectory contains the optimal solu
 
 {% include code-block-copy.html %}
 ```bash
-cd Workshop-Session5-SigProfilerExtractor/SBS96/Suggested_Solution
+cd /data/$USER/Expect_result/SigProfilerExtractor_output/SBS96/Suggested_Solution/
 tree SBS96_De-Novo_Solution/
 ```
 
