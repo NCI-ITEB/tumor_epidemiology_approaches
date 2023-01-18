@@ -720,6 +720,7 @@ The first task requires filtering the tables bed1, bed2, and bed_genes to just t
 <details><summary></summary>
 
 <blockquote markdown="1">
+
 {% include code-block-copy.html %}
 ```R
 # Extract the data for the breakpoints 'A', adding 200000 to the end position
@@ -739,6 +740,7 @@ bed2_chr2 <- svdata %>%
 # Filter the gene annotation track
 bed_gene_chr2<-bed_gene%>%filter(chr=="chr2")
 ```
+
 </blockquote></details><br>
 
 Once we have the tables, we need to limit the ideogram to only chr2 and plot using the  tables we just generated in the first part. To change the ideogram, think about which parts of the circos code handled the various parts of the ideogram (**Hint:** these parts of the code are very appropriately named).
@@ -788,14 +790,14 @@ circos.initializeWithIdeogram(plotType = NULL,chromosome.index = "chr2")
 
 # If there are genes associated with the SVs, add a track showing the gene locations and gene name
 if(dim(bed_gene)[1]>0){
-  circos.genomicLabels(bed_gene%>%filter(chr=="chr2"), labels.column = 4, col=bed_gene$color,side = "outside",cex = 0.4,line_lwd = 0.5,track.margin = c(0,-0.1))
+  circos.genomicLabels(bed_gene%>%filter(chr=="chr2"), labels.column = 4, col=bed_gene$color,side = "outside",cex = 0.6,line_lwd = 0.5,track.margin = c(0,-0.1))
 } else {
   # If there are no genes associated with the SVs, add an empty track
   circos.track(ylim = c(0, 1), bg.col = NULL,bg.border="White",track.height = convert_height(6, "mm"))
 }
 
 # initialize the Circos with chromosome labels only
-circos.initializeWithIdeogram2(plotType = c("labels"))
+# circos.initializeWithIdeogram2(plotType = c("labels"),track.height = 0.0000001)
 # initialize the Circos with chromosome axis and ideogram only
 circos.initializeWithIdeogram2(plotType = c("ideogram","axis"),ideogram.height = 0.04,track.height = 0.02,major.by = 5e7,chromosome.index = "chr2")
 
