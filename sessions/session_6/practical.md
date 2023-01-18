@@ -25,6 +25,18 @@ This practical session will provide detailed steps for the SV calling by one of 
 
 ## Preparation
 
+Before we begin, please login to Biowulf and request an interactive session:
+
+For a reminder on how to log-in to Biowulf, we refer you to this Biowulf HPC guide. In short:
+
+- (Windows) use PuTTy
+- (Mac) enter <code>ssh USERNAME@biowulf.nih.gov</code>{% include code-snippet-copy.html %} to your terminal, then enter your password
+
+Request an interactive session with the following command:
+
+<code>sinteractive --gres=lscratch:4 --mem=10g --cpus-per-task=4 --time=02:00:00
+</code>{% include code-snippet-copy.html %}
+
 **Requirements:**
 - **Rstudio/R/R packages:** tidyverse/circlize/jsonlite
 
@@ -140,7 +152,7 @@ configManta.py \
 ```
 
 
-**6\.** output the first 10 lines and the last 10 lines of the log file.
+**6\.** Output the text from the log file. Use the commands <code>less NSLC-0463.log</code>{% include code-snippet-copy.html %} or <code>more NSLC-0463.log</code>{% include code-snippet-copy.html %} to see the whole log file; below we show how to preview the first 10 and last 10 lines using <code>head</code> and <code>tail</code>, respectively.
 
 <code>head NSLC-0463.log</code>{% include code-snippet-copy.html %}
 
@@ -200,7 +212,9 @@ module load bcftools
 {% include code-block-copy.html %}
 ```bash
 bcftools view  NSLC-0463/results/variants/somaticSV.vcf.gz |grep -v "^##contig"
+```
 
+```bash
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	2452	NSLC-AJGA-TTP1-A-1-1-D-A79F-36
 chr2	28983101	MantaDUP:TANDEM:3:0:1:0:0:0	C	<DUP:TANDEM>	.	PASS	END=28983251;SVTYPE=DUP;SVLEN=150;CIPOS=0,6;CIEND=0,6;HOMLEN=6;HOMSEQ=CTCAGC;SOMATIC;SOMATICSCORE=38	PR:SR	6,0:29,2	57,1:94,28
 chr2	29225011	MantaBND:22:0:1:0:0:0:1	C	C]chr2:42299403]	.	PASS	SVTYPE=BND;MATEID=MantaBND:22:0:1:0:0:0:0;SOMATIC;SOMATICSCORE=147;BND_DEPTH=45;MATE_BND_DEPTH=66	PR:SR	34,0:76,0	57,62:83,43
