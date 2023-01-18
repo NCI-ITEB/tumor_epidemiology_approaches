@@ -68,9 +68,9 @@ library(jsonlite)
 
 ## Cancer Genomics Dataset
 
-We will use our first published Sherlock-Lung WGS data for today’s session (https://pubmed.ncbi.nlm.nih.gov/34493867/). Sherlock-Lung is a comprehensive study that aims to trace lung cancer etiology in never smokers by analyzing genomic data in tumors and surrounding lung tissue. Whole genome sequencing, whole transcriptome, genome-wide methylation, and microbiome data are being analyzed to characterize the genomic landscape of lung cancer in never smokers (LCINS) and to identify exogenous and endogenous processes involved in lung tumorigenesis.
+We will use our first published Sherlock-Lung WGS data for today’s session ([https://pubmed.ncbi.nlm.nih.gov/34493867/](https://pubmed.ncbi.nlm.nih.gov/34493867/)). [Sherlock-Lung](https://dceg.cancer.gov/research/cancer-types/lung/sherlock-lung-study) is a comprehensive study that aims to trace lung cancer etiology in never smokers by analyzing genomic data in tumors and surrounding lung tissue. Whole genome sequencing, whole transcriptome, genome-wide methylation, and microbiome data are being analyzed to characterize the genomic landscape of lung cancer in never smokers (LCINS) and to identify exogenous and endogenous processes involved in lung tumorigenesis.
 
-In the first part of this practical we will analyze sliced WGS bam files from two tumor-normal pairs to identify and validate the most recurrent driver SVs, specifically focusing on the EML4-ALK fusion. In the second part, we will present the finalized SV data for visualization.
+In the first part of this practical we will analyze sliced WGS bam files from two tumor-normal pairs to identify and validate the most recurrent driver SVs, specifically focusing on the *EML4-ALK* fusion. In the second part, we will present the finalized SV data for visualization.
 
 
 ---
@@ -83,7 +83,7 @@ In the first part of this practical we will analyze sliced WGS bam files from tw
 ### Manta Structural Variant Caller
 Manta is a tool for the detection of structural variations (SVs) using Illumina paired-end sequencing data. It is designed to detect a wide range of SVs including insertions, deletions, inversions, and translocations. The algorithm starts by using paired-end read information to identify candidate SV breakpoints. Then, it uses split-read alignments and local assembly to further refine the breakpoint locations and genotype the SVs. Manta is highly sensitive and can detect even small SVs, it also uses paired-end and split-read evidence to genotype the events and it can handle complex SVs such as multi-allelic and large-scale events. Manta can also be used to detect somatic SVs when provided with matched normal and tumor samples.
 
-More detailed information about the Manta algorithm can be found in the publication and GitHub page for the tool.
+More detailed information about the Manta algorithm can be found in the [publication](https://academic.oup.com/bioinformatics/article/32/8/1220/1743909?login=true) and [GitHub](https://github.com/Illumina/manta) page for the tool.
 
 
 ---
@@ -92,18 +92,18 @@ More detailed information about the Manta algorithm can be found in the publicat
 
 Since our goal is to determine the most significant fusion drivers in lung cancer among never-smokers, we would like to provide some additional background about fusion genes. Fusion genes are formed when two individual genes are joined together as a result of structural variation. Fusion genes create totally new gene products, which can result in activation of oncogenes or the inactivation of tumor suppressor genes, and then ultimately development of tumors. The specific function of a fusion gene in tumorigenesis can vary depending on the genes involved and the location of the fusion within the gene.
 
-For example, the EML4-ALK fusion found in some cases of non-small cell lung cancer results in the activation of an oncogene, leading to the growth and spread of cancer cells. Understanding the specific function of a fusion gene can help in the development of targeted treatments for cancer. The following figure from FGviewer illustrates the impact of driver gene fusions on human cancer.
+For example, the *EML4-ALK* fusion found in some cases of non-small cell lung cancer results in the activation of an oncogene, leading to the growth and spread of cancer cells. Understanding the specific function of a fusion gene can help in the development of targeted treatments for cancer. The following figure from [FGviewer](https://ccsmweb.uth.edu/FGviewer) illustrates the impact of driver gene fusions on human cancer.
 
 {% include image-modal.html link="practical_assets/01-fgviewer-diagram.png" %}
 
 <p class="is-italic" style="font-size:.8rem">Fusion genes can participate in gene regulation in a variety of ways in cancer cells. If a partner gene, with the active promoter and dimerization functional domains, is fused with a kinase domain, it will constitutively drive the activated expression of the kinase, leading to uncontrolled cell proliferation. For example, ALK is not normally transcribed in adult lung, but under the control of the EML4 promoter, the EML4-ALK fusion gene is transcribed. The dimerization domain of EML4 permits unregulated dimerization of the tyrosine kinase domain, constitutively activating downstream pathways. The BCR-ABL1 fusion gene is formed between BCR and the non-receptor tyrosine kinase, ABL1. Lacking auto-inhibitory N-terminal myristoylation in ABL1 and dimerization function of the coiled-coil domain in BCR contribute to the constitutive activation of kinase function. TMPRSS2-ERG fusion gene has over 50% of frequency in prostate cancer patients. The strong promoter of TMPRSS2, which is a prostate tissue-specific and androgen-inducing gene, enhanced the function of proto-oncogene (ERG). Similarly, if a DNA-binding domain of FLI1 is fused with a transactivation domain of EWSR1, this fusion protein can recruit transcriptional coregulatory elements, resulting in target gene activation. Through fusion, one protein can also lose its interactions with important cellular regulators (i.e., MLL fusion genes). If the 3’-UTR region of a fusion gene is truncated during fusion, such fusion transcript can avoid the regulation by its targeting miRNAs (i.e., FGFR3-TACC3). Other FG mechanisms include the loss of function of tumor suppressors and DNA damage repairs through the deletion or frameshift open reading frame (ORF) of fusion transcripts. Recently, several studies were done for identifying downstream effectors of FGs (i.e., NUP214-ABL1, RUNX1-ETO, and SS18-SSX). SS18, which encodes the BAF complex subunit, fused with SSX and affected chromatin accessibility. - from FGViewer</p>
 
 
-It is common to observe variation in the types of fusion rearrangements and breakpoints for a given fusion pair. In the case of the EMLK4-ALK fusion, a large inversion structural variant (SV) is often observed between the EML4 and ALK genes on the same chromosome. Analysis and visualization of these breakpoints is crucial for understanding the consequences of this fusion.
+It is common to observe variation in the types of fusion rearrangements and breakpoints for a given fusion pair. In the case of the *EML4-ALK* fusion, a large inversion structural variant (SV) is often observed between the *EML4* and *ALK* genes on the same chromosome. Analysis and visualization of these breakpoints is crucial for understanding the consequences of this fusion.
 
 {% include image-modal.html link="practical_assets/02-ALK-EML4.png" %}
 
-*Figure adapted from: *
+*Figure from: [https://www.atcc.org/resources/application-notes/generation-of-an-eml4-alk-fusion-nsclc-isogenic-cell-line](https://www.atcc.org/resources/application-notes/generation-of-an-eml4-alk-fusion-nsclc-isogenic-cell-line)*
 
 
 ---
@@ -112,28 +112,28 @@ It is common to observe variation in the types of fusion rearrangements and brea
 ## Detailed steps for somatic SV calling using Manta
 
 
-**1\.** `mkdir session6`: This command creates a new directory called "session6".
+**1\.** `mkdir session6`: This command creates a new directory called **session6**.
 
 {% include code-block-copy.html %}
 ```bash
 mkdir session6
 ```
 
-**2\.** `cd session6`: This command changes the current working directory to the newly created "session6" directory.
+**2\.** `cd session6`: This command changes the current working directory to the newly created **session6** directory.
 
 {% include code-block-copy.html %}
 ```bash
 cd session6
 ```
 
-**3\.** `module load manta`: This command loads the "manta" module, which is a tool for structural variant (SV) discovery.
+**3\.** `module load manta`: This command loads the **manta** module, which is a tool for structural variant (SV) discovery.
 
 {% include code-block-copy.html %}
 ```bash
 module load manta
 ```
 
-**4\.** `configManta.py` This command runs the configManta.py script, which is used to configure the Manta workflow. The --normalBam and --tumorBam options specify the path to the normal and tumor BAM files, respectively, and the --referenceFasta option specifies the path to the reference genome in FASTA format. The --runDir option specifies the name of the directory where the Manta workflow will be run.
+**4\.** `configManta.py` This command runs the **configManta.py** script, which is used to configure the Manta workflow. The **--normalBam** and **--tumorBam** options specify the path to the normal and tumor BAM files, respectively, and the **--referenceFasta** option specifies the path to the reference genome in FASTA format. The **--runDir** option specifies the name of the directory where the Manta workflow will be run.
 
 {% include code-block-copy.html %}
 ```bash
@@ -144,7 +144,7 @@ configManta.py \
 --runDir NSLC-0463
 ```
 
-**5\.** `runWorkflow.py`: This command runs the runWorkflow.py script, which is used to execute the Manta workflow. The -m local option specifies that the workflow should be run locally, and the -j 2 option specifies that the workflow should use two CPU cores. The output of the script is redirected to the file "NSLC-0463.log" using the > operator. The 2>&1 part of the command redirects the standard error output to the same file as the standard output, so that both standard output and standard error are written to the log file.
+**5\.** `runWorkflow.py`: This command runs the **runWorkflow.py** script, which is used to execute the Manta workflow. The **-m local** option specifies that the workflow should be run locally, and the **-j 2** option specifies that the workflow should use two CPU cores. The output of the script is redirected to the file "NSLC-0463.log" using the **>** operator. The **2>&1** part of the command redirects the standard error output to the same file as the standard output, so that both standard output and standard error are written to the log file.
 
 {% include code-block-copy.html %}
 ```bash
@@ -184,7 +184,7 @@ configManta.py \
 [2022-12-25T02:09:36.616444] [cn4315.hpc.nih.gov] [97267_1] [WorkflowRunner] Elapsed time for full workflow: 172 sec
 ```
 
-**7\.** `tree`: This command runs the tree command with the -s and -h options, which show the sizes of the files and directories in "human-readable" format. The command displays the directory tree of the "variants" subdirectory under the "results" directory of the Manta workflow.
+**7\.** `tree`: This command runs the tree command with the **-s** and **-h** options, which show the sizes of the files and directories in "human-readable" format. The command displays the directory tree of the **variants** subdirectory under the **results** directory of the Manta workflow.
 
 <code>tree -sh NSLC-0463/results/variants</code>{% include code-snippet-copy.html %}
 
@@ -207,7 +207,7 @@ NSLC-0463/results/variants
 module load bcftools
 ```
 
-**9\.** `bcftools view`: This command runs the bcftools view command, which is used to display the contents of a VCF file. The \| operator pipes the output of the bcftools view command to the grep command, which is used to filter the output. The -v option inverts the sense of the match, so that the grep command prints only the lines that do not match the pattern "^##contig".
+**9\.** `bcftools view`: This command runs the **bcftools view** command, which is used to display the contents of a VCF file. The **\|** operator pipes the output of the **bcftools view** command to the grep command, which is used to filter the output. The **-v** option inverts the sense of the match, so that the grep command prints only the lines that do not match the pattern "^##contig".
 
 {% include code-block-copy.html %}
 ```bash
@@ -230,7 +230,7 @@ chr2	42299403	MantaBND:22:0:1:0:0:0:0	C	C]chr2:29225011]	.	PASS	SVTYPE=BND;MATEI
 module load svviz
 ```
 
-**11\.** `svviz`: This command runs the svviz tool with a number of options and arguments. The -t bkend option specifies the type of SV being visualized (in this case, "bkend" stands for "breakend"). The -b options specify the paths to the normal and tumor BAM files, respectively. The next three arguments specify the reference genome, the coordinates of the structural variation, and the orientation of the sequences, respectively. The --export option specifies the name of the file where the visualization should be saved, and the --annotation option specifies the path to a GTF file with gene annotations.
+**11\.** `svviz`: This command runs the svviz tool with a number of options and arguments. The **-t bkend** option specifies the type of SV being visualized (in this case, "bkend" stands for "breakend"). The **-b** options specify the paths to the normal and tumor BAM files, respectively. The next three arguments specify the reference genome, the coordinates of the structural variation, and the orientation of the sequences, respectively. The **--export** option specifies the name of the file where the visualization should be saved, and the **--annotation** option specifies the path to a GTF file with gene annotations.
 
 {% include code-block-copy.html %}
 ```bash
@@ -244,7 +244,11 @@ svviz -t bkend \
 
 {% include image-modal.html link="practical_assets/03-svviz-out.png" %}
 
-To examine the output, mount your /data/ drive to your computer and open the file 'session6/NSLC-0463_EML4-ALK_fusion.svg'.
+To examine the output, mount your /data/ drive to your computer and open the file **session6/NSLC-0463_EML4-ALK_fusion.svg**.
+
+You can find more information about the svviz from the svviz official website:
+[http://svviz.github.io/svviz/](http://svviz.github.io/svviz/)
+
 
 ---
 ---
@@ -273,11 +277,11 @@ nirvana -c $NIRVANA_DATA/Cache/GRCh38/Both \
 -o NSLC-0463
 ```
 
-Most of these arguments are paths to databases for nirvana; to use your own variants, simply change -i to the path of your variants file and set -o to whatever filename prefix you want for your outputs. Nirvana outputs annotations in JSON format which will need to be reformatted in R or Python for better readability.
+Most of these arguments are paths to databases for nirvana; to use your own variants, simply change **-i** to the path of your variants file and set **-o** to whatever filename prefix you want for your outputs. Nirvana outputs annotations in JSON format which will need to be reformatted in R or Python for better readability.
 
 Here is the detailed information for the JSON annotation file.
 
-{% include image-modal.html link="practical_assets/04-nirvana-json.png" %}
+{% include image-modal.html link="practical_assets/04-nirvana-json.png" max-width="65%" %}
 
 ---
 
@@ -313,13 +317,13 @@ jsondata %>% .[[3]] %>% as_tibble()
 
 ### AnnotSV
 
-After calling structural variants it is helpful to annotate those variants to see if any structural variants in your sample have been previously associated with disease or cancer. For this we can use the SV annotation database AnnotSV: https://www.lbgi.fr/AnnotSV/runjob.
+After calling structural variants it is helpful to annotate those variants to see if any structural variants in your sample have been previously associated with disease or cancer. For this we can use the SV annotation database AnnotSV: <a href="https://www.lbgi.fr/AnnotSV/runjob" target="_blank">https://www.lbgi.fr/AnnotSV/runjob</a>.
 
-**14\.** Navigate to the website. For a simple example, navigate to the section that says “ask for an automatic loading of this SV input file example” highlighted in purple below,  and in the box select yes, then hit submit to the right.
+**14\.** Navigate to the website. For a simple example, navigate to the section that says **ask for an automatic loading of this SV input file example** highlighted in purple below, and in the box select **yes**, then hit **Submit** to the right.
 
 {% include image-modal.html link="practical_assets/05-annotsv-home.png" %}
 
-This will submit an annotation job with their example file. In the future, you can upload your own SV files in VCF or BED format with the “Choose File” button boxed in red.
+This will submit an annotation job with their example file. **In the future, you can upload your own SV files in VCF or BED format with the “Choose File” button boxed in red.**
 
 After submitting, wait ~30 seconds then refresh the page and the results should be generated like so.
 
@@ -327,27 +331,27 @@ After submitting, wait ~30 seconds then refresh the page and the results should 
 
 **15\.** From here you can either download the data to your computer, or browse the output within your internet browser by clicking the bottom two buttons.  
 
-The “HTML visualization” will generate a colorful table in your browser with annotations such as associated genes, OMIM entries for those genes, pathogenic SVs for that gene, regulatory regions overlapping your SV, etc.
+The **HTML visualization** will generate a colorful table in your browser with annotations such as associated genes, OMIM entries for those genes, pathogenic SVs for that gene, regulatory regions overlapping your SV, etc.
 
 {% include image-modal.html link="practical_assets/07-annotsv-table.png" %}
 
-The “circos visualization” button will generate an interactive circos plot to visualize your structural variants.
+The **circos visualization** button will generate an interactive circos plot to visualize your structural variants.
+
+{% include image-modal.html link="practical_assets/08-annotsv-circos.png" max-width="75%" %}
 
 *(Note: you must closely match their VCF formatting specifications to generate the circos plot, otherwise AnnotSV will only generate the annotated SV table.)*
-
-{% include image-modal.html link="practical_assets/08-annotsv-circos.png" %}
 
 ---
 
 ### Fusion search and visualization with FGViewer
 
-**16\.** For the EML4-ALK fusion (translocation) from our samples, we can also check FGviewer, a tool for visualizing functional features of the human fusion gene. First, navigate to the website and click on the ‘Search’ tab: https://ccsmweb.uth.edu/FGviewer.
+**16\.** For the *EML4-ALK* fusion (translocation) from our samples, we can also check FGviewer, a tool for visualizing functional features of the human fusion gene. First, navigate to the website and click on the **Search** tab: <a href="https://ccsmweb.uth.edu/FGviewer" target="_blank">https://ccsmweb.uth.edu/FGviewer</a>.
 
-{% include image-modal.html link="practical_assets/09-fgviewer-home.png" %}
+{% include image-modal.html link="practical_assets/09-fgviewer-home.png" max-width="60%" %}
 
-**17\.** Next, scroll down and in the box labelled “Batch Search by Fusion Gene BPs”, enter the coordinates of our EML4-ALK fusion from earlier, chr2:42299403-chr2:29225011 . Then scroll to the bottom, hit the search button, and click the link labeled “0-FAM179A” at the very bottom when it appears.
+**17\.** Next, scroll down and in the box labelled **Batch Search by Fusion Gene BPs**, enter the coordinates of our *EML4-ALK* fusion from earlier, **chr2:42299403-chr2:29225011**. Then scroll to the bottom, hit the search button, and click the link labeled **0-FAM179A** at the very bottom when it appears.
 
-{% include image-modal.html link="practical_assets/10-fgviewer-search.png" %}
+{% include image-modal.html link="practical_assets/10-fgviewer-search.png" max-width="60%" %}
 
 This will show a window where you can examine DNA-, RNA-, Protein-, and Pathogenic-level consequences of your gene fusion.
 
@@ -371,21 +375,21 @@ The following files are required for the SV visualization:
 
 **18\.** You will need to download these files. Click <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_6/Circos.zip" target="_blank">here</a> to download these files as a zipped folder.
 
-**19\.** Now open RStudio. Go to File >> New Project. A pop-up should appear to create a project; choose “Existing Directory”, then click “Browse” and select the “Circos” folder you just copied from Biowulf.
+**19\.** Now open RStudio. Go to **File >> New Project**. A pop-up should appear to create a project; choose **Existing Directory**, then click **Browse** and select the **Circos** folder you just copied from Biowulf.
 
-{% include image-modal.html link="practical_assets/12-rstudio-load.png" %}
+{% include image-modal.html link="practical_assets/12-rstudio-load.png" max-width="80%" %}
 
 You should see a window like so, where the Project Working Directory ends in “/Circos”. Then hit “Create Project”.
 
-{% include image-modal.html link="practical_assets/13-rstudio-load2.png" %}
+{% include image-modal.html link="practical_assets/13-rstudio-load2.png" max-width="60%" %}
 
-If everything has been done properly, after R loads your window will look roughly like this with the files “ztw_function.R”, “svdata.RData”, and “SV_circos.R” listed in the lower-right panel.
+If everything has been done properly, after R loads your window will look roughly like this with the files **ztw_function.R**, **svdata.RData**, and **SV_circos.R** listed in the lower-right panel.
 
-{% include image-modal.html link="practical_assets/14-rstudio-loaded.png" %}
+{% include image-modal.html link="practical_assets/14-rstudio-loaded.png" max-width="70%" %}
 
-**20\.** In the lower right, click “SV_circos.R” to open the R script for our analysis in RStudio.
+**20\.** In the lower right, click **SV_circos.R** to open the R script for our analysis in RStudio.
 
-{% include image-modal.html link="practical_assets/15-rstudio-script.png" %}
+{% include image-modal.html link="practical_assets/15-rstudio-script.png" max-width="70%" %}
 
 First we need to load the libraries tidyverse and circlize which contain R functions we need to run the script (lines 4-6).
 
@@ -396,7 +400,7 @@ library(tidyverse)
 library(circlize)
 ```
 
-Either highlight these lines and hit Run just above the window; or copy and paste them into the console where you see the > symbol (referred to as the “prompt” and located in the bottom-left panel of RStudio by default), then hit enter.
+Either highlight these lines and hit Run just above the window; or copy and paste them into the console where you see the `>` symbol *(referred to as the “prompt” and located in the bottom-left panel of RStudio by default)*, then hit enter.
 
 *(You may see some warning messages about the package version or R version; these warnings can be ignored. If you see an “Error”, ask for help)*
 
@@ -411,13 +415,13 @@ source('ztw_function.R')
 load('svdata.RData')
 ```
 
-The command “source” runs RScripts such as ‘ztw_function.R’, which contains some helpful functions we wrote to simplify plotting. The load command will load the data from the file svdata.RData, including a table called ‘svdata’ with our SVs.
+The command **source** runs RScripts such as **ztw_function.R**, which contains some helpful functions we wrote to simplify plotting. The **load** command will load the data from the file **svdata.RData**, including a table called ‘svdata’ with our SVs.
 
 Once that code runs, in the Environment tab *(top-right panel of RStudio by default)* you should see the following:
 
-{% include image-modal.html link="practical_assets/16-rstudio-objectsLoaded.png" %}
+{% include image-modal.html link="practical_assets/16-rstudio-objectsLoaded.png" max-width="70%" %}
 
-**22\.** To preview the SV data table, within the console in the bottom-left after the prompt, ‘>’, type and enter svdata, which will yield the following:
+**22\.** To preview the SV data table, within the console in the bottom-left after the prompt, `>`, type and enter **svdata**, which will yield the following:
 
 {% include image-modal.html link="practical_assets/17-svdata-out.png" %}
 
@@ -425,9 +429,9 @@ Once that code runs, in the Environment tab *(top-right panel of RStudio by defa
 
 ### SV Barplot
 
-Now we have everything we need to begin plotting. Our first task is to make a barplot summarizing the number of structural variants by sv_type, like so:
+Now we have everything we need to begin plotting. Our first task is to make a barplot summarizing the number of structural variants by **sv_type**, like so:
 
-{% include image-modal.html link="practical_assets/18-sv-barplot.png" %}
+{% include image-modal.html link="practical_assets/18-sv-barplot.png" max-width="60%" %}
 
 **23\.** Begin by running lines 14-26 of the script:
 
@@ -448,9 +452,9 @@ names(svcolor) <- svtypes
 svdata <- svdata %>% mutate(color = svcolor[sv_type])
 ```
 
-In short, these lines of code extract the different types of SVs from our dataset for the x-axis, assign each SV type a unique color, and then add a new column ‘color’ to our original SV dataset within R. Pay attention to the comments if you’re curious what each line of code does individually.
+In short, these lines of code extract the different types of SVs from our dataset for the x-axis, assign each SV type a unique color, and then add a new column **color** to our original SV dataset within R. Pay attention to the comments if you’re curious what each line of code does individually.
 
-**24\.** Once that’s run, take a look at the table once again by typing svdata into the console in the bottom left after the prompt, ‘>’. You should now see the new column which we just added called ‘color’.
+**24\.** Once that’s run, take a look at the table once again by typing svdata into the console in the bottom left after the prompt, `>`. You should now see the new column which we just added called **color**.
 
 {% include image-modal.html link="practical_assets/19-svdata-wColor.png" %}
 
@@ -478,12 +482,12 @@ barplot
 ### Circos Plot
 Next we will create a circos plot so we can visualize where in the genome these SVs are occurring.
 
-{% include image-modal.html link="practical_assets/20-circos-plot.png" %}
+{% include image-modal.html link="practical_assets/20-circos-plot.png" max-width="70%" %}
 
 **26\.** To begin, we are going to transform our original dataset into a set of BED-formatted tables which will be easier to plot with.
 
-- We will create the tables ‘bed1’ and ‘bed2’ which will be used to create the genomic links between SVs in the center of the circos plot
-- We will also create a table ‘bed_genes’ which will be used for the gene annotations along the outside of the circos
+- We will create the tables **bed1** and **bed2** which will be used to create the genomic links between SVs in the center of the circos plot
+- We will also create a table **bed_genes** which will be used for the gene annotations along the outside of the circos
 
 These are lines 59-107 of the script; to better understand the details read the comments:
 
@@ -530,7 +534,7 @@ bed_gene <- bind_rows(bed_gene1, bed_gene2) %>%
   as.data.frame()
 ```
 
-**27\.** To examine any of these tables, click on its name in the Environment tab in the top right panel, or enter the name of the table at the prompt, just like we did with svdata in step XX , and hit enter.
+**27\.** To examine any of these tables, click on its name in the **Environment** tab in the top right panel, or enter the name of the table at the prompt, just like we did with **svdata** in step 22 , and hit enter.
 
 **28\.** And now, finally, we will create our circos plot with the last chunk of code, lines 109 to the end of the script. We suggest running this code one section at a time to build the plot step-by-step:
 
@@ -556,7 +560,7 @@ if(dim(bed_gene)[1]>0){
 }
 ```
 
-{% include image-modal.html link="practical_assets/21-circos-labels.png" %}
+{% include image-modal.html link="practical_assets/21-circos-labels.png" max-width="60%" %}
 
 **28\.c\.**
 
@@ -566,7 +570,7 @@ if(dim(bed_gene)[1]>0){
 circos.initializeWithIdeogram2(plotType = c("labels"))
 ```
 
-{% include image-modal.html link="practical_assets/22-circos-chrLabels.png" %}
+{% include image-modal.html link="practical_assets/22-circos-chrLabels.png" max-width="60%" %}
 
 **28\.d\.**
 
@@ -576,7 +580,7 @@ circos.initializeWithIdeogram2(plotType = c("labels"))
 circos.initializeWithIdeogram2(plotType = c("ideogram","axis"),ideogram.height = 0.04,track.height = 0.02,major.by = 5e7 )
 ```
 
-{% include image-modal.html link="practical_assets/23-circos-ideogram.png" %}
+{% include image-modal.html link="practical_assets/23-circos-ideogram.png" max-width="60%" %}
 
 **28\.e\.**
 
@@ -588,13 +592,13 @@ if(dim(bed1)[1]>0 & dim(bed2)[1]>0 ){
 }
 ```
 
-{% include image-modal.html link="practical_assets/24-circos-breakpoints.png" %}
+{% include image-modal.html link="practical_assets/24-circos-breakpoints.png" max-width="60%" %}
 
 Read the comments to get an overall sense of what each code chunk does. Much of the details within each function are minor formatting operations, such as resizing, reshaping, coloring, etc.
 
-If you want to learn details about any of these plotting functions or the ones we used for the barplot, type ? followed by the name of the function, e.g. ?circos.genomicLink, and help documents for that function will appear on the lower-right panel if they are available:
+If you want to learn details about any of these plotting functions or the ones we used for the barplot, type ? followed by the name of the function, e.g. `?circos.genomicLink`, and help documents for that function will appear on the lower-right panel if they are available:
 
-{% include image-modal.html link="practical_assets/25-help-docs.png" %}
+{% include image-modal.html link="practical_assets/25-help-docs.png" max-width="70%" %}
 
 ---
 
@@ -629,7 +633,7 @@ The command that sorts our samples is this one on line 31:
 mutate(sv_type = fct_reorder(sv_type,n)) %>%
 ```
 
-Specifically, the command <code>fct_reorder</code> is really what's doing the work to sort and it's what we need to change. If you enter <code>?fct_reorder</code> and read the help documents you'll see that fct_reorder has an option <code>.desc</code>; if we set that option to **TRUE** then we'll get the desired result.
+Specifically, the command **fct_reorder** is really what's doing the work to sort and it's what we need to change. If you enter `?fct_reorder` and read the help documents you'll see that fct_reorder has an option **.desc**; if we set that option to **TRUE** then we'll get the desired result.
 
 ```R
 mutate(sv_type = fct_reorder(sv_type,n,.desc=TRUE)) %>%
@@ -702,7 +706,7 @@ svdata %>%
   mutate(sv_type = fct_reorder(sv_type,n))
 ```
 
-'barcode' isn't in our table anymore; the only columns are 'sv_type' and 'n' because the count() command reduces the original table only down to the variables being counted and their count totals in column 'n'. To fix this we can simply count by both sample and sv_type, like so:
+**barcode** isn't in our table anymore; the only columns are **sv_type** and **n** because the count() command reduces the original table only down to the variables being counted and their count totals in column **n**. To fix this we can simply count by both sample and sv_type, like so:
 
 ```R
 count(barcode,sv_type) %>%
@@ -834,13 +838,13 @@ if(dim(bed1)[1]>0 & dim(bed2)[1]>0 ){
 
 ### SV signature analysis
 
-Structural variant (SV) signature analysis is a method used to identify and characterize the specific patterns of SVs in a genome. This can include identifying the specific genes or regions that are most frequently affected by SVs, as well as the types of SVs that are present (such as deletions, duplications, inversions, or translocations). By analyzing the SV signatures in a genome, researchers can gain insight into the underlying mechanisms that drive the development of genomic rearrangements and the role they play in disease. For example, Li et al., published a SV signature analysis in nature 2020 (link). They developed methods to group, classify and describe somatic structural variants, using data from the Pan-Cancer Analysis of Whole Genomes (PCAWG) Consortium of the International Cancer Genome Consortium (ICGC) and The Cancer Genome Atlas (TCGA), which aggregated whole-genome sequencing data from 2,658 cancers across 38 tumour types. From that study, they detected sixteen signatures of structural variations. This study shows that a wide variety of rearrangement processes are active in cancer, which generate complex configurations of the genome upon which selection can act.
+Structural variant (SV) signature analysis is a method used to identify and characterize the specific patterns of SVs in a genome. This can include identifying the specific genes or regions that are most frequently affected by SVs, as well as the types of SVs that are present (such as deletions, duplications, inversions, or translocations). By analyzing the SV signatures in a genome, researchers can gain insight into the underlying mechanisms that drive the development of genomic rearrangements and the role they play in disease. For example, Li et al., published a SV signature analysis in nature 2020 ([link](http://nature.com/articles/s41586-019-1913-9)). They developed methods to group, classify and describe somatic structural variants, using data from the Pan-Cancer Analysis of Whole Genomes (PCAWG) Consortium of the International Cancer Genome Consortium (ICGC) and The Cancer Genome Atlas (TCGA), which aggregated whole-genome sequencing data from 2,658 cancers across 38 tumour types. From that study, they detected sixteen signatures of structural variations. This study shows that a wide variety of rearrangement processes are active in cancer, which generate complex configurations of the genome upon which selection can act.
 
 ---
 
 ### Identification of complex genomic rearrangements
 
-Complex genomic rearrangements refer to large-scale changes in the genome that involve multiple structural variants (SVs) occurring in close proximity. One example of this is Chromothripsis, which is a phenomenon where multiple, clustered SVs occur within a single chromosome in a single event, leading to significant genomic changes. Identification of these complex genomic rearrangements can provide important insight into the underlying mechanisms of disease and the role that genomic instability plays in the development of cancer and other genetic disorders. As part of the Pan-Cancer Analysis of Whole Genomes (PCAWG) Consortium of the International Cancer Genome Consortium (ICGC) and The Cancer Genome Atlas (TCGA), Researchers analyze patterns of chromothripsis across 2,658 tumors from 38 cancer types using whole-genome sequencing data (link). They find that chromothripsis events are pervasive across cancers, with a frequency of more than 50% in several cancer types. You can find more information about chromothripsis including the detecting algorithm, and patterns across all cancer types in Chromothripsis Explorer.
+Complex genomic rearrangements refer to large-scale changes in the genome that involve multiple structural variants (SVs) occurring in close proximity. One example of this is Chromothripsis, which is a phenomenon where multiple, clustered SVs occur within a single chromosome in a single event, leading to significant genomic changes. Identification of these complex genomic rearrangements can provide important insight into the underlying mechanisms of disease and the role that genomic instability plays in the development of cancer and other genetic disorders. As part of the Pan-Cancer Analysis of Whole Genomes (PCAWG) Consortium of the International Cancer Genome Consortium (ICGC) and The Cancer Genome Atlas (TCGA), Researchers analyze patterns of chromothripsis across 2,658 tumors from 38 cancer types using whole-genome sequencing data ([link](https://www.nature.com/articles/s41588-019-0576-7)). They find that chromothripsis events are pervasive across cancers, with a frequency of more than 50% in several cancer types. You can find more information about chromothripsis including the detecting algorithm, and patterns across all cancer types in [Chromothripsis Explorer](http://compbio.med.harvard.edu/chromothripsis/).
 
 ---
 
