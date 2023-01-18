@@ -1,12 +1,8 @@
 ---
 layout: page
 permalink: sessions/session_6/lecture
-menubar_toc: true
 ---
 
+[Download the lecture slides here](https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/lecture_materials/lecture_6/SV.lecture.16.9.pdf)
 
-## Emerging somatic SVs in cancer genomic
-## Mechanism of SVs in the cancer genomes
-## Popular algorithms for SV detection in cancer genomes
-## SV calling challenges and validation
-## Downstream analysis for SVs
+<iframe src="lecture_assets/SV.lecture.16.9.pdf" width="960" height="1000" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
