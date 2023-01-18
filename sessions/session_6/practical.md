@@ -230,7 +230,7 @@ chr2	42299403	MantaBND:22:0:1:0:0:0:0	C	C]chr2:29225011]	.	PASS	SVTYPE=BND;MATEI
 module load svviz
 ```
 
-**11\.** `svviz`: This command runs the svviz tool with a number of options and arguments. The -t bkend option specifies the type of visualization to use (in this case, "bkend" stands for "backend"). The -b options specify the paths to the normal and tumor BAM files, respectively. The next three arguments specify the reference genome, the coordinates of the structural variation, and the orientation of the sequences, respectively. The --export option specifies the name of the file where the visualization should be saved, and the --annotation option specifies the path to a GTF file with gene annotations.
+**11\.** `svviz`: This command runs the svviz tool with a number of options and arguments. The -t bkend option specifies the type of SV being visualized (in this case, "bkend" stands for "breakend"). The -b options specify the paths to the normal and tumor BAM files, respectively. The next three arguments specify the reference genome, the coordinates of the structural variation, and the orientation of the sequences, respectively. The --export option specifies the name of the file where the visualization should be saved, and the --annotation option specifies the path to a GTF file with gene annotations.
 
 {% include code-block-copy.html %}
 ```bash
