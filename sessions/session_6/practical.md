@@ -694,7 +694,19 @@ svdata %>%
 count(barcode,sv_type) %>%
 ```
 
-If you make both of these changes you'll get the stacked barplot above
+If you make both of these changes you'll get the following code and the stacked barplot above:
+
+```R
+svdata %>%
+  count(barcode,sv_type) %>%
+  mutate(sv_type = fct_reorder(sv_type,n)) %>%
+  ggplot(aes(x=barcode,y=n,fill=sv_type)) +
+  geom_col(width = 0.7, col = 'black', linewidth = 0.4) +
+  scale_fill_manual(values = svcolor, breaks = names(svcolor)) +
+  labs(x = '', y = 'Number of SVs', fill = 'SV type', title = 'NSLC-0463-T01') +
+  theme_bw(base_size = 15, base_line_size = 0.25) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+```
 
 </blockquote></details><br>
 
