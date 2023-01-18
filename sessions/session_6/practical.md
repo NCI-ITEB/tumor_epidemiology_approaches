@@ -244,6 +244,8 @@ svviz -t bkend \
 
 {% include image-modal.html link="practical_assets/03-svviz-out.png" %}
 
+To examine the output, mount your /data/ drive to your computer and open the file 'session6/NSLC-0463_EML4-ALK_fusion.svg'.
+
 ---
 ---
 
@@ -267,7 +269,7 @@ Run the following code:
 nirvana -c $NIRVANA_DATA/Cache/GRCh38/Both \
 --sd $NIRVANA_DATA/SupplementaryAnnotation/GRCh38 \
 -r $NIRVANA_DATA/References/Homo_sapiens.GRCh38.Nirvana.dat \
--i /NSLC-0463/results/variants/somaticSV.vcf.gz \
+-i NSLC-0463/results/variants/somaticSV.vcf.gz \
 -o NSLC-0463
 ```
 
@@ -288,10 +290,9 @@ Here is the detailed information for the JSON annotation file.
 library(jsonlite)
 library(tidyverse)
 
-jsondata <- fromJSON('NSLC-0463.json.gz')
+jsondata <- fromJSON('path/to/NSLC-0463.json.gz')
 
 # extract the Header
-
 jsondata %>% .[[1]] %>% as.data.frame() %>% as_tibble()
 
 # extract the positions and all variant information
@@ -305,7 +306,6 @@ jsondata %>% .[[2]] %>% as_tibble() %>% pull(variants) %>% bind_rows() %>% as_ti
 
 
 # extract the genes annotation
-
 jsondata %>% .[[3]] %>% as_tibble()
 ```
 

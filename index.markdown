@@ -29,7 +29,7 @@ To register, click the registration button above or visit the NCI events page at
 #### Module 2
 - Jan. 11, 2023: Mutation calling and analysis
 - Jan. 18, 2023: Mutational signatures
-  - *Jan. 19, 2023 - Ludmil Alexandrov - Anthology of unusual patterns of somatic mutations in cancer genomes*
+  - *Jan. 19, 2023, 10:30–11:30 AM - Ludmil Alexandrov - Anthology of unusual patterns of somatic mutations in cancer genomes*
 - Jan. 25, 2023: Structural variant (SV) analysis
 - Feb. 1, 2023: “Ask a Bioinformatician” II
   - *Feb. 16, 2023 - Peter Park - Structural alterations in cancer genomes*
