@@ -355,7 +355,7 @@ The following files are required for the SV visualization:
 └── ztw_function.R
 ```
 
-**18\.** You will need to download these files from Biowulf. **Add a download link for the R code**
+**18\.** You will need to download these files. Click <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_6/Circos.zip" target="_blank">here</a> to download these files as a zipped folder.
 
 **19\.** Now open RStudio. Go to File >> New Project. A pop-up should appear to create a project; choose “Existing Directory”, then click “Browse” and select the “Circos” folder you just copied from Biowulf.
 
@@ -698,7 +698,7 @@ If you make both of these changes you'll get the stacked barplot above
 
 </blockquote></details><br>
 
-**30\.** Next let's try to customize the circos plot. In the original figure we observed many structural variants on chromosome 2, so let's try producing a circos plot with only chromosome 2. To do this we need to accomplish a couple of things:
+**30\.** Next let's try to customize the circos plot. In the original figure we observed many structural variants on chromosome 2, so let's try producing a circos plot where we zoom in only on chromosome 2. To do this we need to accomplish a couple of things:
 
 - Limit the ideogram to only chr2
 - Limit our structural variants table to only chr2, and reduce the extra bp distance added to the end positions
@@ -802,9 +802,20 @@ if(dim(bed1)[1]>0 & dim(bed2)[1]>0 ){
 
 ## Advanced genomic analysis based on SV callings
 
-SV signature analysis: Structural variant (SV) signature analysis is a method used to identify and characterize the specific patterns of SVs in a genome. This can include identifying the specific genes or regions that are most frequently affected by SVs, as well as the types of SVs that are present (such as deletions, duplications, inversions, or translocations). By analyzing the SV signatures in a genome, researchers can gain insight into the underlying mechanisms that drive the development of genomic rearrangements and the role they play in disease. For example, Li et al., published a SV signature analysis in nature 2020 (link). They developed methods to group, classify and describe somatic structural variants, using data from the Pan-Cancer Analysis of Whole Genomes (PCAWG) Consortium of the International Cancer Genome Consortium (ICGC) and The Cancer Genome Atlas (TCGA), which aggregated whole-genome sequencing data from 2,658 cancers across 38 tumour types. From that study, they detected sixteen signatures of structural variations. This study shows that a wide variety of rearrangement processes are active in cancer, which generate complex configurations of the genome upon which selection can act.
+---
 
-Identification of complex genomic rearrangements: Complex genomic rearrangements refer to large-scale changes in the genome that involve multiple structural variants (SVs) occurring in close proximity. One example of this is Chromothripsis, which is a phenomenon where multiple, clustered SVs occur within a single chromosome in a single event, leading to significant genomic changes. Identification of these complex genomic rearrangements can provide important insight into the underlying mechanisms of disease and the role that genomic instability plays in the development of cancer and other genetic disorders. As part of the Pan-Cancer Analysis of Whole Genomes (PCAWG) Consortium of the International Cancer Genome Consortium (ICGC) and The Cancer Genome Atlas (TCGA), Researchers analyze patterns of chromothripsis across 2,658 tumors from 38 cancer types using whole-genome sequencing data (link). They find that chromothripsis events are pervasive across cancers, with a frequency of more than 50% in several cancer types. You can find more information about chromothripsis including the detecting algorithm, and patterns across all cancer types in Chromothripsis Explorer.
+### SV signature analysis
 
+Structural variant (SV) signature analysis is a method used to identify and characterize the specific patterns of SVs in a genome. This can include identifying the specific genes or regions that are most frequently affected by SVs, as well as the types of SVs that are present (such as deletions, duplications, inversions, or translocations). By analyzing the SV signatures in a genome, researchers can gain insight into the underlying mechanisms that drive the development of genomic rearrangements and the role they play in disease. For example, Li et al., published a SV signature analysis in nature 2020 (link). They developed methods to group, classify and describe somatic structural variants, using data from the Pan-Cancer Analysis of Whole Genomes (PCAWG) Consortium of the International Cancer Genome Consortium (ICGC) and The Cancer Genome Atlas (TCGA), which aggregated whole-genome sequencing data from 2,658 cancers across 38 tumour types. From that study, they detected sixteen signatures of structural variations. This study shows that a wide variety of rearrangement processes are active in cancer, which generate complex configurations of the genome upon which selection can act.
 
-Integrative analysis with other genomic or clinical data: Integrative analysis refers to the combination of different types of data to gain a more comprehensive understanding of a biological system. This can include combining SV signature analysis with other genomic data, such as gene expression or epigenetic data, as well as clinical data, such as patient outcomes or treatment response. By integrating these different types of data, researchers can gain a more complete understanding of the underlying mechanisms of disease and the role that SVs play in the development of cancer and other genetic disorders.
+---
+
+### Identification of complex genomic rearrangements
+
+Complex genomic rearrangements refer to large-scale changes in the genome that involve multiple structural variants (SVs) occurring in close proximity. One example of this is Chromothripsis, which is a phenomenon where multiple, clustered SVs occur within a single chromosome in a single event, leading to significant genomic changes. Identification of these complex genomic rearrangements can provide important insight into the underlying mechanisms of disease and the role that genomic instability plays in the development of cancer and other genetic disorders. As part of the Pan-Cancer Analysis of Whole Genomes (PCAWG) Consortium of the International Cancer Genome Consortium (ICGC) and The Cancer Genome Atlas (TCGA), Researchers analyze patterns of chromothripsis across 2,658 tumors from 38 cancer types using whole-genome sequencing data (link). They find that chromothripsis events are pervasive across cancers, with a frequency of more than 50% in several cancer types. You can find more information about chromothripsis including the detecting algorithm, and patterns across all cancer types in Chromothripsis Explorer.
+
+---
+
+### Integrative analysis with other genomic or clinical data
+
+Integrative analysis refers to the combination of different types of data to gain a more comprehensive understanding of a biological system. This can include combining SV signature analysis with other genomic data, such as gene expression or epigenetic data, as well as clinical data, such as patient outcomes or treatment response. By integrating these different types of data, researchers can gain a more complete understanding of the underlying mechanisms of disease and the role that SVs play in the development of cancer and other genetic disorders.
