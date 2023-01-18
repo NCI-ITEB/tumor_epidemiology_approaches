@@ -700,10 +700,10 @@ If you make both of these changes you'll get the stacked barplot above
 
 **30\.** Next let's try to customize the circos plot. In the original figure we observed many structural variants on chromosome 2, so let's try producing a circos plot where we zoom in only on chromosome 2. To do this we need to accomplish a couple of things:
 
+- Limit our structural variants table to only chr2, and reduce the extra bp padding added to the end positions since this graph is much smaller
 - Limit the ideogram to only chr2
-- Limit our structural variants table to only chr2, and reduce the extra bp distance added to the end positions
 
-The second task we can do by adding a filter command to bed1 and bed2 tables. See the dropdown below for how to do this, or try it yourself.
+The first task requires filtering the tables bed1, bed2, and bed_genes to just the SVs/genes on chr2. We can accomplish this by adding a filter command somewhere in the code for making these three tables. Get the help documents for this command with ?filter and see if you can get generate these tables. If you get stuck, check the answer in the dropdown below.
 
 <details><summary></summary>
 
@@ -729,7 +729,7 @@ bed_gene_chr2<-bed_gene%>%filter(chr=="chr2")
 ```
 </blockquote></details><br>
 
-Once we have the tables, we need to limit the ideogram to only chr2 and swap the big table out for our new tables. To figure out how to do this, look at the help documents for **circos.initializeWithIdeogram**.
+Once we have the tables, we need to limit the ideogram to only chr2 and plot using the  tables we just generated in the first part. To change the ideogram, think about which parts of the circos code handled the various parts of the ideogram (**Hint:** these parts of the code are very appropriately named).
 
 We should also do some re-styling to get it looking right. Try this exercise yourself, and use the answer below if you get stuck.
 
@@ -737,7 +737,7 @@ We should also do some re-styling to get it looking right. Try this exercise you
 
 <blockquote markdown="1">
 
-To every circos.initializeWithIdeogram and circos.initializeWithIdeogram2 command we need to add the variable **chromosome.index="chr2"** which filters to a subset of chromosomes. Then swap every mention of bed1 for bed1_chr2, bed2 for bed2_chr2, and bed_gene for bed_gene_chr2. This will be the finished code chunk:
+To every **circos.initializeWithIdeogram** and **circos.initializeWithIdeogram2** command we need to add the variable **chromosome.index="chr2"** which filters to a subset of chromosomes. Then swap every mention of bed1, bed2, and bed_gene for the new tables generated in the first part. This will be the finished code chunk:
 
 ```R
 # Clear any previous plot and initialize the Circos
@@ -763,11 +763,11 @@ if(dim(bed1)[1]>0 & dim(bed2)[1]>0 ){
 }
 ```
 
-When you generate this plot it will look good, but not perfect. Specifically, the genes are rather far from the axes, and the gene names are a little small.
+When you generate this plot it will look close to what we want, but not perfect. Specifically, the genes are rather far from the axes, and the gene names are a little small.
 
 {% include image-modal.html link="practical_assets/27-circos-imperfect.png" %}
 
-To fix this, we can remove the chromosome label since there's only one chromosome (or if you like the label set the chr label's **track.height** to a very small number), then increase the variable **cex** in the command for **circos.genomicLabels**. Here's the final code:
+To fix this, we can remove the chromosome label since there's only one chromosome (or if you like the label set the chr label's **track.height** variable to a very small number), then increase the variable **cex** in the command for **circos.genomicLabels**. Here's the final code:
 
 ```R
 # Clear any previous plot and initialize the Circos
