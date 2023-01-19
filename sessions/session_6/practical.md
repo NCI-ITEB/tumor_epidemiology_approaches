@@ -207,11 +207,11 @@ NSLC-0463/results/variants
 module load bcftools
 ```
 
-**9\.** `bcftools view`: This command runs the **bcftools view** command, which is used to display the contents of a VCF file. The **\|** operator pipes the output of the **bcftools view** command to the grep command, which is used to filter the output. The **-v** option inverts the sense of the match, so that the grep command prints only the lines that do not match the pattern "^##contig".
+**9\.** `bcftools view`: This command runs the **bcftools view** command, which is used to display the contents of a VCF file. The **\|** operator pipes the output of the **bcftools view** command to the grep command, which is used to filter the output. The **-v** option inverts the sense of the match, so that the grep command prints only the lines that do not match the pattern "^##".
 
 {% include code-block-copy.html %}
 ```bash
-bcftools view  NSLC-0463/results/variants/somaticSV.vcf.gz |grep -v "^##contig"
+bcftools view  NSLC-0463/results/variants/somaticSV.vcf.gz |grep -v "^##"
 ```
 
 ```bash
@@ -294,23 +294,47 @@ Here is the detailed information for the JSON annotation file.
 library(jsonlite)
 library(tidyverse)
 
-jsondata <- fromJSON('path/to/NSLC-0463.json.gz')
+jsondata <- fromJSON('NSLC-0463.json.gz')
 
-# extract the Header
+## extract the Header
 jsondata %>% .[[1]] %>% as.data.frame() %>% as_tibble()
 
-# extract the positions and all variant information
+## extract the positions and all variant information
 jsondata %>% .[[2]] %>% as_tibble()
 
+
+## expand per-sample read support
 jsondata %>% .[[2]] %>% as_tibble() %>% unnest(samples)
 
+
+## expand per-sample read support, variant filtering status, and any multi-allelic sites
 jsondata %>% .[[2]] %>% as_tibble() %>% unnest(c(altAlleles,filters,samples))
 
+
+## extract specific variant annotations
 jsondata %>% .[[2]] %>% as_tibble() %>% pull(variants) %>% bind_rows() %>% as_tibble()
 
-
-# extract the genes annotation
+## extract gene annotations
 jsondata %>% .[[3]] %>% as_tibble()
+
+## combine all info into one table
+vars<-jsondata %>% .[[2]] %>%
+  as_tibble() %>%
+  ## expand the variants annotations to columns
+  mutate(variants %>% bind_rows() %>% as_tibble())%>%
+  select(-variants)%>%
+  ## add the gene annotations
+  cbind(jsondata %>% .[[3]] %>% as_tibble())%>%
+  ## expand the sample read supports and add the sample names
+  ## then move the sample names column before read support cols
+  unnest(samples,altAlleles)%>%
+  cbind(sample_names=jsondata[[1]]$samples)%>%
+  relocate(sample_names,.before = splitReadCounts)%>%
+  as.tibble()
+
+## Use this code to expand any other columns, such as clingen disease phenotypes
+## if keep_empty=FALSE, variants without annotations in column clingenGeneValidity will be dropped
+# vars%>%unnest(clingenGeneValidity, keep_empty=TRUE)
 ```
 
 ---
