@@ -244,7 +244,7 @@ svviz -t bkend \
 
 {% include image-modal.html link="practical_assets/03-svviz-out.png" %}
 
-To examine the output, mount your /data/ drive to your computer and open the file **session6/NSLC-0463_EML4-ALK_fusion.svg**.
+To examine the output, mount your Biowulf /data/ drive to your local computer and open the file **session6/NSLC-0463_EML4-ALK_fusion.svg**. ([Reminder for how to do this.](https://hpc.nih.gov/docs/hpcdrive.html))
 
 You can find more information about the svviz from the svviz official website:
 [http://svviz.github.io/svviz/](http://svviz.github.io/svviz/)
