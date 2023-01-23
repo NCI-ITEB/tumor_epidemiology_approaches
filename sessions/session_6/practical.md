@@ -287,7 +287,7 @@ Here is the detailed information for the JSON annotation file.
 
 #### Using R studio to convert the JSON annotation file into an R data frame.
 
-**13\.** In R, perform the following codes to extract the annotation information as a data frame, which can be easily convert to any format (e.g., txt/tsv/csv).
+**13\.** In R, perform the following code to extract the annotation information as a data frame, which can be easily converted to any format (e.g., txt/tsv/csv).
 
 {% include code-block-copy.html %}
 ```R
@@ -355,7 +355,7 @@ After submitting, wait ~30 seconds then refresh the page and the results should 
 
 **15\.** From here you can either download the data to your computer, or browse the output within your internet browser by clicking the bottom two buttons.  
 
-The **HTML visualization** will generate a colorful table in your browser with annotations such as associated genes, OMIM entries for those genes, pathogenic SVs for that gene, regulatory regions overlapping your SV, etc.
+The **HTML visualization** will generate a colorful table in your browser with annotations such as associated genes, OMIM entries for those genes, pathogenic SVs for that gene, regulatory regions overlapping your SV, etc. Most columns you can get an explanation by hovering over the column name ([full output specifications](https://www.lbgi.fr/AnnotSV/Documentation/README.AnnotSV_latest.pdf)).
 
 {% include image-modal.html link="practical_assets/07-annotsv-table.png" %}
 
@@ -363,7 +363,7 @@ The **circos visualization** button will generate an interactive circos plot to 
 
 {% include image-modal.html link="practical_assets/08-annotsv-circos.png" max-width="75%" %}
 
-*(Note: you must closely match their VCF formatting specifications to generate the circos plot, otherwise AnnotSV will only generate the annotated SV table.)*
+*(Note: you must closely match their VCF formatting specifications to generate the circos plot, otherwise AnnotSV will only generate the annotated SV table. AnnotSV asks all inputs match [VCFv4.3 format](https://samtools.github.io/hts-specs/VCFv4.3.pdf).)*
 
 ---
 
@@ -752,7 +752,11 @@ svdata %>%
 
 </blockquote></details><br>
 
-**30\.** Next let's try to customize the circos plot. In the original figure we observed many structural variants on chromosome 2, so let's try producing a circos plot where we zoom in only on chromosome 2. To do this we need to accomplish a couple of things:
+**30\.** Next let's try to customize the circos plot. In the original figure we observed many structural variants on chromosome 2, so let's try producing a circos plot where we zoom in only on chromosome 2, like so:
+
+{% include image-modal.html link="practical_assets/28-circos-final.png" max-width="60%"" %}
+
+To do this we need to accomplish a couple of things:
 
 - Limit our structural variants table to only chr2, and reduce the extra bp padding added to the end positions since this graph is much smaller
 - Limit the ideogram to only chr2
