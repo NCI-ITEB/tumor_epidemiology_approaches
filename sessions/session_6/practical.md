@@ -754,7 +754,7 @@ svdata %>%
 
 **30\.** Next let's try to customize the circos plot. In the original figure we observed many structural variants on chromosome 2, so let's try producing a circos plot where we zoom in only on chromosome 2, like so:
 
-{% include image-modal.html link="practical_assets/28-circos-final.png" max-width="60%"" %}
+{% include image-modal.html link="practical_assets/28-circos-final.png" max-width="60%" %}
 
 To do this we need to accomplish a couple of things:
 
