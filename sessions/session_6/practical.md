@@ -647,7 +647,7 @@ See the images below for examples:
 
 To accomplish part a, first think about what section of the code handles sorting our SV table entries. Does this command have any built-in options to accomplish what we want? Are there any other ways to accomplish this?
 
-<details><summary>Answer</summary>
+<details><summary>Answer for part a</summary>
 
 <blockquote markdown="1">
 
@@ -674,7 +674,7 @@ mutate(sv_type = fct_reorder(sv_type,-n)) %>%
 
 For b, we need to change the section of code that defines the x-axis of the plot from SV types to samples. How can we accomplish this?
 
-<details><summary>Answer</summary>
+<details><summary>Answer for part b</summary>
 
 <blockquote markdown="1">
 
@@ -763,7 +763,7 @@ To do this we need to accomplish a couple of things:
 
 The first task requires filtering the tables bed1, bed2, and bed_genes to just the SVs/genes on chr2. We can accomplish this by adding a filter command somewhere in the code for making these three tables. Get the help documents for this command with ?filter and see if you can get generate these tables. If you get stuck, check the answer in the dropdown below.
 
-<details><summary></summary>
+<details><summary>How to generate new tables</summary>
 
 <blockquote markdown="1">
 
@@ -793,7 +793,7 @@ Once we have the tables, we need to limit the ideogram to only chr2 and plot usi
 
 We should also do some re-styling to get it looking right. Try this exercise yourself, and use the answer below if you get stuck.
 
-<details><summary>Answer</summary>
+<details><summary>Answer for reformatting the circos</summary>
 
 <blockquote markdown="1">
 
