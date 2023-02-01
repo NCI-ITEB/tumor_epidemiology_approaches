@@ -289,12 +289,14 @@ Here is the detailed information for the JSON annotation file.
 
 **13\.** In R, perform the following code to extract the annotation information as a data frame, which can be easily converted to any format (e.g., txt/tsv/csv).
 
+**PLEASE NOTE:** *The exact data within the JSON may vary depending on the format of variants input and depending on the databases/sources used for annotating. While this code should be roughly accurate for most cases, you may need to make small changes to fit your data formatting.*
+
 {% include code-block-copy.html %}
 ```R
 library(jsonlite)
 library(tidyverse)
 
-jsondata <- fromJSON('NSLC-0463.json.gz')
+jsondata <- fromJSON('/path/to/NSLC-0463.json.gz')
 
 ## extract the Header
 jsondata %>% .[[1]] %>% as.data.frame() %>% as_tibble()
@@ -306,30 +308,31 @@ jsondata %>% .[[2]] %>% as_tibble()
 ## expand per-sample read support
 jsondata %>% .[[2]] %>% as_tibble() %>% unnest(samples)
 
-
 ## expand per-sample read support, variant filtering status, and any multi-allelic sites
-jsondata %>% .[[2]] %>% as_tibble() %>% unnest(c(altAlleles,filters,samples))
-
+jsondata %>% .[[2]] %>% as_tibble() %>% unnest(samples) %>% unnest(altAlleles) %>% unnest(filters)
 
 ## extract specific variant annotations
-jsondata %>% .[[2]] %>% as_tibble() %>% pull(variants) %>% bind_rows() %>% as_tibble()
+variants_info<-jsondata %>% .[[2]] %>% as_tibble() %>% pull(variants) %>% bind_rows() %>% as_tibble()
 
 ## extract gene annotations
-jsondata %>% .[[3]] %>% as_tibble()
+genes<-jsondata %>% .[[3]] %>% as_tibble()
 
 ## combine all info into one table
-vars<-jsondata %>% .[[2]] %>%
+vars<-
+  jsondata %>% .[[2]] %>%
   as_tibble() %>%
-  ## expand the variants annotations to columns
-  mutate(variants %>% bind_rows() %>% as_tibble())%>%
+  # expand per-sample data (i.e. read support per sample)
+  unnest(samples)%>%
+  cbind(sample_name=jsondata[[1]]$samples)%>%
+  # expand per alternate allele data
+  unnest(altAlleles)%>%
+  relocate(sample_name)%>%
+  # join information on variants, such as population allele frequencies
+  left_join(variants_info,by=c("chromosome","position"="begin","refAllele","altAlleles"="altAllele"))%>%
   select(-variants)%>%
-  ## add the gene annotations
-  cbind(jsondata %>% .[[3]] %>% as_tibble())%>%
-  ## expand the sample read supports and add the sample names
-  ## then move the sample names column before read support cols
-  unnest(samples,altAlleles)%>%
-  cbind(sample_names=jsondata[[1]]$samples)%>%
-  relocate(sample_names,.before = splitReadCounts)%>%
+  # expand trancript information and join gene annotations
+  unnest(transcripts)%>%
+  left_join(genes,by=c("hgnc"="name"))%>%
   as.tibble()
 
 ## Use this code to expand any other columns, such as clingen disease phenotypes
