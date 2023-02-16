@@ -38,8 +38,8 @@ To register, click the registration button above or visit the NCI events page at
 #### Module 3
 - Mar. 8, 2023: Somatic copy number alterations (SCNAs)
 - Mar. 13<b>*</b>, 2023: Identifying cancer drivers
-- Mar. 28<b>\*</b>, 2023 ***(in conference room 110)***: Tumor evolution
   - *Mar. 23, 2023- Núria López-Bigas - Somatic mutations in tumors and normal tissues*
+- Mar. 28<b>\*</b>, 2023 ***(in conference room 110)***: Tumor evolution
 - Mar. 29, 2023: “Ask a Bioinformatician” III
   - *Apr. 20, 2023- David Wedge - Tumour evolution in diverse human populations*
 
