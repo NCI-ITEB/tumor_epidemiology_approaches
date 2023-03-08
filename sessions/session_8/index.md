@@ -9,4 +9,4 @@ permalink: sessions/session_8
 - Extrachromosomal DNA
 
 ### Practical
-- MutSigCV, dN-dScv, intOGene (examples with integration of gene expression and other data)
+- OncodriveFML, OncodriveCLUSTL, dNdScv, CGI

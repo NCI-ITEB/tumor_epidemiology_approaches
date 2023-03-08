@@ -641,7 +641,7 @@ We can see results from the two algorithms are very consistent. There can be hig
 
 Somatic copy number alterations are distributed across the whole genome, however only a few 'driver' alterations can promote cancer development. How to distinguish those driver SCNAs from random passenger SCNAs is a critical question.
 
-**GISTIC **is a well known tool for **G**enomic **I**dentification of **S**ignificant **T**argets in **C**ancer.  The method identifies recurrent focal events which are more likely to be drivers of tumorigenesis based on their frequency. Through GISTIC analysis we can get a list of significant SCNA regions. According to the latest statistics from Google scholar, this tool has been cited by ~2500 times, since its first publication in 2011.
+**GISTIC** is a well known tool for **G**enomic **I**dentification of **S**ignificant **T**argets in **C**ancer.  The method identifies recurrent focal events which are more likely to be drivers of tumorigenesis based on their frequency. Through GISTIC analysis we can get a list of significant SCNA regions. According to the latest statistics from Google scholar, this tool has been cited by ~2500 times, since its first publication in 2011.
 
 {% include image-modal.html link="practical_assets/11_GISTIC_paper.png" max-width="70%" %}<br>
 
@@ -754,7 +754,7 @@ NSLC-0001-T01	2	23368	55711409	32535	1.40855
 1. ***Sample:***			sample name
 2. ***Chromosome:***		chromosome number
 3. ***Start Position:***		segment start position, in bases
-4. ***(End Position:***		segment end position, in bases
+4. ***End Position:***		segment end position, in bases
 5. ***Num Markers:***		number of markers in segment
 6. ***Seg.CN:***			log2()-1 of copy number
 
