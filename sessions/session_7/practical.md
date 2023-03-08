@@ -168,15 +168,11 @@ python $facets_py_path -i $Input_Dir -o $Output_Dir
 
 In this sbatch script, we define basic parameters like input and output for running facets program and submit it at biowulf.  
 
-***Line 1*** is the header of this script, to tell biowulf the script should be interpreted by bash.
-
-***Line 3 and Line 4*** is used to produce log file to summarise output and error
-
-***Line 8 to Line 10*** is used to load basic environments required by facets.
-
-***Line 13 and Line 14*** is used to define the absolute path of input and output Directories
-
-***Line 16*** is used to define the absolute path of python program to run facets
+- ***Line 1*** is the header of this script, to tell biowulf the script should be interpreted by bash.
+- ***Line 3 and Line 4*** is used to produce log file to summarise output and error
+- ***Line 8 to Line 10*** is used to load basic environments required by facets.
+- ***Line 13 and Line 14*** is used to define the absolute path of input and output Directories
+- ***Line 16*** is used to define the absolute path of python program to run facets
 
 **10\.** Have a closer look at our Major pipeline to run facets:
 
