@@ -370,7 +370,14 @@ First we will download the folder we have created for this session. This zipped 
 
 This folder should download directly to your /Downloads folder. After it downloads, unzip the folder as you normally would on your machine.
 
-This folder includes several files: 1) the mutational data we will be using today from a subset of the _Sherlock-Lung_ Study, 2) the R script with all of the commands you will find throughout this part of the practical session, 3) genome reference file, and 4) covariate file. The genome reference file and the covariate file are necessary to run dNdScv.
+This folder includes several files:
+
+1. the mutational data we will be using today from a subset of the _Sherlock-Lung_ Study
+2. the R script with all of the commands you will find throughout this part of the practical session
+3. genome reference file
+4. covariate file.
+
+The genome reference file and the covariate file are necessary to run dNdScv.
 
 **Open the file, dndscv_session8_practice_FINAL.R. This should open in RStudio.**
 
@@ -941,7 +948,10 @@ From just this one example, it can be seen that CGI can serve as a great tool in
 
 Since we will not be going over the use of another tool, MEGSA, but we wanted to provide you with the material should you be interested in learning about this additional tool on your own time.
 
-MEGSA is a R package used to identify mutually exclusive gene sets (MEGS). The purpose of identifying mutually exclusive gene sets (MEGS) is to help address the challenges that come with identifying driver genes and pathways. The two main challenges include: 1) identifying infrequently mutated driver genes requires a very large sample size to achieve statistical significance, and 2) investigation of relationships among mutated genes and the subsequent identification of oncogenic pathways can be complex (Hua _et al_, 2016).
+MEGSA is a R package used to identify mutually exclusive gene sets (MEGS). The purpose of identifying mutually exclusive gene sets (MEGS) is to help address the challenges that come with identifying driver genes and pathways. The two main challenges include:
+
+1. identifying infrequently mutated driver genes requires a very large sample size to achieve statistical significance
+2. investigation of relationships among mutated genes and the subsequent identification of oncogenic pathways can be complex (Hua _et al_, 2016).
 
 Originally, ME analysis was for pairwise analyses, but as we know, cancer pathways typically involve multiple genes, and so the original pairwise analyses have been extended to identify MEGS instead. There are multiple methods that have been proposed for ME analysis, but each method is different from the next with regard to the statistical tests of the method and the search criterion used for identifying MEGS. The analytical framework of MEGSA is based on a likelihood ratio test and model selection procedure. This method can be used for de novo discovery, pathway-guided searches, and expanding established small MEGS. The expectation of MEGSA is that it can be useful for identifying oncogenic pathways and driver genes that would have been missed by frequency-based methods (Hua _et al_, 2016).
 
