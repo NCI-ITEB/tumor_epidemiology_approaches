@@ -819,9 +819,9 @@ The following link will take you to the homepage of Cancer Genome Interpreter.  
 
 The main steps of the CGI framework include those listed below. The number of each step below corresponds to the numbers found on the right side of the figure below:
 
-**1\.** CGI takes genomic alterations as input and automatically recognizes the format, remaps variants as necessary, and standardizes annotation.
-**2\.** Identifies likely driver alterations in cancer driver genes in the tumor type ([BoostDM](https://www.nature.com/articles/s41586-021-03771-1) and [OncoDriveMut](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0531-8)), and annotates mutations in the tumor that are known to be tumorigenic.
-**3\.** Identifies alterations that constitute biomarkers of response to anti-cancer drugs.
+1. CGI takes genomic alterations as input and automatically recognizes the format, remaps variants as necessary, and standardizes annotation.
+2. Identifies likely driver alterations in cancer driver genes in the tumor type ([BoostDM](https://www.nature.com/articles/s41586-021-03771-1) and [OncoDriveMut](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0531-8)), and annotates mutations in the tumor that are known to be tumorigenic.
+3. Identifies alterations that constitute biomarkers of response to anti-cancer drugs.
 
 {% include image-modal.html link="practical_assets/9-cgi-frame.png" %}
 
