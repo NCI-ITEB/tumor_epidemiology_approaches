@@ -21,7 +21,7 @@ There are two main methods of quantitation that laboratories might use to report
 
 <div style="display: flex;
   justify-content: center;
-  flex-direction: row; position:relative;">
+  align-items: center; position:relative;">
   <div>
     {% include image-modal.html max-width="97%" link="lecture_assets/spectrometry_curve.png" %}
     <figurecaption style="text-align:left"><ul><li>Spectrophotometry

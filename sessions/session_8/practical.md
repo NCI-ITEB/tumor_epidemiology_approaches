@@ -93,6 +93,7 @@ oncodriveclustl \
 
 Let’s review the inputs used, particularly for OncodriveFML which requires some configuring. Both Oncodrive tools require a value for **BGDATA_LOCAL**, which is the path to a folder containing a reference genome. Both tools require the mutations file which we previewed at the start of the practical, and they also require a ‘regions’ file with genome annotations. Preview this file with:
 
+{% include code-block-copy.html %}
 ```bash
 head -n 5 /data/classes/DCEG_Somatic_Workshop/Practical_session_8/cds_chr17.regions
 ```
@@ -108,7 +109,8 @@ For OncodriveCLUSTL, this is all that’s needed along with specifying the genom
 
 OncodriveFML needs some additional configuring, most importantly to set a path to the pre-computed functional impact scores (_if you do not specify a configuration with a functional impact scores file, FML will attempt to download them to your home folder; this will likely fail as the scores file is large_). You can review the configuration we used with:
 
-```
+{% include code-block-copy.html %}
+```bash
 less /data/classes/DCEG_Somatic_Workshop/Practical_session_8/config/bbglab/oncodrivefml_v2.conf
 ```
 
@@ -297,6 +299,7 @@ These algorithms can take several hours to run on a large cohort, therefore to a
 
 First, make a folder in your data drive for storing today’s data and change directory to that folder:
 
+{% include code-block-copy.html %}
 ```bash
 mkdir /data/$USER/practical_8
 cd /data/$USER/practical_8
@@ -304,6 +307,7 @@ cd /data/$USER/practical_8
 
 Now copy the script to run these tools, and then submit the script to run:
 
+{% include code-block-copy.html %}
 ```bash
 cp /data/classes/DCEG_Somatic_Workshop/Practical_session_8/practical_8_oncodrive.sh .
 
@@ -315,6 +319,7 @@ sbatch --cpus-per-task=6 --mem=12g practical_8_oncodrive.sh
 
 Now, copy the results from analyzing the whole genome on our 200 sample cohort:
 
+{% include code-block-copy.html %}
 ```bash
 cp -r /data/classes/DCEG_Somatic_Workshop/Practical_session_8/*wholeGenome .
 ```
@@ -323,13 +328,12 @@ Mount your data drive to your laptop/ local computer so you can examine the quan
 
 _OncodriveFML whole-genome results (left), OncodriveCLUSTL whole-genome (right):_
 
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image1.png "image_tooltip")
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image2.png "image_tooltip")
+<div style="display: flex;
+  justify-content: center;
+  align-items: center;">
+{% include image-modal.html link="practical_assets/1-oncofml-wholegenome.png" %}
+{% include image-modal.html link="practical_assets/2-oncoclust-wholegenome.png" max-width="105%"%}
+</div>
 
 Both figures show the observed p-values for each gene *(y-axis)* plotted against the expected p-value predicted by the null hypothesis *(x-axis)*, therefore a large deviation from the dashed line towards the y-axis is indicative of greater mutation functional impact (oncodriveFML) or mutation clustering (oncodriveCLUSTL) than expected by chance for a gene. Genes with a significant q-value are labeled in each plot.
 
@@ -337,13 +341,12 @@ Both algorithms also generate .tsv files containing the p- and q-values for all 
 
 Many significant driver genes identified do not overlap in these two sample sets. To explain why these results are so different, take a look at OncodriveCLUSTL’s mutation clusters for _KRAS_ and _TP53_, generated using a cohort of 1000+ samples:
 
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image3.png "image_tooltip")
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image4.png "image_tooltip")
+<div style="display: flex;
+  justify-content: center;
+  align-items: center;">
+{% include image-modal.html link="practical_assets/3-kras-clust.png" %}
+{% include image-modal.html link="practical_assets/4-tp53-clust.png" %}
+</div>
 
 Strongly clustered mutation patterns like _KRAS_ will be strongly selected by OncodriveCLUSTL whereas genes like _TP53_ may be missed due to weak clustering. This further illustrates why synthesizing the results from many algorithms with different strengths and weaknesses can produce a better result than relying on only one.
 
@@ -351,13 +354,12 @@ When your jobs completes (~5 minutes), you should get the following quantile plo
 
 OncodriveFML (left), OncodriveCLUSTL (right):
 
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image5.png "image_tooltip")
-
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image6.png "image_tooltip")
+<div style="display: flex;
+  justify-content: center;
+  align-items: center;">
+{% include image-modal.html link="practical_assets/5-oncofml-chr17.png" max-width="80%" %}
+{% include image-modal.html link="practical_assets/6-oncoclust-chr17.png" max-width="105%"%}
+</div>
 
 ---
 ---
@@ -379,9 +381,9 @@ Use the following links for additional information regarding the dNdScv package:
 * GitHub page for dNdScv: [https://github.com/im3sanger/dndscv](https://github.com/im3sanger/dndscv)
 
 ---
-### Download session folder
+#### Download session folder
 
-First we will download the folder we have created for this session. This zipped folder, session8_dndscv.zip, can be downloaded here.
+First we will download the folder we have created for this session. This zipped folder, session8_dndscv.zip, can be downloaded [here](needs_link).
 
 This folder should download directly to your /Downloads folder. After it downloads, unzip the folder as you normally would on your machine.
 
@@ -394,7 +396,8 @@ This folder includes several files: 1) the mutational data we will be using toda
 
 **1\.** There are some additional packages we will need today to run the R code. Run the following commands below to install these packages if they are not already installed:
 
-```
+{% include code-block-copy.html %}
+```R
 packages_req <- c('tidyverse','devtools','scales','hrbrthemes')
 pkg_check_fcn <-lapply(packages_req,function(x){
   if(!(x %in% installed.packages())){
@@ -410,13 +413,15 @@ The code above checks to see if the necessary packages are installed, and instal
 
 **2\.** If you haven’t done so already, you will need to install the dndscv package in R.  Use the following commands to do this:
 
-```
+{% include code-block-copy.html %}
+```R
 install_github("im3sanger/dndscv")
 ```
 
 After you install dndscv, load the package using the `library()` command:
 
-```
+{% include code-block-copy.html %}
+```R
 library(dndscv)
 ```
 
@@ -425,51 +430,36 @@ library(dndscv)
 
 **3\.** Run `getwd() `to make sure that the current working directory is the path to the session8_dndscv folder:
 
-```
+{% include code-block-copy.html %}
+```R
 getwd()
 ```
 
-**Mac:**
-
-```
+```R
+### Mac:
 [1] "/Users/[username]/Downloads/session8_dndscv"
-```
 
-**Windows:**
-
-```
+### Windows:
 [1] "C:/Users/[username]/Downloads/session8_dndscv"
 ```
 
 **4\.** **If the working directory is not the session8_dndscv directory, use the <code>setwd() </code>command to set this directory as the working directory.
 
-**Mac:**
-
-```
-setwd("/Users/[username]/Downloads/session8_dndscv")
-```
-
-**Windows:**
-
-```
-setwd("C:/Users/[username]/Downloads/session8_dndscv")
-```
+- **Mac:** `setwd("/Users/[username]/Downloads/session8_dndscv")`{% include code-snippet-copy.html %}
+- **Windows:** `setwd("C:/Users/[username]/Downloads/session8_dndscv")`{% include code-snippet-copy.html %}
 
 Then run `getwd()` again to make sure the working directory is now correct:
 
-```
+{% include code-block-copy.html %}
+```R
 getwd()
 ```
 
-**Mac:**
-
-```
+```R
+### Mac:
 [1] "/Users/[username]/Downloads/session8_dndscv"
-```
 
-**Windows:**
-
-```
+### Windows:
 [1] "C:/Users/[username]/Downloads/session8_dndscv"
 ```
 
@@ -479,7 +469,8 @@ To load the mutation data file, we will need to use the path to the file so it c
 
 **5\.** Use the command below to load the data file:
 
-```
+{% include code-block-copy.html %}
+```R
 sherlock_mdata <- read_delim("sherlock_only_mutations_top200.txt.gz")
 ```
 
@@ -490,8 +481,11 @@ This file should take 30 seconds or less to load. When it is finished loading, c
 
 **6\.** You could also check the dimensions of the data you just loaded, using the `dim()` command:
 
-```
+{% include code-block-copy.html %}
+```R
 dim(sherlock_mdata)
+```
+```
 [1] 13076340        5
 ```
 
@@ -499,8 +493,11 @@ You should see that you have 13076340 rows of mutation data, and 5 columns.
 
 **7\.** To get a sense of what the data looks like, use the `head()` command to print the first several lines to the console:
 
-```
+{% include code-block-copy.html %}
+```R
 head(sherlock_mdata)
+```
+```R
 # A tibble: 6 × 5
   Tumor_Sample_Barcode   Chr   Start Ref         Alt  
   <chr>                <dbl>   <dbl> <chr>       <chr>
@@ -518,15 +515,17 @@ To run dNdScv, we need the columns in our data to match the required input colum
 
 **8\.** To change our columns in R, we can do the following:
 
-```
+{% include code-block-copy.html %}
+```R
 colnames(sherlock_mdata) <- c('sampleID', 'chr','pos','ref','mut')
 ```
 
 This changes our column names. To check that they were changed, we can run the colnames() command again:
 
-```
+```R
 colnames(sherlock_mdata)
-
+```
+```
 [1] "sampleID" "chr"      "pos"      "ref"      "mut"
 ```
 
@@ -534,7 +533,8 @@ And we see that your column names are correct.
 
 **9\.** We will now set another object, which we are calling `dndsout`, to NULL, so we can then store the output here.
 
-```
+{% include code-block-copy.html %}
+```R
 dndsout <- NULL
 ```
 
@@ -542,7 +542,8 @@ dndsout <- NULL
 
 This file contains covariate data that was generated combining epigenomic data (from Roadmap Epigenomics) and whole-genome mutation density vectors (from the PCAWG consortium), collapsed into 20 principal components per gene.
 
-```
+{% include code-block-copy.html %}
+```R
 load("covariates_hg19_hg38_epigenome_pcawg.rda")
 ```
 
@@ -559,7 +560,8 @@ This RefCDS object contains data and information for the coding sequence data fo
 
 **Additional Information:** While not necessary, you can also load the genome reference file into the environment if you’d like.
 
-```
+{% include code-block-copy.html %}
+```R
 load('RefCDS_human_GRCh38_GencodeV18_recommended.rda')
 ```
 
@@ -570,7 +572,8 @@ If you load this data, and then click on **RefCDS **in the R environment, you wi
 
 **11\.** To run dNdScv, we will set up a function call:
 
-```
+{% include code-block-copy.html %}
+```R
 dndsout <- dndscv(mutations = sherlock_mdata, refdb = 'RefCDS_human_GRCh38_GencodeV18_recommended.rda',cv =covs)
 ```
 
@@ -625,13 +628,15 @@ First, we are going to extract sel_cv, which includes the results of neutrality 
 
 **12\.** We use the following command to extract sel_cv from the dndsout object:
 
-```
+{% include code-block-copy.html %}
+```R
 sel_cv <- dndsout$sel_cv
 ```
 
 We can view the data frame that we have extracted by using the following command, or simply click on the sel_cv data object found under the Environment tab:
 
-```
+{% include code-block-copy.html %}
+```R
 sel_cv %>% View()
 ```
 
@@ -648,19 +653,19 @@ In our data output, we can see that the columns beginning with ‘w’, the esti
 
 **13\.** If we filter our sel_cv dataframe for only the three genes noted above, _TP53, KEAP1_, and _KRAS_, we can see that the values for these different estimates vary across the different mutation types:
 
-```
+{% include code-block-copy.html %}
+```R
 dnds_wvals <- sel_cv %>% filter(gene_name%in% c('TP53','KEAP1','KRAS')) %>% select(gene_name, starts_with('w'))
 ```
 
 We can view the data frame that we have extracted by using the following command, or simply click on the sel_cv data object found under the Environment tab:
 
-```
+{% include code-block-copy.html %}
+```R
 dnds_wvals %>% View()
 ```
 
-<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image7.png "image_tooltip")
+{% include image-modal.html link="practical_assets/7-dnds-snippet.png" max-width="60%" %}
 
 Here we can see that the _TP53_ has dN/dS ratio estimates that are high across all mutation types. In contrast, _KRAS_ has a high estimate with regard to the missense mutation type. Overall, these higher values denote that a large proportion of mutations in these genes are genuine drivers.
 
@@ -668,7 +673,8 @@ Here we can see that the _TP53_ has dN/dS ratio estimates that are high across a
 
 For our purposes today, let’s briefly look at those genes whose qglobal_cv value (which considers all mutation types) is less than 0.1. **This q-value cutoff can differ depending on your type of analysis or what you are interested in investigating.**
 
-```
+{% include code-block-copy.html %}
+```R
 signif_genes = sel_cv[sel_cv$qglobal_cv<0.1, c("gene_name","qglobal_cv")]
 ```
 
@@ -676,9 +682,11 @@ If we look at the data frame, we can see that 18 genes meet this filtering crite
 
 **15\.** We can also explore additional data included in the dndscv output. Another result of the dndscv function is `annotmuts`, an annotated table of coding mutations. If we look at just the first several lines of the `annotmuts` table, we can see a variety of information about the mutations, including what samples they are from, coordinate information, codon information, amino acid change information, and gene information.
 
-```
+{% include code-block-copy.html %}
+```R
 head(dndsout$annotmuts)
-
+```
+```R
   sampleID   chr      pos   ref   mut   gene    strand
   <chr>     <chr>    <dbl> <chr> <chr> <chr>    <dbl>
 1 NSLC-0005 1      6475486 C     G     PLEKHG5     -1
@@ -693,7 +701,8 @@ head(dndsout$annotmuts)
 
 Get the sample size by using n_distinct() to count the number of unique sampleIDs:
 
-```
+{% include code-block-copy.html %}
+```R
 sizedata <- n_distinct(sherlock_mdata$sampleID) - 1 # number of samples - 1
 ```
 
@@ -707,7 +716,8 @@ As stated before, we ran dNdScv with mostly default parameters. One of these def
 
 Create a mutation frequency table. Note that for our purposes today we will focus on the 18 genes with a qglobal_cv value of &lt; 0.1:
 
-```
+{% include code-block-copy.html %}
+```R
 freqdata <- dndsout$annotmuts %>%
   filter(gene %in% signif_genes$gene_name) %>%
   filter(impact!="Synonymous") %>%
@@ -722,7 +732,8 @@ If we look at just the first few lines in `freqdata`, we can see that the data f
 
 **17\.** Now, we can take the frequency data and join this with the sel_cv data for the 18 significant genes (based on the qglobal_cv value) and generate a plot that looks at the relationship between mutation frequency and the (-log10 of the) qvalue.
 
-```
+{% include code-block-copy.html %}
+```R
 p <- sel_cv %>% filter(gene_name %in% signif_genes$gene_name) %>%
   left_join(freqdata,by=c('gene_name'='gene')) %>%
   mutate(gene_name=factor(gene_name),gene_name=fct_reorder(gene_name,qglobal_cv)) %>%
@@ -740,9 +751,7 @@ p <- sel_cv %>% filter(gene_name %in% signif_genes$gene_name) %>%
   theme(legend.position = 'none') + coord_cartesian(clip = "off")
 ```
 
-<p id="gdcalert8" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image8.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert9">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image8.png "image_tooltip")
+{% include image-modal.html link="practical_assets/8-dnds-mutFreq-v-qglobal.png" %}
 
 The coloration of the dots is based on the (-log10 of the) qvalue. We can see that there is a cluster of genes with a low mutational frequency and a slightly larger q-value in the bottom left of each plot. Those in the top right of the plot have a high mutational frequency and a small q-value (i.e. highly significant).  The two horizontal lines across the plot are the cutoffs for: 1) genes whose qvalue was 0 (purple line), and 2) genes whose qvalue just met the less than 0.1 criteria (red line).
 
@@ -817,17 +826,13 @@ The main steps of the CGI framework include those listed below. The number of ea
 **2\.** Identifies likely driver alterations in cancer driver genes in the tumor type ([BoostDM](https://www.nature.com/articles/s41586-021-03771-1) and [OncoDriveMut](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0531-8)), and annotates mutations in the tumor that are known to be tumorigenic.
 **3\.** Identifies alterations that constitute biomarkers of response to anti-cancer drugs.
 
-<p id="gdcalert9" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image9.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert10">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+{% include image-modal.html link="practical_assets/9-cgi-frame.png" %}
 
-![alt_text](images/image9.png "image_tooltip")
-
-_Link to image: [https://www.cancergenomeinterpreter.org/faq#q02](https://www.cancergenomeinterpreter.org/faq#q02) _
+_Link to image: [https://www.cancergenomeinterpreter.org/faq#q02](https://www.cancergenomeinterpreter.org/faq#q02)_
 
 Below is a figure depicting how the driver events are identified, through the use of either BoostDM or OncoDriveMut:
 
-<p id="gdcalert10" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image10.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert11">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image10.png "image_tooltip")
+{% include image-modal.html link="practical_assets/10-boostdm.png" %}
 
 _First, CGI determines if the gene is a driver gene. If so, likely driver alterations in the gene are then identified by one of the two approaches used: BoostDM or OncoDriveMut. Indels are further analyzed by OncoDriveMut, whereas point mutations are further analyzed by BoostDM, if there is a gene-specific BoostDM model available. Otherwise, OncoDriveMut is used. If you are interested, here is a link to a two minute video highlighting the basics of BoostDM: [https://www.youtube.com/watch?v=1Nq_rm_yudk&t=8s](https://www.youtube.com/watch?v=1Nq_rm_yudk&t=8s)_
 
@@ -836,9 +841,7 @@ _First, CGI determines if the gene is a driver gene. If so, likely driver altera
 
 There are a series of tabs across the top of the CGI homepage. Feel free to browse some of the tabs on your own.
 
-<p id="gdcalert11" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image11.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert12">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image11.png "image_tooltip")
+{% include image-modal.html link="practical_assets/11-cgi-tabs.png" %}
 
 In addition to these tabs, you can also access all of the different mutation, gene, and biomarker data that are utilized in CGI using the following links:
 
@@ -852,15 +855,11 @@ Note: The Cancer Bioactivities database is no longer supported in CGI.
 
 **1\.** To use CGI, go to the Analysis tab, or click the following link: [https://www.cancergenomeinterpreter.org/analysis](https://www.cancergenomeinterpreter.org/analysis)
 
-<p id="gdcalert12" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image12.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert13">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image12.png "image_tooltip")
+{% include image-modal.html link="practical_assets/11-cgi-tabs-highlight.png" %}
 
 Below is the CGI Analysis page. This is where we will upload the mutation data we wish to analyze, and select the cancer type and reference genome.
 
-<p id="gdcalert13" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image13.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert14">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image13.png "image_tooltip")
+{% include image-modal.html link="practical_assets/13-cgi-analysis.png" %}
 
 You can view several CGI examples and their output by clicking **View CGI example results** in the top right corner. These examples are helpful to see what types of data have been run, and what the results of CGI look like.
 
@@ -871,9 +870,7 @@ Also notice that you can insert a mutation per line in various formats, as you c
 **4\.** To upload a file, click the Add file + button in the Alterations table. Navigate to the folder housing the **NSLC-0005_example.txt** file and select the file.
 **5\.** Now we can set up our other inputs for the interpreter. First, we will select **Solid Tumors → Torax → Lung → Non-small cell lung**. Make sure the **NSCLC option is selected with a pink rectangle**. See below:
 
-<p id="gdcalert14" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image14.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert15">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image14.png "image_tooltip")
+{% include image-modal.html link="practical_assets/13-cgi-nsclc.png" %}
 
 **6\.** Make sure the reference genome is set to **hg38**.
 **7\.** Click **Run**.
@@ -881,15 +878,11 @@ Also notice that you can insert a mutation per line in various formats, as you c
 
 While your job is running, you will see the following at the top of the screen:
 
-<p id="gdcalert15" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image15.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert16">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image15.png "image_tooltip")
+{% include image-modal.html link="practical_assets/15-cgi-progress.png" %}
 
 When the job completes, you will see a screen that looks something like this:
 
-<p id="gdcalert16" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image16.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert17">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image16.png "image_tooltip")
+{% include image-modal.html link="practical_assets/16-cgi-complete.png" %}
 
 **9\.** While you are waiting for this job to complete, we will take a look at the results using the following link: [https://www.cancergenomeinterpreter.org/analysis?id=3ff8aca92ef238385e58](https://www.cancergenomeinterpreter.org/analysis?id=3ff8aca92ef238385e58).
 
@@ -927,11 +920,11 @@ C	corresponds to biomarkers identified from small group studies or case studies
 D	biomarkers have been identified in pre-clinical studies
 There are several different pieces of information displayed for the mutations found in the sample(s) uploaded and the biomarkers these mutations matched, including:
 
-**1\.** Drugs the biomarker is associated with
-**2\.** Disease and tumor type
-**3\.** Response to a drug
-**4\.** Level of evidence
-**5\.** Source database for where the information for a given mutation-biomarker match comes from
+1. Drugs the biomarker is associated with
+2. Disease and tumor type
+3. Response to a drug
+4. Level of evidence
+5. Source database for where the information for a given mutation-biomarker match comes from
 
 For example, if we search in the Prescription table for the first driver in our Alterations table, _TP53_, and focus on the R175H amino acid change, we see that there are two different biomarker matches.
 
@@ -969,25 +962,29 @@ This tutorial will show you how to use the example data included in the package,
 **2\.** First, we will source the MEGSA.R file, which contains all of the necessary functions in the MEGSA package.
 **3\.** Then, we will load the mutation matrix included in the package, which includes binary mutation data for TCGA LAML samples.
 
-```
+{% include code-block-copy.html %}
+```R
 mutationMat <- as.matrix(read.table("mutationMat_LAML.txt", header = TRUE, row.names = 1) != 0)
 ```
 
 We will filter this data to include only specific genes, to minimize the time to get a result:
 
-```
+{% include code-block-copy.html %}
+```R
 mutationMat_tmp <-  mutationMat[,c('FLT3','TP53','KRAS','NRAS','PTPN11','KIT','RUNX1')]
 ```
 
 Save this data frame in a file in case you need to use it later (Note: you would need this file for a command to run MEGSA all at the same time- see Additional Information).
 
-```
+{% include code-block-copy.html %}
+```R
 write_delim(as.data.frame(mutationMat_tmp), file = 'mutationMat_tmp_example_byuser.txt', delim="\t")
 ```
 
 Use this to read it back into R if necessary:
 
-```
+{% include code-block-copy.html %}
+```R
 mutationMat_tmp <- as.matrix(read.table("mutationMat_tmp_byuser.txt", header = TRUE))
 ```
 
@@ -995,11 +992,17 @@ If you look at this data, you will see that there is a TRUE/FALSE value for each
 
 **4\.** Next, we will run the permutations step to generate the distribution of the maximum LRT statistic under the null hypothesis. In this case, the null hypothesis is the idea that the set of genes in the mutation matrix (what we load in step two), contains no MEGS of any size. You can use the following command to run it yourself. **Note: this step takes about 30 minutes to run on a local machine.**
 
-`maxSSimu <- funMaxSSimu(mutationMat_tmp, nSimu = 1000, nPairStart = 10, maxSize = 6)`
+{% include code-block-copy.html %}
+```R
+maxSSimu <- funMaxSSimu(mutationMat_tmp, nSimu = 1000, nPairStart = 10, maxSize = 6)
+```
 
 **Or, read in the file already provided:**
 
-`maxSSimu <- as.matrix(read.table("maxSSimu_example.txt", header = TRUE))`
+{% include code-block-copy.html %}
+```R
+maxSSimu <- as.matrix(read.table("maxSSimu_example.txt", header = TRUE))
+```
 
 The following explain the parameters used:
 
@@ -1008,19 +1011,22 @@ The following explain the parameters used:
 * maxSize: the maximum size of putative MEGS.
 **5\.** Write your own file after running step 2 (if you did not use the maxSSimu_example.txt file provided to save some time) so that you do not have to run this step again in the future.
 
-```
+{% include code-block-copy.html %}
+```R
 write_delim(as.data.frame(maxSSimu), file = 'maxSSimu_example_byuser.txt', delim="\t")
 ```
 
 Use this to read it back into R if necessary:
 
-```
+{% include code-block-copy.html %}
+```R
 maxSSimu <- as.matrix(read.table("maxSSimu_example_byuser.txt", header = TRUE))
 ```
 
 **6\.** Now we identify significant MEGS based on a significance level or family-wise error after multiple testing correction based on permutations. We use a level of 0.05 here:
 
-```
+{% include code-block-copy.html %}
+```R
 resultMEGSA <- funSelect(mutationMat_tmp, maxSSimu, level = 0.05)
 
 str(resultMEGSA)
@@ -1032,7 +1038,8 @@ This command will display a list of two components in the result output:
 * `resultMEGSA$MEGSList`: a list of significant MEGS)
 **7\.** MEGSList is the list of significant MEGS. We can pull this from the resultsMEGSA object:
 
-```
+{% include code-block-copy.html %}
+```R
 MEGSList <- resultMEGSA$MEGSList
 ```
 
@@ -1047,34 +1054,45 @@ Each of these has four attributes:
 
 We can look at these here, using the following:
 
-```
+{% include code-block-copy.html %}
+```R
 str(MEGSList)
 ```
 
 **8\.** Then we can convert this list of MEGS to a data frame and export it:
 
-```
+{% include code-block-copy.html %}
+```R
 MEGSDF <- funPrintMEGS(MEGSList, outputFile = "resultMEGS_example.txt")
 ```
 
 **9\.** Finally, we can visualize the MEGS and generate corresponding figures for each gene set:
 
-```
+{% include code-block-copy.html %}
+```R
 funPlotMEGS(MEGSList, mutationMat, outputDir = "figure_example", type = "pdf")
 ```
 
 **10\.** There will be a pdf for every gene set identified. Here is an example figure (gene_set_1) and how to interpret it:
 
-This gene set includes _FLT3, RUNX1, TP53, KRAS,_ and _KIT_. This MEGS was identified in about half of the samples (52%), and its corrected p-value is 0. The yellow coloration denotes mutation, and the red denotes no mutation of a gene in a given sample. We can see that these mutations are almost always mutually exclusive from each other, except for in a few cases where a mutation in one gene overlaps a mutation with another gene. In relation to one of the aims of MEGSA, to allow for identification of driver genes even when mutation in the gene is infrequent, this shows that for example, KRAS is infrequently mutated in these samples, but is a well-known cancer driver gene. This is a driver that could have potentially been missed in these LAML samples if using a frequency-based method.
+<div style="display: flex;
+  justify-content: center;
+  align-items: center;">
+{% include image-modal.html link="practical_assets/17-megsa-MEplot.png" %}
+<p markdown="1" style="width:75%;">
+This gene set includes _FLT3, RUNX1, TP53, KRAS,_ and _KIT_. This MEGS was identified in about half of the samples (52%), and its corrected p-value is 0. The yellow coloration denotes mutation, and the red denotes no mutation of a gene in a given sample. We can see that these mutations are almost always mutually exclusive from each other, except for in a few cases where a mutation in one gene overlaps a mutation with another gene. In relation to one of the aims of MEGSA, to allow for identification of driver genes even when mutation in the gene is infrequent, this shows that for example, _KRAS_ is infrequently mutated in these samples, but is a well-known cancer driver gene. This is a driver that could have potentially been missed in these LAML samples if using a frequency-based method.</p>
+</div>
 
 Additional Information: There is also a function in the MEGSA package where you can run all of the previous steps in one.
 
-```
+{% include code-block-copy.html %}
+```R
 resultMEGSA <- funMEGSA("mutationMat_tmp_example.txt", "maxSSimu_example.txt", resultTableFile = "resultMEGSA_example.txt", figureDir = "figure_example")
 ```
 
 If you want to use files **you** generated in the steps above, be sure to change the file names for mutationMat and maxSSimu to your given file names. See below:
 
-```
+{% include code-block-copy.html %}
+```R
 resultMEGSA <- funMEGSA("mutationMat_tmp_example_byuser.txt", "maxSSimu_example_byuser.txt", resultTableFile = "resultMEGSA_example.txt", figureDir = "figure_example")
 ```
