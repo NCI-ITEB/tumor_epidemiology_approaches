@@ -6,12 +6,6 @@ menubar_toc: true
 
 # Practical 4
 
-<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
-<script>addBackToTop()</script>
-
-<script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
-<script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
-
 Before we begin, please login to Biowulf and request an interactive session:
 
 For a reminder on how to log-in to Biowulf, we refer you to this Biowulf HPC guide. In short:
@@ -21,7 +15,10 @@ For a reminder on how to log-in to Biowulf, we refer you to this Biowulf HPC gui
 
 Request an interactive session with the following command:
 
-<code>sinteractive --mem=12g --cpus-per-task=2</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+sinteractive --mem=12g --cpus-per-task=2
+```
 
 ---
 
@@ -37,24 +34,33 @@ We will use the targeted sequencing data of paired tumor and normal samples from
 
 **1\.** First let's create a new folder in your personal data directory, and copy all the sample data to this directory.
 
-<code>cd /data/$USER/<br>
-mkdir practical_session_4<br>
-cd practical_session_4<br>
-cp -r /data/classes/DCEG_Somatic_Workshop/Practical_session_4/* .</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+cd /data/$USER/
+mkdir practical_session_4
+cd practical_session_4
+cp -r /data/classes/DCEG_Somatic_Workshop/Practical_session_4/* .
+```
 
 **2\.** Next, we will submit two sets of scripts to Biowulf. Use the following commands to submit the scripts for step 1.
 
-<code>cd shfiles<br>
-jobid1=$(swarm -t 8 -g 24  --gres=lscratch:24 --job-name step1 --time 1:00:00 scripts_for_step1.swarm)<br>
-echo $jobid1</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+cd shfiles
+jobid1=$(swarm -t 8 -g 24  --gres=lscratch:24 --job-name step1 --time 1:00:00 scripts_for_step1.swarm)
+echo $jobid1
+```
 
 <span style="color:crimson">swarm</span> is a command to submit a group of command lines to biowulf and those command lines will run as parallel processes. The options <span style="color:crimson">-g</span>, <span style="color:crimson">-t</span> and <span style="color:crimson">--time</span> specify the memory (in GB), threads and running time per process. We request 8CPUs and 24GB of memory for each process. The default running time is 2hrs. We assign a job name using the option <span style="color:crimson">--job-name</span>. The option <span style="color:crimson">--gres</span> is to allocate a local scratch disk space for each process. <span style="color:crimson">lscratch:N</span> will require N GB for the scratch space. The directory of this scratch space can be accessed in the script as <span style="color:crimson">/lscratch/$SLURM_JOB_ID/</span>. More information could be found at [https://hpc.nih.gov/apps/swarm.html](https://hpc.nih.gov/apps/swarm.html).
 
 The <span style="color:crimson">swarm</span> will return a job ID and it will be saved to <span style="color:crimson">$jobid1</span> in this script. We then submit the swarm file for step 2 and let it start only after the completion of all commands in the first job. To set up the dependency, we use the option <span style="color:crimson">--dependency=afterany:jobid</span> where the jobid is $jobid1. Step 1 will take about 9 mins.
 
 
-<code>jobid2=$(swarm -t 8 -g 20 --gres=lscratch:20 --dependency=afterany:$jobid1 --job-name step2 scripts_for_step2.swarm)<br>
-echo $jobid2</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+jobid2=$(swarm -t 8 -g 20 --gres=lscratch:20 --dependency=afterany:$jobid1 --job-name step2 scripts_for_step2.swarm)
+echo $jobid2
+```
 
 In a few seconds, let's check the job status using <span style="color:crimson">sjobs</span>, the second job will sit in a pending state until all the processes in job1 are finished.
 
@@ -64,7 +70,11 @@ In a few seconds, let's check the job status using <span style="color:crimson">s
 
 While we are waiting for the two jobs, let's examine the script.
 
-<code>vi scripts_for_step1.swarm</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+vi scripts_for_step1.swarm
+```
+
 ```bash
 #!/bin/bash
 sh Step1_preprocess_variant_discovery.sh GPK7017_2000 ../fastq ../Results
@@ -81,7 +91,10 @@ All the fields after the bash file (.sh) are arguments, and they will be passed 
 
 **4\.** Now let's quit the swarm file by typing <span style="color:crimson">:q</span> and hitting enter, and open the corresponding bash file.
 
-<code>vi Step1_preprocess_variant_discovery.sh</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+vi Step1_preprocess_variant_discovery.sh
+```
 
 ```bash
 #!/bin/bash
@@ -260,7 +273,10 @@ The command line <code>> ${logs}/BQSR-${SAMPLE}.log 2>&1</code> redirects 'stand
 
 **8\.** By the end of step 1, you should have generated analysis-ready BAM files for each individual sample (tumor and normal). We prepared the sample output data in the /Results/ directory for you to check.
 
-<code>ls ../Expected_Results</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+ls ../Expected_Results
+```
 
 ---
 
@@ -271,7 +287,10 @@ Next we will use the analysis-ready BAM files to proceed the GATK pipeline for s
 {% include image-modal.html link="practical_assets/GATK_somatic_variant_calling.png" %}
 
 Let's examine the swarm file.
-<code>vi scripts_for_step2.swarm</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+vi scripts_for_step2.swarm
+```
 ```bash
 #!/bin/bash
 sh Step2_somatic_variant_discovery_MuTect2.sh  GPK7017_2000 GPK4013_0401 PAP1_1708_01_T01 ../Results ../Results
@@ -279,7 +298,10 @@ sh Step2_somatic_variant_discovery_MuTect2.sh  GPK7017_2000 GPK4013_0401 PAP1_17
 
 Simlar to the first step, we use one bash file to process tumor/normal sample pairs in batches. In this example, we have only one tumor/normal pair, but we can easily scale up in this way. Now let's quit the swarm file by with <span style="color:crimson">:q</span> and open the script file:
 
-<code>vi Step2_somatic_variant_discovery_MuTect2.sh</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+vi Step2_somatic_variant_discovery_MuTect2.sh
+```
 
 ```bash
 #!/bin/bash
@@ -445,9 +467,11 @@ The tool <span style="color:crimson">GetPileupSummaries</span> summarizes read c
 
 **For your future reference**: you may use the following commands within an interactive session to check and download the reference files for common germline variant sites (for today's ).
 
-<code>module load google-cloud-sdk<br>
-gsutil ls gs://gatk-best-practices/somatic-hg38/<br>
-gsutil ls gs://gatk-best-practices/somatic-hg38/af-only-gnomad.hg38.vcf.gz* ./</code>
+```bash
+module load google-cloud-sdk
+gsutil ls gs://gatk-best-practices/somatic-hg38/
+gsutil ls gs://gatk-best-practices/somatic-hg38/af-only-gnomad.hg38.vcf.gz* ./
+```
 
 **12\.** Then we will filter the mutation candidates using the tool [FilterMutationCalls](https://gatk.broadinstitute.org/hc/en-us/articles/360036856831-FilterMutectCalls). The options <span style="color:crimson">--contamination-table</span> and <span style="color:crimson">--tumor-segmentation</span> use the output from the previous step and are optional.
 
@@ -487,12 +511,18 @@ Now we have a list of variants ready for the downstream analysis. To prioritize 
 
 **14\.** We first annotate with Funcotator. Confirm that you are in the interactive session, and enter the following commands.
 
-<code>cd /data/$USER/practical_session_4/shfiles<br>
-sh ./Step3_funcotator_annotation.sh  PAP1_1708_01_T01 ../Expected_Results ../Results</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+cd /data/$USER/practical_session_4/shfiles
+sh ./Step3_funcotator_annotation.sh  PAP1_1708_01_T01 ../Expected_Results ../Results
+```
 
 The script will take a few seconds. Let's first check the bash scripts.
 
-<code>vi /data/classes/DCEG_Somatic_Workshop/Practical_session_4/shfiles/Step3_funcotator_annotation.sh</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+vi /data/classes/DCEG_Somatic_Workshop/Practical_session_4/shfiles/Step3_funcotator_annotation.sh
+```
 
 <!--{% include image-modal.html link="practical_assets/Step3_1.PNG" %}-->
 ```bash
@@ -566,12 +596,18 @@ We will run the second annotation package ANNOVAR and check the results together
 
 **15\.** Next we annotate with ANNOVAR. The command lines are very similar:
 
-<code>cd /data/$USER/practical_session_4/shfiles<br>
-sh ./Step3_annovar_annotation.sh  PAP1_1708_01_T01 ../Expected_Results ../Results</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+cd /data/$USER/practical_session_4/shfiles
+sh ./Step3_annovar_annotation.sh  PAP1_1708_01_T01 ../Expected_Results ../Results
+```
 
 Next let's check the bash scripts.
 
-<code>vi /data/classes/DCEG_Somatic_Workshop/Practical_session_4/shfiles/Step3_annovarannotation.sh</code>{% include code-snippet-copy.html %}
+{% include code-block-copy.html %}
+```bash
+vi /data/classes/DCEG_Somatic_Workshop/Practical_session_4/shfiles/Step3_annovarannotation.sh
+```
 
 <!--{% include image-modal.html link="practical_assets/Step3_2.PNG" %}-->
 ```bash
@@ -652,30 +688,6 @@ For the next a few columns, the ExAC* columns are allele frequencies in all the 
 **18\.** In the upper left of the IGV window you will see a dropdown menu to select a reference genome. Select  GRCh38/hg38.
 
 **19\.** Now you will need to load the BAM files into IGV. [Click here to download them from GitHub](https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_4/IGV.zip) (you may need to unzip the folder).
-
-<!--
-<details><summary>To download directly from Biowulf instead...</summary>
-
-<blockquote markdown="1">
- (**replace USERNAME with your unique Biowulf username**):
-
-**Mac:**
-
-{% include code-block-copy.html %}
-```bash
-scp -r USERNAME@helix.nih.gov:/data/classes/DCEG_Somatic_Workshop/Practical_session_4/IGV .
-```
-
-**Windows** via PuTTy:
-
-{% include code-block-copy.html %}
-```bash
-pscp -r USERNAME@helix.nih.gov:/data/classes/DCEG_Somatic_Workshop/Practical_session_4/IGV .
-```
-
-</blockquote>
-</details><br>
--->
 
 Once the files are downloaded, load them into IGV by clicking **File >> Load from File...**, locating your downloaded files, and selecting Normal.bam and Tumor.bam.
 
@@ -1208,5 +1220,3 @@ dev.off()
 ```
 
 ***Saving a plot in this way is necessary if you are running an R script in a non-interactive manner, such as a batch script on Biowulf.***
-
-<a href="#0" class="cd-top">Top</a>

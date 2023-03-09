@@ -4,12 +4,6 @@ permalink: sessions/session_6/practical
 menubar_toc: true
 ---
 
-<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
-<script>addBackToTop()</script>
-
-<script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
-<script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
-
 This practical session will provide detailed steps for the SV calling by one of the most popular algorithms (e.g. Manta) from examples of analysis-ready BAM files. In addition, We will also provide example SV callings from our Sherlock-Lung study for SV filtering, annotation, and visualization. Suggestive downstream analysis related to SV will also be present in this practical session.
 
 ---

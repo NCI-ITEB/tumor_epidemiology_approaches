@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+<script src="{{ site.baseurl }}/assets/js/vanilla-back-to-top.min.js"></script>
+<script>addBackToTop()</script>
+
+<script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
+<script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
+
+{% if page.toc %}
+    {% assign contentsTitle = page.toc_title | default: 'Contents' %}
+    {% include toc.html html=content class='menu-list' h_min=2 h_max=3 contents_title=contentsTitle %}
+{% endif %}
+<div class="content">
+    {{ content }}
+</div>

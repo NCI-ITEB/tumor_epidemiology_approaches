@@ -12,3 +12,6 @@ permalink: sessions/session_12
 - Heatmaps
 - Circos Plots
 - IGV
+
+### Supplemental
+- MEGSA (Mutually Exclusive Gene Set Analysis)
