@@ -10,14 +10,6 @@ menubar_toc: true
 <script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
 <script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
 
-<style>
-pre {
-  max-height: 500px;
-  overflow-y: auto;
-  max-width: 120%;
-}
-</style>
-
 # Session 7 Practice Session
 
 Main Speakers: Jian and Azhar

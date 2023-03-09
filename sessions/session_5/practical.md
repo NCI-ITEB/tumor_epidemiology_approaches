@@ -10,14 +10,6 @@ menubar_toc: true
 <script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
 <script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
 
-<style>
-pre {
-  max-height: 500px;
-  overflow-y: auto;
-  max-width: 120%;
-}
-</style>
-
 Before we begin, please login to Biowulf and request an interactive session:
 
 For a reminder on how to log-in to Biowulf, we refer you to this Biowulf HPC guide. In short:

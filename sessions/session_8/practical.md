@@ -10,16 +10,6 @@ menubar_toc: true
 <script src="{{ site.baseurl }}/assets/js/copyCodeSnippet.js" defer></script>
 <script src="{{ site.baseurl }}/assets/js/copyCodeBlock.js" defer></script>
 
-<style>
-pre {
-  max-height: 500px;
-  overflow-y: auto;
-  max-width: 120%;
-}
-</style>
-
----
----
 ## Introduction
 
 In today’s practical we will practice identifying cancer driver genes using 3 algorithms: OncodriveFML and OncodriveCLUSTL on Biowulf, and dNdScv on your local computer in R. We will use pooled mutations from 200 samples of our Sherlock study, starting from a very basic tsv file format:
@@ -46,9 +36,8 @@ For statistically robust identification of cancer driver genes it is necessary t
 
 As a quick reminder of how these algorithms identify drivers:
 
-- **OncodriveFML** uses ‘functional impact scores’ which attempt to assign every mutation a score based on its predicted functional consequence. Genes which consistently have higher functional impact scores than predicted by chance are assumed to be under positive selection and therefore candidate cancer drivers. Because these scores also include non-coding regions, OncodriveFML can be applied to non-coding elements e.g. ncRNAs, though the accuracy of prediction is constrained by the accuracy of the functional impact scores which may be less reliable for non-coding elements.<br><br>These functional significance scores are pre-calculated by the CADD tool from University of Washington and require lots of storage space to download (they are pre-downloaded on Biowulf).
-
-**- OncodriveCLUSTL** uses unsupervised clustering to identify clusters of mutations and compares the real mutation clustering patterns for each gene to simulated mutation clusters generated using nucleotide context-specific mutation probabilities. Greater mutation clustering than expected is known to be a feature of cancer driver genes. This method is best applied to coding regions, but could be applied to non-coding regions with careful vetting of proposed mutation hotspots (mutations in non-coding regions may cluster due to other reasons, for instance due to APOBEC mutagenesis).
+- **OncodriveFML** uses ‘functional impact scores’ which attempt to assign every mutation a score based on its predicted functional consequence. Genes which consistently have higher functional impact scores than predicted by chance are assumed to be under positive selection and therefore candidate cancer drivers. Because these scores also include non-coding regions, OncodriveFML can be applied to non-coding elements e.g. ncRNAs, though the accuracy of prediction is constrained by the accuracy of the functional impact scores which may be less reliable for non-coding elements.<br>*These functional significance scores are pre-calculated with the CADD algorithm from University of Washington and require lots of storage space to download (they are pre-downloaded on Biowulf).*
+- **OncodriveCLUSTL** uses unsupervised clustering to identify clusters of mutations and compares the real mutation clustering patterns for each gene to simulated mutation clusters generated using nucleotide context-specific mutation probabilities. Greater mutation clustering than expected is known to be a feature of cancer driver genes. This method is best applied to coding regions, but could be applied to non-coding regions with careful vetting of proposed mutation hotspots (mutations in non-coding regions may cluster due to other reasons, for instance due to APOBEC mutagenesis).
 
 Here is an example script to run both Oncodrive tools on Biowulf:
 
@@ -58,16 +47,12 @@ Here is an example script to run both Oncodrive tools on Biowulf:
 ml oncodriveFML
 ml oncodriveCLUSTL
 
----
----
 ## Set paths to needed files/folders
-BGDATA_LOCAL = /fdb/intogen/datasets/bgdata
+#BGDATA_LOCAL=/fdb/intogen/datasets/bgdata
 mutations_file = /data/classes/DCEG_Somatic_Workshop/Practical_session_8/sherlock_only_mutations_top200_chr17.txt.gz
 gene_regions = /data/classes/DCEG_Somatic_Workshop/Practical_session_8/cds_chr17.regions
 fml_config= /data/classes/DCEG_Somatic_Workshop/Practical_session_8/config/bbglab/oncodrivefml_v2.conf
 
----
----
 ## OncodriveFML command
 oncodrivefml \
 -i ${mutations_file} \
@@ -76,8 +61,6 @@ oncodrivefml \
 --configuration ${fml_config} \
 --seed 123
 
----
----
 ## OncodriveCLUSTL command
 oncodriveclustl \
 -i ${mutations_file} \
@@ -91,7 +74,7 @@ oncodriveclustl \
 ---
 ### Review Inputs
 
-Let’s review the inputs used, particularly for OncodriveFML which requires some configuring. Both Oncodrive tools require a value for **BGDATA_LOCAL**, which is the path to a folder containing a reference genome. Both tools require the mutations file which we previewed at the start of the practical, and they also require a ‘regions’ file with genome annotations. Preview this file with:
+Let’s review the inputs used, particularly for OncodriveFML which requires some configuring. Both tools require the mutations file which we previewed at the start of the practical, and they also require a ‘regions’ file with genome annotations. Preview this file with:
 
 {% include code-block-copy.html %}
 ```bash
@@ -383,7 +366,7 @@ Use the following links for additional information regarding the dNdScv package:
 ---
 #### Download session folder
 
-First we will download the folder we have created for this session. This zipped folder, session8_dndscv.zip, can be downloaded [here](needs_link).
+First we will download the folder we have created for this session. This zipped folder, session8_dndscv.zip, can be downloaded [here](check).
 
 This folder should download directly to your /Downloads folder. After it downloads, unzip the folder as you normally would on your machine.
 
@@ -753,17 +736,20 @@ p <- sel_cv %>% filter(gene_name %in% signif_genes$gene_name) %>%
 
 {% include image-modal.html link="practical_assets/8-dnds-mutFreq-v-qglobal.png" %}
 
-The coloration of the dots is based on the (-log10 of the) qvalue. We can see that there is a cluster of genes with a low mutational frequency and a slightly larger q-value in the bottom left of each plot. Those in the top right of the plot have a high mutational frequency and a small q-value (i.e. highly significant).  The two horizontal lines across the plot are the cutoffs for: 1) genes whose qvalue was 0 (purple line), and 2) genes whose qvalue just met the less than 0.1 criteria (red line).
+The coloration of the dots is based on the -log10(qvalue). We can see that there is a cluster of genes with a low mutational frequency and a slightly larger q-value in the bottom left of each plot. Those in the top right of the plot have a high mutational frequency and a small q-value (i.e. highly significant).  The two horizontal lines across the plot are the cutoffs for:
+
+1. genes whose qvalue was 0 (purple line)
+2. genes whose qvalue just met the less than 0.1 criteria (red line).
 
 We see several common drivers at a lower frequency in these samples compared to other common drivers at a higher frequency, such as _TP53_ and _KRAS_. Statistically significant, low-frequency mutated genes may be false positives **or** may represent rare cancer drivers in a specific cancer type (e.g. _ARID1A_ in this specific case). Some cancers, e.g. prostate cancer, ([https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6107367/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6107367/)), have rare driver mutations in many genes. Looking at both mutational frequency and q-value is just one way of exploring the data that may help you narrow your focus for further analysis.
 
-Based on the plots generated above, and our exploration of the different dN/dS ratios and the corresponding q-values, it could be concluded that these 18 genes have the **_potential_** to be cancer driver genes in our sample set. However, this sort of conclusion heavily depends on what you are interested in e.g. q-values cutoff, consideration of mutational frequency in determining drivers, etc.
+Based on the plots generated above, and our exploration of the different dN/dS ratios and the corresponding q-values, it could be concluded that these 18 genes are **_candidate_** cancer driver genes in our sample set. However, this sort of conclusion heavily depends on what you are interested in e.g. q-values cutoff, consideration of mutational frequency in determining drivers, etc.
 
 ---
 ---
 ## OncodriveFML, OncodriveCLUSTL, and dNdScv Comparison
 
-Now that we have run OncodriveFML, OncodriveCLUSTL, and dNdScv, let’s compare their results. In the table below, we have noted which genes were identified as drivers and by which algorithms. We have highlighted genes identified by at least 2 algorithms, which are the least likely to be false positives (though of course you may note that this excludes some known drivers of lung cancer which were detected by only one algorithm).
+Now that we have run OncodriveFML, OncodriveCLUSTL, and dNdScv, let’s compare their results. In the table below, we have noted which genes were identified as drivers and by which algorithms. We have highlighted genes identified by at least 2 algorithms, which are the least likely to be false positives *(though of course you may note that this excludes some known drivers of lung cancer which were detected by only one algorithm)*.
 
 | Gene     | dNdScv | OncoFML | OncoCLUSTL |
 |-----------------|--------|---------|------------|
@@ -794,7 +780,11 @@ Now that we have run OncodriveFML, OncodriveCLUSTL, and dNdScv, let’s compare 
 | **_AADACL3_**   |        |         | TRUE       |
 | **_LILRB3_**    |        |         | TRUE       |
 
-This is a common method for manually combining the results from several algorithms, commonly referred to as “voting”, and of course the number of votes needed would change depending on your analysis and how many algorithms you used. Even better than manually combining results is using an automated statistical method such as [IntoGen](https://www.nature.com/articles/s41568-020-0290-x), which is a carefully developed pipeline for combining results from 7 cancer driver gene algorithms, including the three we practiced with today.
+This is a common method for manually combining the results from several algorithms, commonly referred to as “voting”, and of course the number of votes needed would change depending on your analysis and how many algorithms you used.
+
+Even better than manually combining results is using an automated statistical or machine learning method such as [IntoGen](https://www.nature.com/articles/s41568-020-0290-x), which is a carefully developed pipeline for combining results from 7 cancer driver gene algorithms, including the three we practiced with today.
+
+*Note: As of this writing, IntoGen is in the process of being installed on Biowulf and will be available soon*.
 
 ---
 ---
@@ -865,18 +855,21 @@ You can view several CGI examples and their output by clicking **View CGI exampl
 
 Also notice that you can insert a mutation per line in various formats, as you can see in the Alterations box. For our purposes today, we will be uploading a mutation file.
 
-**2\.** Today’s example will only use one sample from the _Sherlock-Lung_ project, due to time restraints. Click here to download the file with mutation data for one sample, NSLC-0005.
+**2\.** Today’s example will only use one sample from the _Sherlock-Lung_ project, due to time restraints. Click [here](check) to download the file with mutation data for one sample, NSLC-0005.
+
 **3\.** Decompress the file as you normally would on your machine.
+
 **4\.** To upload a file, click the Add file + button in the Alterations table. Navigate to the folder housing the **NSLC-0005_example.txt** file and select the file.
+
 **5\.** Now we can set up our other inputs for the interpreter. First, we will select **Solid Tumors → Torax → Lung → Non-small cell lung**. Make sure the **NSCLC option is selected with a pink rectangle**. See below:
 
 {% include image-modal.html link="practical_assets/13-cgi-nsclc.png" %}
 
 **6\.** Make sure the reference genome is set to **hg38**.
-**7\.** Click **Run**.
-**8\.** This will take just under about 18 minutes to run.
 
-While your job is running, you will see the following at the top of the screen:
+**7\.** Click **Run**.
+
+**8\.** This will take just under about 18 minutes to run. While your job is running, you will see the following at the top of the screen:
 
 {% include image-modal.html link="practical_assets/15-cgi-progress.png" %}
 
@@ -936,11 +929,9 @@ From just this one example, it can be seen that CGI can serve as a great tool in
 
 **Additional Information:** You can also choose to download the results by clicking the Download results button in the top left. This will download a zip folder to the Downloads folder on your computer.  If you unzip this folder, you will see that there are three files included:
 
-**1\.** drug_prescription.tsv-  prescriptions table you see in the CGI result page, give or take a few columns. Includes all biomarkers identified, regardless of tumor type.
-
-**2\.** input01.tsv- the file uploaded as input for the job submission
-
-**3\.** mutation_analysis.tsv- alterations table you see in the CGI result page, give or take a few columns
+1. drug_prescription.tsv-  prescriptions table you see in the CGI result page, give or take a few columns. Includes all biomarkers identified, regardless of tumor type.
+2. input01.tsv- the file uploaded as input for the job submission
+3. mutation_analysis.tsv- alterations table you see in the CGI result page, give or take a few columns
 
 ---
 ---
@@ -959,7 +950,9 @@ You can find the publication for MEGSA [here](https://www.ncbi.nlm.nih.gov/pmc/a
 This tutorial will show you how to use the example data included in the package, but with an abridged version of the data so that the analysis does not take so long.
 
 **1\.** If you haven’t already, download the zip file that contains all of the files necessary to use MEGSA, as well as the pre-generated files.
+
 **2\.** First, we will source the MEGSA.R file, which contains all of the necessary functions in the MEGSA package.
+
 **3\.** Then, we will load the mutation matrix included in the package, which includes binary mutation data for TCGA LAML samples.
 
 {% include code-block-copy.html %}
@@ -1008,7 +1001,8 @@ The following explain the parameters used:
 
 * `nSimu`: number of simulations (recommend 1000 or more, it may take ~ 10 hours for 1000 simulations).
 * `nPairStart`: first tested all pairs of genes and then picked up the top nPairStart gene pairs (ranked by P-values) to perform multiple-path search to include more genes. Increasing `nPairStart`: will slightly increase power but linearly increase the computational time.
-* maxSize: the maximum size of putative MEGS.
+* `maxSize`: the maximum size of putative MEGS.
+
 **5\.** Write your own file after running step 2 (if you did not use the maxSSimu_example.txt file provided to save some time) so that you do not have to run this step again in the future.
 
 {% include code-block-copy.html %}
@@ -1036,6 +1030,7 @@ This command will display a list of two components in the result output:
 
 * `resultMEGSA$p`: the global p value
 * `resultMEGSA$MEGSList`: a list of significant MEGS)
+
 **7\.** MEGSList is the list of significant MEGS. We can pull this from the resultsMEGSA object:
 
 {% include code-block-copy.html %}
