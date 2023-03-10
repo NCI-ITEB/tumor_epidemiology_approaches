@@ -4,16 +4,18 @@ permalink: sessions/session_3
 ---
 
 ### Topics Covered
-- Effect of specimen type (frozen/FFPE/Blood/Others) on results
-- Cost, study design, QC
-  - Targeted panel bulk sequencing
-  - Whole exome bulk sequencing
-  - Whole genome bulk sequencing
+- Introduction to NGS sequencing
+- NGS Platforms Summary
+- Sequencing Strategies and Study Design
+- Quality Control (QC)
+- Data QC after read mapping
 
 ### Practical
-- Perform NGS QC at the raw and alignment levels
-  - FastQC, MultiQC
-- Discuss strategy-specific QC metrics (targeted, WES, WGS)
+- Running NGS QC
+- FASTQ-based QC results
+- Reviewing alignment-based QC results
+- Effect of FFPE on NGS Quality
+- Sequencing Strategy-specific QC Metrics
 
 The aim of this session is to provide an in-depth summary of the DNA
 sequencing techniques most useful for cancer genomics, particularly

@@ -4,10 +4,12 @@ permalink: sessions/session_2
 ---
 
 ### Topics Covered
-- Databases for:
-  - Accessing data from major studies (TCGA-cBioPortal/PCAWG/GTEx/ENCODE, etc.)
-  - Specific analyses (IntoGen, COSMIC, mSigPortal, etc.)
-  - Common genetics resources (1000 genomes, gnomAD, UCSC Genome browser, etc.)
+- Major Cancer Genomic Studies and Data Portals
+- Other Genetics Data Resources
+- Specialized Databases for Genomic Analyses
+- Analytical Programming Packages for Cancer Genomic Datasets
+- Cloud Resources with Available Cancer Genomic Datasets
+- “Awesome Bioinformatics” Resources
 
 ### Practical
 - Using popular portals to answer research questions:
@@ -15,6 +17,7 @@ permalink: sessions/session_2
   - FIREBROWSE
   - GTEx
   - ICGC Portal
+- Visualizing mutation data 
 
 In this session we will provide an overview of current cancer genomic studies and many common genetic resources. We will begin by highlighting major cancer genomics studies (e.g. TCGA, ICGC, PCAWG, Genomics England, MSK-IMPACT, GENIE) and their associated data portals such as cBioPortal, FIREBROWSE, GDC and more, plus genetics databases useful for genomic analyses in general such as Ensembl, 1000 genomes, gnomAD, etc.
 

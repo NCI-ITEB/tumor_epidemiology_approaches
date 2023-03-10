@@ -4,8 +4,12 @@ permalink: sessions/session_7
 ---
 
 ### Topics Covered
-- SCNA calling + Purity estimate
-- FACETS, ASCAT, Battenberg, MOCHA, Sequenza
+- Methods for detecting SCNAs
+- SCNA Validation & Visualization
+- Challenges for SCNA detection
+- Common SCNA analysis in cancer genomics
+- Significance of SCNAs in cancer
 
 ### Practical
-- SCNA calling (including GISTIC analysis), SCNA clonality
+- SCNA calling (FACETS,ASCAT,GISTIC analysis)
+- SCNA signatures

@@ -3,8 +3,15 @@ layout: page
 permalink: sessions/session_6
 ---
 
-### Topics Covered
-- SV calling, chromothripsis, chromoplexy and other complex SV rearrangements.
-- Oncogenic fusions
+### Lecture
+- Complex SVs
+- SV calling
+- SV landscape
 - SV signatures
-- Data interpretation
+- Oncogenic SVs
+
+### Practical
+- Somatic SV Calling using Illumina Manta
+- SV Annotation
+- SV visualization using R
+- Advanced genomic analysis based on SVs

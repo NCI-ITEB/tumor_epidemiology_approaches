@@ -4,9 +4,8 @@ permalink: sessions/session_1
 ---
 
 ### Topics Covered
-- Overall architecture, computing resources and applications on Biowulf and CCAD
-- Instructions to set up connections for Mac/Windows and
-transfer data (Globus account, mount HPC directory, GUI file transfer)
+- Introduction to Available Computing Clusters
+- Cluster How-Tos: Connect, Transfer Files/Share Data
 - Basic Linux/UNIX commands (e.g. bash scripts, submitting and monitoring jobs)
 - Common bioinformatics formats and tools (e.g. FASTQ, BAM, VCF, BED, and GFF; samtools, bcftools, bedtools, and maftools)
 
