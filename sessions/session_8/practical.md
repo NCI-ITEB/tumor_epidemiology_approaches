@@ -30,8 +30,12 @@ For statistically robust identification of cancer driver genes it is necessary t
 
 As a quick reminder of how these algorithms identify drivers:
 
-- **OncodriveFML** uses ‘functional impact scores’ which attempt to assign every mutation a score based on its predicted functional consequence. Genes which consistently have higher functional impact scores than predicted by chance are assumed to be under positive selection and therefore candidate cancer drivers. Because these scores also include non-coding regions, OncodriveFML can be applied to non-coding elements e.g. ncRNAs, though the accuracy of prediction is constrained by the accuracy of the functional impact scores which may be less reliable for non-coding elements.<br>*These functional significance scores are pre-calculated with the CADD algorithm from University of Washington and require lots of storage space to download (they are pre-downloaded on Biowulf).*
-- **OncodriveCLUSTL** uses unsupervised clustering to identify clusters of mutations and compares the real mutation clustering patterns for each gene to simulated mutation clusters generated using nucleotide context-specific mutation probabilities. Greater mutation clustering than expected is known to be a feature of cancer driver genes. This method is best applied to coding regions, but could be applied to non-coding regions with careful vetting of proposed mutation hotspots (mutations in non-coding regions may cluster due to other reasons, for instance due to APOBEC mutagenesis).
+- **OncodriveFML** uses ‘functional impact scores’ which attempt to assign every mutation a score based on its predicted functional consequence. Genes which consistently have higher functional impact scores than predicted by chance are assumed to be under positive selection and therefore candidate cancer drivers.
+  - Because these scores also include non-coding regions, OncodriveFML can be applied to non-coding elements e.g. ncRNAs, though the accuracy of prediction is constrained by the accuracy of the functional impact scores which may be less reliable for non-coding elements.
+  - *These functional significance scores are pre-calculated with the CADD algorithm from University of Washington and require lots of storage space to download (they are pre-downloaded on Biowulf).*<br><br>
+
+- **OncodriveCLUSTL** uses unsupervised clustering to identify clusters of mutations and compares the real mutation clustering patterns for each gene to simulated mutation clusters generated using nucleotide context-specific mutation probabilities.
+  - This method is best applied to coding regions, but could be applied to non-coding regions with careful vetting of proposed mutation hotspots (mutations in non-coding regions may cluster due to other reasons, for instance due to APOBEC mutagenesis).
 
 Here is an example script to run both Oncodrive tools on Biowulf:
 
@@ -303,13 +307,17 @@ cp -r /data/classes/DCEG_Somatic_Workshop/Practical_session_8/*wholeGenome .
 
 Mount your data drive to your laptop/ local computer so you can examine the quantile-quantile plots (or QQ plots) produced by each algorithm.
 
-_OncodriveFML whole-genome results (left), OncodriveCLUSTL whole-genome (right):_
-
 <div style="display: flex;
   justify-content: center;
   align-items: center;">
-{% include image-modal.html link="practical_assets/1-oncofml-wholegenome.png" %}
-{% include image-modal.html link="practical_assets/2-oncoclust-wholegenome.png" max-width="105%"%}
+  <div>
+    <figcaption class="is-italic" style="text-align:center">OncodriveFML whole-genome results</figcaption>
+    {% include image-modal.html link="practical_assets/1-oncofml-wholegenome.png" %}
+  </div>
+  <div>
+    <figcaption class="is-italic" style="text-align:center">OncodriveCLUSTL whole-genome results</figcaption>
+    {% include image-modal.html link="practical_assets/2-oncoclust-wholegenome.png" max-width="100%"%}
+  </div>
 </div>
 
 Both figures show the observed p-values for each gene *(y-axis)* plotted against the expected p-value predicted by the null hypothesis *(x-axis)*, therefore a large deviation from the dashed line towards the y-axis is indicative of greater mutation functional impact (oncodriveFML) or mutation clustering (oncodriveCLUSTL) than expected by chance for a gene. Genes with a significant q-value are labeled in each plot.
@@ -329,13 +337,17 @@ Strongly clustered mutation patterns like _KRAS_ will be strongly selected by On
 
 When your jobs completes (~5 minutes), you should get the following quantile plots from analyzing only chr17:
 
-OncodriveFML (left), OncodriveCLUSTL (right):
-
 <div style="display: flex;
   justify-content: center;
   align-items: center;">
-{% include image-modal.html link="practical_assets/5-oncofml-chr17.png" max-width="80%" %}
-{% include image-modal.html link="practical_assets/6-oncoclust-chr17.png" max-width="105%"%}
+  <div style="width:55%">
+    <figcaption class="is-italic" style="text-align:center">OncodriveFML chr17 results</figcaption>
+    {% include image-modal.html link="practical_assets/5-oncofml-chr17.png"%}
+  </div>
+  <div>
+    <figcaption class="is-italic" style="text-align:center">OncodriveCLUSTL chr17 results</figcaption>
+    {% include image-modal.html link="practical_assets/6-oncoclust-chr17.png" max-width="95%"%}
+  </div>
 </div>
 
 ---
@@ -368,10 +380,9 @@ This folder includes several files:
 
 1. the mutational data we will be using today from a subset of the _Sherlock-Lung_ Study
 2. the R script with all of the commands you will find throughout this part of the practical session
-3. genome reference file
-4. covariate file.
+3. covariate file.
 
-The genome reference file and the covariate file are necessary to run dNdScv.
+The covariate file and a genome reference file, which we will download in R, are necessary to run dNdScv.
 
 **Open the file, dndscv_session8_practice_FINAL.R. This should open in RStudio.**
 
@@ -570,7 +581,7 @@ dndsout <- dndscv(mutations = sherlock_mdata, refdb = 'RefCDS_human_GRCh38_Genco
 In this run of dNdScv, we use the following parameters:
 
 * `mutations` is set to our mutation data
-* `refdb` is set to a RefCDS object provided through the GitHub repository (and included in the zip file you downloaded earlier)
+* `refdb` is set to a RefCDS object which we downloaded earlier
 * `cv` is set to the covariate data (`covs`) you loaded into the R environment
 
 This will take about two and a half minutes to run. You will see updates printed to the console periodically, like the following:
@@ -704,7 +715,7 @@ Note: 1 samples excluded for exceeding the limit of mutations per sample (see th
 
 As stated before, we ran dNdScv with mostly default parameters. One of these defaults removes ultra-hypermutator samples. This parameter was designed to protect against loss of sensitivity (i.e. potential bias) due to ultra-hypermutators, but can also be adjusted depending on the analysis.
 
-Create a mutation frequency table. Note that for our purposes today we will focus on the 18 genes with a qglobal_cv value of &lt; 0.1:
+Create a mutation frequency table. Note that for our purposes today we will focus on the 18 genes with a qglobal_cv value of <0.1:
 
 {% include code-block-copy.html %}
 ```R
@@ -756,7 +767,7 @@ Based on the plots generated above, and our exploration of the different dN/dS r
 ---
 ## OncodriveFML, OncodriveCLUSTL, and dNdScv Comparison
 
-Now that we have run OncodriveFML, OncodriveCLUSTL, and dNdScv, let’s compare their results. In the table below, we have noted which genes were identified as drivers and by which algorithms. We have highlighted genes identified by at least 2 algorithms, which are the least likely to be false positives *(though of course you may note that this excludes some known drivers of lung cancer which were detected by only one algorithm)*.
+Now that we have run OncodriveFML, OncodriveCLUSTL, and dNdScv, let’s compare their results. In the table below, we have noted which genes were identified as drivers and by which algorithms. We have highlighted genes identified by at least 2 algorithms, which are the least likely to be false positives *(though of course you may note that this excludes some known cancer drivers which were detected by only one algorithm, most notably EGFR)*.
 
 | Gene     | dNdScv | OncoFML | OncoCLUSTL |
 |-----------------|--------|---------|------------|
@@ -802,6 +813,7 @@ Even better than manually combining results is using an automated statistical or
 CGI is a platform that systematizes the interpretation of cancer genomes, the main hallmark of which is the streamlining and automatization of the whole process. There are two main components of the CGI platform, including:
 
 **1\.** Identification of all known and likely tumorigenic genomic alterations (point mutations, small insertions/deletions, copy number alterations and/or gene fusions) of a tumor, including the assessment of variants of unknown significance.
+
 **2\.** Annotation of all variants of the tumor that constitute biomarkers of drug response organized using different levels of clinical evidence.
 
 The publication for the first release of CGI can be found here: [https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0531-8](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0531-8)
@@ -817,7 +829,7 @@ The following link will take you to the homepage of Cancer Genome Interpreter.  
 ---
 ### CGI Framework
 
-The main steps of the CGI framework include those listed below. The number of each step below corresponds to the numbers found on the right side of the figure below:
+The main steps of the CGI framework include those listed below:
 
 1. CGI takes genomic alterations as input and automatically recognizes the format, remaps variants as necessary, and standardizes annotation.
 2. Identifies likely driver alterations in cancer driver genes in the tumor type ([BoostDM](https://www.nature.com/articles/s41586-021-03771-1) and [OncoDriveMut](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0531-8)), and annotates mutations in the tumor that are known to be tumorigenic.
@@ -898,16 +910,16 @@ In the case of this one sample, there were four drivers identified by the BoostD
 
 | Gene  | Protein Change | Mutation           |
 |-------|----------------|--------------------|
-| TP53  | R175H          | chr17:7675088 C>T  |
-| RB1   | R251*          | chr13:48362847 C>T |
-| FBXW7 | E51*           | chr4:152411653 C>A |
-| ATRX  | R1687K         | chrX:77633281 C>T  |
-| MACF1 | D191N          | chr1:39257960 G>A  |
-| GFI1  | G397S          | chr1:92476109 C>T  |
-| MSH6  | L539F          | chr2:47799598 C>T  |
-| TP63  | D660N          | chr3:189894437 G>A |
-| FAT4  | S2978I         | chr4:125449943 G>T |
-| ACTNB | Q354H          | chr7:5527814 C>A   |
+| *TP53*  | R175H          | chr17:7675088 C>T  |
+| *RB1*   | R251*          | chr13:48362847 C>T |
+| *FBXW7* | E51*           | chr4:152411653 C>A |
+| *ATRX*  | R1687K         | chrX:77633281 C>T  |
+| *MACF1* | D191N          | chr1:39257960 G>A  |
+| *GFI1*  | G397S          | chr1:92476109 C>T  |
+| *MSH6*  | L539F          | chr2:47799598 C>T  |
+| *TP63*  | D660N          | chr3:189894437 G>A |
+| *FAT4*  | S2978I         | chr4:125449943 G>T |
+| *ACTNB* | Q354H          | chr7:5527814 C>A   |
 
 The second table you will find in the output from CGI is the Prescriptions table. This table contains annotations of all variants of the tumor that constitute biomarkers of drug response, and are organized using different levels of clinical evidence. These levels of evidence range from A-D, with A being the highest level of evidence, guidelines of FDA approved drugs, to D, pre-clinical studies.
 

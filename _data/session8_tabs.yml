@@ -5,12 +5,12 @@ items:
   - name: Overview
     link: /sessions/session_8
     icon: fa-dna
-  # - name: Lecture
-  #   link: /sessions/session_8/lecture
-  #   icon: fa-book
-  # - name: Practical
-  #   link: /sessions/session_8/practical
-  #   icon: fa-laptop-code
-  # - name: Supplemental
-  #   link: /sessions/session_8/supplemental
-  #   icon: fa-plus
+  - name: Lecture
+    link: /sessions/session_8/lecture
+    icon: fa-book
+  - name: Practical
+    link: /sessions/session_8/practical
+    icon: fa-laptop-code
+  - name: Supplemental
+    link: /sessions/session_8/supplemental
+    icon: fa-plus
