@@ -322,7 +322,7 @@ Mount your data drive to your laptop/ local computer so you can examine the quan
 
 Both figures show the observed p-values for each gene *(y-axis)* plotted against the expected p-value predicted by the null hypothesis *(x-axis)*, therefore a large deviation from the dashed line towards the y-axis is indicative of greater mutation functional impact (oncodriveFML) or mutation clustering (oncodriveCLUSTL) than expected by chance for a gene. Genes with a significant q-value are labeled in each plot.
 
-Both algorithms also generate .tsv files containing the p- and q-values for all tested genes, plus other miscellaneous statistics such as counts of mutations per gene. Also of note, the OncodriveCLUSTL QQ plot does not show _all_ clusters in your dataset, only the most significant cluster for each gene. If you would like to see the statistics for _every_ mutation cluster this information can be found in the .tsv.
+Both algorithms also generate .tsv files containing the p- and q-values for all tested genes, plus other miscellaneous statistics such as counts of mutations per gene and individual cluster statistics for OncodriveCLUSTL (descriptions for output: [OncodriveFML](https://oncodrivefml.readthedocs.io/en/latest/output.html),[OncodriveCLUSTL](https://bitbucket.org/bbglab/oncodriveclustl/src/master/)).
 
 Many significant driver genes identified do not overlap in these two sample sets. To explain why these results are so different, take a look at OncodriveCLUSTL’s mutation clusters for _KRAS_ and _TP53_, generated using a cohort of 1000+ samples:
 
