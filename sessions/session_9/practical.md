@@ -109,6 +109,7 @@ cp /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/cmdfile .
 
 **5\.** Check the command line for NGSpurity pipeline through the singularity container *(the file has been slightly reformatted below for readability)*:
 
+{% include code-block-copy.html %}
 ```bash
 less cmdfile
 ```
@@ -122,7 +123,8 @@ singularity exec \
 -B /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Library/NGSpurity_clone:/data \
 -B /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Rawdata:/rawdata \
 -B /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Library/NGSpurity_clone/R/:/opt/R \
-/data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Library/bfx_container.sif /bin/bash /data/NGSpurity_BB0.sh \
+/data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Library/bfx_container.sif \
+/bin/bash /data/NGSpurity_BB0.sh \
 NSLC-0337-T01 /rawdata/NSLC-AILS-TTP1-A-1-1-D-A782-36.cram \
 NSLC-0337-N01 /rawdata/NSLC-AILS-NT1-A-1-1-D-A782-36.cram \
 NSLC-0337-T01 Female 24 local 0.5 2 /rawdata/NSLC-0337-T01.vcf.gz /rawdata/NSLC-0337-T01.hg38_multianno.txt
@@ -145,7 +147,7 @@ Here's a breakdown of the different parts of the command:
 
 In summary, this command sets some environment variables, runs a singularity container with specific configurations, and executes a shell script with a set of arguments. The shell script takes in several positional arguments and named arguments, and the command is specific to the context of the NGSpurity software tool.
 
-Detailed information about the singularity can be found [here](https://singularity-userdoc.readthedocs.io/en/latest/).
+Detailed information about singularity can be found [here](https://singularity-userdoc.readthedocs.io/en/latest/).
 
 **6\.** Submit the job using the swarm script
 
@@ -193,7 +195,11 @@ singularity exec \
 -B /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Library/NGSpurity_clone:/data \
 -B /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Rawdata:/rawdata \
 -B /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Library/NGSpurity_clone/R/:/opt/R \
-/data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Library/bfx_container.sif /bin/bash /data/NGSpurity_BB_refit.sh NSLC-0337-T01 /rawdata/NSLC-AILS-TTP1-A-1-1-D-A782-36.cram NSLC-0337-N01 /rawdata/NSLC-AILS-NT1-A-1-1-D-A782-36.cram NSLC-0337-T01 Female 24 local 0.60 3.71 /rawdata/NSLC-0337-T01.vcf.gz \
+/data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Library/bfx_container.sif \
+/bin/bash /data/NGSpurity_BB_refit.sh \
+NSLC-0337-T01 /rawdata/NSLC-AILS-TTP1-A-1-1-D-A782-36.cram \
+NSLC-0337-N01 /rawdata/NSLC-AILS-NT1-A-1-1-D-A782-36.cram \
+NSLC-0337-T01 Female 24 local 0.60 3.71 /rawdata/NSLC-0337-T01.vcf.gz
 /rawdata/NSLC-0337-T01.hg38_multianno.txt
 ```
 
