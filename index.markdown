@@ -29,29 +29,29 @@ To register, click the registration button above or visit the NCI events page at
 #### Module 2
 - Jan. 11, 2023: Mutation calling and analysis<span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
 - Jan. 18, 2023: Mutational signatures<span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
-  - *Jan. 19, 2023, 10:30–11:30 AM - Ludmil Alexandrov - Anthology of unusual patterns of somatic mutations in cancer genomes*<span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
+  - _Jan. 19, 2023, 10:30–11:30 AM - **Speaker: Ludmil Alexandrov** - Anthology of unusual patterns of somatic mutations in cancer genomes_<span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
 - Jan. 25, 2023: Structural variant (SV) analysis<span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
 - Feb. 1, 2023: “Ask a Bioinformatician” II<span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
-  - *Feb. 16, 2023 - Peter Park - Structural alterations in cancer genomes*<span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
+  - _Feb. 16, 2023 - **Speaker: Peter Park** - Structural alterations in cancer genomes_<span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
 
 ---
 #### Module 3
 - Mar. 8, 2023: Somatic copy number alterations (SCNAs) <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
 - Mar. 13<b>*</b>, 2023: Identifying cancer drivers <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
-  - *Mar. 23, 2023- Núria López-Bigas - Somatic mutations in tumors and normal tissues* <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
-- Mar. 28<b>\*</b>, 2023 ***(in conference room 110)***: Tumor evolution
+  - _Mar. 23, 2023- **Speaker: Núria López-Bigas** - Somatic mutations in tumors and normal tissues_ <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
+- Mar. 28<b>\*</b>, 2023 ***(in conference room 110)***: Tumor evolution <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
 - Mar. 29, 2023: “Ask a Bioinformatician” III
-  - *Apr. 20, 2023- David Wedge - Tumour evolution in diverse human populations*
+  - _Apr. 20, 2023- **Speaker: David Wedge** - Tumour evolution in diverse human populations_
 
 ---
 #### Module 4
 - Apr. 26, 2023: Transcriptome-based study designs
 - May 3, 2023: RNA-seq data mining
-  - *May 11, 2023- Speaker: Marcin Imieliński - Origin and identity in lung adenocarcinoma evolution*
-- May 15<b>*</b>, 2023: Data visualization approaches
+  - _May 11, 2023- **Speaker: Marcin Imieliński** - Origin and identity in lung adenocarcinoma evolution_
+- May 15<b></b>, 2023: Data visualization approaches
 - May 17, 2023: “Ask a Bioinformatician” IV
-  - *May 25, 2023- Charles Swanton - Title TBD*
-  - *June 8, 2023- David Adams - Cross-species oncogenomics of melanoma and other malignancies to define disease drivers*
+  - May 25, 2023- Charles Swanton - Title TBD
+  - _June 8, 2023- **Speaker: David Adams** - Cross-species oncogenomics of melanoma and other malignancies to define disease drivers_
 
 *Date changed
 
