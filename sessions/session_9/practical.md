@@ -20,8 +20,8 @@ if(!require(devtools)){
     install.packages("devtools")
   }
   
-  devtools::install_github("FunGeST/Palimpsest")
-  devtools::install_github("https://github.com/caravagnalab/revolver")
+devtools::install_github("FunGeST/Palimpsest")
+devtools::install_github("https://github.com/caravagnalab/revolver")
 ```
 * Mutation data is in GRCh38
 
