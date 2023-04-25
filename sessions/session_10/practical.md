@@ -140,7 +140,7 @@ This should take less than 10 seconds to run. When it is finished, you will see 
 
 **We will focus on S10_RNA_quality_multiqc_report.html.**
 
-**10\.** Access the report (**S10_RNA_quality_multiqc_report.html**) from the data directory that you mounted to at the beginning of the session, or you can click [here](link needed) to access the report.
+**10\.** Access the report (**S10_RNA_quality_multiqc_report.html**) from the data directory that you mounted to at the beginning of the session, or you can click <a href="practical_assets/S10_RNA_quality_multiqc_report.html" target="_blank">here</a> to access the report.
 
 ---
 ### Copy all files needed for practical session
