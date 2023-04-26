@@ -46,7 +46,7 @@ ssh [username]@biowulf.nih.gov
 
 {% include code-block-copy.html %}
 ```
-sinteractive --mem=4g --cpus-per-task=2 --time=4:00:00.
+sinteractive --mem=4g --cpus-per-task=2 --time=4:00:00
 ```
 
 This sets up the default interactive node with 2 CPUs and 4 GB memory, for 4 hours.
@@ -168,7 +168,8 @@ For reference, you can click on **Configure Columns** to see what each column me
 
 {% include image-modal.html link="practical_assets/02-configure_columns.png" %}
 
-**11\.** As previously mentioned,  we are going to quickly generate the MultiQC report and highlight what are considered the 5 main FastQC measures:
+**11\.** As previously mentioned,  we are going to quickly highlight what are considered the 5 most important FastQC measures:
+
 * Per base sequence quality
 * Per sequence quality scores
 * Per sequence GC content
@@ -767,7 +768,9 @@ Now can visualize the alignment results using IGV.  We have used IGV to examinin
 
 Locate IGV on your computer and double click it to launch the application. In the upper left of the IGV window you will see a dropdown menu to select a reference genome. Select GRCh38/hg38.
 
-Next you will need to load the BAM files into IGV. If you have mounted the biowulf account into your local laptop, then you can locate the files in the folder `/data/$USER/practical_session_10/STAR_output`. Alternatively Click here to download them from GitHub.Load them into IGV by clicking File » Load from File…, locating your downloaded files, and selecting CSP97520Aligned.sortedByCoord.out.bam.
+Next you will need to load the BAM files into IGV. If you have mounted the biowulf account into your local laptop, then you can locate the files in the folder `/data/$USER/practical_session_10/STAR_output`. Alternatively click <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_10/CSP97520Aligned.sortedByCoord.out.chr20.zip" target="_blank">here</a> to download them from GitHub.
+
+Load them into IGV by clicking File » Load from File…, locating your downloaded files, and selecting CSP97520Aligned.sortedByCoord.out.bam.
 
 Next we would search for the gene BCL2L1. In the upper panel, you will see a search bar, in which you can enter ‘BCL2L1’. You should see this screen.
 
