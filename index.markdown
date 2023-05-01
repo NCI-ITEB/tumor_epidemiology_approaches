@@ -40,12 +40,12 @@ To register, click the registration button above or visit the NCI events page at
 - Mar. 13<b>*</b>, 2023: Identifying cancer drivers <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
   - _Mar. 23, 2023- **Speaker: Núria López-Bigas** - Somatic mutations in tumors and normal tissues_ <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
 - Mar. 28<b>\*</b>, 2023 ***(in conference room 110)***: Tumor evolution <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
-- Mar. 29, 2023: “Ask a Bioinformatician” III
-  - _Apr. 20, 2023- **Speaker: David Wedge** - Tumour evolution in diverse human populations_
+- Mar. 29, 2023: “Ask a Bioinformatician” III <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
+  - _Apr. 20, 2023- **Speaker: David Wedge** - Tumour evolution in diverse human populations_ <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
 
 ---
 #### Module 4
-- Apr. 26, 2023: Transcriptome-based study designs
+- Apr. 26, 2023: Transcriptome-based study designs <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
 - May 3, 2023: RNA-seq data mining
   - _May 11, 2023- **Speaker: Marcin Imieliński** - Origin and identity in lung adenocarcinoma evolution_
 - May 15<b></b>, 2023: Data visualization approaches

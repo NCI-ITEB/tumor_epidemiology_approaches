@@ -38,14 +38,14 @@ First, let’s copy the FastQC output to your data directory.
 **1\.** Log onto Biowulf using the following command, substituting your username where it says [username].
 
 {% include code-block-copy.html %}
-```
+```bash
 ssh [username]@biowulf.nih.gov
 ```
 
 **2\.**  Set up an interactive session using the following command:
 
 {% include code-block-copy.html %}
-```
+```bash
 sinteractive --mem=4g --cpus-per-task=2 --time=4:00:00
 ```
 
@@ -54,21 +54,21 @@ This sets up the default interactive node with 2 CPUs and 4 GB memory, for 4 hou
 **3\.** Change the directory to the data directory:
 
 {% include code-block-copy.html %}
-```
+```bash
 cd /data/$USER
 ```
 
 **4\.** Create a directory for this practical session using the following command:
 
 {% include code-block-copy.html %}
-```
+```bash
 mkdir practical_session_10
 ```
 
 **5\.** Move to that directory so that it becomes your working directory and check that you are now in this directory:
 
 {% include code-block-copy.html %}
-```
+```bash
 cd practical_session_10
 pwd
 ```
@@ -76,14 +76,14 @@ pwd
 **6\.** Copy the FastQC output for both samples to practical_session_10:
 
 {% include code-block-copy.html %}
-```
+```bash
 cp -R /data/classes/DCEG_Somatic_Workshop/Practical_session_10/quality_checks .
 ```
 
 **7\.** After copying this quality_checks folder, move into this directory and use the tree command:
 
 {% include code-block-copy.html %}
-```
+```bash
 cd quality_checks
 tree
 ```
@@ -109,7 +109,7 @@ FastQC runs each of the mate files separately, leading to each sample to have tw
 **8\.** In order to run MultiQC, we first load the module using the following command:
 
 {% include code-block-copy.html %}
-```
+```bash
 module load multiqc
 ```
 
@@ -123,7 +123,7 @@ You will see the following appear to show that the module had been loaded:
 **9\.** Use the following command to run MultiQC using the FastQC output for both samples:
 
 {% include code-block-copy.html %}
-```
+```bash
 multiqc --title "S10_RNA_quality" . --ignore Picard_RNA_Metrics.txt --ignore insert_size_histogram.pdf --ignore insert_size_metrics.txt
 ```
 
@@ -148,7 +148,7 @@ This should take less than 10 seconds to run. When it is finished, you will see 
 Before we move on to explore the MultiQC output, we are going to set up all of the files needed for this session to be copied over to the practical_session_10 folder you have created:
 
 {% include code-block-copy.html %}
-```
+```bash
 cd ..
 cp -R /data/classes/DCEG_Somatic_Workshop/Practical_session_10/scripts .
 cp -R /data/classes/DCEG_Somatic_Workshop/Practical_session_10/quantification .
@@ -310,7 +310,7 @@ Now we are ready to run STAR for sample CSP97520. Since this sample takes over o
 **1\.** To set up our job, we will use a sbatch command:
 
 {% include code-block-copy.html %}
-```
+```bash
 sbatch --cpus-per-task=12 --mem=100g scripts/session_10_star_align_FINAL.sh
 ```
 
@@ -321,7 +321,7 @@ We use the following arguments to set up our job:
 
 **2\.** After running the command from step 2, you will see a job ID output. You can check the status of your job using various commands:
 
-```
+```bash
 jobhist [jobID]
 sjobs
 squeue -u $USER
@@ -330,10 +330,10 @@ squeue -u $USER
 **3\.** Now that we have our STAR job running, we can take a look at the sh script used to run STAR, session_10_star_align_FINAL.sh:
 
 {% include code-block-copy.html %}
-```
+```bash
 cat scripts/session_10_star_align_FINAL.sh
 ```
-```
+```bash
 #!/usr/bin/env bash
 
 GENOME_DIR=/fdb/STAR_current/GENCODE/Gencode_human/release_39/genes-100
@@ -405,7 +405,7 @@ rm -r ${SAMPLE}_STARtmp
 
 In lines 3-11, we set up the variables to be used throughout the script. Let’s look at a these lines to see what each of these is equivalent to:
 
-```
+```bash
 GENOME_DIR=/fdb/STAR_current/GENCODE/Gencode_human/release_39/genes-100
 THREADS=12
 GTF_FILE=/fdb/GENCODE/Gencode_human/release_39/gencode.v39.annotation.gtf
@@ -418,14 +418,14 @@ PLATFORM=ILLUMINA
 ```
 
 <table>
-  <tr>
+  <th>
    <td><strong>Variable Name</strong>
    </td>
    <td><strong>Description</strong>
    </td>
    <td><strong>Value</strong>
    </td>
-  </tr>
+  </th>
   <tr>
    <td>GENOME_DIR
    </td>
@@ -589,7 +589,7 @@ Next we are going to assess the quality of alignments in two ways, checking the 
 If the STAR job completed successfully, you will find a file name with the extension Log.Final.out. This is a summary of the alignment statistics. We can open the file with the command:
 
 {% include code-block-copy.html %}
-```
+```bash
 cd /data/$USER/practical_session_10/STAR_output
 cat CSP97520Log.final.out
 ```
@@ -654,14 +654,14 @@ In the Picard Tools package, there are several tools for different types of QC. 
 **1\.** Let’s use the following script to submit the job.
 
 {% include code-block-copy.html %}
-```
+```bash
 cd /data/$USER/practical_session_10/scripts
 swarm -t 2 -g 8 --time 4:00:00 --job-name qc post_alignment_qc.swarm
 ```
 
 If we check the swarm file, we only process the sample CSP97520 using the bash file post_alignment_qc.sh. But we could process samples in batches in one job submission, and each sample/each swarm command line will run in parallel. Let’s review the bash file.
 
-```
+```bash
 vi post_alignment_qc.sh
 
 #/bin/bash
@@ -698,7 +698,7 @@ In the lines beginning with java, you will find the names of the tools.
 **2\.** CollectRnaSeqMetrics produces RNA alignment metrics. For the full instruction of this tool, please refer to this [link](https://broadinstitute.github.io/picard/command-line-overview.html#CollectRnaSeqMetrics). Please note, in the picard tools website, the usage example looks like:
 
 {% include code-block-copy.html %}
-```
+```bash
 java -jar picard.jar CollectRnaSeqMetrics \
       I=input.bam \
       O=output.RNA_Metrics \
@@ -714,7 +714,7 @@ The format `I=input.bam `is now replaced with` -I input.bam` in the latest versi
 **4\.** Now let’s check the output of the two files. We have included the output in the folder `/data/$USER/practical_session_10/quality_checks`. Open the output for CollectRnaSeqMetrics.
 
 {% include code-block-copy.html %}
-```
+```bash
 cd /data/$USER/practical_session_10/quality_checks
 less Picard_RNA_Metrics.txt
 ```
@@ -735,14 +735,14 @@ PF_BASES        PF_ALIGNED_BASES        RIBOSOMAL_BASES CODING_BASES    UTR_BASE
 We can extract only the table (line 7-8) with this command
 
 {% include code-block-copy.html %}
-```
+```bash
 sed -n 7,8p Picard_RNA_Metrics.txt
 ```
 
 -n suppresses the default output (that is, printing the whole file). 7,8p specifies the range of lines to extract. We can also write the table to a new file by redirecting the output:
 
 {% include code-block-copy.html %}
-```
+```bash
 sed -n 7,8p Picard_RNA_Metrics.txt  >Picard_RNA_Metrics_table.txt
 ```
 
@@ -812,14 +812,14 @@ Next we are going to show the gene quantification using two approaches, htseq an
 We have prepared a script to use htseq for quantification. Let’s first submit the commands.
 
 {% include code-block-copy.html %}
-```
+```bash
 cd ../scripts/
 swarm -t 4 -g 8 --time 10:00:00 --job-name htseq htseq_quant.swarm
 ```
 
 In the swarm file, you will find the bash file name htseq_quant.sh. Let’s check this file.
 
-```
+```bash
 htseq-count  -m intersection-nonempty \
 -i gene_id \
 -r pos \
@@ -845,7 +845,7 @@ For the first time we run RSEM, it is required to prepare transcript references 
 
 As we would see shortly, we can use the BAM file generated by STAR for quantification. So it is important to ensure the consistency of all the reference files (.fasta file and .GTF file) between STAR and RSEM.
 
-```
+```bash
 module load STAR/2.7.10b
 module load rsem
 fasta=/fdb/STAR_current/GENCODE/Gencode_human/release_39/ref.fa
@@ -863,13 +863,13 @@ $reference_name
 To apply RSEM to individual samples, we may use either the read sequence files (.fastq files) or the alignment files (.bam) files. Next we run the following commands to submit the swarm file:
 
 {% include code-block-copy.html %}
-```
+```bash
 swarm -t 4 -g 20 --time 8:00:00 --job-name rsem --gres=lscratch:100 rsem_from_bam.swarm
 ```
 
 In the swarm file, you will find the bash file name rsem_from_bam.sh. Let’s get a look.
 
-```
+```bash
 #!/bin/bash
 module load rsem
 
@@ -899,7 +899,7 @@ The argument $`output_prefix `will be used as the prefix of all output files (e.
 
 Alternatively, RSEM can use .fastq files as input. In the pipeline that includes an alignment module, it is not necessary to re-do the alignment. It follows a different synopsis:
 
-```
+```bash
 rsem-calculate-expression [options] --paired-end upstream_read_file(s) downstream_read_file(s) reference_name sample_name
 ```
 
@@ -913,7 +913,7 @@ Change to the practical_session_10 directory using `cd ../` before we move on to
 The htseq generates one output file CSP97520_htseq.txt. It is a tab-delimited text file. You could check up with the command:
 
 {% include code-block-copy.html %}
-```
+```bash
 head -5 quantification/CSP97520_htseq.txt.
 ```
 ```
@@ -929,7 +929,7 @@ It has two columns. The first column is the gene id defined by the GTF file. The
 The RSEM generates two output files with the extensions of rsem.genes.results and  rsem.isoforms.results. We check the results with the command:
 
 {% include code-block-copy.html %}
-```
+```bash
 head -5 quantification/CSP97520.genes.results
 ```
 ```
@@ -949,7 +949,7 @@ In addition to estimated raw counts, RSEM also provides two types of normalized 
 Lastly, let’s check the other output file of RSEM:
 
 {% include code-block-copy.html %}
-```
+```bash
 head -5 quantification/CSP97520.isoforms.results
 ```
 ```
