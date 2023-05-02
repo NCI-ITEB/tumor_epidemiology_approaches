@@ -14,7 +14,7 @@ In this session, we will provide detailed instructions for data mining with RNA-
 * Gene set and pathway enrichment analysis
 * Identification of gene fusion
 
-Today, we will be using 20 samples- 10 tumor samples and 10 normal samples (i.e. tumor-normal pairs). These samples are a subset from
+Today, we will be using 20 samples- 10 tumor samples and 10 normal samples (i.e. tumor-normal pairs). These samples are a subset of lung squamous carcinoma patients from the EAGLE study.
 
 ---
 ## Preparation
@@ -110,7 +110,7 @@ cp -R /data/classes/DCEG_Somatic_Workshop/Practical_session_11/* .
 ---
 ### Copy/download the sample data- Local Machine
 
-There will be several files needed for this session on your local machine. Click here to download the necessary files for the sections that will involve working in R.
+There will be several files needed for this session on your local machine. Click [here to download](https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_11/Practical_session_11.zip) the necessary files for these sections.
 
 You will see that you have downloaded a zip file. Unzip this file so that you now have a Practical_session_11/ folder with several different files. We will begin using some of these files in the next step.
 
@@ -127,34 +127,34 @@ There are several factors to consider when carrying out normalization. These inc
 * **Gene length-** While genes may have similar levels of expression, the number of reads mapping to one gene could be much higher than another gene simply due to a much greater gene length.
 * **RNA composition-** Normalization can be skewed or inaccurate if there are a few highly differentially expressed genes between samples, difference in the number of genes expressed between samples, or presence of contamination.
 
-There are several normalization methods to choose from, and so we are only going to focus on one today. These include Transcripts Per Million (TPM) normalization (instructions in the supplemental section), and DESeq’s method of normalization.
+There are several normalization methods to choose from, and so we are only going to focus on one today, DESeq’s method of normalization. We have also included an additional normalization method, TPM, under the Supplemental section of the course website.
 
 ---
 ### DESeq normalization
 
 The method we will be using for normalization today is the DESeq method, known as the median of ratios. This is a method where counts divided by sample-specific size factors are determined by the median ratio of gene counts relative to geometric mean per gene, taking into account sequencing depth and RNA composition.
 
-This normalization will be carried out in R. You should have downloaded and unzipped the zip file that contains all of the necessary files for this part of the practical. Unzip this file and select the Practical_session_11_normalization_DE.R file. This will open in RStudio.
+This normalization will be carried out in R. You should have downloaded and unzipped the zip file that contains all of the necessary files for this part of the practical. Unzip this file and open the **scripts/Practical_session_11_normalization_DE.R** file. This will open in RStudio.
 
 Since we already loaded the packages in a previous preparation section, we need to make sure we are in the correct working directory. The following code can be found in lines 23-32 of the script. First, make sure you are in the correct directory by using the `getwd()` command. The directory should be:
 
 - Mac
 ```
-"/Users/[YOUR_USERNAME]/Downloads/epi_studies_course/Practical_session_11/"
+/Users/[username]/Downloads/Practical_session_11/
 ```
 - Windows
 ```
-"C:/Users/[YOUR_USERNAME]/Downloads/epi_studies_course/Practical_session_11/"
+C:/Users/[username]/Downloads/Practical_session_11/
 ```
 
 If you are not in the right directory, use the `setwd()` command:
 
 {% include code-block-copy.html %}
 ```R
-setwd("/Users/[YOUR_USERNAME]/Downloads/epi_studies_course/Practical_session_11/")
+setwd("/Users/[username]/Downloads/Practical_session_11/")
 ```
 
-First, we will read in the necessary files to run the DESeq’s normalization method. These files include a sample annotation file (Practical_11_samples_clinical.txt) and the htseq raw count data (Practical_11_candidate_TP53_cnt_GeneName_N20_recode.txt).
+First, we will read in the necessary files to run the DESeq’s normalization method. These files include a sample annotation file (Practical_11_samples_clinical.txt) and the htseq raw count data (Practical_11_htseq_counts.txt).
 
 {% include code-block-copy.html %}
 ```R
@@ -162,7 +162,7 @@ First, we will read in the necessary files to run the DESeq’s normalization me
 metadata <- read_delim('Practical_11_samples_clinical.txt')
 
 # read in raw counts output from htseq
-htseq_output <- read_delim('Practical_11_candidate_TP53_cnt_GeneName_N20_recode.txt') %>% data.frame()
+htseq_output <- read_delim('Practical_11_htseq_counts.txt') %>% data.frame()
 
 # rename UID to gene_name (to be used later)
 htseq_output <- dplyr::rename(htseq_output, gene_name = UID)
@@ -285,7 +285,7 @@ We begin as if we have not done anything with the data yet by reading in our req
 metadata <- read_delim('Practical_11_samples_clinical.txt')
 
 # read in raw counts output from htseq
-htseq_output <- read_delim('Practical_11_candidate_TP53_cnt_GeneName_N20_recode.txt') %>% data.frame()
+htseq_output <- read_delim('Practical_11_htseq_counts.txt') %>% data.frame()
 
 # rename UID to gene_name (to be used later)
 htseq_output <- dplyr::rename(htseq_output, gene_name = UID)
@@ -378,7 +378,7 @@ Now we will run a differential expression (DE) analysis. Differential expression
 
 One important part of differential expression using DESeq2’s DESeq() function is that it requires raw counts as input- not normalized counts. Therefore, we will not be using the normalized count files we generated in the previous part. Those can be used for other parts of the analysis workflow.
 
-Since we set up the DESeqDataSet and variables in the PCA plot generation step, we jump right into running DESeq().` `This will take about 30 seconds to 1 minute to complete.
+Since we set up the DESeqDataSet and variables in the PCA plot generation step, we jump right into running DESeq(). This will take about 30 seconds to 1 minute to complete.
 
 {% include code-block-copy.html %}
 ```R
@@ -593,7 +593,9 @@ Now we will move on to clustering and visualization of our gene expression.
 ---
 ##  Clustering and visualization of gene expression
 
-Next we will cluster our samples using the differentially expressed gene from DESeq output. First we will prepare the data matrix using the normalized read counts of differentially expressed genes.
+Next we will cluster our samples using the differentially expressed gene from DESeq output. Open the R script **scripts/Practical_session_11_clustering_heatmap.R** in the practical materials folder.
+
+First we will prepare the data matrix using the normalized read counts of differentially expressed genes.
 
 {% include code-block-copy.html %}
 ```R
@@ -683,7 +685,7 @@ Now you should see a color bar below the sample names to indicate classes. You c
 ---
 ###  Heatmap in R
 
-To produce a heatmap we will use the R package tidyHeatmap which provides user-friendly commands for heatmap generation.
+To produce a heatmap we will use the R package tidyHeatmap which provides user-friendly commands for heatmap generation. Return to the **Practical_session_11_clustering_heatmap.R** script.
 
 First we will isolate a shortened list of the top 1000 differentially expressed genes by log fold change which we will include in the heatmap:
 
@@ -840,7 +842,9 @@ Butterfly plot showing the positive and negative correlation between gene rank a
 
 Here we will demonstrate how to use GSVA in R.
 
-Like GSEA, GSVA is an algorithm for gene set enrichment analysis. The main benefit of GSVA is that unlike GSEA which is supervised and requires sample labels, GSVA allows you to generate per-sample pathway enrichment scores which can be used further with standard statistical analyses of your choice (e.g. t-test, correlation, etc). We will begin by downloading some genesets with the msigdb package in R, and then run GSVA with our RNAseq expression matrix.
+Like GSEA, GSVA is an algorithm for gene set enrichment analysis. The main benefit of GSVA is that unlike GSEA which is supervised and requires sample labels, GSVA allows you to generate per-sample pathway enrichment scores which can be used further with standard statistical analyses of your choice (e.g. t-test, correlation, etc). Open the third script in the **scripts/** folder, **Practical_session_11_GSVA.R**.
+
+ We will begin by downloading some genesets with the msigdb package in R, and then run GSVA with our RNAseq expression matrix.
 
 {% include code-block-copy.html %}
 ```R
@@ -909,7 +913,7 @@ gsva_signif%>%
 
 {% include image-modal.html link="practical_assets/33-gsva-ttest.png" %}
 
-As you can see, the results contain many similar pathways to GSEA: cell division checkpoints, unfolded protein response, and dna repair. Conveniently if you wanted to find pathways enriched in later stage tumors you could simply reuse the same GSVA enrichment table and perform a similar t-test or ANOVA comparing tumors by stage.
+As you can see, the results contain many similar pathways to GSEA: cell division checkpoints, unfolded protein response, and DNA repair. Conveniently if you wanted to find pathways enriched in later stage tumors you could simply reuse the same GSVA enrichment table and perform a similar t-test or ANOVA comparing tumors by stage.
 
 ---
 ##  Identification of gene fusion
@@ -1000,7 +1004,7 @@ The SpanningFrags column indicates the number of RNA-Seq fragments that encompas
 
 The 'LargeAnchorSupport' column indicates whether there are split reads that provide 'long' (set to length of 25 bases) alignments on both sides of the putative breakpoint. Those fusions supported only by split reads (no spanning fragments) and lack LargeAnchorSupport are often highly suspicious and tend to be false positives.
 
-**4\.** Next we can check the output of Fusion-Inspector in the folder /Practical_session_11/Fusion_Output/FusionInspector-inspect/. If you have mapped your biowulf account as a drive in your local laptop, alternatively, you can download these results from GitHub. Fnd this folder and open the file finspector.fusion_inspector_web.html in the web browser.
+**4\.** Next we can check the output of Fusion-Inspector in the folder /Practical_session_11/Fusion_Output/FusionInspector-inspect/. If you have mapped your biowulf account as a drive in your local laptop, alternatively, you can [download these results from GitHub](https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/practical_materials/practical_11/FusionInspector-inspect.zip). Find this folder and open the file finspector.fusion_inspector_web.html in the web browser.
 
 {% include image-modal.html link="practical_assets/34-fusion-inspector.png" %}
 

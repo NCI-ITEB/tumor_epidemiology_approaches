@@ -6,24 +6,22 @@ menubar_toc: true
 
 ## TPM normalization
 
-This section includes the method for TPM normalization. This normalization provides counts per length of transcript (kilobases) per million reads mapped. This method accounts for sequencing depth and gene length, as we discussed above.
+This section includes the method for TPM normalization. This normalization provides counts per length of transcript (kilobases) per million reads mapped. This method accounts for sequencing depth and gene length.
 
 This normalization will be carried out in R. Make sure you have installed and loaded all of the necessary packages (see Preparation under Practical tab).
 
-Also make sure sure that you have downloaded the zip file (in the Practical tab) that  contains all of the necessary files for this process. Unzip this file and select the Practical_session_11_normalization_DE.R file. This will open a window in RStudio.
+Also make sure that you have downloaded the zip file (in the Practical tab) that  contains all of the necessary files for this process. Unzip this file and select the Practical_session_11_normalization_DE.R file from the scripts folder. This will open a window in RStudio.
 
-Make sure you are in the correct directory by using the `getwd()` command. The directory should be:
+Make sure you are in the correct directory by using the getwd() command. The directory should be:
 
 Mac
-
 ```
-"/Users/kleinam/Documents/epi_studies_course/Practical_session_11/"
+/Users/[username]/Downloads/Practical_session_11/
 ```
 
 Windows
-
 ```
-"C:/Users/kleinam/Documents/epi_studies_course/Practical_session_11/"
+"C:/Users/[username]/Downloads/Practical_session_11/
 ```
 
 If you are not, use the `setwd()` command:
@@ -40,7 +38,7 @@ This is covered in lines 37-45 in our code:
 # read in sample annotations
 metadata <- read_delim('Practical_11_samples_clinical.txt')
 # read in raw counts output from htseq
-htseq_output <- read_delim('Practical_11_candidate_TP53_cnt_GeneName_N20_recode.txt') %>% data.frame()
+htseq_output <- read_delim('Practical_11_htseq_counts.txt') %>% data.frame()
 # rename UID to gene_name (to be used later)
 htseq_output <- dplyr::rename(htseq_output, gene_name = UID)
 # set row names to gene names and remove the gene_name column (the first column in the dataframe)

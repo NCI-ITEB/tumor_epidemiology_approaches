@@ -417,88 +417,17 @@ SAMPLE=CSP97520
 PLATFORM=ILLUMINA
 ```
 
-<table>
-  <th>
-   <td><strong>Variable Name</strong>
-   </td>
-   <td><strong>Description</strong>
-   </td>
-   <td><strong>Value</strong>
-   </td>
-  </th>
-  <tr>
-   <td>GENOME_DIR
-   </td>
-   <td>Path to where genome indices are stored.
-   </td>
-   <td>fdb/STAR_current/GENCODE/Gencode_human/release_39/genes-100
-   </td>
-  </tr>
-  <tr>
-   <td>THREADS
-   </td>
-   <td>Number of threads to use to run STAR
-   </td>
-   <td>24
-   </td>
-  </tr>
-  <tr>
-   <td>GTF_FILE
-   </td>
-   <td>Path to GTF file
-   </td>
-   <td>/fdb/GENCODE/Gencode_human/release_39/gencode.v39.annotation.gtf
-   </td>
-  </tr>
-  <tr>
-   <td>OVERHANG
-   </td>
-   <td>Value to be used for sjdbOverhang argument
-   </td>
-   <td>100
-   </td>
-  </tr>
-  <tr>
-   <td>INPUT_DIR
-   </td>
-   <td>Path to input data files
-   </td>
-   <td>/data/classes/DCEG_Somatic_Workshop/Practical_session_10/sample_data
-   </td>
-  </tr>
-  <tr>
-   <td>FASTQ_1
-   </td>
-   <td>Path to R1 fastq file
-   </td>
-   <td>CSP97520_R1.fastq.gz
-   </td>
-  </tr>
-  <tr>
-   <td>FASTQ_2
-   </td>
-   <td>Path to R2 fastq file
-   </td>
-   <td>CSP97520_R2.fastq.gz
-   </td>
-  </tr>
-  <tr>
-   <td>SAMPLE
-   </td>
-   <td>Sample name (for RG line)
-   </td>
-   <td>CSP97520
-   </td>
-  </tr>
-  <tr>
-   <td>PLATFORM
-   </td>
-   <td>Platform name (for RG line)
-   </td>
-   <td>ILLUMINA
-   </td>
-  </tr>
-</table>
+| Variable Name | Description | Value  |
+|---------------|--------------------------------------------|----------------------------------------------------------------------|
+| GENOME_DIR    | Path to where genome indices are stored.   | fdb/STAR_current/GENCODE/Gencode_human/release_39/genes-100          |
+| THREADS       | Number of threads to use to run STAR       | 24                                                                   |
+| GTF_FILE      | Path to GTF file                           | /fdb/GENCODE/Gencode_human/release_39/gencode.v39.annotation.gtf     |
+| OVERHANG      | Value to be used for sjdbOverhang argument | 100                                                                  |
+| INPUT_DIR     | Path to input data files                   | /data/classes/DCEG_Somatic_Workshop/Practical_session_10/sample_data |
+| FASTQ_1       | Path to R1 fastq file                      | CSP97520_R1.fastq.gz                                                 |
+| FASTQ_2       | Path to R2 fastq file                      | CSP97520_R2.fastq.gz                                                 |
+| SAMPLE        | Sample name (for RG line)                  | CSP97520                                                             |
+| PLATFORM      | Platform name (for RG line)                | ILLUMINA                                                             |
 
 Below is a description of all of the different arguments being used in our STAR command:
 
