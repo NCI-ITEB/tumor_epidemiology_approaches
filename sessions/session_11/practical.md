@@ -329,7 +329,7 @@ keep <- rowSums(counts(dds)) >= 10
 dds <- dds[keep,]
 ```
 
-Then we run a vst normalization in order to generate a PCA plot with normalized counts. The vst normalization stands for variance stabilizing transformation. You can read more about this method [here](https://gcc02.safelinks.protection.outlook.com/?url=https%3A%2F%2Falexslemonade.github.io%2Frefinebio-examples%2F03-rnaseq%2F00-intro-to-rnaseq.html%23deseq2-transformation-methods&data=05%7C01%7Cjohn.mcelderry%40nih.gov%7C1018aade1068428acb4a08db4bcc095e%7C14b77578977342d58507251ca2dc2b06%7C0%7C0%7C638187111937652788%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=pmH1yR%2FdIJl0ui%2FrYk61k%2FSxTJ1HfD5NGQ62OUgymwU%3D&reserved=0). Note: There are additional transformation approaches, including rlog, or log + 1, which you will see later. We use vst due to its speed and effectiveness.
+Then we run a vst normalization in order to generate a PCA plot with normalized counts. The vst normalization stands for variance stabilizing transformation. You can read more about this method [here](https://alexslemonade.github.io/refinebio-examples/03-rnaseq/00-intro-to-rnaseq.html#deseq2-transformation-methods). Note: There are additional transformation approaches, including rlog, or log + 1, which you will see later. We use vst due to its speed and effectiveness.
 
 {% include code-block-copy.html %}
 ```R
@@ -359,6 +359,23 @@ pca_results <- plotPCA(
   intgroup = c("Type","stage"),
   returnData = TRUE
 )
+
+annotated_pca_plot <- ggplot(
+  pca_results,
+  aes(
+    x = PC1,
+    y = PC2,
+    # plot points with different colors for tumor vs normal
+    color = Type,
+    # plot points with different shapes for each stage
+    shape = stage
+  )
+) +
+  # Make a scatter plot
+  geom_point()
+
+# display annotated plot
+annotated_pca_plot
 ```
 
 {% include image-modal.html link="practical_assets/5-pca-2.png" %}
