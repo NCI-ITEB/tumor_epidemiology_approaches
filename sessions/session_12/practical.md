@@ -210,7 +210,7 @@ egfr_exp %>%
 
 It’s now much easier to see what’s happening within our boxplot, and we get additional knowledge about genomic features. A few things to note:
 
-- `scale_shape_manual(values = c(25,21))` sets the shape types for our graph, where 25=hollow inverted triangle (Mutant), 21=hollow circle (Wildtype). If you try running this code without this line you’ll see that the points are still black. This is because the default shapes are solids that cannot be filled.
+- `scale_shape_manual(values = c(25,21))` sets the shape types for our graph, where 25=hollow inverted triangle (Mutant), 21=hollow circle (Wildtype). If you try running this code without this line you’ll see that the points are still black. This is because the default shapes are solids that cannot be filled. For all the shape codes, see [here](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html#point).
 - Similarly the colors legend needs to be manually updated to a new shape. That’s accomplished with the `guides(fill=guide_legend(override.aes=list(shape=21,size=4)))` command, which changes the legend shape to a hollow circle.
 - We also changed the shape legend to be solid black. Within this last command we changed the color of the shape outlines to a very light gray by specifying `col="gray95"` within `geom_point` which looks nice within the plot but is hard to read in the legend.
 
