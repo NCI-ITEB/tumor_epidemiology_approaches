@@ -8,5 +8,13 @@ permalink: sessions/session_11
 
 ### Practical
 
-- Differential gene expression. Popular R packages (e.g. TCGABiolinks-RNA part), GUI (e.g., Cluster, Java Treeview)
-- Calling somatic mutations from bulk RNA-Seq
+- DESeq normalization
+- Principal Component Analysis (PCA)
+- Differential Expression (DE) Analysis
+- Plots to visualize DE results
+
+- Clustering and visualization of gene expression
+- Hierarchical clustering using the GenePattern module and R
+- Gene set and pathway enrichment analysis with GSEA and GSVA
+
+- Identification of gene fusion

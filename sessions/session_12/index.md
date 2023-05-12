@@ -8,10 +8,7 @@ permalink: sessions/session_12
 - Useful tools/software (Python, R packages, Gunplot, Adobe Illustrator)
 
 ### Practical
-- ggplot
-- Heatmaps
-- Circos Plots
-- IGV
-
-### Supplemental
-- MEGSA (Mutually Exclusive Gene Set Analysis)
+- Walkthrough of how to use ggplot2
+  - Boxplot
+  - GWAS
+- Using Adobe Illustrator to touch up figures
