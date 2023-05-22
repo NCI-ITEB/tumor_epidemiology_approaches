@@ -4,7 +4,7 @@ permalink: sessions/session_11/practical
 menubar_toc: true
 ---
 
-*Main Speaker: Wei Zhao, Alyssa Klein*
+*Presenters: Wei Zhao, Alyssa Klein*
 
 In this session, we will provide detailed instructions for data mining with RNA-seq data. We will preview the following:
 

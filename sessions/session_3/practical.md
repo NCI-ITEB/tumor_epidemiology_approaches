@@ -4,6 +4,8 @@ permalink: sessions/session_3/practical
 menubar_toc: true
 ---
 
+*Presenters: John McElderry, Phuc Hoang*
+
 Before we begin, please login to Biowulf and request an interactive session:
 
 For a reminder on how to log-in to Biowulf, we refer you to this <a href="https://nci-iteb.github.io/tumor_epidemiology_approaches/sessions/session_1/practical#setup-ssh-connection">Biowulf HPC guide</a>. In short:

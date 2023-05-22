@@ -4,6 +4,8 @@ permalink: sessions/session_4/practical
 menubar_toc: true
 ---
 
+*Presenters: Wei Zhao, Jian Sang, Alyssa Klein*
+
 # Practical 4
 
 Before we begin, please login to Biowulf and request an interactive session:
@@ -74,7 +76,6 @@ While we are waiting for the two jobs, let's examine the script.
 ```bash
 vi scripts_for_step1.swarm
 ```
-
 ```bash
 #!/bin/bash
 sh Step1_preprocess_variant_discovery.sh GPK7017_2000 ../fastq ../Results

@@ -4,6 +4,8 @@ permalink: sessions/session_8/practical
 menubar_toc: true
 ---
 
+*Presenters: John McElderry, Alyssa Klein*
+
 ## Introduction
 
 In today’s practical we will practice identifying cancer driver genes using 3 algorithms: OncodriveFML and OncodriveCLUSTL on Biowulf, and dNdScv on your local computer in R. We will use pooled mutations from 200 samples of our Sherlock study, starting from a very basic tsv file format:

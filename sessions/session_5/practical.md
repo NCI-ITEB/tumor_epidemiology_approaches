@@ -4,6 +4,8 @@ permalink: sessions/session_5/practical
 menubar_toc: true
 ---
 
+*Presenters: Jian Sang, Alyssa Klein and Tongwu Zhang*
+
 Before we begin, please login to Biowulf and request an interactive session:
 
 For a reminder on how to log-in to Biowulf, we refer you to this Biowulf HPC guide. In short:

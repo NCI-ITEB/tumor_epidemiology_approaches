@@ -4,6 +4,8 @@ permalink: sessions/session_12/practical
 menubar_toc: true
 ---
 
+*Presenter: John McElderry*
+
 ## Introduction
 
 ggplot2 is the most popular graphing framework in R, and in fact it’s the most downloaded package for R period, graphing or otherwise. This is for good reason since ggplot2 is very flexible, powerful, and relatively intuitive compared to other graphing frameworks in R. There are also many users actively developing new plugins for added functionality and accessibility. For the same reasons it can also be tough to get started and get the most out of ggplot2 without some guidance.

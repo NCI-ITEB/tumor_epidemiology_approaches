@@ -11,6 +11,7 @@ menubar_toc: true
 
 <a href="https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/lecture_materials/lecture_3/Full_version_Session%203_%20DNA%20Sequencing%20Strategies%20and%20Quality%20Control%20(1).pdf" target="_blank">Download today's presentation plus extra slides here</a>
 
+*Presenters: Kristie Jones, Phuc Hoang*
 
 ## Introduction to NGS sequencing
 

@@ -10,6 +10,8 @@ some common bioinformatics file formats.
 
 ---
 
+*Speakers: Wei Zhao*
+
 ## Setup ssh connection
 
 First, to use the computing clusters we need to establish an ssh connection

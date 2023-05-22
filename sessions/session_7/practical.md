@@ -4,15 +4,15 @@ permalink: sessions/session_7/practical
 menubar_toc: true
 ---
 
-# Session 7 Practice Session
+*Presenters: Jian Sang, Azhar Khandekar*
 
-Main Speakers: Jian and Azhar
+# Introduction
 
 This session aims to provide a comprehensive guide to identify somatic copy number alterations in cancer genomic studies. We will use the FACET and ASCAT algorithms, and whole genome sequencing data from one tumor and normal pair to demonstrate the key steps in somatic copy number alterations calling. Then we will introduce how to identify significant SCNA regions using GISTIC2. Finally, we will show you how to perform somatic copy number alteration signatures analysis with SigProfilerMatrixGenerator and SigProfilerExtractor.
 
 ---
 
-#### Log into Biowulf and set up interactive session
+### Log into Biowulf and set up interactive session
 
 Before we begin, please login to Biowulf and request an interactive session:
 

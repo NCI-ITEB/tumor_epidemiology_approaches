@@ -4,7 +4,7 @@ permalink: sessions/session_10/practical
 menubar_toc: true
 ---
 
-*Speakers: Wei Zhao and Alyssa Klein*
+*Presenters: Wei Zhao, Alyssa Klein*
 
 In today’s practical session, we will be focusing on the first step of the RNA-Seq data analysis workflow, raw gene expression quantification. The steps we will be covering today include sequence alignment, post-alignment quality assessment, visualization of the alignment, and transcript quantification.
 

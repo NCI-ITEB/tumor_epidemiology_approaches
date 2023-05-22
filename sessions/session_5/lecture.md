@@ -15,6 +15,8 @@ permalink: sessions/session_5/lecture
 ## Experimental validation of mutational signatures
 -->
 
+*Presenters: Marcos Díaz-Gay, Mariya Kazachkova, Tongwu Zhang*
+
 [Download lecture slides](https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/lecture_materials/lecture_5/Session5_Mutational_signatures_lecture.pdf)
 
 [Download lecture slides plus additional supplementary slides](https://github.com/NCI-ITEB/tumor_epidemiology_approaches_materials/raw/main/lecture_materials/lecture_5/Session5_Mutational_signatures_full.pdf)

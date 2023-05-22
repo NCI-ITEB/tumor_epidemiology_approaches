@@ -4,6 +4,8 @@ permalink: sessions/session_9/practical
 menubar_toc: true
 ---
 
+*Presenters: Tongwu Zhang, John McElderry*
+
 ## Introduction
 
 This session aims to provide hands-on experience in performing tumor evolution analysis using different algorithms. Using our Sherlock-Lung data, we will first use the NGSpurity pipeline (unpublished) to conduct SCNA analysis (Battenberg) and mutation clustering analysis (DPClust and CCUBE). We will demonstrate how to generate the initial solution for SCNA and mutation clustering results. Then, given the tumor purity and ploidy information, we will illustrate how to re-fit the initial solution into the final tumor profile solution. Additionally, we will apply Palimpsest, a popular tumor evolution algorithm, to perform clonality and chromosomal duplication timing analyses. Furthermore, we will practice using the REVOLVER algorithm to analyze clonal and subclonal evolution in multi-region tumor sequencing studies.
@@ -19,7 +21,7 @@ This session aims to provide hands-on experience in performing tumor evolution a
 if(!require(devtools)){
     install.packages("devtools")
   }
-  
+
 devtools::install_github("FunGeST/Palimpsest")
 devtools::install_github("https://github.com/caravagnalab/revolver")
 ```
