@@ -3,7 +3,7 @@ picture: Marcin_Imielinski_smaller.png
 name: Marcin Imieliński
 education:  M.D., Ph.D.
 affiliation: New York Genome Center, Weill Cornell Medicine
-talk_date: <s>May 11th, 2023</s> TBD
+talk_date: June 15th, 2023
 talk_title: Origin and identity in lung adenocarcinoma evolution
 ---
 
