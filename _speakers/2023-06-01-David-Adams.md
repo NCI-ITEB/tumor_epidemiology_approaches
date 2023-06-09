@@ -13,6 +13,9 @@ Dave is co-head of the Sanger Excellence Program for Black British scientist and
 
 #### Recording
 
+<details><summary>Recorded Talk</summary>
+<iframe width="640" height="360" src="https://drive.google.com/file/d/1tNfpgzh17f_xHLGpZlhVs5Pyx1s5-9mx/preview" allowfullscreen style="border:none;" allow="autoplay"></iframe>
+</details>
 <details><summary>Slides</summary>
 <iframe width="640" height="540" src="{{ site.baseurl }}/assets/speaker_slides/David_Adams_Dermatlas.pdf" allowfullscreen style="border:none;"></iframe>
 </details>
