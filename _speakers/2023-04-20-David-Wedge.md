@@ -13,6 +13,8 @@ The Wedge group have pioneered the development of computational methods to study
 
 #### Recording
 
-<details><summary>Recorded Talk</summary>
+<!--<details><summary>Recorded Talk</summary>
 <iframe width="640" height="360" src="https://drive.google.com/file/d/1AuAegO7HEHM9aXhq_A2FWzmd9VV1k7VU/preview" allowfullscreen allow="autoplay" style="border:none;"></iframe>
-</details>
+</details>-->
+
+<a href="https://drive.google.com/file/d/1AuAegO7HEHM9aXhq_A2FWzmd9VV1k7VU/preview" target="_blank">Recorded Talk</a>
