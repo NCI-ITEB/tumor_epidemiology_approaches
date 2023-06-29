@@ -51,7 +51,7 @@ To register, click the registration button above or visit the NCI events page at
 - May 17, 2023: “Ask a Bioinformatician” IV <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
   - _May 25, 2023- **Dr. Charles Swanton** - Mechanism of Action and Inflammatory Axis for Air Pollution Induced Non-Small Cell Lung Cancer_ <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
   - _June 8, 2023- **Dr. David Adams** - Cross-species oncogenomics of melanoma and other malignancies to define disease drivers_ <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
-  - _June 15, 2023- **Dr. Marcin Imieliński** - Origin and identity in lung adenocarcinoma evolution_
+  - _June 15, 2023- **Dr. Marcin Imieliński** - Origin and identity in lung adenocarcinoma evolution_ <span style="color: green;font-size:25px;"><b>&#x2713;</b></span>
   - _July 13, 2023- **Dr. Jinghui Zhang** - Therapy-Related Clonal Evolution in Pediatric Cancer Patients and Long-term Survivors_
 
 *Date changed

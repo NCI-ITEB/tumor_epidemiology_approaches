@@ -18,4 +18,4 @@ Originally trained in applied mathematics (B.A., Harvard; Ph.D., Caltech), he wa
 <iframe width="640" height="360" src="https://drive.google.com/file/d/17NFKuGGFaj_ykydMR_c4uFC8M8758HsF/preview" allowfullscreen style="border:none;" allow="autoplay"></iframe>
 </details>-->
 
-<a href="https://drive.google.com/file/d/17NFKuGGFaj_ykydMR_c4uFC8M8758HsF/preview" target="_blank">Recorded Talk</a>
+<a href="https://drive.google.com/file/d/1RfeHM5tj8_nUpmVbvUQxDiHhQiHhp3Qg/preview" target="_blank">Recorded Talk</a>

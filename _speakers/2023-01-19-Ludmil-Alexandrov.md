@@ -19,7 +19,7 @@ Dr. Alexandrov's many publications have been cited 36,858 times as of August 202
 <iframe width="640" height="360" src="https://drive.google.com/file/d/1vk_CRYSjF8Re_2TbUGGxYr9v-iudkO5j/preview" allowfullscreen allow="autoplay" style="border:none;"></iframe>
 </details>-->
 
-<a href="https://drive.google.com/file/d/1vk_CRYSjF8Re_2TbUGGxYr9v-iudkO5j/preview" target="_blank">Recorded Talk</a>
+<a href="https://drive.google.com/file/d/1zXJ85zrQz1EfG7JFGjxA06661WXKjslq/preview" target="_blank">Recorded Talk</a>
 
 <details><summary>Slides</summary>
 <iframe width="640" height="540" src="{{ site.baseurl }}/assets/speaker_slides/Alexandrov_unusual_patterns_NCI_45min.pdf" allowfullscreen style="border:none;"></iframe>
