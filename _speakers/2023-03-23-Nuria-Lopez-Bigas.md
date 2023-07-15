@@ -13,9 +13,4 @@ Núria López-Bigas is an ICREA Research Professor at the Institute for Research
 
 #### Recording
 
-<details><summary>Recorded Talk</summary>
-<iframe width="640" height="360" src="https://web.microsoftstream.com/embed/video/e4bb3059-6fec-4f32-af9b-95360078a7bd?autoplay=false&showinfo=true" allowfullscreen style="border:none;"></iframe>
-</details>
-<details><summary>Slides</summary>
-<iframe width="640" height="540" src="{{ site.baseurl }}/assets/speaker_slides/Nuria_DCEG_NCI_2023.pdf" allowfullscreen style="border:none;"></iframe>
-</details>
+<a href="https://drive.google.com/file/d/1him-kBnOPjRIYoNFPOb_se5L2FB4WF2r/preview" target="_blank">Recorded Talk</a>
