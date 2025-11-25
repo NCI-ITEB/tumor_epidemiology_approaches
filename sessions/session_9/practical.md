@@ -74,7 +74,9 @@ Below is a list of references and resources for the algorithms included in our p
 
 Tumor tissues usually consist of a mixture of tumor clones, normal epithelium and stromal cells, which decrease tumor purity and affect the detection of tumor alterations. Thus, it is important to correctly assess tumor purity before conducting any downstream analyses. NGSpurity is a software that will visualize and estimate tumor purity, ploidy, and clonal architecture by integrating somatic copy number alteration, single nucleotide variants and cancer cell fraction.
 
-NGSpurity is a tool that can identify the tumor purity, ploidy, and clonality of tumor samples. This software enables users to incorporate tumor purity and ploidy information into Battenberg and mutational clustering results without the need for reprocessing the sequencing data. In addition, NGSpurity integrates mutation calling and annotation for better visualization, which can assist with comparing SCNA profiling and mutation profiles. For quality-control purposes, NGSpurity provides visualizations and a summary of the solution matrix, enabling users to detect issues and obtain the necessary information to re-adjust their analyses.
+NGSpurity is a tool that can identify the tumor purity, ploidy, and clonality of tumor samples. This software enables users to incorporate tumor purity and ploidy information into Battenberg and mutational clustering results without the need for reprocessing the sequencing data. In addition, NGSpurity integrates mutation calling and annotation for better visualization, which can assist with comparing SCNA profiling and mutation profiles. For quality-control purposes, NGSpurity provides visualizations and a summary of the solution matrix, enabling users to detect issues and obtain the necessary information to re-adjust their analyses. 
+
+NGSpurity is run using a Singularity **container**, which is a small-scale, self-contained computing environment. This allows every user to run programs (like NGSpurity) without needing to worry about software dependencies and compatability issues. Detailed information about singularity can be found [here](https://singularity-userdoc.readthedocs.io/en/latest/).
 
 ---
 
@@ -109,7 +111,7 @@ cd practical_session_9
 cp /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/cmdfile .
 ```
 
-**5\.** Check the command line for NGSpurity pipeline through the singularity container *(the file has been slightly reformatted below for readability)*:
+**5\.** Check the command line for running the NGSpurity pipeline through the singularity container *(the file has been slightly reformatted below for readability)*:
 
 {% include code-block-copy.html %}
 ```bash
@@ -131,6 +133,7 @@ NSLC-0337-T01 /rawdata/NSLC-AILS-TTP1-A-1-1-D-A782-36.cram \
 NSLC-0337-N01 /rawdata/NSLC-AILS-NT1-A-1-1-D-A782-36.cram \
 NSLC-0337-T01 Female 24 local 0.5 2 /rawdata/NSLC-0337-T01.vcf.gz /rawdata/NSLC-0337-T01.hg38_multianno.txt
 ```
+
 Here's a breakdown of the different parts of the command:
 
 <blockquote markdown="1">
@@ -143,13 +146,16 @@ Here's a breakdown of the different parts of the command:
 * `-B /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Library/NGSpurity_clone/R/:/opt/R`: This binds the directory `/data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Library/NGSpurity_clone/R/` on the host to the `/opt/R` directory within the container.
 * `/data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Library/bfx_container.sif`: This is the path to the singularity container file that will be executed.
 * `/bin/bash /data/NGSpurity_BB0.sh`: This is the command that will be run within the container. It executes the shell script `NGSpurity_BB0.sh` located in the `/data` directory within the container.
-* `NSLC-0337-T01 /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Rawdata/NSLC-AILS-TTP1-A-1-1-D-A782-36.cram NSLC-0337-N01 /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Rawdata/NSLC-AILS-NT1-A-1-1-D-A782-36.cram NSLC-0337-T01 Female 24 local 0.5 2 /data/zhangt8/NSLC2/Mutations/Result/NSLC-0337-T01/NSLC-0337-T01.vcf.gz /data/zhangt8/NSLC2/Mutations/Result/NSLC-0337-T01/NSLC-0337-T01.hg38_multianno.txt`: These are the arguments passed to the shell script. There are several positional arguments, followed by a set of named arguments. The positional arguments are: `NSLC-0337-T01`, `/data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Rawdata/NSLC-AILS-TTP1-A-1-1-D-A782-36.cram`, `NSLC-0337-N01`, `/data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Rawdata/NSLC-AILS-NT1-A-1-D-A782-36.cram`, `NSLC-0337-T01`, `Female`, `24`, `local`, `0.5`, `2`. These arguments are specific to the script `NGSpurity_BB0.sh`.
-* The named arguments are `/data/zhangt8/NSLC2/Mutations/Result/NSLC-0337-T01/NSLC-0337-T01.vcf.gz` and `/data/zhangt8/NSLC2/Mutations/Result/NSLC-0337-T01/NSLC-0337-T01.hg38_multianno.txt`. These named arguments provide the paths to two files that are used by the script.
+* Next are the arguments passed to the shell script:
+  * `NSLC-0337-T01 /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Rawdata/NSLC-AILS-TTP1-A-1-1-D-A782-36.cram`: the tumor sample name and alignment file
+  * `NSLC-0337-N01 /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/Rawdata/NSLC-AILS-NT1-A-1-1-D-A782-36.cram`: the normal sample name and alignment file
+  * `NSLC-0337-T01`: the naming scheme for the outputs
+  * `Female`: expected sex of the patient
+  * `24`: number of CPUs to use
+  * `local`: where analysis should be run; specify 'local' for current directory, anything else for scratch space
+  * `0.5 2`: expected purity and ploidy (in the first run, these are just placeholders)
+  * `/data/zhangt8/NSLC2/Mutations/Result/NSLC-0337-T01/NSLC-0337-T01.vcf.gz /data/zhangt8/NSLC2/Mutations/Result/NSLC-0337-T01/NSLC-0337-T01.hg38_multianno.txt`: path to somatic vcf and maf files for the sample
 </blockquote>
-
-In summary, this command sets some environment variables, runs a singularity container with specific configurations, and executes a shell script with a set of arguments. The shell script takes in several positional arguments and named arguments, and the command is specific to the context of the NGSpurity software tool.
-
-Detailed information about singularity can be found [here](https://singularity-userdoc.readthedocs.io/en/latest/).
 
 **6\.** Submit the job using the swarm script
 
@@ -157,34 +163,33 @@ Detailed information about singularity can be found [here](https://singularity-u
 ```bash
 jobid1=$(swarm -f cmdfile -g 360 -t 24 --job-name ngspurity_hg38 --logdir logs --time=120:00:00 --module singularity --gres=lscratch:400)
 ```
-This is a Bash command that runs a job using the Swarm workload manager, which distributes work across multiple computing nodes in a cluster. Here is an explanation of each part of the command:
+
+Here is an explanation of each part of the command:
 
 <blockquote markdown="1">
-* `jobid1=`: This sets the variable `jobid1` to the output of the command that follows. The `=` sign assigns the output of the command to the variable.
-* `$(...)`: This is a command substitution that runs the command inside the parentheses and returns its output as a string.
-* `swarm`: This is the command that runs the job. It is followed by several options that configure the job:
-* `-f cmdfile`: This specifies the file containing the command(s) to be run as a swarm job.
-* `-g 360`: This specifies the number of nodes to use for the job. In this case, the job will use 360 G memory.
-* `-t 24`: This specifies the number of threads (i.e., CPU cores) to use for the job. In this case, the job will use 24 threads per node.
-* `--job-name ngspurity_hg38`: This sets the name of the job to "ngspurity_hg38".
-* `--logdir logs`: This specifies the directory where log files for the job will be stored.
-* `--time=120:00:00`: This sets the maximum time that the job is allowed to run for, in the format of hours:minutes:seconds. In this case, the job is allowed to run for up to 120 hours, or 5 days.
-* `--module singularity`: This loads the singularity module, which is a container platform that allows users to package their software and dependencies into a single portable executable.
-* `--gres=lscratch:400`: This requests a certain amount of temporary scratch space for the job, in this case 400GB.
+* `jobid1=`: This stores the output of a following command to a variable of our choosing, e.g. jobid1. Upon submitting our swarm job in the parentheses that follow, Biowulf will return a number corresponding to the job id - this value is what is stored in the variable.
+* `$(...)`: This is a command substitution; the command inside the parentheses is run first and its output is returned as text.
+* `swarm`: This is the command to submit our job, with the following configurations:
+  * `-f cmdfile`: the file containing the commands to be run as a swarm job.
+  * `-g 360`: the amount of memory to request, 360 GB memory per command.
+  * `-t 24`: the number of threads (i.e., CPU cores) to request, 24 threads per command.
+  * `--job-name ngspurity_hg38`: sets the name of the job to "ngspurity_hg38"; not necessary but good practice for ease of monitoring jobs.
+  * `--logdir logs`: the directory where log files will be stored.
+  * `--time=120:00:00`: This sets the maximum time that each command is allowed to run for, formatted as days-hours:minutes:seconds. After this cutoff, your job will be closed even if it hasn't completed.
+  * `--module singularity`: This loads the Singularity module, which we need for our Singularity .
+  * `--gres=lscratch:400`: This requests temporary scratch space for the job, in this case 400GB.
 </blockquote>
 
-Overall, the command is running a job using Swarm that will execute the commands in the `cmdfile` using 360G memory and 24 threads per node, with a maximum run time of 120 hours. The job will use the singularity container platform and request 400GB of temporary scratch space. The job ID will be stored in the variable `jobid1`.
+**7\.** Because tumor samples have highly variable ploidy and purity (% of tumor cells in the sample), it is sometimes necessary to run this pipeline twice: once to inform estimates of the tumor sample purity and ploidy, and again to re-fit the results using these estimates.
 
-Check [here](https://hpc.nih.gov/apps/swarm.html) for the detail information about swarm in Biowulf.
-
-**7\.** Copy the “cmdfile_refit” file to the current folder:
+Now we will submit another job to refit the results, using some pre-defined purity and ploidy estimates. Copy the “cmdfile_refit” file to the current folder:
 
 {% include code-block-copy.html %}
 ```bash
 cp /data/classes/DCEG_Somatic_Workshop/Practical_session_9/NGSpurity/cmdfile_refit .
 ```
 
-**8\.** Check the command line for NGSpurity refit pipeline through the singularity container.
+**8\.** Check the command line for NGSpurity refit pipeline using `less`.
 
 ```bash
 R_PROFILE_USER=/data/.Rprofile \
@@ -205,11 +210,7 @@ NSLC-0337-T01 Female 24 local 0.60 3.71 /rawdata/NSLC-0337-T01.vcf.gz
 /rawdata/NSLC-0337-T01.hg38_multianno.txt
 ```
 
-The only differences between cmdfile and cmdfil_refit are the major script,  tumor purity and ploidy.
-
-In the cmdfile, the major script is NGSpurity_BB0.sh. This script does not take into account the tumor purity and ploidy information at all.
-
-In the cmdfile_refit, the major script changed to NGSpurity_BB_refit, which will refit the SCNA profile according to provided purity and ploidy information.
+The only differences between cmdfile and cmdfil_refit are the major script, tumor purity (0.60) and ploidy (3.71). In the cmdfile_refit, the major script has changed from NGSpurity_BB0.sh to NGSpurity_BB_refit.sh; this `refit.sh` script will refit the SCNA profile according to provided purity and ploidy information.
 
 **9\.** Resubmit the cmdfile_refit using swarm in biowulf:
 
@@ -256,7 +257,7 @@ cd Battenberg_0/NGSpurity && tree -lh -C -L 2
 
 {% include image-modal.html link="practical_assets/NGS_purity_tree.png" max-width="75%" %}
 
-**12\.**  Check the major matrix results from NGSpurity *(here we use a script 'verticalize' to transpose/pivot the output in 'ngspurity_output.txt' to a vertical list for better readability)*.
+**12\.**  Check the major matrix results from NGSpurity *(here we use a script 'verticalize' to transpose/pivot the output to a vertical list for better readability)*.
 
 {% include code-block-copy.html %}
 ```bash
@@ -370,19 +371,19 @@ $33               Cluster_Signatures : C1|SBS5|0.85; C2|SBS5|0.79; C3|SBS5|0.86;
 33. **Cluster_Signatures**: C1\|SBS5\|0.85; C2\|SBS5\|0.79; C3\|SBS5\|0.86; C5\|SBS5\|0.81; ALL\|SBS5\|0.86 *(list the most similarity mutational signature for each clusters)*.
 </blockquote>
 
-**13\.** Check the SCNA result from the Battenberg
+**13\.** Check the SCNA result from Battenberg
 
 {% include image-modal.html link="practical_assets/03-logr_BAF_CN.png" %}
 
 SCNA profiling using Battenberg for tumor NSLC-0037-T01 with the default parameters.  Each Battenberg SCNA profile includes LogR, BAF, and absolute copy number (orange: total copy number for major clone; green: minor copy number for major clone; purple: total copy number for additional subclone; blue: minor copy number for additional subclone) and clonality of each segment (dark blue to light blue: ccf from 1 to 0). The tumor sample name, purity estimated by CCUBE, the final purity (Battenberg Purity), final ploidy (Battenberg Ploidy), and percentage of genome altered is shown at the bottom of each Battenberg profile.
 
-**14\.** Check the mutation clustering from DPClust results
+**14\.** Check the mutation clustering from DPClust
 
 {% include image-modal.html link="practical_assets/04-CCF_VAF.png" %}
 
 mutation clustering using DPClust for tumor NSLC-0337-T01, which shows both CCF vs VAF scatter plot and CCF distribution. Different colors represent mutations included in different clusters. Potential drive genes are labeled on the clustering plots.  
 
-**15\.** Check the mutation clustering from CCUBE results
+**15\.** Check the mutation clustering from CCUBE
 
 {% include image-modal.html link="practical_assets/05-CCF_VAF_2.png" %}
 
@@ -392,29 +393,29 @@ mutation clustering using CCUBE for tumor NSLC-0337-T01, which shows both CCF vs
 
 ### Refitting Solution for somatic copy number alterations
 
-As shown in cmdfile_refit, We using the following tumor purity and ploidy as the refitting parameters: # **Tumor Purity = 0.6**, **Tumor Ploidy = 3.7**
+As shown earlier in cmdfile_refit, we used the following tumor purity and ploidy as the refitting parameters: # **Tumor Purity = 0.6**, **Tumor Ploidy = 3.7**
 
 **16\.** check output structures after refitting
 
 {% include image-modal.html link="practical_assets/06-battenberg_tree_2.png" %}
 
-**17\.** Check the major matrix results from NGSpurity after refitting
+**17\.** Check the re-fitted major matrix results from NGSpurity
 
 {% include image-modal.html link="practical_assets/refit-matrix-results.png" %}
 
-**18\.** Check the SCNA result from the Battenberg after refitting
+**18\.** Check the re-fitted SCNA result from the Battenberg
 
 {% include image-modal.html link="practical_assets/07-logr_BAF_CN_refit.png" %}
 
 SCNA profiling using Battenberg for tumor NSLC-0037-T01 with the default parameters.  Each Battenberg SCNA profile includes LogR, BAF, and absolute copy number (orange: total copy number for major clone; green: minor copy number for major clone; purple: total copy number for additional subclone; blue: minor copy number for additional subclone) and clonality of each segment (dark blue to light blue: ccf from 1 to 0). The tumor sample name, purity estimated by CCUBE, the final purity (Battenberg Purity), final ploidy (Battenberg Ploidy), and percentage of genome altered is shown at the bottom of each Battenberg profile.
 
-**19\.** Check the mutation clustering from DPClust results after refitting
+**19\.** Check the re-fitted mutation clustering from DPClust
 
 {% include image-modal.html link="practical_assets/08-CCF_VAF_refitt.png" %}
 
 mutation clustering using DPClust for tumor NSLC-0337-T01, which shows both CCF vs VAF scatter plot and CCF distribution. Different colors represent mutations included in different clusters. Potential drive genes are labeled on the clustering plots.  
 
-**20\.** Check the mutation clustering from CCUBE results after refitting
+**20\.** Check the re-fitted mutation clustering from CCUBE results
 
 {% include image-modal.html link="practical_assets/09-CCF_VAF_refitt_2.png" %}
 
