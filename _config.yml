@@ -31,7 +31,7 @@ baseurl: "/tumor_epidemiology_approaches"
 #url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
-remote_theme: chrisrhymes/bulma-clean-theme
+remote_theme: chrisrhymes/bulma-clean-theme@v0.13
 #remote_theme: just-the-docs/just-the-docs
 #theme: minima
 plugins:
