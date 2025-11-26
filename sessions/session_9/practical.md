@@ -219,7 +219,7 @@ The only differences between cmdfile and cmdfil_refit are the major script, tumo
 swarm -f cmdfile_refit -g 360 -t 24 --job-name ngspurity_hg38 --logdir logs --time=120:00:00 --module singularity --gres=lscratch:400 --dependency afterany:$jobid1
 ```
 
-* `--dependency afterany:$jobid1`: This sets a dependency on a previous job with ID `$jobid1`, meaning that this job will not start until the previous one has completed successfully.
+* `--dependency afterany:$jobid1`: This sets a dependency on a previous job with ID `$jobid1`, meaning that this job will not start until the previous one has completed. *(note: if you want the job to run only if the previous job has completed without errors, you can change `afterany` to `afterok`. See the (Biowulf documentation on dependencies)[https://hpc.nih.gov/docs/userguide.html#depend] for more details)*
 
 Note, the NGSpurity may take a long time to complete. In our local test without the singularity container, it is about 3-4 hours. Within the singularity container, it produces the same results as the local application, however, it has an unexpectedly long running time, ~12hrs. We are still investigating the issue.
 
